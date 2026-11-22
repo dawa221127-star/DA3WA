@@ -1,0 +1,376 @@
+
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#54232d">
+<title>دعوة | DA3WA</title>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+ --ivory:#f7f1e8;
+ --paper:#fffdf9;
+ --wine:#54232d;
+ --wine2:#713946;
+ --gold:#c3a16a;
+ --ink:#302522;
+ --muted:#82766d;
+ --line:#e9dfd2;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+ margin:0;background:var(--ivory);color:var(--ink);
+ font-family:"IBM Plex Sans Arabic",sans-serif
+}
+a{text-decoration:none;color:inherit}
+button{font:inherit;cursor:pointer}
+.wrap{width:min(1160px,calc(100% - 40px));margin:auto}
+.topbar{
+ height:82px;display:flex;align-items:center;
+ justify-content:space-between;border-bottom:1px solid var(--line)
+}
+.brand{display:flex;align-items:center;gap:12px}
+.brandmark{
+ width:42px;height:42px;border:1px solid var(--gold);
+ border-radius:50%;display:grid;place-items:center;
+ color:var(--wine);font:25px Amiri
+}
+.brandname{font:27px Amiri;color:var(--wine);line-height:1}
+.brandname small{
+ display:block;font:10px "IBM Plex Sans Arabic";
+ letter-spacing:3px;color:var(--gold);text-align:center
+}
+.nav{display:flex;gap:30px;color:#675b54;font-size:14px}
+.nav a:hover{color:var(--wine)}
+.btn,.navbtn{
+ border:0;border-radius:3px;background:var(--wine);
+ color:white;padding:13px 23px;transition:.2s
+}
+.btn:hover,.navbtn:hover{background:var(--wine2);transform:translateY(-2px)}
+.ghost{background:transparent;color:var(--wine);border:1px solid #bda68a}
+.hero{
+ padding:76px 0 82px;display:grid;
+ grid-template-columns:1.03fr .97fr;gap:70px;align-items:center
+}
+.eyebrow{color:#9b8058;letter-spacing:2px;font-size:12px;font-weight:600}
+.hero h1{
+ font:400 clamp(42px,5.5vw,70px)/1.28 Amiri;
+ color:var(--wine);margin:18px 0
+}
+.hero h1 span{color:var(--gold)}
+.hero p{color:#776b63;line-height:2;font-size:16px;max-width:500px}
+.actions{display:flex;gap:12px;margin-top:28px;flex-wrap:wrap}
+.note{margin-top:26px;color:#9a8d82;font-size:12px}
+.hero-art{min-height:490px;position:relative;display:grid;place-items:center}
+.halo{
+ position:absolute;width:390px;height:390px;
+ border:1px solid #d9c7a6;border-radius:50%
+}
+.halo:before,.halo:after{
+ content:"";position:absolute;inset:18px;
+ border:1px solid #e6d9c3;border-radius:50%
+}
+.halo:after{inset:-18px;border-style:dashed;opacity:.5}
+.invite{
+ position:relative;width:min(330px,78%);min-height:430px;
+ background:var(--paper);box-shadow:0 22px 70px #38231b16;
+ border:8px double #eadfcf;text-align:center;padding:40px 25px;
+ display:flex;flex-direction:column;align-items:center;justify-content:center;
+ outline:1px solid #d8c5a4;outline-offset:8px
+}
+.invite:before,.invite:after{content:"✦";color:var(--gold);font-size:19px}
+.invite .tiny{font-size:11px;letter-spacing:2px;color:#9b8058;margin:18px 0}
+.invite h2{font:42px Amiri;color:var(--wine);margin:8px 0}
+.invite .amp{font:28px Amiri;color:var(--gold)}
+.invite p{font:15px/2 Amiri;color:#7a6a5e}
+.invite .rule{width:75px;height:1px;background:var(--gold);margin:18px}
+.seal{
+ width:54px;height:54px;border-radius:50%;border:1px solid var(--gold);
+ display:grid;place-items:center;color:var(--wine);font:25px Amiri;margin-top:10px
+}
+.section{padding:78px 0}
+.section.white{background:var(--paper)}
+.sectionhead{text-align:center;margin-bottom:38px}
+.sectionhead .eyebrow{display:block}
+.sectionhead h2{font:40px Amiri;color:var(--wine);margin:9px 0}
+.sectionhead p{color:var(--muted);font-size:14px}
+.templates{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.template-card{
+ background:white;border:1px solid var(--line);padding:12px;
+ box-shadow:0 8px 30px #38231b08;transition:.25s
+}
+.template-card:hover{transform:translateY(-5px)}
+.sample{height:300px;display:grid;place-items:center;padding:20px}
+.sample.one{background:#f4e9df}
+.sample.two{background:#5a2632}
+.sample.three{background:#e8e1d5}
+.sample-paper{
+ width:78%;height:90%;background:#fffdf9;border:5px double #d7c39f;
+ display:flex;flex-direction:column;align-items:center;
+ justify-content:center;text-align:center;padding:18px
+}
+.two .sample-paper{background:#5a2632;border-color:#d4b77f}
+.three .sample-paper{background:#f7f3eb;border-color:#a99b80}
+.sample-paper .orn{font-size:24px;color:#b8955c}
+.sample-paper strong{font:30px Amiri;color:var(--wine);margin:12px 0}
+.two .sample-paper strong,.two .sample-paper p{color:#f7e8d2}
+.sample-paper p{font:13px/1.9 Amiri;color:#887466;margin:4px}
+.cardmeta{display:flex;justify-content:space-between;align-items:center;padding:14px 5px 5px}
+.cardmeta strong{color:var(--wine)}
+.smallbtn{
+ background:transparent;border:1px solid #d8c8b2;
+ color:var(--wine);padding:8px 13px;font-size:12px
+}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:30px}
+.step{text-align:center;padding:25px}
+.stepnum{
+ width:48px;height:48px;border:1px solid var(--gold);
+ border-radius:50%;display:grid;place-items:center;
+ margin:0 auto 17px;color:var(--wine);font:23px Amiri
+}
+.step h3{font:24px Amiri;color:var(--wine);margin:8px}
+.step p{font-size:14px;color:var(--muted);line-height:1.9}
+.pricing{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.price{background:white;border:1px solid var(--line);padding:28px 24px}
+.price.featured{background:var(--wine);color:white;transform:translateY(-8px)}
+.price h3{font:25px Amiri;margin:0 0 10px}
+.amount{font-size:32px;font-weight:600;color:var(--wine);margin:14px 0}
+.featured .amount{color:#e8cf9d}
+.amount small{font-size:12px;font-weight:400}
+.price ul{padding:0 18px 0 0;color:#7a6d63;font-size:14px;line-height:2.2;min-height:120px}
+.featured ul{color:#f0e3dc}
+.price .btn{width:100%}
+.footer{background:#342329;color:#f7eee5;padding:42px 0}
+.footerinner{display:flex;justify-content:space-between;align-items:center;gap:20px}
+.footer .brandname{color:#f7eee5}
+.footer p{color:#c9b9ad;font-size:12px}
+.modal{
+ position:fixed;inset:0;background:#1c1010aa;
+ display:none;place-items:center;padding:20px;z-index:10
+}
+.modal.show{display:grid}
+.modalbox{
+ width:min(520px,100%);background:var(--paper);
+ padding:28px;position:relative
+}
+.modalbox h3{font:30px Amiri;color:var(--wine);margin:0 0 16px}
+.close{
+ position:absolute;left:15px;top:12px;border:0;
+ background:none;font-size:24px;color:var(--wine)
+}
+label{display:block;font-size:13px;color:#6f6259;margin:12px 0 6px}
+input{
+ width:100%;padding:12px;border:1px solid var(--line);
+ background:white;font:14px "IBM Plex Sans Arabic"
+}
+.modalbox .btn{width:100%;margin-top:18px}
+.hint{font-size:11px;color:#92847a;line-height:1.8}
+@media(max-width:800px){
+ .nav{display:none}
+ .hero{grid-template-columns:1fr;gap:25px;padding:55px 0}
+ .hero-copy{text-align:center}
+ .hero p{margin:auto}
+ .actions{justify-content:center}
+ .hero-art{min-height:440px}
+ .halo{width:320px;height:320px}
+ .invite{min-height:390px}
+ .templates,.pricing{grid-template-columns:1fr;max-width:430px;margin:auto}
+ .steps{grid-template-columns:1fr;gap:5px}
+ .price.featured{transform:none}
+ .section{padding:58px 0}
+ .footerinner{flex-direction:column;text-align:center}
+}
+</style>
+</head>
+<body>
+
+<header class="wrap topbar">
+ <a class="brand" href="#">
+  <span class="brandmark">د</span>
+  <span class="brandname">دعوة<small>DA3WA</small></span>
+ </a>
+ <nav class="nav">
+  <a href="#templates">القوالب</a>
+  <a href="#how">كيف تعمل</a>
+  <a href="#pricing">الباقات</a>
+  <a href="#contact">تواصل معنا</a>
+ </nav>
+ <button class="navbtn" onclick="openModal()">صمّم دعوتك</button>
+</header>
+
+<main>
+<section class="wrap hero">
+ <div class="hero-copy">
+  <span class="eyebrow">تفاصيل صغيرة… وذكرى تدوم</span>
+  <h1>لكل حكاية بداية،<br><span>ولكل فرحة دعوة.</span></h1>
+  <p>حوّلوا لحظة إعلان فرحتكم إلى تجربة أنيقة. دعوات زفاف إلكترونية بتصاميم راقية، وتفاصيل تحمل أسماءكم وتحكي حكايتكم.</p>
+  <div class="actions">
+   <button class="btn" onclick="openModal()">اكتشفوا دعوتكم</button>
+   <a class="btn ghost" href="#templates">تصفّح القوالب</a>
+  </div>
+  <div class="note">أناقة الدعوة تبدأ من أول نظرة — DA3WA</div>
+ </div>
+ <div class="hero-art">
+  <div class="halo"></div>
+  <div class="invite">
+   <span class="tiny">بِسْمِ اللهِ الرَّحْمٰنِ الرَّحِيم</span>
+   <div class="orn">❧ ✦ ❧</div>
+   <h2>ليان <span class="amp">&</span> عمر</h2>
+   <p>بكل الحب والسرور<br>نتشرّف بدعوتكم لمشاركتنا<br>فرحة العمر</p>
+   <div class="rule"></div>
+   <span class="tiny">الجمعة · 20 ديسمبر · 2026</span>
+   <div class="seal">د</div>
+  </div>
+ </div>
+</section>
+
+<section class="section white" id="templates">
+ <div class="wrap">
+  <div class="sectionhead">
+   <span class="eyebrow">اختاروا ما يشبهكم</span>
+   <h2>قوالب صُممت للحظاتكم</h2>
+   <p>مجموعة من التصاميم الراقية، والبداية دائماً من ذوقكم.</p>
+  </div>
+  <div class="templates">
+   <article class="template-card">
+    <div class="sample one"><div class="sample-paper">
+     <span class="orn">✦ ❀ ✦</span><strong>ليان & عمر</strong>
+     <p>دعوة لحضور حفل زفافنا</p><p>بكل الحب ننتظركم</p><span class="orn">❧</span>
+    </div></div>
+    <div class="cardmeta"><strong>رِقّة الدانتيل</strong>
+     <button class="smallbtn" onclick="chooseTemplate('رِقّة الدانتيل')">اختيار القالب</button>
+    </div>
+   </article>
+   <article class="template-card">
+    <div class="sample two"><div class="sample-paper">
+     <span class="orn">✧</span><strong>ليان & عمر</strong>
+     <p>ليلة من العمر</p><p>يسعدنا حضوركم ومشاركتكم فرحتنا</p><span class="orn">❦</span>
+    </div></div>
+    <div class="cardmeta"><strong>ليلة ملكية</strong>
+     <button class="smallbtn" onclick="chooseTemplate('ليلة ملكية')">اختيار القالب</button>
+    </div>
+   </article>
+   <article class="template-card">
+    <div class="sample three"><div class="sample-paper">
+     <span class="orn">❀</span><strong>ليان & عمر</strong>
+     <p>بداية حكاية جميلة</p><p>كونوا جزءاً من فرحتنا</p><span class="orn">✦</span>
+    </div></div>
+    <div class="cardmeta"><strong>بساطة راقية</strong>
+     <button class="smallbtn" onclick="chooseTemplate('بساطة راقية')">اختيار القالب</button>
+    </div>
+   </article>
+  </div>
+ </div>
+</section>
+
+<section class="section" id="how">
+ <div class="wrap">
+  <div class="sectionhead">
+   <span class="eyebrow">بكل سهولة</span>
+   <h2>دعوتكم بثلاث خطوات</h2>
+   <p>من اختيار التصميم إلى مشاركة الرابط مع أحبائكم.</p>
+  </div>
+  <div class="steps">
+   <div class="step"><div class="stepnum">١</div><h3>اختاروا التصميم</h3><p>تصفّحوا القوالب واختاروا الأسلوب الأقرب لذوقكم.</p></div>
+   <div class="step"><div class="stepnum">٢</div><h3>أضيفوا تفاصيلكم</h3><p>اكتبوا الأسماء والتاريخ والمكان والتفاصيل الخاصة بليلتكم.</p></div>
+   <div class="step"><div class="stepnum">٣</div><h3>شاركوها بمحبة</h3><p>جهّزوا دعوتكم الإلكترونية وشاركوها مع الأهل والأصدقاء.</p></div>
+  </div>
+ </div>
+</section>
+
+<section class="section white" id="pricing">
+ <div class="wrap">
+  <div class="sectionhead">
+   <span class="eyebrow">باقات تناسب فرحتكم</span>
+   <h2>اختاروا الباقة الأقرب لكم</h2>
+   <p>أسعار تجريبية قابلة للتعديل قبل الإطلاق الرسمي.</p>
+  </div>
+  <div class="pricing">
+   <article class="price">
+    <h3>الأساسية</h3><div class="amount">20,000 <small>د.ع</small></div>
+    <ul><li>تصميم دعوة أنيق</li><li>أسماء وتاريخ الحفل</li><li>رابط خاص للمشاركة</li><li>موقع القاعة على الخريطة</li></ul>
+    <button class="btn" onclick="openModal('الأساسية')">اختيار الباقة</button>
+   </article>
+   <article class="price featured">
+    <h3>المميزة</h3><div class="amount">40,000 <small>د.ع</small></div>
+    <ul><li>كل مميزات الأساسية</li><li>تصميم متحرك</li><li>موسيقى مناسبة</li><li>تأكيد حضور المدعوين</li></ul>
+    <button class="btn" style="background:#d7bd8c;color:#39252a" onclick="openModal('المميزة')">اختيار الباقة</button>
+   </article>
+   <article class="price">
+    <h3>الملكية</h3><div class="amount">70,000 <small>د.ع</small></div>
+    <ul><li>كل مميزات المميزة</li><li>تصميم حصري</li><li>دفتر تهاني</li><li>إدارة قائمة الضيوف</li></ul>
+    <button class="btn" onclick="openModal('الملكية')">اختيار الباقة</button>
+   </article>
+  </div>
+ </div>
+</section>
+</main>
+
+<footer class="footer" id="contact">
+ <div class="wrap footerinner">
+  <a class="brand" href="#"><span class="brandmark">د</span><span class="brandname">دعوة<small>DA3WA</small></span></a>
+  <p>دعوة — لأن أجمل اللحظات تستحق بداية تليق بها.</p>
+  <p>© 2026 DA3WA. جميع الحقوق محفوظة.</p>
+ </div>
+</footer>
+
+<div class="modal" id="modal" role="dialog" aria-modal="true">
+ <div class="modalbox">
+  <button class="close" onclick="closeModal()">×</button>
+  <h3 id="modalTitle">ابدأوا دعوتكم</h3>
+  <p class="hint">هذه معاينة أولية لطلب الدعوة. لم يتم إرسال البيانات أو حفظها بعد.</p>
+  <form id="requestForm">
+   <label for="groom">اسم العريس</label>
+   <input id="groom" required placeholder="اسم العريس">
+   <label for="bride">اسم العروس</label>
+   <input id="bride" required placeholder="اسم العروس">
+   <label for="date">تاريخ الحفل</label>
+   <input id="date" type="date" required>
+   <label for="phone">رقم واتساب للتواصل</label>
+   <input id="phone" type="tel" required placeholder="07XXXXXXXXX">
+   <button class="btn" type="submit">إنشاء معاينة الطلب</button>
+  </form>
+  <p id="formResult" class="hint" aria-live="polite"></p>
+ </div>
+</div>
+
+<script>
+let selectedTemplate="رِقّة الدانتيل";
+let selectedPackage="";
+
+function openModal(pkg=""){
+ selectedPackage=pkg;
+ document.getElementById("modal").classList.add("show");
+ document.getElementById("formResult").textContent="";
+ document.getElementById("modalTitle").textContent=pkg?"طلب باقة "+pkg:"ابدأوا دعوتكم";
+}
+function closeModal(){
+ document.getElementById("modal").classList.remove("show");
+}
+function chooseTemplate(name){
+ selectedTemplate=name;
+ openModal();
+ document.getElementById("modalTitle").textContent="القالب المختار: "+name;
+}
+document.getElementById("modal").addEventListener("click",e=>{
+ if(e.target.id==="modal")closeModal();
+});
+document.getElementById("requestForm").addEventListener("submit",e=>{
+ e.preventDefault();
+ const data={
+  groom:document.getElementById("groom").value,
+  bride:document.getElementById("bride").value,
+  date:document.getElementById("date").value,
+  phone:document.getElementById("phone").value,
+  template:selectedTemplate,
+  package:selectedPackage
+ };
+ document.getElementById("formResult").textContent=
+ "تم تجهيز معاينة بياناتك على هذا الجهاز فقط. المرحلة القادمة: ربط الطلبات بقاعدة البيانات.";
+ console.log("DA3WA demo request",data);
+});
+</script>
+</body>
+</html>
