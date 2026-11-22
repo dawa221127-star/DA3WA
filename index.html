@@ -54,16 +54,23 @@ a{color:inherit;text-decoration:none}
 .templates{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
 .template{background:white;border:1px solid var(--line);padding:10px;transition:.2s}
 .template:hover{transform:translateY(-4px);box-shadow:0 15px 35px #35232912}
-.template-art{height:260px;display:grid;place-items:center;text-align:center;padding:20px;position:relative;overflow:hidden}
-.template-art .art-inner{width:85%;height:90%;display:flex;flex-direction:column;justify-content:center;align-items:center;border:1px solid currentColor;padding:18px}
+.template-art{height:260px;display:grid;place-items:center;text-align:center;padding:20px;position:relative;overflow:hidden;isolation:isolate}
+.template-art:before{content:"";position:absolute;inset:12px;border:1px solid currentColor;opacity:.35;pointer-events:none}
+.template-art:after{content:"✦";position:absolute;font:100px Amiri;opacity:.12;pointer-events:none}
+.template-art .art-inner{width:85%;height:90%;display:flex;flex-direction:column;justify-content:center;align-items:center;border:1px solid currentColor;padding:18px;position:relative;z-index:1}
 .template-art strong{font:32px Amiri;margin:12px 0}
 .template-art p{font:14px Amiri}
 .template-art small{font-size:10px;letter-spacing:2px}
-.theme-royal{background:#542733;color:#e8d2a8}
-.theme-floral{background:#f2e4df;color:#79535b}
-.theme-minimal{background:#f4f0e7;color:#51443d}
-.theme-midnight{background:#242126;color:#d8bd83}
-.theme-champagne{background:#e8dcc8;color:#715b45}
+.theme-royal-couple{background:linear-gradient(145deg,#f8f0df,#e8d5b5);color:#72502e}
+.theme-parchment{background:linear-gradient(120deg,#e8d2a8,#fff3d9,#d9bd8e);color:#76512e}
+.theme-royal-seal{background:linear-gradient(145deg,#35151e,#71313d);color:#e8c98b}
+.theme-garden-romance{background:linear-gradient(145deg,#f9e9e5,#e6c8ca);color:#855b65}
+.theme-midnight-love{background:radial-gradient(circle at 50% 20%,#44405c,#171725 75%);color:#e8d39b}
+.theme-pearl-elegance{background:linear-gradient(145deg,#fffdf7,#e8dfd1);color:#a28a68}
+.theme-andalusian{background:linear-gradient(145deg,#153c35,#28665a);color:#e6c88a}
+.theme-golden-cinema{background:linear-gradient(145deg,#261719,#63352e);color:#e9c78b}
+.theme-watercolor-dreams{background:linear-gradient(135deg,#f5e7e5,#e7e5ef,#e8d8cf);color:#806a80}
+.theme-heritage-gold{background:linear-gradient(145deg,#38251c,#76552d);color:#e8cb8b}
 .template-info{display:flex;align-items:center;justify-content:space-between;padding:12px 4px 4px;gap:8px}
 .template-info strong{color:var(--wine)}
 .template-info small{display:block;color:var(--muted);font-size:11px;margin-top:4px}
@@ -105,17 +112,26 @@ a{color:inherit;text-decoration:none}
 .preview-controls{max-height:70vh;overflow:auto;padding-left:4px}
 .preview-stage{height:72vh;min-height:470px;overflow:auto;background:#eee5da;scroll-behavior:smooth;position:relative}
 .live-invite{--accent:#512630;--accent2:#c3a16a;--surface:#fffdf9;--text:#302522;background:var(--surface);color:var(--text);min-height:100%;text-align:center;overflow:hidden}
-.live-invite.royal{--accent:#542733;--accent2:#d8bd83;--surface:#f8f0e3;--text:#512630}
-.live-invite.floral{--accent:#815c65;--accent2:#c99e9d;--surface:#fff8f5;--text:#63454d}
-.live-invite.minimal{--accent:#4e4840;--accent2:#b49a70;--surface:#fffdf8;--text:#39332d}
-.live-invite.midnight{--accent:#d7bd86;--accent2:#f0d9a8;--surface:#242126;--text:#f6eddf}
-.live-invite.champagne{--accent:#796044;--accent2:#c2a77d;--surface:#f3eadb;--text:#57432f}
-.envelope-screen{min-height:470px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:25px;background:var(--accent);color:#f7e8d2;position:relative}
+.live-invite.royal,.live-invite.royal-couple{--accent:#79532f;--accent2:#c3a16a;--surface:#fbf5e9;--text:#51402e}
+.live-invite.floral,.live-invite.garden-romance{--accent:#805963;--accent2:#c89a9d;--surface:#fff7f5;--text:#65444c}
+.live-invite.minimal,.live-invite.pearl-elegance{--accent:#927b59;--accent2:#d0b98e;--surface:#fffdf8;--text:#514638}
+.live-invite.midnight,.live-invite.midnight-love{--accent:#e2c88d;--accent2:#f0d9a8;--surface:#201e2d;--text:#f6eddf}
+.live-invite.champagne,.live-invite.parchment{--accent:#815b32;--accent2:#c69c60;--surface:#f8edda;--text:#60472e}
+.live-invite.royal-seal{--accent:#54212d;--accent2:#d5b477;--surface:#fff8ec;--text:#43232a}
+.live-invite.andalusian{--accent:#285b4d;--accent2:#d4b36e;--surface:#f5f0df;--text:#284b40}
+.live-invite.golden-cinema{--accent:#78412f;--accent2:#d5ad70;--surface:#fff4e5;--text:#4c3028}
+.live-invite.watercolor-dreams{--accent:#89728d;--accent2:#c6a6aa;--surface:#fff9f7;--text:#55485c}
+.live-invite.heritage-gold{--accent:#76532e;--accent2:#d5b16e;--surface:#f8f0df;--text:#4a3828}
+
+.envelope-screen{min-height:470px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:25px;background:var(--accent);color:#f7e8d2;position:relative;overflow:hidden}
 .envelope-screen .tiny{font:13px Amiri;letter-spacing:2px}
+.envelope-screen:before,.envelope-screen:after{content:"✦";position:absolute;font:45px Amiri;color:var(--accent2);opacity:.55}
+.envelope-screen:before{top:25px;right:30px}
+.envelope-screen:after{bottom:25px;left:30px}
 .envelope{width:min(330px,85%);height:205px;position:relative;margin:28px auto 15px;background:var(--accent);border:1px solid var(--accent2);box-shadow:0 20px 50px #0003;display:grid;place-items:center}
 .envelope:before{content:"";position:absolute;inset:0;background:var(--accent2);clip-path:polygon(0 0,50% 57%,100% 0);opacity:.55}
 .envelope:after{content:"";position:absolute;inset:0;background:linear-gradient(35deg,transparent 49.5%,var(--accent2) 50%,transparent 50.5%),linear-gradient(-35deg,transparent 49.5%,var(--accent2) 50%,transparent 50.5%);opacity:.7}
-.seal-button{z-index:2;width:65px;height:65px;border-radius:50%;border:3px double #f5dfb5;background:var(--accent2);color:var(--accent);font:32px Amiri}
+.seal-button{z-index:2;width:65px;height:65px;border-radius:50%;border:3px double #f5dfb5;background:var(--accent2);color:var(--accent);font:32px Amiri;cursor:pointer}
 .open-hint{font-size:12px;color:#f0dfc4;animation:pulse 1.8s infinite}
 @keyframes pulse{50%{opacity:.45}}
 .invitation-content{display:none;animation:fadeUp .9s ease}
@@ -135,7 +151,7 @@ a{color:inherit;text-decoration:none}
 .detail span{display:block;color:var(--accent2);font-size:11px;margin-bottom:8px}
 .detail strong{font:19px Amiri;color:var(--accent)}
 .detail-wide{grid-column:1/-1}
-.action-link{display:inline-block;background:var(--accent);color:var(--surface);padding:11px 20px;margin:10px 5px;font-size:13px;border:0}
+.action-link{display:inline-block;background:var(--accent);color:var(--surface);padding:11px 20px;margin:10px 5px;font-size:13px;border:0;cursor:pointer}
 .countdown{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:20px}
 .countdown div{min-width:65px;padding:12px 8px;border:1px solid var(--accent2)}
 .countdown strong{display:block;font:24px Amiri;color:var(--accent)}
@@ -153,7 +169,52 @@ a{color:inherit;text-decoration:none}
 .hidden{display:none!important}
 button:disabled{opacity:.6;cursor:not-allowed}
 
-/* PUBLIC INVITATION PAGE */
+/* DISTINCT OPENING DESIGNS */
+.live-invite.royal-couple .envelope{
+ background:linear-gradient(145deg,#f8edda,#d9bd8e);
+ border:3px double #9c7845;
+}
+.live-invite.royal-couple .envelope:before{
+ content:"♕  ♡  ♕";clip-path:none;background:none;
+ color:#79532f;font:35px Amiri;opacity:1
+}
+.live-invite.royal-couple .envelope:after{opacity:.15}
+.live-invite.parchment .envelope{
+ height:230px;width:min(290px,85%);
+ border-radius:8px;background:linear-gradient(90deg,#c49b63,#f5e5c5,#c49b63);
+ border:5px solid #a77e49
+}
+.live-invite.parchment .envelope:before{
+ content:"❧";clip-path:none;background:none;color:#76512e;font:65px Amiri;opacity:1
+}
+.live-invite.parchment .envelope:after{border-top:2px solid #a77e49;opacity:.2}
+.live-invite.royal-seal .envelope{background:#54212d;border:2px solid #d5b477}
+.live-invite.royal-seal .seal-button{box-shadow:0 0 0 5px #d5b47755,0 5px 15px #0005}
+.live-invite.garden-romance .envelope{background:#f5e1df;border:1px solid #c89a9d}
+.live-invite.garden-romance .envelope:before{content:"❀  ❁  ❀";clip-path:none;background:none;color:#986c76;font:38px Amiri;opacity:1}
+.live-invite.garden-romance .envelope:after{opacity:.12}
+.live-invite.midnight-love .envelope{background:linear-gradient(145deg,#29263d,#171725);border:1px solid #e2c88d}
+.live-invite.midnight-love .envelope:before{content:"☾  ✦  ★";clip-path:none;background:none;color:#e2c88d;font:38px Amiri;opacity:1}
+.live-invite.pearl-elegance .envelope{background:linear-gradient(145deg,#fffdf8,#e8dfd1);border:4px double #c1a77d}
+.live-invite.pearl-elegance .seal-button{background:#fffaf0;color:#927b59;border-color:#d0b98e}
+.live-invite.andalusian .envelope{background:#285b4d;border:4px double #d4b36e}
+.live-invite.andalusian .envelope:before{content:"۞";clip-path:none;background:none;color:#e6c88a;font:75px Amiri;opacity:1}
+.live-invite.andalusian .envelope:after{opacity:.1}
+.live-invite.golden-cinema .envelope{background:linear-gradient(90deg,#5b2927,#241719,#5b2927);border:2px solid #d5ad70}
+.live-invite.golden-cinema .envelope:before{content:"✦  ✧  ✦";clip-path:none;background:none;color:#e9c78b;font:35px Amiri;opacity:1}
+.live-invite.golden-cinema .envelope:after{border-right:8px solid #d5ad70;border-left:8px solid #d5ad70;opacity:.3}
+.live-invite.watercolor-dreams .envelope{background:linear-gradient(135deg,#f5e7e5,#e7e5ef,#e8d8cf);border:2px solid #c6a6aa}
+.live-invite.watercolor-dreams .envelope:before{content:"♡  ❀  ♡";clip-path:none;background:none;color:#89728d;font:40px Amiri;opacity:1}
+.live-invite.watercolor-dreams .envelope:after{opacity:.1}
+.live-invite.heritage-gold .envelope{background:linear-gradient(145deg,#38251c,#76552d);border:5px double #d5b16e}
+.live-invite.heritage-gold .envelope:before{content:"❖  ۞  ❖";clip-path:none;background:none;color:#e8cb8b;font:38px Amiri;opacity:1}
+.live-invite.heritage-gold .envelope:after{opacity:.12}
+
+/* Opening motion */
+.live-invite.opened .envelope-screen{animation:screenAway .65s ease forwards}
+@keyframes screenAway{to{opacity:0;transform:scale(1.04)}}
+.live-invite.opened .invitation-content{animation:fadeUp 1s ease .2s both}
+
 body.public-invitation{background:#171315}
 body.public-invitation > *:not(#publicInvitationPage){display:none!important}
 #publicInvitationPage{min-height:100vh;background:var(--cream);color:var(--ink)}
@@ -175,6 +236,7 @@ body.public-invitation > *:not(#publicInvitationPage){display:none!important}
 .public-invite .wish p{overflow-wrap:anywhere}
 .public-invite .seal-button{cursor:pointer}
 .public-invite .detail-grid{grid-template-columns:1fr 1fr}
+
 @media(max-width:800px){
  .nav{display:none}
  .hero{grid-template-columns:1fr;text-align:center;padding:45px 0}
@@ -240,9 +302,9 @@ body.public-invitation > *:not(#publicInvitationPage){display:none!important}
 <section class="section light" id="templates">
  <div class="container">
   <div class="section-head">
-   <span class="eyebrow">خمسة تصاميم مختارة</span>
+   <span class="eyebrow">عشرة تصاميم حصرية</span>
    <h2>اختر تجربة دعوتك</h2>
-   <p>كل تصميم له ألوانه وأجواؤه وحركاته الخاصة.</p>
+   <p>عشرة تصاميم، لكل تصميم شخصيته ورسوماته وأجواؤه الخاصة.</p>
   </div>
   <div class="templates" id="templateGrid"></div>
  </div>
@@ -256,7 +318,7 @@ body.public-invitation > *:not(#publicInvitationPage){display:none!important}
    <p>ثلاث خطوات بسيطة حتى تصير فرحتكم تجربة مميزة.</p>
   </div>
   <div class="steps">
-   <div class="step"><div class="step-no">١</div><h3>اختار التصميم</h3><p>اختار واحد من التصاميم الخمسة وعاينه مباشرة.</p></div>
+   <div class="step"><div class="step-no">١</div><h3>اختار التصميم</h3><p>اختار واحد من التصاميم العشرة وعاينه مباشرة.</p></div>
    <div class="step"><div class="step-no">٢</div><h3>أرسل التفاصيل</h3><p>أضف الأسماء والتاريخ والموقع وأوقات المناسبة.</p></div>
    <div class="step"><div class="step-no">٣</div><h3>استلم الرابط</h3><p>بعد مراجعة الطلب والدفع يتم تجهيز رابط دعوتك.</p></div>
   </div>
@@ -310,14 +372,14 @@ body.public-invitation > *:not(#publicInvitationPage){display:none!important}
  <div class="modal-box wide">
   <button class="close" onclick="closeModal('previewModal')">×</button>
   <h3>معاينة الدعوة التفاعلية</h3>
-  <p class="notice">اضغط على الختم لفتح الظرف، وبعدها انزل داخل الدعوة حتى تشوف كل التفاصيل.</p>
+  <p class="notice">اضغط على الختم أو الزر لفتح الدعوة، وبعدها انزل داخلها حتى تشوف التفاصيل.</p>
   <div class="preview-layout">
    <div class="preview-stage">
     <div class="live-invite royal" id="liveInvite">
      <section class="envelope-screen">
       <div class="tiny">YOU ARE INVITED</div>
       <div class="envelope"><button class="seal-button" onclick="openEnvelope()">د</button></div>
-      <div class="open-hint">اضغط على الختم لفتح دعوتك</div>
+      <div class="open-hint" id="openHint">اضغط على الختم لفتح دعوتك</div>
       <div class="tiny" style="margin-top:20px">DA3WA · A SPECIAL MOMENT</div>
      </section>
      <div class="invitation-content">
@@ -441,12 +503,27 @@ try{
 }catch(e){console.error(e)}
 
 const templates=[
- {id:"royal",name:"Royal Envelope",arabic:"الظرف الملكي",theme:"royal",symbol:"✦ ❦ ✦",line:"أناقة ملكية"},
- {id:"floral",name:"Floral Garden",arabic:"حديقة الورد",theme:"floral",symbol:"❀ ❁ ❀",line:"رومانسية ناعمة"},
- {id:"minimal",name:"Minimal Luxury",arabic:"البساطة الفاخرة",theme:"minimal",symbol:"— ✦ —",line:"هدوء وأناقة"},
- {id:"midnight",name:"Midnight",arabic:"منتصف الليل",theme:"midnight",symbol:"✧ ★ ✧",line:"أجواء سينمائية"},
- {id:"champagne",name:"Champagne",arabic:"الشامبين",theme:"champagne",symbol:"❧ ✦ ❧",line:"دفء وفخامة"}
+ {id:"royal-couple",name:"Royal Couple",arabic:"العروسان",theme:"royal-couple",symbol:"♕ ♡ ♕",line:"رسمة العروس والعريس"},
+ {id:"parchment",name:"The Parchment",arabic:"الرقّ الملكي",theme:"parchment",symbol:"❧ ❦ ❧",line:"رقّ فاخر ينفتح"},
+ {id:"royal-seal",name:"Royal Seal",arabic:"الختم الملكي",theme:"royal-seal",symbol:"✦ ◉ ✦",line:"ظرف مختوم بالشمع"},
+ {id:"garden-romance",name:"Garden Romance",arabic:"حديقة الحب",theme:"garden-romance",symbol:"❀ ❁ ❀",line:"ورود رومانسية"},
+ {id:"midnight-love",name:"Midnight Love",arabic:"حب منتصف الليل",theme:"midnight-love",symbol:"☾ ✦ ★",line:"قمر ونجوم"},
+ {id:"pearl-elegance",name:"Pearl Elegance",arabic:"أناقة اللؤلؤ",theme:"pearl-elegance",symbol:"◇ ❖ ◇",line:"فخامة اللؤلؤ"},
+ {id:"andalusian",name:"Andalusian",arabic:"الأندلس",theme:"andalusian",symbol:"۞ ❖ ۞",line:"زخارف أندلسية"},
+ {id:"golden-cinema",name:"Golden Cinema",arabic:"السينما الذهبية",theme:"golden-cinema",symbol:"✦ ✧ ✦",line:"ستارة سينمائية"},
+ {id:"watercolor-dreams",name:"Watercolor Dreams",arabic:"أحلام مائية",theme:"watercolor-dreams",symbol:"♡ ❀ ♡",line:"ألوان مائية ناعمة"},
+ {id:"heritage-gold",name:"Heritage Gold",arabic:"التراث الذهبي",theme:"heritage-gold",symbol:"❖ ۞ ❖",line:"نقوش عربية أصيلة"}
 ];
+
+/* Keep old template IDs working for previously published invitations */
+const oldTemplateMap={
+ royal:"royal-couple",
+ floral:"garden-romance",
+ minimal:"pearl-elegance",
+ midnight:"midnight-love",
+ champagne:"parchment"
+};
+
 const prices={"الأساسية":20000,"المميزة":40000,"الملكية":70000};
 const $=id=>document.getElementById(id);
 let selectedTemplate=templates[0];
@@ -455,13 +532,17 @@ let isSubmitting=false;
 
 $("year").textContent=new Date().getFullYear();
 
+function getTemplate(id){
+ return templates.find(t=>t.id===id)||templates.find(t=>t.id===oldTemplateMap[id])||templates[0];
+}
+
 function renderTemplates(){
  $("templateGrid").innerHTML=templates.map(t=>`
   <article class="template">
    <div class="template-art theme-${t.theme}">
     <div class="art-inner">
      <small>DA3WA · INVITATION</small>
-     <div style="font-size:24px;margin:12px">${t.symbol}</div>
+     <div style="font-size:30px;margin:12px">${t.symbol}</div>
      <strong>أحمد & زهراء</strong>
      <p>${t.line}</p>
      <small>${t.name.toUpperCase()}</small>
@@ -469,7 +550,7 @@ function renderTemplates(){
    </div>
    <div class="template-info">
     <div><strong>${t.arabic}</strong><small>${t.name}</small></div>
-    <div style="display:flex;gap:5px">
+    <div style="display:flex;gap:5px;flex-wrap:wrap">
      <button class="mini-btn" onclick="previewTemplate('${t.id}')">معاينة</button>
      <button class="mini-btn primary" onclick="chooseTemplate('${t.id}')">اختيار</button>
     </div>
@@ -486,10 +567,11 @@ function applyTemplate(t){
  $("previewTemplate").value=t.id;
  $("liveInvite").className="live-invite "+t.theme;
  $("liveInvite").classList.remove("opened");
+ $("openHint").textContent=t.id==="parchment"?"اضغط لفتح الرقّ الملكي":t.id==="golden-cinema"?"اضغط لفتح الستارة الذهبية":"اضغط على الختم لفتح دعوتك";
 }
 function previewTemplate(id){
- const t=templates.find(x=>x.id===id);
- if(t)applyTemplate(t);
+ const t=getTemplate(id);
+ applyTemplate(t);
  openPreview();
 }
 function chooseTemplate(id){previewTemplate(id)}
@@ -502,7 +584,7 @@ function closeModal(id){$(id).classList.remove("open")}
 function openEnvelope(){$("liveInvite").classList.add("opened")}
 
 $("previewTemplate").addEventListener("change",e=>{
- const t=templates.find(x=>x.id===e.target.value);
+ const t=getTemplate(e.target.value);
  if(t)applyTemplate(t);
 });
 
@@ -573,13 +655,13 @@ $("wishForm").addEventListener("submit",e=>{
 });
 
 function usePreviewForOrder(){
- $("orderTemplate").value=selectedTemplate.arabic;
+ $("orderTemplate").value=selectedTemplate.arabic+" — "+selectedTemplate.name;
  closeModal("previewModal");
  $("orderModal").classList.add("open");
 }
 function startOrder(packageName){
  $("orderPackage").value=packageName;
- $("orderTemplate").value=selectedTemplate.arabic;
+ $("orderTemplate").value=selectedTemplate.arabic+" — "+selectedTemplate.name;
  $("orderModal").classList.add("open");
 }
 function selectPayment(btn){
@@ -673,25 +755,14 @@ document.addEventListener("keydown",e=>{
 
 /* PUBLIC INVITATION ROUTE */
 (function(){
-
  const params=new URLSearchParams(window.location.search);
  const invitationSlug=params.get("invite");
-
  if(!invitationSlug)return;
 
  document.body.classList.add("public-invitation");
-
  const root=document.createElement("div");
  root.id="publicInvitationPage";
  document.body.appendChild(root);
-
- const themeMap={
-  royal:"royal",
-  floral:"floral",
-  minimal:"minimal",
-  midnight:"midnight",
-  champagne:"champagne"
- };
 
  function escapeHTML(value){
   return String(value??"").replace(/[&<>"']/g,char=>({
@@ -733,7 +804,8 @@ document.addEventListener("keydown",e=>{
 
  function renderInvitation(inv){
   const d=inv.details||{};
-  const theme=themeMap[inv.template_id]||"royal";
+  const template=getTemplate(inv.template_id);
+  const theme=template.theme;
   const map=safeMap(d.map_link);
   const phone=String(d.host_phone||"").trim();
   const target=d.event_date?
@@ -744,16 +816,16 @@ document.addEventListener("keydown",e=>{
     <section class="envelope-screen">
      <div class="tiny">YOU ARE INVITED</div>
      <div class="envelope">
-      <button class="seal-button" id="openPublicEnvelope" aria-label="افتح الدعوة">د</button>
+      <button class="seal-button" id="openPublicEnvelope" aria-label="افتح الدعوة">${escapeHTML(template.symbol.split(" ")[1]||"د")}</button>
      </div>
-     <div class="open-hint">اضغط على الختم لفتح دعوتك</div>
+     <div class="open-hint">${template.id==="parchment"?"اضغط لفتح الرقّ الملكي":template.id==="golden-cinema"?"اضغط لفتح الستارة الذهبية":"اضغط على الختم لفتح دعوتك"}</div>
      <div class="tiny" style="margin-top:20px">DA3WA · A SPECIAL MOMENT</div>
     </section>
 
     <div class="invitation-content">
      <section class="invite-section">
       <div class="invite-kicker">بِسْمِ اللهِ الرَّحْمٰنِ الرَّحِيم</div>
-      <div class="ornament">❧ ✦ ❧</div>
+      <div class="ornament">${escapeHTML(template.symbol)}</div>
       <p>${escapeHTML(d.opening||"بكل الحب والسرور، يسعدنا دعوتكم لمشاركتنا أجمل لحظاتنا")}</p>
       <div class="couple-names">${escapeHTML(d.names||"أهلاً بكم")}</div>
       <div class="couple-sub">${escapeHTML(d.occasion||"دعوتكم لحضور مناسبتنا")}</div>
@@ -817,7 +889,6 @@ document.addEventListener("keydown",e=>{
    const name=$("publicWishName").value.trim();
    const message=$("publicWishText").value.trim();
    if(!name||!message)return;
-
    const item=document.createElement("div");
    item.className="wish";
    const strong=document.createElement("strong");
@@ -854,7 +925,6 @@ document.addEventListener("keydown",e=>{
    errorPage("تعذر الاتصال","يرجى تحديث الصفحة والمحاولة مرة أخرى.");
    return;
   }
-
   if(!/^[a-zA-Z0-9_-]{5,80}$/.test(invitationSlug)){
    errorPage("رابط غير صحيح","تأكد من الرابط الذي وصلك.");
    return;
@@ -885,7 +955,6 @@ document.addEventListener("keydown",e=>{
  }
 
  loadInvitation();
-
 })();
 </script>
 </body>
