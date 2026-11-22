@@ -12,7 +12,6 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-<!-- Supabase -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
@@ -149,6 +148,7 @@ button{cursor:pointer}
 .payment-option:focus,.payment-option.selected{border-color:var(--gold);background:#faf4e9}
 .empty{padding:25px;text-align:center;color:var(--muted);background:#faf6ef;border:1px dashed var(--line)}
 .hidden{display:none!important}
+button:disabled{opacity:.6;cursor:not-allowed}
 @media(max-width:850px){
 .nav{display:none}
 .hero{grid-template-columns:1fr;gap:15px;padding:48px 0}
@@ -356,7 +356,7 @@ button{cursor:pointer}
 </div>
 </footer>
 
-<!-- Preview -->
+<!-- Preview Modal -->
 <div class="modal" id="previewModal" role="dialog" aria-modal="true">
 <div class="modal-box wide">
 <button class="close" onclick="closeModal('previewModal')" aria-label="إغلاق">×</button>
@@ -419,26 +419,26 @@ button{cursor:pointer}
 </div>
 </div>
 
-<!-- Order -->
+<!-- Order Modal -->
 <div class="modal" id="orderModal" role="dialog" aria-modal="true">
 <div class="modal-box">
 <button class="close" onclick="closeModal('orderModal')" aria-label="إغلاق">×</button>
 <h3>إكمال طلب الدعوة</h3>
-<p class="notice">سجّل تفاصيل الطلب واختر طريقة الدفع المفضلة. الدفع الإلكتروني يحتاج تفعيل حساب التاجر وربط بوابة الدفع قبل استقبال الأموال.</p>
+<p class="notice">سجّل تفاصيل الطلب واختر طريقة الدفع المفضلة. اختيار طريقة الدفع هنا لا يخصم أي مبلغ.</p>
 
 <form id="orderForm">
   <div class="form-grid">
     <div class="field">
       <label for="orderName">الاسم الكامل</label>
-      <input id="orderName" required placeholder="اسم صاحب الطلب">
+      <input id="orderName" required maxlength="100" placeholder="اسم صاحب الطلب">
     </div>
     <div class="field">
       <label for="orderPhone">رقم الهاتف</label>
-      <input id="orderPhone" required type="tel" placeholder="07xxxxxxxxx">
+      <input id="orderPhone" required type="tel" maxlength="20" placeholder="07xxxxxxxxx">
     </div>
     <div class="field">
       <label for="orderTemplate">القالب</label>
-      <input id="orderTemplate" readonly>
+      <input id="orderTemplate" readonly required>
     </div>
     <div class="field">
       <label for="orderPackage">الباقة</label>
@@ -458,20 +458,20 @@ button{cursor:pointer}
     </div>
   </div>
 
-  <p class="notice">اختيار طريقة الدفع هنا لا يخصم أي مبلغ. سيتم تفعيل الدفع الفعلي بعد ربط حساب DA3WA التجاري بمزوّد الدفع.</p>
+  <p class="notice">اختيار طريقة الدفع هنا لا يخصم أي مبلغ. سيتم التواصل معك لإكمال الدفع وتأكيد الطلب.</p>
   <button class="btn" type="submit">إرسال الطلب</button>
 </form>
 
-<div class="result" id="orderResult"></div>
+<div class="result" id="orderResult" role="status" aria-live="polite"></div>
 </div>
 </div>
 
-<!-- Account -->
+<!-- Account Modal -->
 <div class="modal" id="accountModal" role="dialog" aria-modal="true">
 <div class="modal-box">
 <button class="close" onclick="closeModal('accountModal')" aria-label="إغلاق">×</button>
 <h3>حسابي في DA3WA</h3>
-<p class="notice">واجهة الحساب جاهزة للتصميم. تسجيل الدخول الفعلي يحتاج خدمة تحقق SMS مثل Supabase Phone Auth أو مزوّد رسائل، مع إعداد مفاتيح المشروع.</p>
+<p class="notice">واجهة الحساب تجريبية حالياً. تسجيل الدخول عبر SMS غير مفعّل.</p>
 
 <div id="accountLoggedOut">
   <div class="field">
@@ -489,7 +489,7 @@ button{cursor:pointer}
 <div id="accountLoggedIn" class="hidden">
   <div class="account-card">
     <strong id="accountDisplay"></strong>
-    <p class="notice">حساب محلي تجريبي على هذا المتصفح. لا تتم مزامنته بين الأجهزة قبل ربط قاعدة البيانات.</p>
+    <p class="notice">حساب محلي تجريبي على هذا المتصفح.</p>
     <h4>طلباتي المحفوظة</h4>
     <div id="myOrders"></div>
   </div>
@@ -499,13 +499,32 @@ button{cursor:pointer}
 </div>
 
 <script>
-/* إعداد اتصال Supabase */
-const da3waDB = window.supabase.createClient(
-  "https://xnabtqiukgcbukrmpyle.supabase.co",
-  "sb_publishable_-fZR33L75gcyESGdh0OYTg_Ct1Iamlz"
-);
+/* =========================
+   SUPABASE CONNECTION
+========================= */
 
-/* القوالب */
+const SUPABASE_URL = "https://xnabtqiukgcbukrmpyle.supabase.co";
+const SUPABASE_KEY = "sb_publishable_-fZR33L75gcyESGdh0OYTg_Ct1Iamlz";
+
+let da3waDB = null;
+
+try {
+  if (!window.supabase || !window.supabase.createClient) {
+    throw new Error("Supabase library did not load.");
+  }
+
+  da3waDB = window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+  );
+} catch (error) {
+  console.error("Supabase initialization error:", error);
+}
+
+/* =========================
+   TEMPLATES
+========================= */
+
 const templates = [
 {id:1,name:'بالونات الفرح',category:'birthday',tone:'blush',symbol:'✦ 🎈 ✦',line:'يوم ميلاد سعيد'},
 {id:2,name:'ليلة ذهبية',category:'birthday',tone:'dark',symbol:'✧',line:'احتفال يليق بكم'},
@@ -541,15 +560,26 @@ const categoryNames = {
   wedding:'الأعراس'
 };
 
+const packagePrices = {
+  "الأساسية": 20000,
+  "المميزة": 40000,
+  "الملكية": 70000
+};
+
 let selectedTemplate = templates[18];
 let selectedPayment = '';
 let currentCategory = 'all';
+let isSubmitting = false;
 
 const $ = id => document.getElementById(id);
 
 $('year').textContent = new Date().getFullYear();
 
-function renderTemplates(){
+/* =========================
+   RENDER TEMPLATES
+========================= */
+
+function renderTemplates() {
   const list = currentCategory === 'all'
     ? templates
     : templates.filter(t => t.category === currentCategory);
@@ -581,20 +611,20 @@ function renderTemplates(){
 
 renderTemplates();
 
-$('categoryTabs').addEventListener('click',e=>{
+$('categoryTabs').addEventListener('click', e => {
   const b = e.target.closest('[data-category]');
-  if(!b)return;
+  if (!b) return;
 
   currentCategory = b.dataset.category;
 
-  document.querySelectorAll('.tab').forEach(x=>{
-    x.classList.toggle('active',x===b);
+  document.querySelectorAll('.tab').forEach(x => {
+    x.classList.toggle('active', x === b);
   });
 
   renderTemplates();
 });
 
-function fillTemplateSelect(){
+function fillTemplateSelect() {
   $('previewTemplate').innerHTML = templates.map(t =>
     `<option value="${t.id}">${t.name} — ${categoryNames[t.category]}</option>`
   ).join('');
@@ -602,40 +632,44 @@ function fillTemplateSelect(){
 
 fillTemplateSelect();
 
-function applyTemplate(t){
+function applyTemplate(t) {
+  if (!t) return;
+
   selectedTemplate = t;
   $('previewTemplate').value = t.id;
   $('liveInvite').className = 'invite-card ' + t.tone;
 }
 
-function previewTemplate(id){
+function previewTemplate(id) {
   const t = templates.find(x => x.id === id);
   applyTemplate(t);
   openPreview();
 }
 
-function chooseTemplate(id){
+function chooseTemplate(id) {
   previewTemplate(id);
 }
 
-function openPreview(){
+function openPreview() {
   $('previewModal').classList.add('open');
   applyTemplate(selectedTemplate);
   updatePreview();
 }
 
-function closeModal(id){
+function closeModal(id) {
   $(id).classList.remove('open');
 }
 
-function updatePreview(){
-  const names = $('previewNames').value.trim() || 'الاسم الأول & الاسم الثاني';
+/* =========================
+   PREVIEW
+========================= */
 
+function updatePreview() {
+  const names = $('previewNames').value.trim() || 'الاسم الأول & الاسم الثاني';
   $('pNames').textContent = names;
 
   const kind = $('eventKind').value;
   const msg = $('previewMessage').value.trim() || kind;
-
   $('pMessage').textContent = msg;
 
   const date = $('previewDate').value;
@@ -643,7 +677,7 @@ function updatePreview(){
 
   $('pDate').textContent =
     (date
-      ? new Date(date+'T12:00:00').toLocaleDateString('ar-IQ',{
+      ? new Date(date + 'T12:00:00').toLocaleDateString('ar-IQ', {
           year:'numeric',
           month:'long',
           day:'numeric'
@@ -662,63 +696,88 @@ function updatePreview(){
   'previewTime',
   'previewVenue',
   'previewMessage'
-].forEach(id=>{
-  $(id).addEventListener('input',updatePreview);
+].forEach(id => {
+  $(id).addEventListener('input', updatePreview);
 });
 
-$('previewTemplate').addEventListener('change',e=>{
+$('previewTemplate').addEventListener('change', e => {
   const t = templates.find(x => x.id === Number(e.target.value));
-  if(t)applyTemplate(t);
+  if (t) applyTemplate(t);
 });
 
-function usePreviewForOrder(){
+/* =========================
+   OPEN ORDER
+========================= */
+
+function usePreviewForOrder() {
   $('orderTemplate').value = selectedTemplate.name;
   $('orderModal').classList.add('open');
   closeModal('previewModal');
 }
 
-function startOrder(packageName){
+function startOrder(packageName) {
   $('orderPackage').value = packageName;
   $('orderTemplate').value = selectedTemplate.name;
   $('orderModal').classList.add('open');
 }
 
-function selectPayment(btn){
+function selectPayment(btn) {
   selectedPayment = btn.dataset.pay;
 
-  document.querySelectorAll('.payment-option').forEach(x=>{
-    x.classList.toggle('selected',x===btn);
+  document.querySelectorAll('.payment-option').forEach(x => {
+    x.classList.toggle('selected', x === btn);
   });
 }
 
-/* أسعار الباقات */
-const packagePrices = {
-  "الأساسية": 20000,
-  "المميزة": 40000,
-  "الملكية": 70000
-};
+/* =========================
+   ORDER SUBMISSION
+========================= */
 
-/* إرسال الطلب إلى Supabase */
-$('orderForm').addEventListener('submit', async (e) => {
+$('orderForm').addEventListener('submit', async e => {
   e.preventDefault();
 
-  const submitButton = e.target.querySelector(
-    'button[type="submit"]'
-  );
+  if (isSubmitting) return;
+
+  const form = e.target;
+  const submitButton = form.querySelector('button[type="submit"]');
+  const result = $('orderResult');
+
+  result.textContent = '';
+
+  if (!da3waDB) {
+    result.textContent = 'تعذر تشغيل الاتصال بقاعدة البيانات. حدّث الصفحة وحاول مرة أخرى.';
+    return;
+  }
+
+  if (!form.reportValidity()) return;
 
   if (!selectedPayment) {
-    $('orderResult').textContent =
-      'يرجى اختيار طريقة الدفع أولاً.';
+    result.textContent = 'يرجى اختيار طريقة الدفع أولاً.';
+    return;
+  }
+
+  const packageName = $('orderPackage').value;
+  const price = packagePrices[packageName];
+
+  if (!price) {
+    result.textContent = 'الباقة المختارة غير صحيحة.';
+    return;
+  }
+
+  const phone = $('orderPhone').value.trim();
+
+  if (!/^(\+?964|0)?7\d{9}$/.test(phone.replace(/[\s-]/g, ''))) {
+    result.textContent = 'يرجى التأكد من رقم الهاتف العراقي. مثال: 07xxxxxxxxx';
     return;
   }
 
   const order = {
     customer_name: $('orderName').value.trim(),
-    phone: $('orderPhone').value.trim(),
+    phone: phone,
     occasion: $('eventKind').value,
     template_name: $('orderTemplate').value,
-    package_name: $('orderPackage').value,
-    amount: packagePrices[$('orderPackage').value],
+    package_name: packageName,
+    amount: price,
     payment_method: selectedPayment,
     invitation_date: $('previewDate').value || null,
     invitation_time: $('previewTime').value || null,
@@ -727,24 +786,34 @@ $('orderForm').addEventListener('submit', async (e) => {
     status: 'new'
   };
 
+  isSubmitting = true;
   submitButton.disabled = true;
   submitButton.textContent = 'جاري إرسال الطلب...';
-  $('orderResult').textContent = '';
 
   try {
-    const { error } = await da3waDB
+    const { data, error } = await da3waDB
       .from('orders')
-      .insert([order]);
+      .insert([order])
+      .select('id')
+      .single();
 
-    if (error) throw error;
+    if (error) {
+      console.error('Supabase insert error:', error);
+      throw error;
+    }
 
-    /* نسخة محلية اختيارية للزبون */
+    if (!data || !data.id) {
+      throw new Error('لم يتم استلام رقم الطلب من قاعدة البيانات.');
+    }
+
+    const orderId = data.id;
+
     const localOrders = JSON.parse(
       localStorage.getItem('da3wa_orders') || '[]'
     );
 
     localOrders.unshift({
-      id: 'DW-' + Date.now().toString().slice(-7),
+      id: orderId,
       name: order.customer_name,
       phone: order.phone,
       template: order.template_name,
@@ -759,43 +828,61 @@ $('orderForm').addEventListener('submit', async (e) => {
       JSON.stringify(localOrders)
     );
 
-    $('orderResult').textContent =
-      'تم إرسال طلبك بنجاح إلى DA3WA! ❤️\n' +
-      'الباقة: ' + order.package_name +
-      '\nالمبلغ: ' + order.amount.toLocaleString('en-US') +
-      ' د.ع\nسيتم مراجعة طلبك من الإدارة.';
+    result.textContent =
+      'تم إرسال طلبك بنجاح إلى DA3WA ❤️\n' +
+      'رقم الطلب: ' + orderId +
+      '\nالباقة: ' + order.package_name +
+      '\nالمبلغ: ' + price.toLocaleString('en-US') +
+      ' د.ع\nحالة الطلب: بانتظار مراجعة الإدارة.';
 
-    e.target.reset();
-
+    form.reset();
     selectedPayment = '';
 
-    document.querySelectorAll('.payment-option').forEach(btn=>{
+    document.querySelectorAll('.payment-option').forEach(btn => {
       btn.classList.remove('selected');
     });
 
   } catch (error) {
-    console.error('DA3WA order error:', error);
+    console.error('DA3WA order submission failed:', error);
 
-    $('orderResult').textContent =
-      'لم نتمكن من إرسال الطلب. يرجى المحاولة مرة أخرى.\n' +
-      'تفاصيل الخطأ: ' + error.message;
+    let message = error.message || 'حدث خطأ غير معروف.';
+
+    if (error.code === '42501') {
+      message = 'لا توجد صلاحية لإضافة طلب جديد. تحقق من سياسات RLS.';
+    } else if (error.code === '42P01') {
+      message = 'جدول orders غير موجود في قاعدة البيانات.';
+    } else if (error.code === '42703') {
+      message = 'يوجد عمود مفقود في جدول orders. تحقق من أسماء الأعمدة.';
+    } else if (error.code === '23502') {
+      message = 'هناك حقل مطلوب في قاعدة البيانات لم يتم إرساله.';
+    } else if (error.code === '23514') {
+      message = 'إحدى القيم المرسلة غير مقبولة حسب إعدادات الجدول.';
+    }
+
+    result.textContent =
+      'لم يتم إرسال الطلب.\nسبب الخطأ: ' + message +
+      '\nيرجى إرسال صورة الخطأ للإدارة التقنية.';
 
   } finally {
+    isSubmitting = false;
     submitButton.disabled = false;
     submitButton.textContent = 'إرسال الطلب';
   }
 });
 
-/* الحساب التجريبي */
-function openAccount(){
+/* =========================
+   DEMO ACCOUNT
+========================= */
+
+function openAccount() {
   $('accountModal').classList.add('open');
   refreshAccount();
 }
 
-function requestOtp(){
+function requestOtp() {
   const phone = $('accountPhone').value.trim();
 
-  if(!/^07\d{9}$/.test(phone)){
+  if (!/^07\d{9}$/.test(phone)) {
     $('otpNotice').textContent =
       'يرجى إدخال رقم عراقي بصيغة 07xxxxxxxxx.';
     return;
@@ -804,16 +891,16 @@ function requestOtp(){
   $('otpField').classList.remove('hidden');
 
   $('otpNotice').textContent =
-    'واجهة التحقق جاهزة، لكن إرسال SMS غير مفعّل بعد. لن يتم تسجيل الدخول قبل ربط مزوّد OTP حقيقي.';
+    'إرسال رمز SMS غير مفعّل حالياً. هذه الواجهة تجريبية فقط.';
 }
 
-function refreshAccount(){
+function refreshAccount() {
   const phone = localStorage.getItem('da3wa_demo_user');
 
-  $('accountLoggedIn').classList.toggle('hidden',!phone);
-  $('accountLoggedOut').classList.toggle('hidden',!!phone);
+  $('accountLoggedIn').classList.toggle('hidden', !phone);
+  $('accountLoggedOut').classList.toggle('hidden', !!phone);
 
-  if(phone){
+  if (phone) {
     $('accountDisplay').textContent = 'رقم الحساب: ' + phone;
 
     const orders = JSON.parse(
@@ -829,21 +916,26 @@ function refreshAccount(){
   }
 }
 
-function logout(){
+function logout() {
   localStorage.removeItem('da3wa_demo_user');
   refreshAccount();
 }
 
-/* إغلاق النوافذ */
-document.querySelectorAll('.modal').forEach(m=>{
-  m.addEventListener('click',e=>{
-    if(e.target===m)m.classList.remove('open');
+/* =========================
+   MODAL CONTROLS
+========================= */
+
+document.querySelectorAll('.modal').forEach(m => {
+  m.addEventListener('click', e => {
+    if (e.target === m) {
+      m.classList.remove('open');
+    }
   });
 });
 
-document.addEventListener('keydown',e=>{
-  if(e.key==='Escape'){
-    document.querySelectorAll('.modal.open').forEach(m=>{
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') {
+    document.querySelectorAll('.modal.open').forEach(m => {
       m.classList.remove('open');
     });
   }
