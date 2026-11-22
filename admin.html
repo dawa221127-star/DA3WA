@@ -9,32 +9,70 @@
 <style>
 *{box-sizing:border-box}
 body{margin:0;background:#171315;color:#f5eee8;font-family:Arial,sans-serif}
-header{padding:22px 5%;background:#291c21;border-bottom:1px solid #59404a;display:flex;justify-content:space-between;align-items:center}
+header{padding:20px 5%;background:#291c21;border-bottom:1px solid #59404a;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
 h1{font-size:22px;margin:0;color:#e8c98d}
-main{max-width:1100px;margin:35px auto;padding:0 18px}
-.panel{background:#251d20;border:1px solid #49343c;border-radius:16px;padding:24px;margin-bottom:22px}
-input,select{width:100%;padding:13px;border-radius:9px;border:1px solid #60434c;background:#171315;color:white;margin:8px 0 15px;font-size:15px}
+main{max-width:1150px;margin:30px auto;padding:0 16px}
+.panel{background:#251d20;border:1px solid #49343c;border-radius:16px;padding:22px;margin-bottom:20px}
+input,select,textarea{width:100%;padding:13px;border-radius:9px;border:1px solid #60434c;background:#171315;color:white;margin:8px 0 15px;font-size:15px;font-family:Arial}
+textarea{min-height:90px;resize:vertical}
+label{display:block;color:#e8c98d;font-size:14px}
 button{border:0;border-radius:9px;padding:11px 17px;cursor:pointer;font-weight:bold;background:#d5b47a;color:#211719}
-button:hover{opacity:.85}
+button:hover{opacity:.86}
+button:disabled{opacity:.5;cursor:wait}
 button.secondary{background:#49343c;color:white}
 button.danger{background:#8d343d;color:white}
+button.success{background:#356c53;color:white}
 .hidden{display:none!important}
-.muted{color:#b9a9ad;font-size:13px}
-.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:22px}
-.stat{background:#302329;padding:18px;border-radius:12px;border:1px solid #49343c}
+.muted{color:#b9a9ad;font-size:13px;line-height:1.8}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:20px}
+.stat{background:#302329;padding:17px;border-radius:12px;border:1px solid #49343c}
 .stat strong{display:block;font-size:25px;color:#e8c98d;margin-top:8px}
-.order{background:#251d20;border:1px solid #49343c;border-radius:14px;padding:18px;margin:14px 0}
-.order h3{margin:0 0 12px;color:#e8c98d}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}
+.tab{background:#302329;color:#eee;border:1px solid #59404a}
+.tab.active{background:#d5b47a;color:#211719}
+.order,.invite-card{background:#251d20;border:1px solid #49343c;border-radius:14px;padding:17px;margin:13px 0}
+.order h3,.invite-card h3{margin:0 0 12px;color:#e8c98d}
 .details{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin:14px 0}
 .detail{background:#302329;padding:11px;border-radius:8px;overflow-wrap:anywhere}
 .detail small{display:block;color:#b9a9ad;margin-bottom:5px}
 .actions{display:flex;gap:9px;flex-wrap:wrap;align-items:center}
 .actions select{max-width:220px;margin:0}
-#message{margin:12px 0;color:#e8c98d}
+.grid{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
+.template{border:2px solid #59404a;border-radius:13px;padding:9px;background:#302329;cursor:pointer;text-align:center}
+.template.selected{border-color:#e8c98d;box-shadow:0 0 0 2px #e8c98d33}
+.template-art{height:125px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:25px;margin-bottom:9px;position:relative;overflow:hidden}
+.template-art span{border:1px solid currentColor;padding:12px 8px;font-size:13px}
+.t1{background:linear-gradient(140deg,#411923,#170d12);color:#e8c98d}
+.t2{background:linear-gradient(140deg,#f4dce0,#fff8f1);color:#8b5264}
+.t3{background:linear-gradient(140deg,#080808,#38302b);color:#d7bd83}
+.t4{background:linear-gradient(140deg,#fffdf4,#e8dfcb);color:#92784f}
+.t5{background:linear-gradient(140deg,#092d28,#124a3c);color:#d8c18b}
+.template b{font-size:13px}
+.editor-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:18px}
+.preview{min-height:420px;border-radius:14px;padding:25px;text-align:center;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:14px;white-space:pre-wrap}
+.preview h2{font-size:30px;margin:5px 0}
+.preview p{line-height:1.9;margin:4px 0}
+.preview .preview-names{font-size:27px}
+.preview.t1{background:linear-gradient(145deg,#421b27,#170d12);color:#e8c98d}
+.preview.t2{background:linear-gradient(145deg,#fff4f2,#efd7df);color:#805064}
+.preview.t3{background:linear-gradient(145deg,#090909,#302823);color:#e5c987}
+.preview.t4{background:linear-gradient(145deg,#fffdf5,#e8dfca);color:#806b49}
+.preview.t5{background:linear-gradient(145deg,#082c27,#145044);color:#e5d09a}
+.preview .ornament{font-size:30px}
+.preview .line{width:65%;height:1px;background:currentColor;opacity:.5}
+.link-box{background:#171315;border:1px solid #59404a;border-radius:9px;padding:12px;overflow-wrap:anywhere;margin:10px 0}
+#message,#ordersMessage,#inviteMessage{color:#e8c98d;margin:12px 0}
+.section-title{color:#e8c98d;margin-top:0}
+.small-note{font-size:12px;color:#b9a9ad}
+@media(max-width:850px){
+.grid{grid-template-columns:repeat(2,1fr)}
+.editor-grid{grid-template-columns:1fr}
+}
 @media(max-width:600px){
 .stats{grid-template-columns:1fr}
 .details{grid-template-columns:1fr}
-header{padding:18px}
+header{padding:16px}
+.panel{padding:16px}
 }
 </style>
 </head>
@@ -48,7 +86,7 @@ header{padding:18px}
 <main>
   <section id="loginPanel" class="panel">
     <h2>تسجيل دخول الإدارة</h2>
-    <p class="muted">هذه الصفحة مخصصة لإدارة طلبات دعوة</p>
+    <p class="muted">هذه الصفحة مخصصة لإدارة DA3WA</p>
     <form id="loginForm">
       <label>البريد الإلكتروني</label>
       <input id="email" type="email" required placeholder="admin@email.com">
@@ -63,18 +101,127 @@ header{padding:18px}
     <div class="stats">
       <div class="stat">إجمالي الطلبات<strong id="total">0</strong></div>
       <div class="stat">طلبات جديدة<strong id="newCount">0</strong></div>
-      <div class="stat">طلبات مكتملة<strong id="doneCount">0</strong></div>
+      <div class="stat">الدعوات المنشورة<strong id="inviteCount">0</strong></div>
     </div>
 
-    <div class="panel">
+    <div class="tabs">
+      <button class="tab active" data-tab="ordersSection">الطلبات</button>
+      <button class="tab" data-tab="createSection">إنشاء دعوة</button>
+      <button class="tab" data-tab="invitationsSection">الدعوات المنشورة</button>
+    </div>
+
+    <!-- الطلبات -->
+    <section id="ordersSection" class="panel">
       <div class="actions">
-        <h2 style="flex:1">الطلبات</h2>
+        <h2 class="section-title" style="flex:1">طلبات الزبائن</h2>
         <button id="refreshBtn">تحديث الطلبات</button>
       </div>
-      <p class="muted">تظهر هنا الطلبات المحفوظة في قاعدة البيانات.</p>
-      <p id="ordersMessage"></p>
+      <p id="ordersMessage" class="muted"></p>
       <div id="ordersList"></div>
-    </div>
+    </section>
+
+    <!-- إنشاء دعوة -->
+    <section id="createSection" class="panel hidden">
+      <h2 class="section-title">إنشاء دعوة إلكترونية</h2>
+      <p class="muted">اختار قالب، أضف تفاصيل المناسبة، عاين الدعوة، وبعدها انشرها حتى تحصل على رابط خاص.</p>
+
+      <h3>1. اختار القالب</h3>
+      <div class="grid" id="templateGrid">
+        <div class="template selected" data-template="royal">
+          <div class="template-art t1"><span>دعوة ملكية</span></div>
+          <b>الظرف الملكي</b>
+        </div>
+        <div class="template" data-template="rose">
+          <div class="template-art t2"><span>دعوة وردية</span></div>
+          <b>حديقة الورد</b>
+        </div>
+        <div class="template" data-template="black">
+          <div class="template-art t3"><span>VIP</span></div>
+          <b>الليلة السوداء</b>
+        </div>
+        <div class="template" data-template="ivory">
+          <div class="template-art t4"><span>دعوة خاصة</span></div>
+          <b>اللؤلؤ العاجي</b>
+        </div>
+        <div class="template" data-template="oriental">
+          <div class="template-art t5"><span>ليلة شرقية</span></div>
+          <b>الليلة الشرقية</b>
+        </div>
+      </div>
+
+      <div class="editor-grid" style="margin-top:25px">
+        <div>
+          <h3>2. تفاصيل الدعوة</h3>
+          <form id="invitationForm">
+            <label>اسم صاحب الدعوة / العريس</label>
+            <input id="hostNames" required placeholder="مثلاً: أحمد وسارة">
+
+            <label>نوع المناسبة</label>
+            <input id="occasion" required placeholder="مثلاً: حفل زفاف">
+
+            <label>العبارة الافتتاحية</label>
+            <textarea id="opening" placeholder="بكل الحب والفرح نتشرف بدعوتكم لمشاركتنا أجمل لحظاتنا..."></textarea>
+
+            <label>تاريخ المناسبة</label>
+            <input id="eventDate" type="date" required>
+
+            <label>مكان المناسبة</label>
+            <input id="venue" required placeholder="اسم القاعة أو المكان">
+
+            <label>عنوان المكان أو رابط الموقع</label>
+            <input id="mapLink" type="url" placeholder="https://maps.google.com/...">
+
+            <label>وقت استقبال الضيوف</label>
+            <input id="arrivalTime" type="time">
+
+            <label>وقت بدء المناسبة</label>
+            <input id="startTime" type="time" required>
+
+            <label>رقم هاتف الشخص المستضيف</label>
+            <input id="hostPhone" type="tel" placeholder="07xxxxxxxxx">
+
+            <label>رسالة إضافية للضيوف</label>
+            <textarea id="extraMessage" placeholder="نتشرف بحضوركم ومشاركتكم فرحتنا..."></textarea>
+
+            <div class="actions">
+              <button type="submit" id="saveInvitationBtn">نشر الدعوة وإنشاء الرابط</button>
+              <button type="button" class="secondary" id="clearFormBtn">تفريغ الحقول</button>
+            </div>
+            <p id="inviteMessage"></p>
+          </form>
+        </div>
+
+        <div>
+          <h3>3. معاينة مباشرة</h3>
+          <div id="preview" class="preview t1">
+            <div class="ornament">✦</div>
+            <p id="previewOpening">بكل الحب والفرح نتشرف بدعوتكم</p>
+            <div class="line"></div>
+            <h2 class="preview-names" id="previewNames">أحمد وسارة</h2>
+            <p id="previewOccasion">حفل زفاف</p>
+            <div class="line"></div>
+            <p id="previewDate">تاريخ المناسبة</p>
+            <p id="previewVenue">مكان المناسبة</p>
+            <p id="previewArrival">استقبال الضيوف</p>
+            <p id="previewStart">وقت بدء المناسبة</p>
+            <p id="previewExtra"></p>
+            <div class="ornament">❖</div>
+          </div>
+          <p class="small-note">هذه معاينة أولية لشكل القالب. عرض الدعوة النهائي للضيف يحتاج ربط صفحة الموقع العامة برابط الدعوة.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- الدعوات المنشورة -->
+    <section id="invitationsSection" class="panel hidden">
+      <div class="actions">
+        <h2 class="section-title" style="flex:1">الدعوات المنشورة</h2>
+        <button id="refreshInvitationsBtn">تحديث</button>
+      </div>
+      <p class="muted">من هنا تقدر تنسخ روابط الدعوات أو توقفها أو تحذفها.</p>
+      <p id="publishedMessage"></p>
+      <div id="invitationsList"></div>
+    </section>
   </section>
 </main>
 
@@ -82,17 +229,16 @@ header{padding:18px}
 const PROJECT_URL = "https://xnabtqiukgcbukrmpyle.supabase.co";
 const PUBLISHABLE_KEY = "sb_publishable_-fZR33L75gcyESGdh0OYTg_Ct1Iamlz";
 
-const db = window.supabase.createClient(
-  PROJECT_URL,
-  PUBLISHABLE_KEY
-);
+const db = window.supabase.createClient(PROJECT_URL, PUBLISHABLE_KEY);
 
-const loginPanel = document.getElementById("loginPanel");
-const dashboard = document.getElementById("dashboard");
-const message = document.getElementById("message");
-const ordersMessage = document.getElementById("ordersMessage");
-const ordersList = document.getElementById("ordersList");
-const logoutBtn = document.getElementById("logoutBtn");
+const $ = id => document.getElementById(id);
+
+const loginPanel = $("loginPanel");
+const dashboard = $("dashboard");
+const message = $("message");
+const ordersMessage = $("ordersMessage");
+const ordersList = $("ordersList");
+const logoutBtn = $("logoutBtn");
 
 const statusNames = {
   new: "جديد",
@@ -101,6 +247,17 @@ const statusNames = {
   completed: "مكتمل",
   rejected: "مرفوض"
 };
+
+const templateNames = {
+  royal: "الظرف الملكي",
+  rose: "حديقة الورد",
+  black: "الليلة السوداء",
+  ivory: "اللؤلؤ العاجي",
+  oriental: "الليلة الشرقية"
+};
+
+let selectedTemplate = "royal";
+let editingInvitationId = null;
 
 function showLogin() {
   loginPanel.classList.remove("hidden");
@@ -125,16 +282,13 @@ async function verifyAdmin(user) {
   if (!data) throw new Error("هذا الحساب لا يملك صلاحيات الإدارة.");
 }
 
-document.getElementById("loginForm").addEventListener("submit", async (e) => {
+document.getElementById("loginForm").addEventListener("submit", async e => {
   e.preventDefault();
   message.textContent = "جاري تسجيل الدخول...";
 
-  const email = document.getElementById("email").value.trim();
-  const password = document.getElementById("password").value;
-
   const { data, error } = await db.auth.signInWithPassword({
-    email,
-    password
+    email: $("email").value.trim(),
+    password: $("password").value
   });
 
   if (error) {
@@ -147,6 +301,7 @@ document.getElementById("loginForm").addEventListener("submit", async (e) => {
     message.textContent = "";
     showDashboard();
     await loadOrders();
+    await loadInvitations();
   } catch (err) {
     await db.auth.signOut();
     message.textContent = err.message;
@@ -157,7 +312,21 @@ document.getElementById("loginForm").addEventListener("submit", async (e) => {
 logoutBtn.addEventListener("click", async () => {
   await db.auth.signOut();
   ordersList.replaceChildren();
+  $("invitationsList").replaceChildren();
   showLogin();
+});
+
+document.querySelectorAll(".tab").forEach(button => {
+  button.addEventListener("click", () => {
+    document.querySelectorAll(".tab").forEach(b => b.classList.remove("active"));
+    button.classList.add("active");
+
+    ["ordersSection","createSection","invitationsSection"].forEach(id => {
+      $(id).classList.toggle("hidden", id !== button.dataset.tab);
+    });
+
+    if (button.dataset.tab === "invitationsSection") loadInvitations();
+  });
 });
 
 function addDetail(container, label, value) {
@@ -168,15 +337,15 @@ function addDetail(container, label, value) {
   small.textContent = label;
 
   const content = document.createElement("div");
-  content.textContent =
-    value === null || value === undefined || value === ""
-      ? "غير محدد"
-      : String(value);
+  content.textContent = value === null || value === undefined || value === ""
+    ? "غير محدد"
+    : String(value);
 
   box.append(small, content);
   container.appendChild(box);
 }
 
+/* إدارة الطلبات القديمة */
 async function loadOrders() {
   ordersMessage.textContent = "جاري تحميل الطلبات...";
   ordersList.replaceChildren();
@@ -192,12 +361,8 @@ async function loadOrders() {
   }
 
   const orders = data || [];
-
-  document.getElementById("total").textContent = orders.length;
-  document.getElementById("newCount").textContent =
-    orders.filter(o => o.status === "new").length;
-  document.getElementById("doneCount").textContent =
-    orders.filter(o => o.status === "completed").length;
+  $("total").textContent = orders.length;
+  $("newCount").textContent = orders.filter(o => o.status === "new").length;
 
   ordersMessage.textContent = orders.length
     ? "عدد الطلبات: " + orders.length
@@ -236,32 +401,24 @@ async function loadOrders() {
     actions.className = "actions";
 
     const select = document.createElement("select");
-
     Object.entries(statusNames).forEach(([value, label]) => {
       const option = document.createElement("option");
       option.value = value;
       option.textContent = label;
       select.appendChild(option);
     });
-
     select.value = order.status || "new";
 
     const updateBtn = document.createElement("button");
     updateBtn.textContent = "حفظ الحالة";
-
     updateBtn.addEventListener("click", async () => {
       updateBtn.disabled = true;
-
-      const { error } = await db
-        .from("orders")
-        .update({ status: select.value })
-        .eq("id", order.id);
-
+      const { error } = await db.from("orders")
+        .update({ status: select.value }).eq("id", order.id);
       updateBtn.disabled = false;
 
-      if (error) {
-        alert("تعذر تحديث الطلب: " + error.message);
-      } else {
+      if (error) alert("تعذر تحديث الطلب: " + error.message);
+      else {
         alert("تم تحديث حالة الطلب");
         await loadOrders();
       }
@@ -270,20 +427,11 @@ async function loadOrders() {
     const deleteBtn = document.createElement("button");
     deleteBtn.textContent = "حذف الطلب";
     deleteBtn.className = "danger";
-
     deleteBtn.addEventListener("click", async () => {
       if (!confirm("هل أنت متأكد من حذف هذا الطلب؟")) return;
-
-      const { error } = await db
-        .from("orders")
-        .delete()
-        .eq("id", order.id);
-
-      if (error) {
-        alert("تعذر حذف الطلب: " + error.message);
-      } else {
-        await loadOrders();
-      }
+      const { error } = await db.from("orders").delete().eq("id", order.id);
+      if (error) alert("تعذر حذف الطلب: " + error.message);
+      else await loadOrders();
     });
 
     actions.append(select, updateBtn, deleteBtn);
@@ -292,17 +440,326 @@ async function loadOrders() {
   });
 }
 
-document.getElementById("refreshBtn").addEventListener("click", loadOrders);
+$("refreshBtn").addEventListener("click", loadOrders);
+
+/* اختيار القالب */
+document.querySelectorAll(".template").forEach(card => {
+  card.addEventListener("click", () => {
+    document.querySelectorAll(".template").forEach(c => c.classList.remove("selected"));
+    card.classList.add("selected");
+    selectedTemplate = card.dataset.template;
+    updatePreview();
+  });
+});
+
+/* المعاينة المباشرة */
+const previewFields = [
+  ["hostNames","previewNames","أحمد وسارة"],
+  ["occasion","previewOccasion","حفل زفاف"],
+  ["opening","previewOpening","بكل الحب والفرح نتشرف بدعوتكم"],
+  ["venue","previewVenue","مكان المناسبة"],
+  ["extraMessage","previewExtra",""]
+];
+
+function formatDate(value) {
+  if (!value) return "تاريخ المناسبة";
+  const date = new Date(value + "T12:00:00");
+  return date.toLocaleDateString("ar-IQ", {
+    weekday:"long", year:"numeric", month:"long", day:"numeric"
+  });
+}
+
+function formatTime(value) {
+  if (!value) return "غير محدد";
+  const [h,m] = value.split(":").map(Number);
+  const suffix = h >= 12 ? "مساءً" : "صباحاً";
+  const hour = h % 12 || 12;
+  return `${hour}:${String(m).padStart(2,"0")} ${suffix}`;
+}
+
+function updatePreview() {
+  previewFields.forEach(([inputId, previewId, fallback]) => {
+    $(previewId).textContent = $(inputId).value.trim() || fallback;
+  });
+
+  $("previewDate").textContent = formatDate($("eventDate").value);
+  $("previewArrival").textContent = "استقبال الضيوف: " +
+    ( $("arrivalTime").value ? formatTime($("arrivalTime").value) : "غير محدد" );
+  $("previewStart").textContent = "بدء المناسبة: " +
+    ( $("startTime").value ? formatTime($("startTime").value) : "غير محدد" );
+
+  $("preview").className = "preview " + ({
+    royal:"t1", rose:"t2", black:"t3", ivory:"t4", oriental:"t5"
+  }[selectedTemplate] || "t1");
+}
+
+[
+  "hostNames","occasion","opening","eventDate","venue",
+  "arrivalTime","startTime","extraMessage"
+].forEach(id => $(id).addEventListener("input", updatePreview));
+
+function getFormDetails() {
+  return {
+    names: $("hostNames").value.trim(),
+    occasion: $("occasion").value.trim(),
+    opening: $("opening").value.trim(),
+    event_date: $("eventDate").value,
+    venue: $("venue").value.trim(),
+    map_link: $("mapLink").value.trim(),
+    arrival_time: $("arrivalTime").value,
+    start_time: $("startTime").value,
+    host_phone: $("hostPhone").value.trim(),
+    extra_message: $("extraMessage").value.trim()
+  };
+}
+
+function makeSlug() {
+  return "d" + crypto.randomUUID().replaceAll("-", "").slice(0,18);
+}
+
+function makeInvitationUrl(slug) {
+  const url = new URL("index.html", window.location.href);
+  url.searchParams.set("invite", slug);
+  return url.href;
+}
+
+$("invitationForm").addEventListener("submit", async e => {
+  e.preventDefault();
+
+  const btn = $("saveInvitationBtn");
+  const status = $("inviteMessage");
+  btn.disabled = true;
+  status.textContent = "جاري حفظ الدعوة...";
+
+  const details = getFormDetails();
+
+  const record = {
+    slug: makeSlug(),
+    template_id: selectedTemplate,
+    details,
+    status: "published"
+  };
+
+  try {
+    let result;
+
+    if (editingInvitationId) {
+      const { data, error } = await db
+        .from("invitations")
+        .update({
+          template_id: selectedTemplate,
+          details
+        })
+        .eq("id", editingInvitationId)
+        .select()
+        .single();
+
+      if (error) throw error;
+      result = data;
+    } else {
+      const { data, error } = await db
+        .from("invitations")
+        .insert([record])
+        .select()
+        .single();
+
+      if (error) throw error;
+      result = data;
+    }
+
+    const url = makeInvitationUrl(result.slug);
+
+    status.textContent = editingInvitationId
+      ? "تم تحديث الدعوة. رابطها محفوظ كما هو."
+      : "تم نشر الدعوة وإنشاء الرابط بنجاح!";
+
+    showCreatedLink(url);
+    editingInvitationId = null;
+    btn.textContent = "نشر الدعوة وإنشاء الرابط";
+
+    await loadInvitations();
+    $("inviteCount").textContent = $("invitationsList").children.length;
+
+  } catch (err) {
+    status.textContent = "تعذر حفظ الدعوة: " + err.message;
+  } finally {
+    btn.disabled = false;
+  }
+});
+
+function showCreatedLink(url) {
+  const status = $("inviteMessage");
+  const box = document.createElement("div");
+  box.className = "link-box";
+
+  const label = document.createElement("strong");
+  label.textContent = "رابط الدعوة:";
+
+  const link = document.createElement("div");
+  link.textContent = url;
+  link.style.margin = "10px 0";
+
+  const copy = document.createElement("button");
+  copy.textContent = "نسخ الرابط";
+  copy.addEventListener("click", async () => {
+    try {
+      await navigator.clipboard.writeText(url);
+      copy.textContent = "تم النسخ ✓";
+    } catch {
+      prompt("انسخ الرابط من هنا:", url);
+    }
+  });
+
+  box.append(label, link, copy);
+  status.appendChild(box);
+}
+
+$("clearFormBtn").addEventListener("click", () => {
+  if (!confirm("تريد تفريغ كل تفاصيل الدعوة؟")) return;
+  $("invitationForm").reset();
+  editingInvitationId = null;
+  $("saveInvitationBtn").textContent = "نشر الدعوة وإنشاء الرابط";
+  selectedTemplate = "royal";
+  document.querySelectorAll(".template").forEach(c => {
+    c.classList.toggle("selected", c.dataset.template === "royal");
+  });
+  $("inviteMessage").textContent = "";
+  updatePreview();
+});
+
+/* تحميل وإدارة الدعوات */
+async function loadInvitations() {
+  const list = $("invitationsList");
+  const msg = $("publishedMessage");
+  list.replaceChildren();
+  msg.textContent = "جاري تحميل الدعوات...";
+
+  const { data, error } = await db
+    .from("invitations")
+    .select("*")
+    .order("created_at", { ascending: false });
+
+  if (error) {
+    msg.textContent = "تعذر تحميل الدعوات: " + error.message;
+    return;
+  }
+
+  const invitations = data || [];
+  msg.textContent = invitations.length
+    ? "عدد الدعوات: " + invitations.length
+    : "ماكو دعوات منشورة لحد الآن.";
+
+  $("inviteCount").textContent =
+    invitations.filter(x => x.status === "published").length;
+
+  invitations.forEach(inv => {
+    const card = document.createElement("article");
+    card.className = "invite-card";
+
+    const details = inv.details || {};
+    const title = document.createElement("h3");
+    title.textContent = details.names || "دعوة بدون اسم";
+    card.appendChild(title);
+
+    const info = document.createElement("p");
+    info.className = "muted";
+    info.textContent =
+      (templateNames[inv.template_id] || inv.template_id) +
+      " • " + (details.occasion || "مناسبة") +
+      " • " + (inv.status === "published" ? "منشورة" : "متوقفة");
+    card.appendChild(info);
+
+    const url = makeInvitationUrl(inv.slug);
+    const linkBox = document.createElement("div");
+    linkBox.className = "link-box";
+    linkBox.textContent = url;
+    card.appendChild(linkBox);
+
+    const actions = document.createElement("div");
+    actions.className = "actions";
+
+    const copyBtn = document.createElement("button");
+    copyBtn.textContent = "نسخ الرابط";
+    copyBtn.addEventListener("click", async () => {
+      try {
+        await navigator.clipboard.writeText(url);
+        copyBtn.textContent = "تم النسخ ✓";
+      } catch {
+        prompt("انسخ الرابط:", url);
+      }
+    });
+
+    const editBtn = document.createElement("button");
+    editBtn.textContent = "تعديل";
+    editBtn.className = "secondary";
+    editBtn.addEventListener("click", () => editInvitation(inv));
+
+    const toggleBtn = document.createElement("button");
+    toggleBtn.textContent = inv.status === "published" ? "إيقاف الرابط" : "إعادة النشر";
+    toggleBtn.className = "secondary";
+    toggleBtn.addEventListener("click", async () => {
+      const nextStatus = inv.status === "published" ? "disabled" : "published";
+      const { error } = await db.from("invitations")
+        .update({ status: nextStatus }).eq("id", inv.id);
+      if (error) alert("تعذر تغيير حالة الدعوة: " + error.message);
+      else await loadInvitations();
+    });
+
+    const deleteBtn = document.createElement("button");
+    deleteBtn.textContent = "حذف";
+    deleteBtn.className = "danger";
+    deleteBtn.addEventListener("click", async () => {
+      if (!confirm("هل تريد حذف هذه الدعوة نهائياً؟")) return;
+      const { error } = await db.from("invitations").delete().eq("id", inv.id);
+      if (error) alert("تعذر حذف الدعوة: " + error.message);
+      else await loadInvitations();
+    });
+
+    actions.append(copyBtn, editBtn, toggleBtn, deleteBtn);
+    card.appendChild(actions);
+    list.appendChild(card);
+  });
+}
+
+function editInvitation(inv) {
+  const d = inv.details || {};
+  editingInvitationId = inv.id;
+  selectedTemplate = inv.template_id;
+
+  $("hostNames").value = d.names || "";
+  $("occasion").value = d.occasion || "";
+  $("opening").value = d.opening || "";
+  $("eventDate").value = d.event_date || "";
+  $("venue").value = d.venue || "";
+  $("mapLink").value = d.map_link || "";
+  $("arrivalTime").value = d.arrival_time || "";
+  $("startTime").value = d.start_time || "";
+  $("hostPhone").value = d.host_phone || "";
+  $("extraMessage").value = d.extra_message || "";
+
+  document.querySelectorAll(".template").forEach(c => {
+    c.classList.toggle("selected", c.dataset.template === selectedTemplate);
+  });
+
+  $("saveInvitationBtn").textContent = "حفظ تعديلات الدعوة";
+  $("inviteMessage").textContent = "أنت تعدّل دعوة منشورة. حفظ التعديلات لا يغيّر رابطها.";
+  updatePreview();
+
+  document.querySelector('[data-tab="createSection"]').click();
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+
+$("refreshInvitationsBtn").addEventListener("click", loadInvitations);
 
 async function restoreSession() {
   const { data } = await db.auth.getSession();
-
   if (!data.session) return;
 
   try {
     await verifyAdmin(data.session.user);
     showDashboard();
     await loadOrders();
+    await loadInvitations();
   } catch (err) {
     await db.auth.signOut();
     showLogin();
@@ -310,6 +767,7 @@ async function restoreSession() {
   }
 }
 
+updatePreview();
 restoreSession();
 </script>
 </body>
