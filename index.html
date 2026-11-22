@@ -10,7 +10,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=Cormorant+Garamond:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
@@ -35,7 +35,6 @@ a{color:inherit;text-decoration:none}
 .btn{border:1px solid var(--wine);background:var(--wine);color:white;padding:11px 19px;border-radius:3px;display:inline-flex;align-items:center;justify-content:center;gap:7px}
 .btn:hover{background:var(--wine2)}
 .btn-outline{background:transparent;color:var(--wine)}
-.btn-gold{background:var(--gold);border-color:var(--gold);color:#352329}
 .hero{display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:40px;padding:70px 0}
 .eyebrow{font-size:12px;color:#9b8058;letter-spacing:2px;font-weight:600}
 .hero h1{font:clamp(43px,6vw,70px)/1.35 Amiri;color:var(--wine);margin:18px 0}
@@ -136,7 +135,7 @@ a{color:inherit;text-decoration:none}
 .detail span{display:block;color:var(--accent2);font-size:11px;margin-bottom:8px}
 .detail strong{font:19px Amiri;color:var(--accent)}
 .detail-wide{grid-column:1/-1}
-.action-link{display:inline-block;background:var(--accent);color:var(--surface);padding:11px 20px;margin:10px 5px;font-size:13px}
+.action-link{display:inline-block;background:var(--accent);color:var(--surface);padding:11px 20px;margin:10px 5px;font-size:13px;border:0}
 .countdown{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:20px}
 .countdown div{min-width:65px;padding:12px 8px;border:1px solid var(--accent2)}
 .countdown strong{display:block;font:24px Amiri;color:var(--accent)}
@@ -153,25 +152,54 @@ a{color:inherit;text-decoration:none}
 .result{font-size:13px;color:var(--wine);line-height:1.9;white-space:pre-line;margin-top:12px}
 .hidden{display:none!important}
 button:disabled{opacity:.6;cursor:not-allowed}
+
+/* PUBLIC INVITATION PAGE */
+body.public-invitation{background:#171315}
+body.public-invitation > *:not(#publicInvitationPage){display:none!important}
+#publicInvitationPage{min-height:100vh;background:var(--cream);color:var(--ink)}
+.public-loading{min-height:100vh;display:grid;place-items:center;text-align:center;padding:25px;color:var(--wine);font-family:Amiri,serif;font-size:24px}
+.public-error{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:25px;background:#211719;color:#f8e8d2}
+.public-error h2{font:36px Amiri;color:#d8bd83}
+.public-error p{line-height:2;color:#e6d7c7}
+.public-invite{max-width:850px;margin:auto;box-shadow:0 0 50px #0001}
+.public-invite .envelope-screen{min-height:100vh}
+.public-invite .invitation-content{display:none}
+.public-invite.opened .invitation-content{display:block;animation:fadeUp .9s ease}
+.public-invite.opened .envelope-screen{display:none}
+.public-invite .invite-section{padding:65px 22px}
+.public-invite .wish-form{max-width:500px;margin:20px auto}
+.public-invite .wish-form input,.public-invite .wish-form textarea{width:100%;padding:12px;margin:6px 0;border:1px solid var(--accent2);background:transparent;color:var(--text)}
+.public-invite .wish-list{max-width:500px;margin:20px auto;text-align:right}
+.public-invite .wish{border-bottom:1px solid color-mix(in srgb,var(--accent2),transparent 60%);padding:12px}
+.public-invite .wish strong{color:var(--accent)}
+.public-invite .wish p{overflow-wrap:anywhere}
+.public-invite .seal-button{cursor:pointer}
+.public-invite .detail-grid{grid-template-columns:1fr 1fr}
 @media(max-width:800px){
-.nav{display:none}.hero{grid-template-columns:1fr;text-align:center;padding:45px 0}
-.hero p{margin:auto}.actions{justify-content:center}.hero-art{min-height:330px}
-.templates{grid-template-columns:repeat(2,1fr)}
-.preview-layout{grid-template-columns:1fr}.preview-controls{max-height:none}
-.preview-stage{height:65vh}
+ .nav{display:none}
+ .hero{grid-template-columns:1fr;text-align:center;padding:45px 0}
+ .hero p{margin:auto}
+ .actions{justify-content:center}
+ .hero-art{min-height:330px}
+ .templates{grid-template-columns:repeat(2,1fr)}
+ .preview-layout{grid-template-columns:1fr}
+ .preview-controls{max-height:none}
+ .preview-stage{height:65vh}
 }
 @media(max-width:580px){
-.container{width:calc(100% - 26px)}
-.header{height:68px}.brand-name{font-size:24px}
-.header .btn{padding:8px 10px;font-size:12px}
-.templates,.prices,.steps{grid-template-columns:1fr;max-width:430px;margin:auto}
-.price.featured{transform:none}
-.section{padding:50px 0}
-.footer-inner{flex-direction:column;text-align:center}
-.form-grid{grid-template-columns:1fr}
-.payment-options{grid-template-columns:1fr}
-.invite-section{padding:42px 17px}
-.detail-grid{gap:7px}
+ .container{width:calc(100% - 26px)}
+ .header{height:68px}
+ .brand-name{font-size:24px}
+ .header .btn{padding:8px 10px;font-size:12px}
+ .templates,.prices,.steps{grid-template-columns:1fr;max-width:430px;margin:auto}
+ .price.featured{transform:none}
+ .section{padding:50px 0}
+ .footer-inner{flex-direction:column;text-align:center}
+ .form-grid{grid-template-columns:1fr}
+ .payment-options{grid-template-columns:1fr}
+ .invite-section{padding:42px 17px}
+ .detail-grid{gap:7px}
+ .public-invite .invite-section{padding:45px 16px}
 }
 </style>
 </head>
@@ -369,7 +397,7 @@ button:disabled{opacity:.6;cursor:not-allowed}
     <div class="field"><label>اسم الشخص المستضيف</label><input id="previewHost" placeholder="اسم المستضيف"></div>
     <div class="field"><label>رقم هاتف المستضيف</label><input id="previewPhone" type="tel" placeholder="07xxxxxxxxx"></div>
     <button class="btn" style="width:100%" onclick="usePreviewForOrder()">اختيار هذا التصميم وطلبه</button>
-    <p class="notice">المعاينة للتجربة فقط. رسائل التهاني هنا تجريبية على نفس الجهاز، وسيتم ربط دفتر التهاني الحقيقي بقاعدة البيانات في مرحلة لاحقة.</p>
+    <p class="notice">المعاينة للتجربة فقط. رسائل التهاني هنا تجريبية على نفس الجهاز.</p>
    </div>
   </div>
  </div>
@@ -402,9 +430,9 @@ button:disabled{opacity:.6;cursor:not-allowed}
 </div>
 
 <script>
-/* SUPABASE */
 const SUPABASE_URL="https://xnabtqiukgcbukrmpyle.supabase.co";
 const SUPABASE_KEY="sb_publishable_-fZR33L75gcyESGdh0OYTg_Ct1Iamlz";
+
 let da3waDB=null;
 try{
  if(window.supabase?.createClient){
@@ -412,7 +440,6 @@ try{
  }
 }catch(e){console.error(e)}
 
-/* FIVE LIVE DESIGNS */
 const templates=[
  {id:"royal",name:"Royal Envelope",arabic:"الظرف الملكي",theme:"royal",symbol:"✦ ❦ ✦",line:"أناقة ملكية"},
  {id:"floral",name:"Floral Garden",arabic:"حديقة الورد",theme:"floral",symbol:"❀ ❁ ❀",line:"رومانسية ناعمة"},
@@ -425,7 +452,6 @@ const $=id=>document.getElementById(id);
 let selectedTemplate=templates[0];
 let selectedPayment="";
 let isSubmitting=false;
-let countdownTimer=null;
 
 $("year").textContent=new Date().getFullYear();
 
@@ -467,17 +493,14 @@ function previewTemplate(id){
  openPreview();
 }
 function chooseTemplate(id){previewTemplate(id)}
-
 function openPreview(){
  $("previewModal").classList.add("open");
  applyTemplate(selectedTemplate);
  updatePreview();
 }
 function closeModal(id){$(id).classList.remove("open")}
+function openEnvelope(){$("liveInvite").classList.add("opened")}
 
-function openEnvelope(){
- $("liveInvite").classList.add("opened");
-}
 $("previewTemplate").addEventListener("change",e=>{
  const t=templates.find(x=>x.id===e.target.value);
  if(t)applyTemplate(t);
@@ -487,8 +510,7 @@ function formatTime(v){
  if(!v)return "يحدد لاحقاً";
  const [h,m]=v.split(":").map(Number);
  const suffix=h>=12?"مساءً":"صباحاً";
- const hour=h%12||12;
- return `${hour}:${String(m).padStart(2,"0")} ${suffix}`;
+ return `${h%12||12}:${String(m).padStart(2,"0")} ${suffix}`;
 }
 function updatePreview(){
  $("liveNames").textContent=$("previewNames").value.trim()||"الأسماء";
@@ -501,8 +523,8 @@ function updatePreview(){
  $("liveVenue").textContent=$("previewVenue").value.trim()||"اسم القاعة";
  $("liveHost").textContent=$("previewHost").value.trim()||"صاحب الدعوة";
  const phone=$("previewPhone").value.trim();
- $("livePhone").textContent=phone||"رقم المستضيف";
- $("phoneLink").href=phone?"tel:"+phone:"#";
+ $("livePhone").textContent=phone||"07xxxxxxxxx";
+ $("phoneLink").href=phone?"tel:"+phone:"tel:";
  const map=$("previewMap").value.trim();
  $("mapLink").href=map||"#";
  $("mapLink").style.opacity=map?"1":".5";
@@ -531,9 +553,8 @@ function updateCountdown(){
  $("cdMinutes").textContent=Math.floor(diff%3600000/60000);
  $("cdSeconds").textContent=Math.floor(diff%60000/1000);
 }
-countdownTimer=setInterval(updateCountdown,1000);
+setInterval(updateCountdown,1000);
 
-/* DEMO GUESTBOOK - LOCAL PREVIEW ONLY */
 $("wishForm").addEventListener("submit",e=>{
  e.preventDefault();
  const name=$("wishName").value.trim();
@@ -551,7 +572,6 @@ $("wishForm").addEventListener("submit",e=>{
  $("wishText").value="";
 });
 
-/* ORDER FLOW */
 function usePreviewForOrder(){
  $("orderTemplate").value=selectedTemplate.arabic;
  closeModal("previewModal");
@@ -567,7 +587,6 @@ function selectPayment(btn){
  document.querySelectorAll(".payment-option").forEach(x=>x.classList.toggle("selected",x===btn));
 }
 
-/* SUBMIT TO EXISTING ORDERS TABLE */
 $("orderForm").addEventListener("submit",async e=>{
  e.preventDefault();
  if(isSubmitting)return;
@@ -576,7 +595,7 @@ $("orderForm").addEventListener("submit",async e=>{
  const result=$("orderResult");
  result.textContent="";
  if(!da3waDB){
-  result.textContent="تعذر الاتصال بقاعدة البيانات. حدّث الصفحة وحاول مرة أخرى.";
+  result.textContent="تعذر الاتصال بقاعدة البيانات.";
   return;
  }
  if(!form.reportValidity())return;
@@ -586,15 +605,13 @@ $("orderForm").addEventListener("submit",async e=>{
  }
  const phone=$("orderPhone").value.trim();
  if(!/^(\+?964|0)?7\d{9}$/.test(phone.replace(/[\s-]/g,""))){
-  result.textContent="تأكد من رقم الهاتف العراقي. مثال: 07xxxxxxxxx";
+  result.textContent="تأكد من رقم الهاتف العراقي.";
   return;
  }
  const packageName=$("orderPackage").value;
  const price=prices[packageName];
  if(!price){result.textContent="الباقة المختارة غير صحيحة.";return}
 
- /* Store all invitation details in the existing invitation_message column.
-    This keeps compatibility with the current orders table. */
  const details=[
   "نوع المناسبة: "+$("eventKind").value,
   "الأسماء: "+$("previewNames").value,
@@ -629,24 +646,16 @@ $("orderForm").addEventListener("submit",async e=>{
  try{
   const {error}=await da3waDB.from("orders").insert([order]);
   if(error)throw error;
-
-  result.textContent=
-   "تم إرسال طلبك بنجاح إلى DA3WA ❤️\n"+
-   "القالب: "+order.template_name+
-   "\nالباقة: "+packageName+
-   "\nالمبلغ: "+price.toLocaleString("en-US")+" د.ع"+
-   "\nحالة الطلب: بانتظار مراجعة الإدارة.";
-
+  result.textContent="تم إرسال طلبك بنجاح إلى DA3WA ❤️\nالقالب: "+order.template_name+"\nالباقة: "+packageName+"\nالمبلغ: "+price.toLocaleString("en-US")+" د.ع\nحالة الطلب: بانتظار مراجعة الإدارة.";
   form.reset();
   selectedPayment="";
   document.querySelectorAll(".payment-option").forEach(x=>x.classList.remove("selected"));
  }catch(error){
-  console.error("DA3WA order error:",error);
+  console.error(error);
   let message=error.message||"حدث خطأ غير معروف";
   if(error.code==="42501")message="لا توجد صلاحية لإضافة طلب جديد. تحقق من RLS.";
   if(error.code==="42P01")message="جدول orders غير موجود.";
   if(error.code==="42703")message="يوجد عمود مفقود في جدول orders.";
-  if(error.code==="23502")message="هناك حقل مطلوب لم يتم إرساله.";
   result.textContent="لم يتم إرسال الطلب.\nسبب الخطأ: "+message;
  }finally{
   isSubmitting=false;
@@ -655,13 +664,229 @@ $("orderForm").addEventListener("submit",async e=>{
  }
 });
 
-/* MODAL CONTROLS */
 document.querySelectorAll(".modal").forEach(m=>{
  m.addEventListener("click",e=>{if(e.target===m)m.classList.remove("open")});
 });
 document.addEventListener("keydown",e=>{
  if(e.key==="Escape")document.querySelectorAll(".modal.open").forEach(m=>m.classList.remove("open"));
 });
+
+/* PUBLIC INVITATION ROUTE */
+(function(){
+
+ const params=new URLSearchParams(window.location.search);
+ const invitationSlug=params.get("invite");
+
+ if(!invitationSlug)return;
+
+ document.body.classList.add("public-invitation");
+
+ const root=document.createElement("div");
+ root.id="publicInvitationPage";
+ document.body.appendChild(root);
+
+ const themeMap={
+  royal:"royal",
+  floral:"floral",
+  minimal:"minimal",
+  midnight:"midnight",
+  champagne:"champagne"
+ };
+
+ function escapeHTML(value){
+  return String(value??"").replace(/[&<>"']/g,char=>({
+   "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"
+  })[char]);
+ }
+
+ function formatPublicTime(value){
+  if(!value)return "غير محدد";
+  const [h,m]=value.split(":").map(Number);
+  return `${h%12||12}:${String(m||0).padStart(2,"0")} ${h>=12?"مساءً":"صباحاً"}`;
+ }
+
+ function formatPublicDate(value){
+  if(!value)return "غير محدد";
+  const date=new Date(value+"T12:00:00");
+  if(Number.isNaN(date.getTime()))return value;
+  return date.toLocaleDateString("ar-IQ",{
+   weekday:"long",year:"numeric",month:"long",day:"numeric"
+  });
+ }
+
+ function safeMap(value){
+  try{
+   const url=new URL(value);
+   return ["https:","http:"].includes(url.protocol)?url.href:"";
+  }catch(e){return ""}
+ }
+
+ function errorPage(title,description){
+  root.innerHTML=`
+   <div class="public-error">
+    <div style="font:45px Amiri;color:#d8bd83">د</div>
+    <h2>${escapeHTML(title)}</h2>
+    <p>${escapeHTML(description)}</p>
+    <div style="letter-spacing:4px;color:#d8bd83">DA3WA</div>
+   </div>`;
+ }
+
+ function renderInvitation(inv){
+  const d=inv.details||{};
+  const theme=themeMap[inv.template_id]||"royal";
+  const map=safeMap(d.map_link);
+  const phone=String(d.host_phone||"").trim();
+  const target=d.event_date?
+   new Date(d.event_date+"T"+(d.start_time||"20:00")+":00").getTime():0;
+
+  root.innerHTML=`
+   <div class="public-invite live-invite ${theme}" id="publicInvite">
+    <section class="envelope-screen">
+     <div class="tiny">YOU ARE INVITED</div>
+     <div class="envelope">
+      <button class="seal-button" id="openPublicEnvelope" aria-label="افتح الدعوة">د</button>
+     </div>
+     <div class="open-hint">اضغط على الختم لفتح دعوتك</div>
+     <div class="tiny" style="margin-top:20px">DA3WA · A SPECIAL MOMENT</div>
+    </section>
+
+    <div class="invitation-content">
+     <section class="invite-section">
+      <div class="invite-kicker">بِسْمِ اللهِ الرَّحْمٰنِ الرَّحِيم</div>
+      <div class="ornament">❧ ✦ ❧</div>
+      <p>${escapeHTML(d.opening||"بكل الحب والسرور، يسعدنا دعوتكم لمشاركتنا أجمل لحظاتنا")}</p>
+      <div class="couple-names">${escapeHTML(d.names||"أهلاً بكم")}</div>
+      <div class="couple-sub">${escapeHTML(d.occasion||"دعوتكم لحضور مناسبتنا")}</div>
+      <div class="ornament">❦</div>
+      <p>حضوركم يزيد فرحتنا ويجعل يومنا أجمل</p>
+     </section>
+
+     <section class="invite-section">
+      <div class="invite-kicker">THE CELEBRATION</div>
+      <h3>تفاصيل المناسبة</h3>
+      <div class="detail-grid">
+       <div class="detail"><span>تاريخ المناسبة</span><strong>${escapeHTML(formatPublicDate(d.event_date))}</strong></div>
+       <div class="detail"><span>وقت استقبال الضيوف</span><strong>${escapeHTML(formatPublicTime(d.arrival_time))}</strong></div>
+       <div class="detail"><span>بداية المناسبة</span><strong>${escapeHTML(formatPublicTime(d.start_time))}</strong></div>
+       <div class="detail"><span>المكان</span><strong>${escapeHTML(d.venue||"غير محدد")}</strong></div>
+       <div class="detail detail-wide"><span>المستضيف</span><strong>${escapeHTML(d.host_name||d.names||"صاحب الدعوة")}</strong></div>
+       ${phone?`<div class="detail detail-wide"><span>للتواصل والاستفسار</span><strong>${escapeHTML(phone)}</strong></div>`:""}
+      </div>
+      ${map?`<a class="action-link" href="${escapeHTML(map)}" target="_blank" rel="noopener noreferrer">عرض الموقع على الخريطة</a>`:""}
+      ${phone?`<a class="action-link" href="tel:${escapeHTML(phone)}">اتصل بالمستضيف</a>`:""}
+      ${d.extra_message?`<p>${escapeHTML(d.extra_message)}</p>`:""}
+     </section>
+
+     <section class="invite-section">
+      <div class="invite-kicker">COUNTDOWN</div>
+      <h3>ننتظركم بكل حب</h3>
+      <p>بدأ العد التنازلي للحظة لقائنا بكم</p>
+      <div class="countdown">
+       <div><strong id="publicDays">--</strong><small>يوم</small></div>
+       <div><strong id="publicHours">--</strong><small>ساعة</small></div>
+       <div><strong id="publicMinutes">--</strong><small>دقيقة</small></div>
+       <div><strong id="publicSeconds">--</strong><small>ثانية</small></div>
+      </div>
+     </section>
+
+     <section class="invite-section">
+      <div class="invite-kicker">GUEST BOOK</div>
+      <h3>اتركوا لنا كلمة جميلة</h3>
+      <p>فرحتنا تكبر بكلماتكم وتهانيكم</p>
+      <form class="wish-form" id="publicWishForm">
+       <input id="publicWishName" maxlength="60" placeholder="اسمك" required>
+       <textarea id="publicWishText" maxlength="300" placeholder="اكتب تهنئتك هنا" required></textarea>
+       <button class="action-link" type="submit">إرسال التهنئة</button>
+      </form>
+      <div class="wish-list" id="publicWishList">
+       <div class="wish"><strong>أحبابكم</strong><p>بانتظار أجمل تهانيكم ❤️</p></div>
+      </div>
+      <p class="notice">رسائل التهاني في هذه النسخة تظهر على نفس الجهاز فقط.</p>
+     </section>
+     <div class="watermark">DA3WA · MADE WITH LOVE</div>
+    </div>
+   </div>`;
+
+  $("openPublicEnvelope").addEventListener("click",()=>{
+   $("publicInvite").classList.add("opened");
+   window.scrollTo({top:0,behavior:"smooth"});
+  });
+
+  $("publicWishForm").addEventListener("submit",e=>{
+   e.preventDefault();
+   const name=$("publicWishName").value.trim();
+   const message=$("publicWishText").value.trim();
+   if(!name||!message)return;
+
+   const item=document.createElement("div");
+   item.className="wish";
+   const strong=document.createElement("strong");
+   strong.textContent=name;
+   const p=document.createElement("p");
+   p.textContent=message;
+   item.append(strong,p);
+   $("publicWishList").prepend(item);
+   e.target.reset();
+  });
+
+  function countdown(){
+   if(!target||Number.isNaN(target)){
+    ["publicDays","publicHours","publicMinutes","publicSeconds"].forEach(id=>$(id).textContent="--");
+    return;
+   }
+   const diff=target-Date.now();
+   if(diff<=0){
+    ["publicDays","publicHours","publicMinutes","publicSeconds"].forEach(id=>$(id).textContent="0");
+    return;
+   }
+   $("publicDays").textContent=Math.floor(diff/86400000);
+   $("publicHours").textContent=Math.floor(diff%86400000/3600000);
+   $("publicMinutes").textContent=Math.floor(diff%3600000/60000);
+   $("publicSeconds").textContent=Math.floor(diff%60000/1000);
+  }
+  countdown();
+  setInterval(countdown,1000);
+  document.title=(d.names||"دعوة خاصة")+" | DA3WA";
+ }
+
+ async function loadInvitation(){
+  if(!da3waDB){
+   errorPage("تعذر الاتصال","يرجى تحديث الصفحة والمحاولة مرة أخرى.");
+   return;
+  }
+
+  if(!/^[a-zA-Z0-9_-]{5,80}$/.test(invitationSlug)){
+   errorPage("رابط غير صحيح","تأكد من الرابط الذي وصلك.");
+   return;
+  }
+
+  root.innerHTML='<div class="public-loading">جاري تجهيز دعوتكم...</div>';
+
+  const {data,error}=await da3waDB
+   .from("invitations")
+   .select("slug,template_id,details,status")
+   .eq("slug",invitationSlug)
+   .maybeSingle();
+
+  if(error){
+   console.error("Invitation load error:",error);
+   errorPage("تعذر تحميل الدعوة","حدث خطأ أثناء تحميل بيانات الدعوة.");
+   return;
+  }
+  if(!data){
+   errorPage("الدعوة غير موجودة","قد يكون الرابط غير صحيح أو تم حذف الدعوة.");
+   return;
+  }
+  if(data.status!=="published"){
+   errorPage("هذه الدعوة غير متاحة","لم يتم نشر هذه الدعوة بعد.");
+   return;
+  }
+  renderInvitation(data);
+ }
+
+ loadInvitation();
+
+})();
 </script>
 </body>
 </html>
