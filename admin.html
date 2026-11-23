@@ -432,6 +432,37 @@ button.secondary,.tab{background:#392330;color:#f2dfc0;border:1px solid #8a6948}
 .music-library-item-actions{display:flex;gap:7px;align-items:center;flex-wrap:wrap}
 .music-library-item-actions button{padding:8px 11px}
 @media(max-width:700px){.music-upload-row{grid-template-columns:1fr}.music-library-item{align-items:flex-start;flex-direction:column}.music-library-item audio{width:100%}}
+
+/* Admin live preview for the full-bleed royal velvet invitation */
+#preview.curtain-admin-preview{display:block!important;min-height:0!important;height:min(1120px,78vh)!important;overflow-y:auto!important;overflow-x:hidden!important;padding:0!important;border:1px solid #8f7043!important;border-radius:3px!important;background:#080609!important;color:#f8e8c9!important;text-shadow:none!important;scrollbar-color:#a9824e #130a0d}
+.curtain-admin-preview:before{display:none!important}
+.curtain-admin-preview .admin-curtain-hero{height:520px;min-height:420px;position:relative;overflow:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;background:#18080d}
+.admin-curtain-photo{position:absolute;inset:0;background:linear-gradient(180deg,#10070a44,#08060988),url('https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1400&q=85') center/cover;animation:adminRoyalDrift 20s ease-in-out infinite alternate}
+.admin-curtain-title{position:absolute;top:28px;z-index:4;color:#f2d99d;letter-spacing:4px;font:11px Arial;text-shadow:0 2px 12px #000}
+.admin-velvet{position:absolute;z-index:3;top:-2%;bottom:-2%;width:52%;box-shadow:inset 0 0 35px #180208,inset 0 0 12px #f6a0a022,0 12px 35px #000b;transition:transform 2s cubic-bezier(.72,0,.18,1);background:repeating-linear-gradient(90deg,#24040d 0 7%,#711329 12%,#360713 20%,#8b1930 28%,#21040c 37%)}
+.admin-velvet.left{left:0;clip-path:polygon(0 0,100% 0,92% 15%,100% 32%,92% 49%,100% 67%,91% 84%,100% 100%,0 100%);border-right:2px solid #a54a51}
+.admin-velvet.right{right:0;clip-path:polygon(0 0,100% 0,100% 100%,0 100%,8% 84%,0 67%,8% 49%,0 32%,8% 15%);border-left:2px solid #a54a51}
+.admin-curtain-seal{position:relative;z-index:5;width:72px;height:72px;border-radius:50%;border:1px solid #f3dba0;background:radial-gradient(circle at 30% 25%,#f8e3ad,#b58b43 48%,#56350f);color:#4b0b18;font-size:29px;box-shadow:0 7px 24px #000b,inset 0 2px 6px #fff9;cursor:pointer}
+.admin-curtain-hint{position:absolute;z-index:5;bottom:24px;color:#f5e5c4;font:14px Amiri,serif;text-shadow:0 2px 12px #000}
+.admin-curtain-hero.opened .admin-velvet.left{transform:translateX(-108%)}
+.admin-curtain-hero.opened .admin-velvet.right{transform:translateX(108%)}
+.admin-curtain-hero.opened .admin-curtain-seal{opacity:0;transition:opacity .5s}
+.curtain-admin-preview .admin-curtain-scene{position:relative;min-height:420px;padding:75px 22px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;overflow:hidden;background:linear-gradient(180deg,#0906099c,#090609dc),url('https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1400&q=85') center/cover;color:#f7e8ca}
+.curtain-admin-preview .admin-curtain-details{background:linear-gradient(180deg,#160b10dd,#080609ee),url('https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1400&q=85') center/cover}
+.admin-scene-kicker{color:#e7c783;font-size:12px;letter-spacing:3px;margin-bottom:22px}
+.admin-scene-ornament{color:#e7c783;font-size:34px;margin:15px}
+.curtain-admin-preview .admin-curtain-scene p{font:18px/2 Amiri,serif;color:#f6e9d4}
+.curtain-admin-preview .admin-curtain-scene h2{font:38px/1.5 Amiri,serif;color:#e7c783;margin:12px 0}
+.curtain-admin-preview .admin-preview-names{font-size:clamp(36px,7vw,58px)!important}
+.admin-scene-details{width:min(620px,100%);display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px;margin:28px auto}
+.admin-scene-details>div{padding:12px 6px;border-bottom:1px solid #d6b36d88}
+.admin-scene-details small{display:block;color:#d9bd80;margin-bottom:8px}
+.admin-scene-details strong{color:#fff5df;font:22px Amiri,serif;overflow-wrap:anywhere}
+.admin-curtain-end{padding:55px 16px;text-align:center;background:#080609;color:#d9bd80;letter-spacing:3px}
+.admin-curtain-end span{padding:0 12px;color:#f4d38f}
+@keyframes adminRoyalDrift{from{background-position:50% 42%;transform:scale(1)}to{background-position:50% 56%;transform:scale(1.07)}}
+@media(max-width:600px){#preview.curtain-admin-preview{height:75vh!important}.curtain-admin-preview .admin-curtain-hero{height:460px}.curtain-admin-preview .admin-curtain-scene{min-height:360px;padding:65px 16px}.admin-scene-details{gap:12px}.admin-scene-details strong{font-size:18px}}
+
 </style>
 </head>
 <body>
@@ -618,7 +649,7 @@ const templateCatalog = [
   {id:"graduation-blue",name:"إنجاز أزرق",symbol:"✧",colors:["#132b48","#78a9d2","#e0f1ff"],kind:"graduation"},
   {id:"birthday-pastel",name:"عيد ميلاد باستيل",symbol:"♡",colors:["#563044","#d99cae","#ffe7eb"],kind:"birthday"},
   {id:"birthday-neon",name:"حفلة أضواء",symbol:"★",colors:["#251438","#c06bd2","#f5d6ff"],kind:"birthday"},
-  {id:"red-star",name:"النجمة الحمراء",symbol:"★",colors:["#09090b","#c99a42","#ffe4a1"],kind:"envelope"}
+  {id:"red-star",name:"الستارة الملكية",symbol:"✦",colors:["#090609","#c99a42","#ffe4a1"],kind:"envelope"}
 ];
 const templateNames = Object.fromEntries(templateCatalog.map(t=>[t.id,t.name]));
 Object.assign(templateNames,{
@@ -1007,22 +1038,70 @@ function formatTime(value) {
 }
 
 function updatePreview() {
-  previewFields.forEach(([inputId, previewId, fallback]) => {
-    $(previewId).textContent = $(inputId).value.trim() || fallback;
-  });
-
-  $("previewDate").textContent = formatDate($("eventDate").value);
-  $("previewArrival").textContent = "استقبال الضيوف: " +
-    ( $("arrivalTime").value ? formatTime($("arrivalTime").value) : "غير محدد" );
-  $("previewStart").textContent = "بدء المناسبة: " +
-    ( $("startTime").value ? formatTime($("startTime").value) : "غير محدد" );
-
   const selected=templateCatalog.find(t=>t.id===normalizeTemplate(selectedTemplate))||templateCatalog[0];
   const selectedIndex=templateCatalog.indexOf(selected)+1;
-  $("preview").className="preview admin-preview-art art-"+selectedIndex;
-  $("preview").style.background="radial-gradient(ellipse at 50% 20%, "+selected.colors[1]+", "+selected.colors[0]+" 78%)";
-  $("preview").style.color=selected.colors[2];
-  $("preview").setAttribute("data-symbol",selected.symbol);
+  const preview=$("preview");
+  const names=$("hostNames").value.trim()||"أحمد وسارة";
+  const occasion=$("occasion").value.trim()||"حفل زفاف";
+  const opening=$("opening").value.trim()||"بكل الحب والفرح نتشرف بدعوتكم";
+  const venue=$("venue").value.trim()||"مكان المناسبة";
+  const date=formatDate($("eventDate").value);
+  const arrival=$("arrivalTime").value?formatTime($("arrivalTime").value):"غير محدد";
+  const start=$("startTime").value?formatTime($("startTime").value):"غير محدد";
+  const extra=$("extraMessage").value.trim();
+  if(selected.id==="red-star"){
+    preview.className="preview admin-preview-art curtain-admin-preview";
+    preview.innerHTML=`
+      <div class="admin-curtain-hero">
+        <div class="admin-curtain-photo"></div>
+        <div class="admin-curtain-title">YOU ARE INVITED</div>
+        <div class="admin-velvet left"></div><div class="admin-velvet right"></div>
+        <button type="button" class="admin-curtain-seal" aria-label="تجربة فتح الستارة">✦</button>
+        <div class="admin-curtain-hint">اضغط على الختم لفتح الدعوة</div>
+      </div>
+      <section class="admin-curtain-scene admin-curtain-intro">
+        <div class="admin-scene-kicker">بِسْمِ اللهِ الرَّحْمٰنِ الرَّحِيم</div>
+        <div class="admin-scene-ornament">✧</div>
+        <p class="admin-opening"></p><h2 class="admin-preview-names"></h2>
+        <p class="admin-preview-occasion"></p><div class="admin-scene-ornament">❦</div>
+      </section>
+      <section class="admin-curtain-scene admin-curtain-details">
+        <div class="admin-scene-kicker">THE CELEBRATION</div><h2>تفاصيل المناسبة</h2>
+        <div class="admin-scene-details">
+          <div><small>التاريخ</small><strong class="admin-preview-date"></strong></div>
+          <div><small>استقبال الضيوف</small><strong class="admin-preview-arrival"></strong></div>
+          <div><small>بداية المناسبة</small><strong class="admin-preview-start"></strong></div>
+          <div><small>المكان</small><strong class="admin-preview-venue"></strong></div>
+        </div>
+        <p class="admin-preview-extra"></p>
+      </section>
+      <div class="admin-curtain-end">DA3WA <span>✦</span> ننتظركم بكل حب</div>`;
+    preview.querySelector(".admin-opening").textContent=opening;
+    preview.querySelector(".admin-preview-names").textContent=names;
+    preview.querySelector(".admin-preview-occasion").textContent=occasion;
+    preview.querySelector(".admin-preview-date").textContent=date;
+    preview.querySelector(".admin-preview-arrival").textContent=arrival;
+    preview.querySelector(".admin-preview-start").textContent=start;
+    preview.querySelector(".admin-preview-venue").textContent=venue;
+    preview.querySelector(".admin-preview-extra").textContent=extra;
+    const hero=preview.querySelector(".admin-curtain-hero");
+    preview.querySelector(".admin-curtain-seal").addEventListener("click",()=>hero.classList.toggle("opened"));
+  }else{
+    preview.className="preview admin-preview-art art-"+selectedIndex;
+    preview.innerHTML=`
+      <div class="ornament">✦</div><p id="previewOpening"></p>
+      <div class="line"></div><h2 class="preview-names" id="previewNames"></h2>
+      <p id="previewOccasion"></p><div class="line"></div>
+      <p id="previewDate"></p><p id="previewVenue"></p>
+      <p id="previewArrival"></p><p id="previewStart"></p><p id="previewExtra"></p>
+      <div class="ornament">❖</div>`;
+    [["previewOpening",opening],["previewNames",names],["previewOccasion",occasion],
+     ["previewDate",date],["previewVenue",venue],["previewArrival","استقبال الضيوف: "+arrival],
+     ["previewStart","بدء المناسبة: "+start],["previewExtra",extra]].forEach(([id,value])=>$(id).textContent=value);
+    preview.style.background="radial-gradient(ellipse at 50% 20%, "+selected.colors[1]+", "+selected.colors[0]+" 78%)";
+    preview.style.color=selected.colors[2];
+  }
+  preview.setAttribute("data-symbol",selected.symbol);
 }
 
 [
