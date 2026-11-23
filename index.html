@@ -1017,7 +1017,11 @@ let pricingData=[{name:"الأساسية",amount:20000,features:["دعوة تف�
 let prices=Object.fromEntries(pricingData.map(p=>[p.name,p.amount]));
 function escPublic(v){return String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
 function renderPublicPricing(){const grid=$("pricingGrid");if(!grid)return;grid.innerHTML=pricingData.map((p,i)=>`<article class="price ${i===1?"featured":""}"><h3>${escPublic(p.name)}</h3><div class="amount">${Number(p.amount).toLocaleString("en-US")} <small>د.ع</small></div><ul>${p.features.map(f=>"<li>"+escPublic(f)+"</li>").join("")}</ul><button class="btn" onclick="startOrder('${escPublic(p.name).replace(/'/g,"&#39;")}')">اختيار الباقة</button></article>`).join("");const sel=$("orderPackage"),old=sel.value;sel.innerHTML=pricingData.map(p=>`<option value="${escPublic(p.name)}">${escPublic(p.name)}</option>`).join("");if(pricingData.some(p=>p.name===old))sel.value=old;prices=Object.fromEntries(pricingData.map(p=>[p.name,p.amount]));}
-async function loadPublicPricing(){if(!da3waDB)return;try{const {data,error}=await da3waDB.from("site_settings").select("value").eq("key","pricing").maybeSingle();if(error)throw error;if(data?.value&&Array.isArray(data.value)&&data.value.length===3){pricingData=data.value.map(p=>({name:String(p.name||""),amount:Number(p.amount)||0,features:Array.isArray(p.features)?p.features.map(String):[]}));renderPublicPricing();}}catch(e){console.warn("Using default package prices",e);}}
+let lastPublicPricingJSON="";
+async function loadPublicPricing(){if(!da3waDB)return;try{const {data,error}=await da3waDB.from("site_settings").select("value").eq("key","pricing").maybeSingle();if(error)throw error;if(data?.value&&Array.isArray(data.value)&&data.value.length===3){const normalized=data.value.map(p=>({name:String(p.name||""),amount:Number(p.amount)||0,features:Array.isArray(p.features)?p.features.map(String):[]}));const fingerprint=JSON.stringify(normalized);if(fingerprint!==lastPublicPricingJSON){pricingData=normalized;lastPublicPricingJSON=fingerprint;renderPublicPricing();}}}catch(e){console.warn("Using default package prices",e);}}
+/* تحديث الأسعار تلقائياً بعد حفظها من لوحة الإدارة */
+setInterval(loadPublicPricing,5000);
+window.addEventListener("focus",loadPublicPricing);
 renderPublicPricing();
 const $=id=>document.getElementById(id);
 let selectedTemplate=templates[0];
