@@ -1542,19 +1542,36 @@ function editInvitation(inv) {
 $("refreshInvitationsBtn").addEventListener("click", loadInvitations);
 
 async function restoreSession() {
-  const { data } = await db.auth.getSession();
+  const { data, error } = await db.auth.getSession();
+  if (error) {
+    message.textContent = "تعذر استعادة جلسة الإدارة: " + error.message;
+    showLogin();
+    return;
+  }
   if (!data.session) return;
 
+  // لا تنهِ جلسة المدير بسبب فشل تحميل قسم ثانوي مثل الطلبات أو مكتبة الأغاني.
   try {
     await verifyAdmin(data.session.user);
-    showDashboard();
-    await loadOrders();
-    await loadInvitations();
-    await loadMusicLibrary();
   } catch (err) {
     await db.auth.signOut();
     showLogin();
     message.textContent = err.message;
+    return;
+  }
+
+  showDashboard();
+  const results = await Promise.allSettled([
+    loadOrders(),
+    loadInvitations(),
+    loadMusicLibrary()
+  ]);
+  const failed = results.find(result => result.status === "rejected");
+  if (failed) {
+    message.textContent = "تم استرجاع دخول الإدارة، لكن تعذر تحميل بعض البيانات. حدّث القسم المطلوب وحاول مرة ثانية.";
+    console.error("Admin data restore error:", failed.reason);
+  } else {
+    message.textContent = "";
   }
 }
 
