@@ -1985,11 +1985,42 @@ document.addEventListener("keydown",e=>{
    const invitationMusic=$("invitationBackgroundMusic");
    if(invitationMusic){invitationMusic.volume=0.85;const playAttempt=invitationMusic.play();if(playAttempt&&typeof playAttempt.catch==="function")playAttempt.catch(error=>console.warn("Invitation music autoplay was blocked:",error));}
    if(inviteRoot.classList.contains("baghdad-ivory")){
-    const pages=[...inviteRoot.querySelectorAll(".invite-section")];let pageIndex=0;
+    const pages=Array.from(inviteRoot.querySelectorAll(".invitation-content > .invite-section"));
     inviteRoot.classList.add("baghdad-auto-book");
-    pages.forEach((page,i)=>page.classList.toggle("baghdad-page-active",i===0));
-    const turnPage=()=>{if(pageIndex>=pages.length-1){clearInterval(window.__da3waBaghdadPages);return;}pages[pageIndex].classList.remove("baghdad-page-active");pages[pageIndex].classList.add("baghdad-page-left");pageIndex++;pages[pageIndex].classList.add("baghdad-page-active");};
-    window.__da3waBaghdadPages=setInterval(turnPage,5600);
+    if(window.__da3waBaghdadPages)clearTimeout(window.__da3waBaghdadPages);
+    let pageIndex=0;
+    const showPage=(index)=>{
+     pages.forEach((page,i)=>{
+      page.classList.remove("baghdad-page-active","baghdad-page-left");
+      page.style.setProperty("display",i===index?"flex":"none","important");
+      page.setAttribute("aria-hidden",i===index?"false":"true");
+     });
+     const current=pages[index];
+     if(!current)return;
+     current.style.setProperty("display","flex","important");
+     current.classList.add("baghdad-page-active");
+    };
+    const turnPage=()=>{
+     if(pageIndex>=pages.length-1)return;
+     const previous=pages[pageIndex];
+     previous.classList.remove("baghdad-page-active");
+     previous.classList.add("baghdad-page-left");
+     previous.style.setProperty("display","flex","important");
+     pageIndex++;
+     showPage(pageIndex);
+     previous.style.setProperty("display","flex","important");
+     previous.style.zIndex="2";
+     window.setTimeout(()=>{
+      previous.classList.remove("baghdad-page-left");
+      previous.style.setProperty("display","none","important");
+      previous.style.zIndex="";
+     },1100);
+     if(pageIndex<pages.length-1)window.__da3waBaghdadPages=window.setTimeout(turnPage,6800);
+    };
+    if(pages.length){
+     showPage(0);
+     if(pages.length>1)window.__da3waBaghdadPages=window.setTimeout(turnPage,6800);
+    }
    }else{setTimeout(scrollToInviteEnd,1300);}
   }
   $("openPublicEnvelope").addEventListener("click",revealPublicInvite);
