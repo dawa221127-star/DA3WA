@@ -349,7 +349,7 @@ $("savePricingBtn").addEventListener("click",async(event)=>{
    const amount=$("[data-price-amount='"+i+"']");
    const features=$("[data-price-features='"+i+"']");
    if(!name||!amount||!features)throw new Error("حقول الباقات غير ظاهرة. افتح تبويب إدارة الأسعار من جديد.");
-   return {name:name.value.trim(),amount:Number(amount.value),features:features.value.split("\\n").map(x=>x.trim()).filter(Boolean)};
+   return {name:name.value.trim(),amount:Number(amount.value),features:features.value.split("\n").map(x=>x.trim()).filter(Boolean)};
   });
   if(next.some(p=>!p.name||!Number.isFinite(p.amount)||p.amount<0||!p.features.length)){
    msg.textContent="أدخل اسم وسعر وميزة واحدة على الأقل لكل باقة.";return;
