@@ -5,6 +5,24 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>DA3WA | لوحة الإدارة</title>
+<script>
+window.addEventListener("error",function(e){
+ const detail=e.message||"خطأ JavaScript غير معروف";
+ window.__da3waAdminError=detail;
+ document.addEventListener("DOMContentLoaded",function(){
+  const box=document.getElementById("message");
+  if(box)box.textContent="خطأ بتشغيل لوحة الإدارة: "+detail;
+ });
+});
+window.addEventListener("unhandledrejection",function(e){
+ const detail=e.reason&&e.reason.message?e.reason.message:String(e.reason||"خطأ اتصال غير معروف");
+ window.__da3waAdminError=detail;
+ document.addEventListener("DOMContentLoaded",function(){
+  const box=document.getElementById("message");
+  if(box)box.textContent="خطأ بلوحة الإدارة: "+detail;
+ });
+});
+</script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
 *{box-sizing:border-box}
