@@ -1283,6 +1283,9 @@ body.public-invitation #publicInvitationPage{width:100%!important;max-width:none
 .baghdad-ivory .invite-section:nth-child(2) .invite-kicker:after{content:" دعوة من قلب بغداد";display:block}
 @media(max-width:600px){.baghdad-ivory .envelope-screen{min-height:100svh!important}.baghdad-ivory .invite-section{min-height:86svh!important;padding:76px 18px!important}.baghdad-ivory .detail-grid{grid-template-columns:1fr!important}}
 
+
+/* Baghdad illustrated auto-turn book */
+.baghdad-ivory{background:#eadcc3!important;color:#59452f!important;overflow-x:hidden!important}.baghdad-ivory .envelope-screen{background:#e8d9bd!important}.baghdad-ivory .envelope-screen .scene-art{inset:0!important;width:100%!important;height:100%!important}.baghdad-ivory .baghdad-book-art{position:absolute;inset:0;overflow:hidden;background:linear-gradient(180deg,#e8d9bd,#f5ead6 68%,#d5c09c)}.baghdad-ivory .baghdad-illustration{position:absolute;inset:0;width:100%;height:100%;filter:drop-shadow(0 8px 9px #7e633333);animation:baghdadPan 18s ease-in-out infinite alternate}.baghdad-ivory .baghdad-book-sun{position:absolute;width:42vw;height:42vw;max-width:280px;max-height:280px;border-radius:50%;background:#fff5d5;top:10%;right:12%;opacity:.8}.baghdad-ivory .baghdad-book-stars{position:absolute;z-index:2;top:12%;left:0;right:0;text-align:center;color:#a98550;letter-spacing:8px;font-size:20px}.baghdad-ivory .baghdad-book-title{position:absolute;z-index:3;bottom:12%;left:0;right:0;text-align:center;color:#76552f;font:clamp(36px,9vw,68px)/1.2 Amiri,serif;text-shadow:0 2px #fff8}.baghdad-ivory .baghdad-book-title span{display:block;font:18px Amiri,serif;letter-spacing:2px;margin-top:8px}.baghdad-ivory .baghdad-book-dust{position:absolute;inset:0;background-image:radial-gradient(#a98550aa 1px,transparent 1px);background-size:38px 38px;opacity:.15}@keyframes baghdadPan{from{transform:scale(1)}to{transform:scale(1.08) translateY(-1.5%)}}.baghdad-ivory .invitation-content{display:none!important;position:fixed!important;inset:0!important;z-index:50!important;overflow:hidden!important;background:#eadcc3!important}.baghdad-ivory.opened .invitation-content{display:block!important}.baghdad-ivory.baghdad-auto-book .invite-section{display:none!important;position:absolute!important;inset:0!important;width:100%!important;height:100%!important;min-height:100svh!important;max-height:100svh!important;overflow:hidden!important;margin:0!important;padding:clamp(55px,9vh,100px) 24px!important;box-sizing:border-box!important}.baghdad-ivory.baghdad-auto-book .invite-section.baghdad-page-active{display:flex!important;animation:baghdadPageIn 1.15s cubic-bezier(.2,.7,.2,1) both!important;z-index:3!important}.baghdad-ivory.baghdad-auto-book .invite-section.baghdad-page-left{display:flex!important;animation:baghdadPageOut .95s ease-in forwards!important;z-index:4!important;pointer-events:none!important}@keyframes baghdadPageIn{from{opacity:0;transform:perspective(1400px) rotateY(-16deg) translateX(10%);filter:brightness(.8)}to{opacity:1;transform:perspective(1400px) rotateY(0) translateX(0);filter:brightness(1)}}@keyframes baghdadPageOut{to{opacity:0;transform:perspective(1400px) rotateY(18deg) translateX(-14%);filter:brightness(.75)}}.baghdad-ivory.baghdad-auto-book .invite-section:before{inset:14px!important;border:1px solid #b18a5280!important;box-shadow:inset 0 0 0 5px #fff5!important}.baghdad-ivory.baghdad-auto-book .detail-grid{max-height:48vh;overflow:hidden}.baghdad-ivory.baghdad-auto-book .invite-section p{max-width:90%}@media(max-width:600px){.baghdad-ivory.baghdad-auto-book .invite-section{padding:60px 22px!important}.baghdad-ivory.baghdad-auto-book .detail-grid{grid-template-columns:1fr 1fr!important;gap:8px!important}.baghdad-ivory.baghdad-auto-book .detail{padding:10px 6px!important}.baghdad-ivory.baghdad-auto-book .detail strong{font-size:17px!important}}
 </style>
 </head>
 
@@ -1330,7 +1333,7 @@ body.public-invitation #publicInvitationPage{width:100%!important;max-width:none
 <section class="section light" id="templates">
  <div class="container">
   <div class="section-head">
-   <span class="eyebrow">11 تصميماً حصرياً</span>
+   <span class="eyebrow">12 تصميماً حصرياً</span>
    <h2>اختر تجربة دعوتك</h2>
    <p>رسوم متحركة راقية، مشاهد رومانسية، وتفاصيل مصممة حتى تليق بمناسبتكم.</p>
   </div>
@@ -1569,11 +1572,7 @@ function getTemplate(id){
 /* مشاهد فوتوغرافية للقوالب — ملفات الصور داخل assets/ */
 function sceneMarkup(theme){
  const t=templates.find(x=>x.theme===theme)||templates[0];
- if(theme==="baghdad-ivory")return `<div class="cin-scene baghdad-ivory-scene" aria-hidden="true">
-  <div class="baghdad-skyline"></div><div class="baghdad-ivory-glow"></div>
-  <div class="baghdad-ivory-arch"><span>بغداد</span><i>✦</i></div>
-  <div class="baghdad-dust"></div>
- </div>`;
+ if(theme==="baghdad-ivory")return `<div class="baghdad-book-art" aria-hidden="true"><div class="baghdad-book-sun"></div><div class="baghdad-book-stars">✦　✧　✦</div><svg class="baghdad-illustration" viewBox="0 0 900 650" preserveAspectRatio="xMidYMid slice"><defs><linearGradient id="biSky" x2="0" y2="1"><stop stop-color="#e7d7b9"/><stop offset="1" stop-color="#f5ead6"/></linearGradient><linearGradient id="biGold" x2="0" y2="1"><stop stop-color="#d2b47d"/><stop offset="1" stop-color="#987344"/></linearGradient></defs><path fill="url(#biSky)" d="M0 0H900V650H0z"/><circle cx="700" cy="130" r="78" fill="#fff8e8" opacity=".5"/><path d="M0 480Q180 450 350 485T900 470V650H0Z" fill="#c9b28e" opacity=".35"/><g stroke="#9b784b" stroke-width="4" stroke-linejoin="round" fill="#d7c29e"><path d="M55 470V340h108v130z"/><path d="M75 340q38-82 76 0z" fill="url(#biGold)"/><path d="M205 470V295h68v175z"/><path d="M205 295q34-72 68 0z"/><path d="M320 470V360h260v110z"/><path d="M345 360q105-190 210 0z" fill="url(#biGold)"/><path d="M385 470V390h130v80z"/><path d="M620 470V330h148v140z"/><path d="M638 330q46-100 92 0z" fill="url(#biGold)"/><path d="M770 470V365h130v105z"/><path d="M786 365q34-75 68 0z"/></g><path d="M0 485H900" stroke="#9b784b" stroke-width="4"/><g fill="none" stroke="#b18a52" stroke-width="2" opacity=".8"><path d="M20 40h860v570H20z"/><path d="M34 54h832v542H34z"/></g></svg><div class="baghdad-book-title">بغداد<span>مدينة الحب والفرح</span></div><div class="baghdad-book-dust"></div></div>`;
  const palette={
   "royal-couple":["#3b1725","#b58a50","#f5dfb8"],
   "first-dance":["#281b35","#c69ab1","#f8e9ee"],
@@ -1981,16 +1980,17 @@ document.addEventListener("keydown",e=>{
   function revealPublicInvite(){
    if(publicInviteRevealed)return;
    publicInviteRevealed=true;
-   $("publicInvite").classList.add("opened");
-   // Start hidden invitation music directly from the envelope click.
+   const inviteRoot=$("publicInvite");
+   inviteRoot.classList.add("opened");
    const invitationMusic=$("invitationBackgroundMusic");
-   if(invitationMusic){
-    invitationMusic.volume=0.85;
-    const playAttempt=invitationMusic.play();
-    if(playAttempt&&typeof playAttempt.catch==="function")playAttempt.catch(error=>console.warn("Invitation music autoplay was blocked:",error));
-   }
-   // Let the envelope disappear and the invitation content take its final layout.
-   setTimeout(scrollToInviteEnd,1300);
+   if(invitationMusic){invitationMusic.volume=0.85;const playAttempt=invitationMusic.play();if(playAttempt&&typeof playAttempt.catch==="function")playAttempt.catch(error=>console.warn("Invitation music autoplay was blocked:",error));}
+   if(inviteRoot.classList.contains("baghdad-ivory")){
+    const pages=[...inviteRoot.querySelectorAll(".invite-section")];let pageIndex=0;
+    inviteRoot.classList.add("baghdad-auto-book");
+    pages.forEach((page,i)=>page.classList.toggle("baghdad-page-active",i===0));
+    const turnPage=()=>{if(pageIndex>=pages.length-1){clearInterval(window.__da3waBaghdadPages);return;}pages[pageIndex].classList.remove("baghdad-page-active");pages[pageIndex].classList.add("baghdad-page-left");pageIndex++;pages[pageIndex].classList.add("baghdad-page-active");};
+    window.__da3waBaghdadPages=setInterval(turnPage,5600);
+   }else{setTimeout(scrollToInviteEnd,1300);}
   }
   $("openPublicEnvelope").addEventListener("click",revealPublicInvite);
 
