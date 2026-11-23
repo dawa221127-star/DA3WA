@@ -1388,6 +1388,40 @@ body.public-invitation #publicInvitationPage{width:100%!important;max-width:none
 .live-invite.door-birds.opened .royal-door-scene .wish-door-leaf.right{transform:perspective(1300px) rotateY(116deg)}
 @media(max-width:600px){.royal-door-scene{width:94vw;height:70vh;min-height:370px}.royal-door-scene .palace-reveal{transform:scale(1.1)}.live-invite.door-birds.opened .royal-door-scene .palace-reveal{transform:scale(1.22)}}
 
+
+/* DA3WA — pearl ivory botanical invitation */
+.live-invite.door-birds{--accent:#705746;--accent2:#c5a77e;--surface:#f8f1e8;--text:#594638;background:#f5eee5;color:#594638}
+.live-invite.door-birds .envelope-screen{min-height:100svh;padding:34px 18px 52px;background:radial-gradient(ellipse at 50% 36%,#fffdf9 0,#f3e9dd 72%,#e8d9c8 100%);color:#6f5947;overflow:hidden}
+.live-invite.door-birds .envelope-screen:before{content:"";position:absolute;inset:16px;border:1px solid #c9ad86;outline:1px solid #e4d4bd;outline-offset:6px;border-radius:5px;pointer-events:none}
+.live-invite.door-birds .envelope-screen .tiny{font:12px Amiri,serif;letter-spacing:4px;color:#9d8060;margin:10px 0 24px}
+.live-invite.door-birds .scene-art{position:absolute;inset:0;width:100%;height:100%;opacity:.9;pointer-events:none}
+.live-invite.door-birds .wish-door-art{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.live-invite.door-birds .ivory-botanical{width:100%;height:100%;filter:drop-shadow(0 2px 2px #a98b6722)}
+.live-invite.door-birds .ivory-monogram{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:74px;height:74px;border:3px double #c4a77e;border-radius:48% 48% 48% 48%;display:grid;place-items:center;color:#9e7b51;background:linear-gradient(145deg,#fffaf1,#ead8bd);font:36px Amiri;box-shadow:0 5px 18px #8b72502b}
+.live-invite.door-birds .envelope{width:min(340px,78vw);height:230px;margin:36px auto 20px;background:linear-gradient(145deg,#fffaf2,#e9d9c5);border:1px solid #c7aa82;box-shadow:0 24px 55px #79634a35;transform:translateY(0);border-radius:4px;overflow:visible}
+.live-invite.door-birds .envelope:before{background:linear-gradient(145deg,#f4e8d8,#e5d1b8);clip-path:polygon(0 0,50% 58%,100% 0);opacity:1;filter:drop-shadow(0 2px 2px #8a73504d)}
+.live-invite.door-birds .envelope:after{background:linear-gradient(35deg,transparent 49.4%,#c5a77e 49.8%,#fff8ed 50.2%,transparent 50.6%),linear-gradient(-35deg,transparent 49.4%,#c5a77e 49.8%,#fff8ed 50.2%,transparent 50.6%);opacity:.95}
+.live-invite.door-birds .envelope-letter{position:absolute;z-index:0;left:9%;right:9%;top:10%;height:80%;background:linear-gradient(#fffdf8,#f4eadc);border:1px solid #d6c2a4;box-shadow:0 0 18px #8b72501c;transition:transform 1.15s cubic-bezier(.2,.75,.2,1)}
+.live-invite.door-birds .seal-button{width:76px;height:76px;border:4px double #fff4dc;background:radial-gradient(circle at 35% 30%,#fff9ef,#d9bd94 78%);color:#866746;box-shadow:0 4px 15px #755c3e45;font:35px Amiri;transition:transform .7s,opacity .5s}
+.live-invite.door-birds .open-hint{color:#8c7457;font:16px Amiri;letter-spacing:1px}
+.live-invite.door-birds.opened .envelope{animation:pearlEnvelopeOpen 1.05s ease forwards}
+.live-invite.door-birds.opened .envelope-letter{transform:translateY(-115px) scale(1.04)}
+.live-invite.door-birds.opened .seal-button{transform:scale(1.7) rotate(22deg);opacity:0}
+@keyframes pearlEnvelopeOpen{0%{transform:translateY(0) scale(1)}55%{transform:translateY(-10px) scale(1.04)}100%{transform:translateY(-30px) scale(.94);opacity:0}}
+.live-invite.door-birds .invitation-content{background:#f5eee5;position:relative;isolation:isolate}
+.live-invite.door-birds .invitation-content:before{content:"";position:absolute;inset:0;z-index:-1;opacity:.28;background-image:radial-gradient(#bca17c 0.55px,transparent .7px);background-size:7px 7px}
+.live-invite.door-birds .invitation-content .invite-section{max-width:760px;margin:0 auto;padding:64px 28px;border:0;background:linear-gradient(90deg,transparent,#fffaf4a8 10%,#fffaf4a8 90%,transparent);position:relative}
+.live-invite.door-birds .invitation-content .invite-section:before{content:"";position:absolute;inset:18px 12px;border:1px solid #cbb18d;border-radius:46% 46% 3px 3px / 100px 100px 3px 3px;pointer-events:none;opacity:.65}
+.live-invite.door-birds .invitation-content .invite-section>.scene-art{display:none}
+.live-invite.door-birds .invite-section h2,.live-invite.door-birds .invite-section h3,.live-invite.door-birds .couple-names{color:#705746}
+.live-invite.door-birds .invite-section p,.live-invite.door-birds .couple-sub{color:#705c4a}
+.live-invite.door-birds .ornament,.live-invite.door-birds .invite-kicker{color:#b18d61}
+.live-invite.door-birds .detail{background:#fffaf3b8;border-color:#cbb18d;border-radius:3px}
+.live-invite.door-birds .action-link{background:#927657;color:#fff9f0;border-radius:2px}
+.live-invite.door-birds .countdown div{background:#fffaf3;border-color:#cbb18d;color:#705746}
+@media(min-width:700px){.live-invite.door-birds .invitation-content .invite-section{padding:82px 52px}.live-invite.door-birds .envelope{width:390px;height:255px}}
+@media(prefers-reduced-motion:reduce){.live-invite.door-birds.opened .envelope{animation:none}}
+
 </style>
 </head>
 
@@ -1677,64 +1711,26 @@ function getTemplate(id){
 /* مشاهد فوتوغرافية للقوالب — ملفات الصور داخل assets/ */
 function sceneMarkup(theme){
  const t=templates.find(x=>x.theme===theme)||templates[0];
- if(theme==="door-birds")return `<div class="wish-door-art">
-  <div class="wish-door-atmosphere"></div><div class="wish-door-floor"></div>
-  <div class="royal-door-scene">
-   <div class="royal-arch-outer"></div><div class="royal-arch-inner"></div>
-   <div class="royal-door-crown"><span>✦</span></div>
-   <div class="wish-door-portal">
-    <svg class="palace-reveal" viewBox="0 0 600 760" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-     <defs>
-      <linearGradient id="hallWall" x2="0" y2="1"><stop stop-color="#ead6ad"/><stop offset=".48" stop-color="#a77c4c"/><stop offset="1" stop-color="#352318"/></linearGradient>
-      <linearGradient id="hallGold" x2="1"><stop stop-color="#765020"/><stop offset=".48" stop-color="#f8dfa0"/><stop offset="1" stop-color="#805a29"/></linearGradient>
-      <linearGradient id="hallFloor" x2="0" y2="1"><stop stop-color="#806144"/><stop offset="1" stop-color="#120e0b"/></linearGradient>
-      <linearGradient id="hallCarpet" x2="0" y2="1"><stop stop-color="#8e1e27"/><stop offset="1" stop-color="#26080d"/></linearGradient>
-      <radialGradient id="hallGlow"><stop stop-color="#fff5d6"/><stop offset=".3" stop-color="#f5d89a" stop-opacity=".7"/><stop offset="1" stop-color="#f5d89a" stop-opacity="0"/></radialGradient>
-     </defs>
-     <rect width="600" height="760" fill="#1b1712"/>
-     <path d="M0 0H600V420L300 300 0 420Z" fill="url(#hallWall)"/>
-     <path d="M0 0Q300 -110 600 0V120Q300 25 0 120Z" fill="#3d2818" stroke="#d5b16e" stroke-width="9"/>
-     <path d="M35 0Q300 -65 565 0" fill="none" stroke="#f0d49a" stroke-width="4"/>
-     <path d="M65 50Q300 -15 535 50V410H65Z" fill="#5b3a22" stroke="#d2ad69" stroke-width="10"/>
-     <path d="M95 65Q300 15 505 65V390H95Z" fill="#d9c19a"/>
-     <path d="M115 80Q300 35 485 80V380H115Z" fill="#27342d"/>
-     <g opacity=".95"><path d="M130 95H470V360H130Z" fill="#1b2a24"/><path d="M300 90V365M130 220H470" stroke="#c69b58" stroke-width="9"/><path d="M145 105L290 215 290 350H145Z M310 215L455 105V350H310Z" fill="#66745d" opacity=".55"/><path d="M150 105L290 215M450 105L310 215" stroke="#e8d09a" stroke-width="4"/></g>
-     <g fill="#c7a36b" stroke="#f1d9a4" stroke-width="5">
-      <path d="M18 0H86V485H18Z"/><path d="M514 0H582V485H514Z"/>
-      <path d="M5 0H100V34H5ZM500 0H595V34H500Z"/>
-      <path d="M0 450H105V478H0ZM495 450H600V478H495Z"/>
-      <path d="M112 60H160V430H112Z"/><path d="M440 60H488V430H440Z"/>
-      <path d="M100 55H172V80H100ZM428 55H500V80H428Z"/>
-      <path d="M100 410H172V438H100ZM428 410H500V438H428Z"/>
-     </g>
-     <g fill="#3b2718" stroke="#e0bf7b" stroke-width="5"><path d="M0 440Q55 380 110 440V475H0Z"/><path d="M490 440Q545 380 600 440V475H490Z"/></g>
-     <path d="M0 475L300 350 600 475V760H0Z" fill="url(#hallFloor)"/>
-     <path d="M0 520L300 390 600 520M0 610L300 430 600 610M0 700L300 470 600 700" stroke="#c9a56d" stroke-opacity=".35" stroke-width="3" fill="none"/>
-     <path d="M210 760L255 430H345L390 760Z" fill="url(#hallCarpet)" stroke="#d5ae68" stroke-width="7"/>
-     <path d="M230 760L270 445H330L370 760Z" fill="none" stroke="#e5c47f" stroke-width="3"/>
-     <g fill="#a57a43" stroke="#f4d99d" stroke-width="4">
-      <path d="M248 455L352 455 385 480 215 480Z"/><path d="M235 500L365 500 405 530 195 530Z"/><path d="M210 550L390 550 430 585 170 585Z"/><path d="M180 610L420 610 470 650 130 650Z"/>
-     </g>
-     <g stroke="#e8c77f" fill="none" stroke-width="5">
-      <path d="M300 0V90M250 90H350M265 90L245 145M335 90L355 145M245 145H355"/>
-      <path d="M260 145Q300 205 340 145M270 145L255 195M330 145L345 195"/>
-      <path d="M255 195H345M270 195L260 225M330 195L340 225"/>
-     </g>
-     <g fill="#fff0bd" filter="url(#none)">
-      <circle cx="245" cy="145" r="9"/><circle cx="355" cy="145" r="9"/><circle cx="260" cy="195" r="8"/><circle cx="340" cy="195" r="8"/><circle cx="300" cy="210" r="12"/>
-     </g>
-     <ellipse cx="300" cy="285" rx="235" ry="300" fill="url(#hallGlow)" opacity=".45"/>
-     <g fill="#e6c77f"><circle cx="60" cy="190" r="7"/><circle cx="540" cy="190" r="7"/><circle cx="60" cy="310" r="6"/><circle cx="540" cy="310" r="6"/></g>
-     <path d="M0 0H600V760H0Z" fill="none" stroke="#160d08" stroke-width="24"/>
-    </svg>
-    <span class="wish-portal-light"></span><span class="wish-portal-rays"></span>
-   </div>
-   <div class="wish-door-leaf left"><svg viewBox="0 0 300 760" preserveAspectRatio="none" aria-hidden="true"><defs><linearGradient id="oakL" x2="1"><stop stop-color="#160d08"/><stop offset=".22" stop-color="#704321"/><stop offset=".48" stop-color="#3b2112"/><stop offset=".72" stop-color="#85552b"/><stop offset="1" stop-color="#1a1009"/></linearGradient><linearGradient id="goldL" x2="1"><stop stop-color="#6b451d"/><stop offset=".5" stop-color="#f1d18a"/><stop offset="1" stop-color="#795020"/></linearGradient></defs><path fill="url(#oakL)" d="M0 0H300V760H0z"/><path fill="none" stroke="url(#goldL)" stroke-width="9" d="M20 18H280V742H20z"/><path fill="none" stroke="#2b160c" stroke-width="13" d="M37 34H263V726H37z"/><path fill="none" stroke="#d4ad68" stroke-width="3" d="M45 42H255V718H45z"/><path fill="none" stroke="url(#goldL)" stroke-width="8" d="M65 60H235V300Q150 380 65 300z M65 405H235V690H65z"/><path fill="none" stroke="#c99b54" stroke-width="3" d="M82 78H218V287Q150 350 82 287z M82 422H218V672H82z"/><g fill="none" stroke="#d6b16e" stroke-width="3"><path d="M150 94l22 38-22 38-22-38z M150 160c-42 20-42 54 0 74 42-20 42-54 0-74z M150 452l26 34-26 34-26-34z M150 540c-38 18-38 48 0 66 38-18 38-48 0-66z"/><path d="M100 220q50-54 100 0M100 590q50-54 100 0"/></g><g fill="#e4c17c"><circle cx="150" cy="132" r="6"/><circle cx="150" cy="486" r="6"/><circle cx="150" cy="630" r="5"/></g></svg></div>
-   <div class="wish-door-leaf right"><svg viewBox="0 0 300 760" preserveAspectRatio="none" aria-hidden="true"><defs><linearGradient id="oakR" x2="1"><stop stop-color="#1a1009"/><stop offset=".28" stop-color="#85552b"/><stop offset=".52" stop-color="#3b2112"/><stop offset=".78" stop-color="#704321"/><stop offset="1" stop-color="#160d08"/></linearGradient><linearGradient id="goldR" x2="1"><stop stop-color="#795020"/><stop offset=".5" stop-color="#f1d18a"/><stop offset="1" stop-color="#6b451d"/></linearGradient></defs><path fill="url(#oakR)" d="M0 0H300V760H0z"/><path fill="none" stroke="url(#goldR)" stroke-width="9" d="M20 18H280V742H20z"/><path fill="none" stroke="#2b160c" stroke-width="13" d="M37 34H263V726H37z"/><path fill="none" stroke="#d4ad68" stroke-width="3" d="M45 42H255V718H45z"/><path fill="none" stroke="url(#goldR)" stroke-width="8" d="M65 60H235V300Q150 380 65 300z M65 405H235V690H65z"/><path fill="none" stroke="#c99b54" stroke-width="3" d="M82 78H218V287Q150 350 82 287z M82 422H218V672H82z"/><g fill="none" stroke="#d6b16e" stroke-width="3"><path d="M150 94l22 38-22 38-22-38z M150 160c-42 20-42 54 0 74 42-20 42-54 0-74z M150 452l26 34-26 34-26-34z M150 540c-38 18-38 48 0 66 38-18 38-48 0-66z"/><path d="M100 220q50-54 100 0M100 590q50-54 100 0"/></g><g fill="#e4c17c"><circle cx="150" cy="132" r="6"/><circle cx="150" cy="486" r="6"/><circle cx="150" cy="630" r="5"/></g></svg></div>
-   <div class="royal-door-handle left"></div><div class="royal-door-handle right"></div>
-   <div class="royal-door-hinge left"></div><div class="royal-door-hinge right"></div>
-  </div>
-  <div class="wish-door-caption">اضغط لفتح الدعوة</div><div class="wish-door-birds"></div>
+ if(theme==="door-birds")return `<div class="wish-door-art" aria-hidden="true">
+  <svg class="ivory-botanical" viewBox="0 0 900 1400" preserveAspectRatio="none">
+   <defs><linearGradient id="ivoryGold" x1="0" x2="1"><stop stop-color="#b99a70"/><stop offset=".5" stop-color="#f4e7cf"/><stop offset="1" stop-color="#b99a70"/></linearGradient></defs>
+   <rect x="18" y="18" width="864" height="1364" rx="26" fill="none" stroke="url(#ivoryGold)" stroke-width="2"/>
+   <rect x="34" y="34" width="832" height="1332" rx="20" fill="none" stroke="#cbb18c" stroke-opacity=".55"/>
+   <g fill="none" stroke="#bba17c" stroke-width="3" stroke-linecap="round" opacity=".8">
+    <path d="M8 360Q130 280 95 80M5 570Q160 460 170 250M892 360Q770 280 805 80M895 570Q740 460 730 250"/>
+    <path d="M0 980Q140 900 95 700M0 1190Q155 1090 180 900M900 980Q760 900 805 700M900 1190Q745 1090 720 900"/>
+    <path d="M95 80q-65 15-70 90q65-5 70-90zm-12 100q-70 0-76 75q67 8 76-75zm85 70q-65-15-93 55q63 25 93-55zm-73 455q-68-8-90 62q66 18 90-62zm80 196q-68-10-92 60q65 20 92-60z"/>
+    <path d="M805 80q65 15 70 90q-65-5-70-90zm12 100q70 0 76 75q-67 8-76-75zm-85 70q65-15 93 55q-63 25-93-55zm73 455q68-8 90 62q-66 18-90-62zm-80 196q68-10 92 60q-65 20-92-60z"/>
+   </g>
+   <g fill="#f7f0e5" stroke="#c8ad86" stroke-width="2">
+    <g transform="translate(62 170)"><circle r="15"/><circle cx="24" cy="17" r="12"/><circle cx="-22" cy="34" r="11"/><circle cx="5" cy="55" r="13"/></g>
+    <g transform="translate(838 170)"><circle r="15"/><circle cx="-24" cy="17" r="12"/><circle cx="22" cy="34" r="11"/><circle cx="-5" cy="55" r="13"/></g>
+    <g transform="translate(60 820)"><circle r="14"/><circle cx="22" cy="18" r="12"/><circle cx="-20" cy="37" r="11"/><circle cx="5" cy="56" r="13"/></g>
+    <g transform="translate(840 820)"><circle r="14"/><circle cx="-22" cy="18" r="12"/><circle cx="20" cy="37" r="11"/><circle cx="-5" cy="56" r="13"/></g>
+   </g>
+   <g fill="none" stroke="#d2b994" stroke-width="2" opacity=".8"><path d="M450 40v65m-30-32q30-38 60 0q-30 38-60 0zM450 1295v65m-30-32q30-38 60 0q-30 38-60 0z"/></g>
+  </svg>
+  <div class="ivory-monogram">✧</div>
  </div>`;
  if(theme==="golden-cinema")return `<div class="golden-cinema-art"><div class="gc-light"></div><div class="gc-arch"></div><div class="gc-chandelier">✧</div><div class="gc-title">ليلة من العمر</div><div class="gc-dust"></div></div>`;
  if(theme==="parchment")return `<div class="parchment-art"><div class="parchment-scroll"><div class="parchment-roll"></div><div class="parchment-copy"><small>بِسْمِ اللهِ الرَّحْمٰنِ الرَّحِيم</small><b>دعوة لحضور</b><i>❦</i><span>أجمل المناسبات</span></div><div class="parchment-roll"></div></div></div>`;
