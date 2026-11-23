@@ -223,6 +223,9 @@ button.secondary,.tab{background:#392330;color:#f2dfc0;border:1px solid #8a6948}
 
             <label>رسالة إضافية للضيوف</label>
             <textarea id="extraMessage" placeholder="نتشرف بحضوركم ومشاركتكم فرحتنا..."></textarea>
+            <label>أغنية الدعوة (اختياري — MP3)</label>
+            <input id="invitationMusic" type="file" accept=".mp3,audio/mpeg">
+            <p class="muted">ارفع الأغنية التي طلبها الزبون. الحد الأقصى 12MB، وستظهر داخل الدعوة بعد فتحها.</p>
 
             <div class="actions">
               <button type="submit" id="saveInvitationBtn">نشر الدعوة وإنشاء الرابط</button>
@@ -636,15 +639,27 @@ $("invitationForm").addEventListener("submit", async e => {
   status.textContent = "جاري حفظ الدعوة...";
 
   const details = getFormDetails();
-
-  const record = {
-    slug: makeSlug(),
-    template_id: selectedTemplate,
-    details,
-    status: "published"
-  };
+  const musicFile = $("invitationMusic").files[0] || null;
 
   try {
+    if(musicFile){
+      if(!/^audio\/(mpeg|mp3)$/i.test(musicFile.type) && !/\.mp3$/i.test(musicFile.name)) throw new Error("ارفع ملف MP3 فقط.");
+      if(musicFile.size > 12 * 1024 * 1024) throw new Error("حجم الأغنية أكبر من 12MB.");
+      status.textContent = "جاري رفع الأغنية...";
+      const musicPath = "invitations/" + (editingInvitationId || crypto.randomUUID()) + "/" + Date.now() + ".mp3";
+      const {error:uploadError} = await db.storage.from("invitation-music").upload(musicPath,musicFile,{upsert:true,contentType:"audio/mpeg"});
+      if(uploadError) throw uploadError;
+      details.music_url = db.storage.from("invitation-music").getPublicUrl(musicPath).data.publicUrl;
+      details.music_name = musicFile.name.replace(/\.mp3$/i,"");
+    }
+
+    const record = {
+      slug: makeSlug(),
+      template_id: selectedTemplate,
+      details,
+      status: "published"
+    };
+
     let result;
 
     if (editingInvitationId) {
@@ -840,6 +855,7 @@ function editInvitation(inv) {
   $("startTime").value = d.start_time || "";
   $("hostPhone").value = d.host_phone || "";
   $("extraMessage").value = d.extra_message || "";
+  $("invitationMusic").value = "";
 
   document.querySelectorAll(".template").forEach(c => {
     c.classList.toggle("selected", c.dataset.template === selectedTemplate);
