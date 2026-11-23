@@ -2034,7 +2034,7 @@ document.addEventListener("keydown",e=>{
      showPage(0);
      if(pages.length>1)window.__da3waBaghdadPages=window.setTimeout(turnPage,6800);
     }
-   }else{setTimeout(scrollToInviteEnd,1300);}
+   }else{const revealDelay=inviteRoot.classList.contains("golden-cinema")?2500:inviteRoot.classList.contains("parchment")?1900:1300;setTimeout(scrollToInviteEnd,revealDelay);}
   }
   $("openPublicEnvelope").addEventListener("click",revealPublicInvite);
 
