@@ -484,6 +484,7 @@ button.secondary,.tab{background:#392330;color:#f2dfc0;border:1px solid #8a6948}
 .admin-baghdad-footer{padding:45px 12px;text-align:center;background:#e8d9bd;color:#a17a43;font:18px Amiri,serif}
 @media(max-width:600px){#preview.baghdad-admin-preview{height:75vh!important}.admin-baghdad-hero{height:440px}.admin-baghdad-section{padding:60px 16px}.admin-baghdad-details>div{flex-direction:column;gap:4px}}
 
+.baghdad-book-art{position:relative;min-height:240px;height:100%;overflow:hidden;background:linear-gradient(180deg,#e8d9bd,#f5ead6 68%,#d5c09c)}.baghdad-illustration{position:absolute;inset:0;width:100%;height:100%}.baghdad-book-title{position:absolute;z-index:2;left:0;right:0;bottom:10%;text-align:center;color:#76552f;font:42px Amiri,serif}.baghdad-book-title span{display:block;font:15px Amiri,serif}
 </style>
 </head>
 <body>
@@ -695,6 +696,7 @@ let selectedTemplate = "royal-couple";
 
 function sceneMarkup(theme){
  const t=templateCatalog.find(x=>x.id===theme)||templateCatalog[0];
+ if(theme==="baghdad-ivory")return `<div class="baghdad-book-art"><svg class="baghdad-illustration" viewBox="0 0 900 650"><defs><linearGradient id="biAdminSky" x2="0" y2="1"><stop stop-color="#e7d7b9"/><stop offset="1" stop-color="#f5ead6"/></linearGradient></defs><path fill="url(#biAdminSky)" d="M0 0H900V650H0z"/><circle cx="700" cy="130" r="78" fill="#fff8e8" opacity=".5"/><g stroke="#9b784b" stroke-width="5" fill="#d7c29e"><path d="M55 470V340h108v130z"/><path d="M55 340q50-105 100 0z"/><path d="M205 470V295h68v175z"/><path d="M205 295q34-72 68 0z"/><path d="M320 470V360h260v110z"/><path d="M345 360q105-190 210 0z" fill="#c5a36c"/><path d="M620 470V330h148v140z"/><path d="M638 330q46-100 92 0z"/></g><path d="M0 485H900" stroke="#9b784b" stroke-width="4"/></svg><div class="baghdad-book-title">بغداد<span>مدينة الحب والفرح</span></div></div>`;
  const palette={
   "royal-couple":["#3b1725","#b58a50","#f5dfb8"],
   "first-dance":["#281b35","#c69ab1","#f8e9ee"],
