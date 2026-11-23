@@ -2153,6 +2153,7 @@ $("orderForm").addEventListener("submit",async e=>{
  const form=e.target;
  const button=form.querySelector('button[type="submit"]');
  const result=$("orderResult");
+  $("orderResult").style.cssText+=";display:block!important;background:#f8ead4!important;color:#4b1728!important;border:1px solid #d7b77d!important;border-radius:10px!important;padding:12px 14px!important;font-size:15px!important;font-weight:800!important;line-height:1.8!important;"
  result.textContent="";
  if(!da3waDB){result.textContent="تعذر الاتصال بقاعدة البيانات. حدّث الصفحة وحاول مرة ثانية.";result.scrollIntoView({behavior:"smooth",block:"nearest"});return}
  if(!form.checkValidity()){
@@ -2167,8 +2168,9 @@ $("orderForm").addEventListener("submit",async e=>{
  if(!selectedPayment){result.textContent="يرجى اختيار طريقة الدفع أولاً.";result.scrollIntoView({behavior:"smooth",block:"nearest"});return}
 
  const phoneRaw=$("orderPhone").value.trim();
- const phone=phoneRaw.replace(/[٠-٩]/g,d=>"٠١٢٣٤٥٦٧٨٩".indexOf(d)).replace(/[۰-۹]/g,d=>"۰۱۲۳۴۵۶۷۸۹".indexOf(d));
- if(!/^(\+?964|0)?7\d{9}$/.test(phone.replace(/[\s-]/g,""))){
+ const phoneDigits=phoneRaw.replace(/[٠-٩]/g,d=>"٠١٢٣٤٥٦٧٨٩".indexOf(d)).replace(/[۰-۹]/g,d=>"۰۱۲۳۴۵۶۷۸۹".indexOf(d)).replace(/\D/g,"");
+ const phone=phoneDigits.startsWith("964")?"0"+phoneDigits.slice(3):phoneDigits.startsWith("7")?"0"+phoneDigits:phoneDigits;
+ if(!/^07\d{9}$/.test(phone)){
   result.textContent="تأكد من رقم الهاتف العراقي.";result.scrollIntoView({behavior:"smooth",block:"nearest"});return;
  }
  const packageName=$("orderPackage").value;
@@ -2541,6 +2543,7 @@ document.addEventListener("keydown",e=>{
  const form=document.getElementById("orderForm");
  if(!form || window.__mirasOrderHandlerReady) return;
  const status=document.getElementById("orderResult");
+  if(status)status.style.cssText+=";display:block!important;background:#f8ead4!important;color:#4b1728!important;border:1px solid #d7b77d!important;border-radius:10px!important;padding:12px 14px!important;font-size:15px!important;font-weight:800!important;line-height:1.8!important;"
  const submit=form.querySelector('button[type="submit"]');
  let payment="";
  document.querySelectorAll("#orderForm .payment-option").forEach(btn=>btn.addEventListener("click",function(){
@@ -2556,8 +2559,9 @@ document.addEventListener("keydown",e=>{
   for(const id of required){const el=document.getElementById(id);if(!el||!String(el.value||"").trim()){status.textContent="يرجى إكمال الحقل المطلوب: "+(el?.previousElementSibling?.textContent||id);el?.focus();return;}}
   if(!payment){status.textContent="اختار طريقة الدفع أولاً.";return;}
   const phoneRaw=document.getElementById("orderPhone").value.trim();
-  const phone=phoneRaw.replace(/[٠-٩]/g,d=>"٠١٢٣٤٥٦٧٨٩".indexOf(d)).replace(/[۰-۹]/g,d=>"۰۱۲۳۴۵۶۷۸۹".indexOf(d));
-  if(!/^(\+?964|0)?7\d{9}$/.test(phone.replace(/[\s-]/g,""))){status.textContent="تأكد من رقم الهاتف العراقي.";return;}
+  const phoneDigits=phoneRaw.replace(/[٠-٩]/g,d=>"٠١٢٣٤٥٦٧٨٩".indexOf(d)).replace(/[۰-۹]/g,d=>"۰۱۲۳۴۵۶۷۸۹".indexOf(d)).replace(/\D/g,"");
+  const phone=phoneDigits.startsWith("964")?"0"+phoneDigits.slice(3):phoneDigits.startsWith("7")?"0"+phoneDigits:phoneDigits;
+  if(!/^07\d{9}$/.test(phone)){status.textContent="تأكد من رقم الهاتف العراقي.";return;}
   const url="https://xnabtqiukgcbukrmpyle.supabase.co";
   const key="sb_publishable_-fZR33L75gcyESGdh0OYTg_Ct1Iamlz";
   if(!window.supabase?.createClient){status.textContent="تعذر تحميل خدمة قاعدة البيانات. حدّث الصفحة وجرب مرة ثانية.";return;}
