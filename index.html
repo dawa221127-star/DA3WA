@@ -1355,7 +1355,7 @@ document.addEventListener("keydown",e=>{
       <p>${escapeHTML(d.opening||"بكل الحب والسرور، يسعدنا دعوتكم لمشاركتنا أجمل لحظاتنا")}</p>
       <div class="couple-names">${escapeHTML(d.names||"أهلاً بكم")}</div>
       <div class="couple-sub">${escapeHTML(d.occasion||"دعوتكم لحضور مناسبتنا")}</div>
-      ${d.music_url ? `<div class="invite-music"><p>${escapeHTML(d.music_name||"الموسيقى الخاصة بالدعوة")}</p><audio controls preload="none" src="${escapeHTML(d.music_url)}"></audio></div>` : ""}
+      ${d.music_url ? `<audio id="invitationBackgroundMusic" preload="auto" playsinline src="${escapeHTML(d.music_url)}" aria-hidden="true"></audio>` : ""}
       <div class="ornament">❦</div>
       <p>حضوركم يزيد فرحتنا ويجعل يومنا أجمل</p>
      </section>
@@ -1428,6 +1428,13 @@ document.addEventListener("keydown",e=>{
    if(publicInviteRevealed)return;
    publicInviteRevealed=true;
    $("publicInvite").classList.add("opened");
+   // Start hidden invitation music directly from the envelope click.
+   const invitationMusic=$("invitationBackgroundMusic");
+   if(invitationMusic){
+    invitationMusic.volume=0.85;
+    const playAttempt=invitationMusic.play();
+    if(playAttempt&&typeof playAttempt.catch==="function")playAttempt.catch(error=>console.warn("Invitation music autoplay was blocked:",error));
+   }
    // Let the envelope disappear and the invitation content take its final layout.
    setTimeout(scrollToInviteEnd,1000);
   }
