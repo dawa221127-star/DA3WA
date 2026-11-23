@@ -1681,5 +1681,34 @@ document.addEventListener("keydown",e=>{
  setTimeout(dismiss,4200);
 })();
 </script>
+
+<!-- Hidden background music for the DA3WA homepage only -->
+<audio id="da3waHomeMusic" preload="auto" loop playsinline>
+ <source src="universfield-calm-piano-background-352250.mp3" type="audio/mpeg">
+</audio>
+<script>
+(function(){
+ const audio=document.getElementById("da3waHomeMusic");
+ if(!audio || new URLSearchParams(location.search).has("invite")) return;
+ audio.volume=0.32;
+ let started=false;
+ async function startMusic(){
+  if(started) return;
+  try{
+   await audio.play();
+   started=true;
+   window.removeEventListener("pointerdown",startMusic,true);
+   window.removeEventListener("keydown",startMusic,true);
+   window.removeEventListener("touchstart",startMusic,true);
+  }catch(e){
+   // Browser blocked autoplay; retry on the visitor's first interaction.
+  }
+ }
+ startMusic();
+ window.addEventListener("pointerdown",startMusic,true);
+ window.addEventListener("keydown",startMusic,true);
+ window.addEventListener("touchstart",startMusic,{capture:true,passive:true});
+})();
+</script>
 </body>
 </html>
