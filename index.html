@@ -972,13 +972,14 @@ body.public-invitation{height:auto!important;min-height:100vh!important;overflow
  transform:rotate(-25deg) scaleY(.34);animation:redStarOrbit 12s linear infinite;
 }
 .red-star .envelope{
- width:min(330px,85%)!important;height:0!important;margin:0!important;
+ width:100%!important;height:100%!important;margin:0!important;
  background:transparent!important;border:0!important;box-shadow:none!important;
- position:absolute!important;left:50%;top:50%;transform:translate(-50%,-50%);
- z-index:12!important;display:block!important;pointer-events:none;
+ position:absolute!important;inset:0!important;transform:none!important;
+ z-index:12!important;display:grid!important;place-items:center!important;pointer-events:none;
 }
 .red-star .envelope:before,.red-star .envelope:after,.red-star .envelope-letter{display:none!important}
 .red-star .seal-button{
+ position:relative!important;left:auto!important;top:auto!important;transform-origin:center!important;
  pointer-events:auto;width:clamp(100px,24vw,145px)!important;height:clamp(100px,24vw,145px)!important;
  border:0!important;border-radius:0!important;clip-path:polygon(50% 0%,61% 34%,98% 35%,68% 57%,79% 94%,50% 72%,21% 94%,32% 57%,2% 35%,39% 34%)!important;
  background:linear-gradient(145deg,#ff4c5d,#c20c2b 52%,#700719)!important;
