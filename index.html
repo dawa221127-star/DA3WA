@@ -428,6 +428,9 @@ body.public-invitation > *:not(#publicInvitationPage){display:none!important}
 .public-invite .wish p{overflow-wrap:anywhere}
 .public-invite .seal-button{cursor:pointer}
 .public-invite .detail-grid{grid-template-columns:1fr 1fr}
+.public-invite .invite-music{max-width:520px;margin:24px auto;padding:18px;border:1px solid var(--gold,#c3a16a);border-radius:14px;background:#ffffff16;text-align:center}
+.public-invite .invite-music p{margin:0 0 12px;color:inherit;font-weight:600}
+.public-invite .invite-music audio{display:block;width:100%;max-width:460px;margin:auto}
 
 /* DA3WA — distinct full-page invitation backgrounds for every template */
 .public-invite .invitation-content{position:relative;isolation:isolate;background-color:var(--surface,#fffaf2)}
@@ -965,6 +968,7 @@ body{background:radial-gradient(ellipse at 50% -15%,#512538 0,#1b0d17 48%,#0c080
     <div class="field"><label>القالب</label><input id="orderTemplate" readonly required></div>
     <div class="field"><label>الباقة</label><select id="orderPackage"><option>الأساسية</option><option>المميزة</option><option>الملكية</option></select></div>
    </div>
+   <div class="field"><label>اسم الأغنية المطلوبة (اختياري)</label><input id="orderSongRequest" maxlength="160" placeholder="اسم الأغنية واسم الفنان"></div>
    <div class="field"><label>طريقة الدفع</label>
     <div class="payment-options">
      <button type="button" class="payment-option" data-pay="Mastercard" onclick="selectPayment(this)">💳<br>Mastercard</button>
@@ -1243,7 +1247,8 @@ $("orderForm").addEventListener("submit",async e=>{
   "المكان: "+$("previewVenue").value,
   "رابط الموقع: "+$("previewMap").value,
   "اسم المستضيف: "+$("previewHost").value,
-  "هاتف المستضيف: "+$("previewPhone").value
+  "هاتف المستضيف: "+$("previewPhone").value,
+  "الأغنية المطلوبة: "+($("orderSongRequest").value.trim()||"لم يحدد")
  ].join("\n");
 
  const order={
@@ -1350,6 +1355,7 @@ document.addEventListener("keydown",e=>{
       <p>${escapeHTML(d.opening||"بكل الحب والسرور، يسعدنا دعوتكم لمشاركتنا أجمل لحظاتنا")}</p>
       <div class="couple-names">${escapeHTML(d.names||"أهلاً بكم")}</div>
       <div class="couple-sub">${escapeHTML(d.occasion||"دعوتكم لحضور مناسبتنا")}</div>
+      ${d.music_url ? `<div class="invite-music"><p>${escapeHTML(d.music_name||"الموسيقى الخاصة بالدعوة")}</p><audio controls preload="none" src="${escapeHTML(d.music_url)}"></audio></div>` : ""}
       <div class="ornament">❦</div>
       <p>حضوركم يزيد فرحتنا ويجعل يومنا أجمل</p>
      </section>
