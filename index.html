@@ -1093,6 +1093,10 @@ body.public-invitation{height:auto!important;min-height:100vh!important;overflow
 .template-actions .mini-btn.primary{background:var(--wine);color:#fff;border-color:var(--wine)}
 .demo-modal{width:min(1100px,96vw)!important;max-width:1100px!important;height:min(92vh,1000px);display:flex;flex-direction:column;overflow:hidden}
 .demo-heading{padding:8px 42px 10px 8px;flex:0 0 auto}
+ .demo-back{display:inline-flex;align-items:center;gap:8px;margin:0 0 10px;padding:8px 15px;border:1px solid #c9a66c;border-radius:999px;background:linear-gradient(135deg,#4b1c2c,#260d19);color:#f6e5c2;font:16px Amiri,serif;cursor:pointer;box-shadow:0 4px 14px #0003;transition:transform .2s,filter .2s}
+ .demo-back:hover{transform:translateY(-2px);filter:brightness(1.12)}
+ .demo-back span{font:18px Arial,sans-serif}
+
 .demo-heading h3{margin:0 0 5px}
 .demo-layout{display:block!important;min-height:0;flex:1;overflow:hidden}
 .demo-stage{height:100%!important;min-height:0!important;max-height:none!important;overflow-y:auto!important;overscroll-behavior:contain}
@@ -1695,7 +1699,7 @@ body.public-invitation #publicInvitationPage{width:100%!important;max-width:none
 <div class="modal" id="previewModal">
  <div class="modal-box wide demo-modal">
   <button class="close" onclick="closeModal('previewModal')">×</button>
-  <div class="demo-heading"><h3>تجربة القالب</h3><p class="notice">هذه نسخة تجريبية كاملة. اضغط على الختم وافتح الدعوة، ثم تصفح تفاصيلها بالتمرير.</p></div>
+  <div class="demo-heading"><button class="demo-back" type="button" onclick="closeModal('previewModal')"><span aria-hidden="true">→</span> رجوع للقوالب</button><h3>تجربة القالب</h3><p class="notice">هذه نسخة تجريبية كاملة. اضغط على الختم وافتح الدعوة، ثم تصفح تفاصيلها بالتمرير.</p></div>
   <div class="preview-layout demo-layout">
    <div class="preview-stage demo-stage">
     <div class="live-invite royal-couple" id="liveInvite">
