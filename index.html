@@ -1293,6 +1293,35 @@ body.public-invitation #publicInvitationPage{width:100%!important;max-width:none
 .live-invite.parchment{--accent:#a77a42;--surface:#ead8b5;background:#ead8b5!important;color:#54391f!important}.live-invite.parchment .envelope-screen{background:radial-gradient(ellipse,#f7e8c7,#c7a777 78%,#80603b)!important;overflow:hidden}.live-invite.parchment .parchment-art{height:100%;min-height:100%}.live-invite.parchment .parchment-scroll{inset:9% 13%;transition:transform 1.8s cubic-bezier(.2,.75,.2,1),opacity 1.4s}.live-invite.parchment.opened .parchment-scroll{transform:translateY(-115%) scaleY(.35);opacity:0}.live-invite.parchment .parchment-copy b{font-size:clamp(30px,6vw,52px)}.live-invite.parchment .parchment-copy i{font-size:clamp(32px,6vw,58px)}.live-invite.parchment .seal-button{position:relative;z-index:7;background:radial-gradient(circle,#fff0c8,#c49a59 55%,#76502b)!important;color:#5a3b1e!important;border:3px double #f8e7c2!important}.live-invite.parchment .open-hint{z-index:7;color:#fff3d7!important}.live-invite.parchment .invitation-content{background:#ead8b5!important;color:#54391f!important}.live-invite.parchment .invite-section{background:linear-gradient(180deg,#f1e3c4,#e4cda2)!important;color:#54391f!important;border-color:#a77a4255!important}.live-invite.parchment .invite-section h2,.live-invite.parchment .invite-section h3,.live-invite.parchment .couple-names,.live-invite.parchment .ornament,.live-invite.parchment .invite-kicker{color:#93652f!important}.live-invite.parchment .detail{background:#f8edda!important;border-color:#c3a16d!important}.live-invite.parchment .detail strong{color:#4f351e!important}
 @keyframes gcLight{from{transform:rotate(-8deg);opacity:.45}to{transform:rotate(8deg);opacity:.9}}@keyframes gcSpark{0%,100%{transform:translateY(0);opacity:.65}50%{transform:translateY(7px);opacity:1}}@keyframes gcDust{to{background-position:0 -260px}}@media(max-width:600px){.live-invite.parchment .parchment-scroll{inset:10% 7%}}
 
+
+/* Wish Door — interactive grand entrance */
+.wish-door-art{position:relative;width:100%;height:100%;min-height:250px;overflow:hidden;display:grid;place-items:center;background:radial-gradient(ellipse at 50% 42%,#526b5d,#182b2a 58%,#091414);isolation:isolate}
+.wish-door-glow{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 42%,#fff0c766,transparent 48%);animation:wishGlow 4s ease-in-out infinite alternate}
+.wish-door-frame{position:relative;width:min(54%,330px);height:78%;min-height:200px;border:9px solid #8d6739;border-bottom:0;border-radius:48% 48% 0 0;background:linear-gradient(90deg,#34251a,#d4b277 10%,#634628 18%,#1b2925 50%,#634628 82%,#d4b277 90%,#34251a);box-shadow:0 0 0 5px #e4c88d66,0 0 40px #f2d39b66,inset 0 0 35px #000}
+.wish-door-frame:before{content:"";position:absolute;inset:12px 12px 0;border:2px solid #d6b77b;border-bottom:0;border-radius:48% 48% 0 0;pointer-events:none}
+.wish-door-leaf{position:absolute;top:8%;bottom:0;width:50%;background:repeating-linear-gradient(90deg,#172d2a 0 9%,#365047 10%,#172923 20%);border:3px solid #b58b4e;box-shadow:inset 0 0 22px #050c0a,0 0 12px #0008;transition:transform 2.25s cubic-bezier(.72,0,.2,1);transform-origin:center}
+.wish-door-leaf.left{left:0;border-radius:100% 0 0 0;border-right:1px solid #e3c889}.wish-door-leaf.right{right:0;border-radius:0 100% 0 0;border-left:1px solid #e3c889}
+.wish-door-leaf:before{content:"";position:absolute;inset:12% 13% 9%;border:2px solid #c4a16a;border-radius:48% 48% 4px 4px;box-shadow:inset 0 0 14px #d9b87933}
+.wish-door-leaf:after{content:"";position:absolute;left:50%;top:48%;width:30%;height:25%;transform:translateX(-50%);border:2px solid #c4a16a;border-radius:45% 45% 4px 4px}
+.wish-door-knob{position:absolute;z-index:3;top:55%;width:9px;height:9px;border-radius:50%;background:radial-gradient(circle at 30% 25%,#fff1c4,#b7863d 65%,#51371c);box-shadow:0 0 8px #e5c47c}.wish-door-knob.left{left:44%}.wish-door-knob.right{right:44%}
+.wish-door-emblem{position:absolute;z-index:4;top:24%;left:50%;transform:translateX(-50%);color:#f3d99e;text-shadow:0 0 12px #e8c17a;font-size:25px}
+.wish-door-caption{position:absolute;bottom:4%;color:#f5e5c4;font:clamp(18px,3vw,28px) Amiri,serif;letter-spacing:2px;text-shadow:0 2px 12px #000}
+.live-invite.door-birds .envelope-screen{background:radial-gradient(ellipse at 50% 40%,#526b5d,#182b2a 58%,#091414)!important;overflow:hidden}
+.live-invite.door-birds .envelope-screen>.scene-art{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;z-index:1}
+.live-invite.door-birds .wish-door-art{height:100%;min-height:100%;padding-bottom:40px}
+.live-invite.door-birds .wish-door-frame{width:min(62vw,410px);height:72%;min-height:280px}
+.live-invite.door-birds .opened .wish-door-art .wish-door-leaf{}
+.live-invite.door-birds.opened .wish-door-leaf.left{transform:perspective(900px) rotateY(-108deg);transform-origin:left center}
+.live-invite.door-birds.opened .wish-door-leaf.right{transform:perspective(900px) rotateY(108deg);transform-origin:right center}
+.live-invite.door-birds .wish-door-birds{position:absolute;inset:0;z-index:8;pointer-events:none;overflow:hidden}
+.wish-flying-bird{position:absolute;left:50%;top:47%;font-size:clamp(20px,4vw,34px);opacity:0;filter:drop-shadow(0 2px 5px #10201c);animation:wishBirdFly 2.8s cubic-bezier(.18,.7,.25,1) forwards;animation-delay:var(--delay)}
+.live-invite.door-birds .seal-button{position:relative;z-index:10;background:radial-gradient(circle at 30% 25%,#fff0c9,#c19a5b 55%,#76502b)!important;color:#294039!important;border:3px double #f8e7c2!important;box-shadow:0 0 25px #f0d59a88!important}
+.live-invite.door-birds .open-hint{position:relative;z-index:10;color:#f8ebcf!important}
+.live-invite.door-birds .invite-section{background:linear-gradient(180deg,#f2e8d4,#d9c6a2)!important;color:#34423a!important}.live-invite.door-birds .invite-section h2,.live-invite.door-birds .invite-section h3,.live-invite.door-birds .couple-names,.live-invite.door-birds .ornament,.live-invite.door-birds .invite-kicker{color:#927044!important}
+@keyframes wishBirdFly{0%{opacity:0;transform:translate(-50%,0) scale(.5) rotate(-8deg)}12%{opacity:1}100%{opacity:0;transform:translate(calc(-50% + var(--x)),var(--y)) scale(1.25) rotate(16deg)}}
+@keyframes wishGlow{from{opacity:.55;transform:scale(.96)}to{opacity:1;transform:scale(1.05)}}
+@media(max-width:600px){.live-invite.door-birds .wish-door-frame{width:76vw;height:68%;min-height:250px}.live-invite.door-birds .seal-button{width:62px;height:62px}}
+
 </style>
 </head>
 
@@ -1542,7 +1571,8 @@ const templates=[
  {id:"red-star",name:"Royal Velvet Curtain",arabic:"الستارة الملكية",theme:"red-star",kind:"envelope",symbol:"✦",line:"ستارة مخملية حمراء تنفتح على قاعة زفاف ملكية"},
  {id:"baghdad-ivory",name:"Baghdad Ivory",arabic:"بغداد العاجية",theme:"baghdad-ivory",kind:"couple",symbol:"❦",line:"حكاية حب بألوان عاجية وذهبية بين معالم بغداد"},
  {id:"golden-cinema",name:"Golden Cinema",arabic:"السينما الذهبية",theme:"golden-cinema",kind:"cinema",symbol:"✦",line:"ستارة مخملية حمراء تنفتح على مسرح ذهبي فاخر"},
- {id:"parchment",name:"The Parchment",arabic:"الرقّ",theme:"parchment",kind:"scroll",symbol:"❦",line:"مخطوطة فاخرة تنفتح تدريجياً لتكشف تفاصيل الدعوة"}
+ {id:"parchment",name:"The Parchment",arabic:"الرقّ",theme:"parchment",kind:"scroll",symbol:"❦",line:"مخطوطة فاخرة تنفتح تدريجياً لتكشف تفاصيل الدعوة"},
+ {id:"door-birds",name:"Wish Door",arabic:"باب الأمنيات",theme:"door-birds",kind:"entrance",symbol:"🕊",line:"باب فخم ينفتح وتخرج منه أسراب الطيور لتبدأ الدعوة"}
 ];
 
 /* IDs القديمة تبقى قابلة للعرض في الدعوات المنشورة سابقاً */
@@ -1581,6 +1611,7 @@ function getTemplate(id){
 /* مشاهد فوتوغرافية للقوالب — ملفات الصور داخل assets/ */
 function sceneMarkup(theme){
  const t=templates.find(x=>x.theme===theme)||templates[0];
+ if(theme==="door-birds")return `<div class="wish-door-art"><div class="wish-door-glow"></div><div class="wish-door-frame"><div class="wish-door-leaf left"></div><div class="wish-door-leaf right"></div><div class="wish-door-knob left"></div><div class="wish-door-knob right"></div><div class="wish-door-emblem">✦</div></div><div class="wish-door-caption">باب الأمنيات</div></div>`;
  if(theme==="golden-cinema")return `<div class="golden-cinema-art"><div class="gc-light"></div><div class="gc-arch"></div><div class="gc-chandelier">✧</div><div class="gc-title">ليلة من العمر</div><div class="gc-dust"></div></div>`;
  if(theme==="parchment")return `<div class="parchment-art"><div class="parchment-scroll"><div class="parchment-roll"></div><div class="parchment-copy"><small>بِسْمِ اللهِ الرَّحْمٰنِ الرَّحِيم</small><b>دعوة لحضور</b><i>❦</i><span>أجمل المناسبات</span></div><div class="parchment-roll"></div></div></div>`;
  if(theme==="baghdad-ivory")return `<div class="baghdad-book-art" aria-hidden="true"><div class="baghdad-book-sun"></div><div class="baghdad-book-stars">✦　✧　✦</div><svg class="baghdad-illustration" viewBox="0 0 900 650" preserveAspectRatio="xMidYMid slice"><defs><linearGradient id="biSky" x2="0" y2="1"><stop stop-color="#e7d7b9"/><stop offset="1" stop-color="#f5ead6"/></linearGradient><linearGradient id="biGold" x2="0" y2="1"><stop stop-color="#d2b47d"/><stop offset="1" stop-color="#987344"/></linearGradient></defs><path fill="url(#biSky)" d="M0 0H900V650H0z"/><circle cx="700" cy="130" r="78" fill="#fff8e8" opacity=".5"/><path d="M0 480Q180 450 350 485T900 470V650H0Z" fill="#c9b28e" opacity=".35"/><g stroke="#9b784b" stroke-width="4" stroke-linejoin="round" fill="#d7c29e"><path d="M55 470V340h108v130z"/><path d="M75 340q38-82 76 0z" fill="url(#biGold)"/><path d="M205 470V295h68v175z"/><path d="M205 295q34-72 68 0z"/><path d="M320 470V360h260v110z"/><path d="M345 360q105-190 210 0z" fill="url(#biGold)"/><path d="M385 470V390h130v80z"/><path d="M620 470V330h148v140z"/><path d="M638 330q46-100 92 0z" fill="url(#biGold)"/><path d="M770 470V365h130v105z"/><path d="M786 365q34-75 68 0z"/></g><path d="M0 485H900" stroke="#9b784b" stroke-width="4"/><g fill="none" stroke="#b18a52" stroke-width="2" opacity=".8"><path d="M20 40h860v570H20z"/><path d="M34 54h832v542H34z"/></g></svg><div class="baghdad-book-title">بغداد<span>مدينة الحب والفرح</span></div><div class="baghdad-book-dust"></div></div>`;
@@ -1898,6 +1929,7 @@ document.addEventListener("keydown",e=>{
     <section class="envelope-screen">
      <div class="tiny">YOU ARE INVITED</div>
      <div class="scene-art">${sceneMarkup(theme)}</div>
+     ${theme==="door-birds"?'<div class="wish-door-birds" aria-hidden="true"></div>':""}
      ${["red-star","golden-cinema"].includes(theme)?'<div class="royal-curtain-panel royal-curtain-left" aria-hidden="true"></div><div class="royal-curtain-panel royal-curtain-right" aria-hidden="true"></div>':""}
      <div class="envelope">
       <span class="envelope-letter" aria-hidden="true"></span>
@@ -1995,6 +2027,10 @@ document.addEventListener("keydown",e=>{
    publicInviteRevealed=true;
    const inviteRoot=$("publicInvite");
    inviteRoot.classList.add("opened");
+   if(inviteRoot.classList.contains("door-birds")){
+    const flock=inviteRoot.querySelector(".wish-door-birds");
+    if(flock)flock.innerHTML=Array.from({length:22},(_,i)=>`<span class="wish-flying-bird" style="--i:${i};--x:${(i%11-5)*58}px;--y:${-100-(i%6)*48}px;--delay:${(i%8)*85}ms">🕊</span>`).join("");
+   }
    const invitationMusic=$("invitationBackgroundMusic");
    if(invitationMusic){invitationMusic.volume=0.85;const playAttempt=invitationMusic.play();if(playAttempt&&typeof playAttempt.catch==="function")playAttempt.catch(error=>console.warn("Invitation music autoplay was blocked:",error));}
    if(inviteRoot.classList.contains("baghdad-ivory")){
@@ -2034,7 +2070,7 @@ document.addEventListener("keydown",e=>{
      showPage(0);
      if(pages.length>1)window.__da3waBaghdadPages=window.setTimeout(turnPage,6800);
     }
-   }else{const revealDelay=inviteRoot.classList.contains("golden-cinema")?2500:inviteRoot.classList.contains("parchment")?1900:1300;setTimeout(scrollToInviteEnd,revealDelay);}
+   }else{const revealDelay=inviteRoot.classList.contains("golden-cinema")?2500:inviteRoot.classList.contains("parchment")?1900:inviteRoot.classList.contains("door-birds")?3600:1300;setTimeout(scrollToInviteEnd,revealDelay);}
   }
   $("openPublicEnvelope").addEventListener("click",revealPublicInvite);
 
