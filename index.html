@@ -1295,9 +1295,112 @@ body.public-invitation #publicInvitationPage{width:100%!important;max-width:none
 
 /* Baghdad illustrated auto-turn book */
 .baghdad-ivory{background:#eadcc3!important;color:#59452f!important;overflow-x:hidden!important}.baghdad-ivory .envelope-screen{background:#e8d9bd!important}.baghdad-ivory .envelope-screen .scene-art{inset:0!important;width:100%!important;height:100%!important}.baghdad-ivory .baghdad-book-art{position:absolute;inset:0;overflow:hidden;background:linear-gradient(180deg,#e8d9bd,#f5ead6 68%,#d5c09c)}.baghdad-ivory .baghdad-illustration{position:absolute;inset:0;width:100%;height:100%;filter:drop-shadow(0 8px 9px #7e633333);animation:baghdadPan 18s ease-in-out infinite alternate}.baghdad-ivory .baghdad-book-sun{position:absolute;width:42vw;height:42vw;max-width:280px;max-height:280px;border-radius:50%;background:#fff5d5;top:10%;right:12%;opacity:.8}.baghdad-ivory .baghdad-book-stars{position:absolute;z-index:2;top:12%;left:0;right:0;text-align:center;color:#a98550;letter-spacing:8px;font-size:20px}.baghdad-ivory .baghdad-book-title{position:absolute;z-index:3;bottom:12%;left:0;right:0;text-align:center;color:#76552f;font:clamp(36px,9vw,68px)/1.2 Amiri,serif;text-shadow:0 2px #fff8}.baghdad-ivory .baghdad-book-title span{display:block;font:18px Amiri,serif;letter-spacing:2px;margin-top:8px}.baghdad-ivory .baghdad-book-dust{position:absolute;inset:0;background-image:radial-gradient(#a98550aa 1px,transparent 1px);background-size:38px 38px;opacity:.15}@keyframes baghdadPan{from{transform:scale(1)}to{transform:scale(1.08) translateY(-1.5%)}}.baghdad-ivory .invitation-content{display:none!important;position:fixed!important;inset:0!important;z-index:50!important;overflow:hidden!important;background:#eadcc3!important}.baghdad-ivory.opened .invitation-content{display:block!important}.baghdad-ivory.baghdad-auto-book .invite-section{display:none!important;position:absolute!important;inset:0!important;width:100%!important;height:100%!important;min-height:100svh!important;max-height:100svh!important;overflow:hidden!important;margin:0!important;padding:clamp(55px,9vh,100px) 24px!important;box-sizing:border-box!important}.baghdad-ivory.baghdad-auto-book .invite-section.baghdad-page-active{display:flex!important;animation:baghdadPageIn 1.15s cubic-bezier(.2,.7,.2,1) both!important;z-index:3!important}.baghdad-ivory.baghdad-auto-book .invite-section.baghdad-page-left{display:flex!important;animation:baghdadPageOut .95s ease-in forwards!important;z-index:4!important;pointer-events:none!important}@keyframes baghdadPageIn{from{opacity:0;transform:perspective(1400px) rotateY(-16deg) translateX(10%);filter:brightness(.8)}to{opacity:1;transform:perspective(1400px) rotateY(0) translateX(0);filter:brightness(1)}}@keyframes baghdadPageOut{to{opacity:0;transform:perspective(1400px) rotateY(18deg) translateX(-14%);filter:brightness(.75)}}.baghdad-ivory.baghdad-auto-book .invite-section:before{inset:14px!important;border:1px solid #b18a5280!important;box-shadow:inset 0 0 0 5px #fff5!important}.baghdad-ivory.baghdad-auto-book .detail-grid{max-height:48vh;overflow:hidden}.baghdad-ivory.baghdad-auto-book .invite-section p{max-width:90%}
+
+/* MIRAS unified luxury wax-seal opener — same size and centered position on every template */
+.live-invite .envelope-screen .envelope{
+ position:absolute!important;
+ left:50%!important;
+ top:50%!important;
+ right:auto!important;
+ bottom:auto!important;
+ width:132px!important;
+ height:132px!important;
+ margin:0!important;
+ padding:0!important;
+ transform:translate(-50%,-50%)!important;
+ display:grid!important;
+ place-items:center!important;
+ z-index:20!important;
+ background:transparent!important;
+ border:0!important;
+ box-shadow:none!important;
+}
+.live-invite .envelope-screen .seal-button{
+ position:absolute!important;
+ left:50%!important;
+ top:50%!important;
+ width:116px!important;
+ height:116px!important;
+ min-width:116px!important;
+ min-height:116px!important;
+ padding:0!important;
+ margin:0!important;
+ transform:translate(-50%,-50%)!important;
+ border-radius:50%!important;
+ display:flex!important;
+ align-items:center!important;
+ justify-content:center!important;
+ overflow:visible!important;
+ background:radial-gradient(circle at 34% 27%,#8f3344 0%,#5b1728 58%,#35101b 100%)!important;
+ color:#f3d99a!important;
+ border:2px solid #d8b66e!important;
+ outline:1px solid #f0d99d!important;
+ outline-offset:5px!important;
+ box-shadow:0 0 0 9px #5b172855,0 10px 30px #12080b88,inset 0 0 0 5px #ffffff12,inset 0 0 20px #e7c77b33!important;
+ font-size:initial!important;
+ backdrop-filter:none!important;
+ z-index:22!important;
+}
+.live-invite .envelope-screen .seal-button:before{
+ content:"✦";
+ position:absolute;
+ top:9px;
+ left:50%;
+ transform:translateX(-50%);
+ color:#f1d69a;
+ font-size:13px;
+ line-height:1;
+}
+.live-invite .envelope-screen .seal-button:after{
+ content:"✦";
+ position:absolute;
+ bottom:9px;
+ left:50%;
+ transform:translateX(-50%);
+ color:#f1d69a;
+ font-size:13px;
+ line-height:1;
+}
+.live-invite .seal-button .seal-brand{
+ display:flex;
+ flex-direction:column;
+ align-items:center;
+ justify-content:center;
+ gap:2px;
+ color:#f6e5bc!important;
+ line-height:1.1;
+ pointer-events:none;
+}
+.live-invite .seal-button .seal-brand b{
+ font:700 19px/1.1 Georgia,serif!important;
+ letter-spacing:2px;
+ color:#f6e5bc!important;
+}
+.live-invite .seal-button .seal-brand i{
+ font:18px/1.2 Amiri,serif!important;
+ font-style:normal!important;
+ letter-spacing:1px;
+ color:#e8ca88!important;
+}
+.live-invite .envelope-screen .seal-button:hover{
+ transform:translate(-50%,-50%) scale(1.06)!important;
+ filter:brightness(1.12);
+}
+.live-invite.opened .envelope-screen .seal-button{
+ animation:mirasSealOpen .55s ease forwards!important;
+}
+@keyframes mirasSealOpen{
+ 0%{transform:translate(-50%,-50%) scale(1);opacity:1}
+ 35%{transform:translate(-50%,-50%) scale(1.12) rotate(5deg);opacity:1}
+ 100%{transform:translate(-50%,-50%) scale(.15) rotate(-20deg);opacity:0}
+}
+/* Keep invitation details hidden until the visitor presses the seal */
+.live-invite:not(.opened) .invitation-content{display:none!important}
+.live-invite.opened .invitation-content{display:block}
+
 /* MIRAS FIX: restore natural page scrolling for Baghdad Ivory invitations */
 .baghdad-ivory .invitation-content{
- display:block!important;
+ display:none!important;
  position:relative!important;
  inset:auto!important;
  width:100%!important;
@@ -1567,7 +1670,7 @@ body.public-invitation #publicInvitationPage{width:100%!important;max-width:none
      <section class="envelope-screen opening-${theme}">
       <div class="tiny">YOU ARE INVITED</div>
       <div class="scene-art" id="previewScene"></div>
-      <div class="envelope"><span class="envelope-letter" aria-hidden="true"></span><button class="seal-button" onclick="openEnvelope()">د</button></div>
+      <div class="envelope"><span class="envelope-letter" aria-hidden="true"></span><button class="seal-button" onclick="openEnvelope()" aria-label="افتح دعوة مِراس"><span class="seal-brand"><b>MIRAS</b><i>مِراس</i></span></button></div>
       <div class="open-hint" id="openHint">اضغط على الختم لفتح دعوتك</div>
       <div class="tiny" style="margin-top:20px">MIRAS · A SPECIAL MOMENT</div>
      </section>
@@ -2116,7 +2219,7 @@ document.addEventListener("keydown",e=>{
      ${["red-star","golden-cinema"].includes(theme)?'<div class="royal-curtain-panel royal-curtain-left" aria-hidden="true"></div><div class="royal-curtain-panel royal-curtain-right" aria-hidden="true"></div>':""}
      <div class="envelope">
       <span class="envelope-letter" aria-hidden="true"></span>
-      <button class="seal-button" id="openPublicEnvelope" aria-label="افتح الدعوة">${escapeHTML(template.symbol)}</button>
+      <button class="seal-button" id="openPublicEnvelope" aria-label="افتح دعوة مِراس"><span class="seal-brand"><b>MIRAS</b><i>مِراس</i></span></button>
      </div>
      <div class="open-hint">${escapeHTML(template.line)} · اضغط لفتح الدعوة</div>
      <div class="tiny" style="margin-top:20px">MIRAS · A SPECIAL MOMENT</div>
