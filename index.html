@@ -759,6 +759,48 @@ body{background:radial-gradient(ellipse at 50% -15%,#512538 0,#1b0d17 48%,#0c080
 .template-art.theme-birthday-neon .cin-balloon{box-shadow:0 0 18px #db83ff,inset -5px -4px 9px #0003}
 .template-art.theme-birthday-neon .cin-frame{border:2px solid #d57cff;box-shadow:0 0 25px #bd61ff,inset 0 0 25px #0005}
 
+/* DA3WA — luxury editorial template art direction: ten distinct cinematic worlds */
+.templates{grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
+.template{padding:9px;border-radius:3px;background:#fbf8f2;border:1px solid #d9c9ad;box-shadow:0 12px 32px #24131a12;transition:transform .45s ease,box-shadow .45s ease}
+.template:hover{transform:translateY(-7px);box-shadow:0 24px 48px #24131a24}
+.template-art{height:330px;padding:13px;border-radius:2px}
+.art-inner{width:100%;height:100%;padding:13px;border:1px solid #ffffff48;background:linear-gradient(145deg,#ffffff0b,#00000012);backdrop-filter:blur(1px)}
+.art-scene{height:190px;flex:0 0 190px}
+.cin-scene{height:100%;min-height:190px;border-radius:1px;box-shadow:inset 0 0 55px #0008}
+.cin-scene:after{content:"";position:absolute;inset:0;z-index:2;pointer-events:none;background:linear-gradient(180deg,#00000012,transparent 35%,#00000030),radial-gradient(ellipse at center,transparent 42%,#0007 100%)}
+.cin-frame{inset:7% 11%;border-radius:48% 48% 3px 3px;border-width:1px;box-shadow:0 0 38px color-mix(in srgb,var(--cin-gold) 28%,transparent),inset 0 0 35px #0007}
+.cin-center{filter:drop-shadow(0 18px 20px #0009)}
+.cin-backlight{width:95%;height:95%;left:2.5%;top:0;opacity:.32;filter:blur(25px)}
+.cin-grain{opacity:.08;background-size:3px 3px}
+.cin-petal{width:13px;height:21px;filter:blur(.15px);box-shadow:0 3px 8px #0004}
+.cin-rings{transform-origin:center;filter:drop-shadow(0 0 18px var(--cin-gold))}
+.cin-envelope{width:clamp(145px,56%,205px);height:118px}
+.cin-wax{width:40px;height:40px;box-shadow:0 5px 15px #0009,inset 0 1px 4px #fff8}
+.cin-diploma{transform:scale(1.12)}
+.cin-cake{transform:scale(1.12)}
+/* Wedding worlds */
+.cin-scene.toon-royal-couple{background:radial-gradient(ellipse at 50% 35%,#9c744d 0,#4a2430 32%,#1b101b 78%),linear-gradient(120deg,#21121a,#694334)}
+.cin-scene.toon-first-dance{background:radial-gradient(ellipse at 50% 85%,#c28fa0 0,#543348 36%,#171321 82%),linear-gradient(90deg,#241b32,#4b2e48)}
+.cin-scene.toon-blooming-roses{background:radial-gradient(ellipse at 50% 50%,#9a5260 0,#4c2538 45%,#1d111e 85%),repeating-linear-gradient(45deg,#ffffff06 0 1px,transparent 1px 9px)}
+.cin-scene.toon-midnight-pearl{background:radial-gradient(ellipse at 50% 35%,#617da0 0,#1d2b4b 42%,#090f20 88%),radial-gradient(circle at 15% 20%,#fff6,transparent 20%)}
+/* Envelope worlds */
+.cin-scene.toon-silk-gold{background:radial-gradient(ellipse at 50% 45%,#9a6b4b 0,#4b292c 48%,#1d1019 88%),repeating-linear-gradient(115deg,#ffffff08 0 1px,transparent 1px 6px)}
+.cin-scene.toon-royal-seal{background:radial-gradient(ellipse at 50% 48%,#68405c 0,#2d1830 48%,#100b18 88%),linear-gradient(135deg,#ffffff12,transparent 55%)}
+/* Graduation worlds */
+.cin-scene.toon-graduation-purple{background:radial-gradient(ellipse at 50% 40%,#8266a7 0,#3b2a59 44%,#171126 88%),linear-gradient(130deg,#201532,#51416b)}
+.cin-scene.toon-graduation-blue{background:radial-gradient(ellipse at 50% 42%,#7199b9 0,#24415f 46%,#0b172b 88%),linear-gradient(130deg,#10243d,#43617e)}
+/* Birthday worlds */
+.cin-scene.toon-birthday-pastel{background:radial-gradient(ellipse at 50% 40%,#d18f9f 0,#78475e 44%,#321b35 88%),radial-gradient(circle at 15% 15%,#fff8,transparent 22%)}
+.cin-scene.toon-birthday-neon{background:radial-gradient(ellipse at 50% 42%,#8248a1 0,#351b55 42%,#100b24 88%),linear-gradient(115deg,#29113f,#4b216b)}
+/* Refined card typography and reveal */
+.template-info{padding:15px 5px 5px}
+.template-info strong{font:600 17px Amiri,serif;color:#432a31}
+.template-info small{letter-spacing:.3px}
+.card-seal{box-shadow:0 5px 18px #0007,0 0 0 5px #ffffff12;border:1px solid #f5dfb8}
+.card-reveal{backdrop-filter:blur(12px);background:#160f19d9!important;border:1px solid #c5a36c!important}
+@media(max-width:850px){.templates{grid-template-columns:repeat(2,minmax(0,1fr))}.template-art{height:300px}.art-scene{height:165px;flex-basis:165px}}
+@media(max-width:560px){.templates{grid-template-columns:1fr;gap:17px}.template-art{height:340px}.art-scene{height:205px;flex-basis:205px}.cin-scene{min-height:205px}}
+@media(prefers-reduced-motion:reduce){.cin-scene,.cin-scene *{animation:none!important}}
 </style>
 </head>
 
