@@ -1308,10 +1308,33 @@ document.addEventListener("keydown",e=>{
     </div>
    </div>`;
 
-  $("openPublicEnvelope").addEventListener("click",()=>{
-   $("publicInvite").classList.add("opened");
-   window.scrollTo({top:0,behavior:"smooth"});
-  });
+  let publicInviteRevealed=false;
+  function revealPublicInvite(auto=false){
+   if(publicInviteRevealed)return;
+   publicInviteRevealed=true;
+   const invite=$("publicInvite");
+   const content=invite.querySelector(".invitation-content");
+   invite.classList.add("opened");
+   if(auto){
+    const start=window.scrollY;
+    const target=content.getBoundingClientRect().top+window.scrollY;
+    const distance=target-start;
+    const duration=3200;
+    const began=performance.now();
+    const ease=t=>t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2;
+    function move(now){
+     const progress=Math.min(1,(now-began)/duration);
+     window.scrollTo(0,start+distance*ease(progress));
+     if(progress<1)requestAnimationFrame(move);
+    }
+    requestAnimationFrame(move);
+   }else{
+    content.scrollIntoView({behavior:"smooth",block:"start"});
+   }
+  }
+  $("openPublicEnvelope").addEventListener("click",()=>revealPublicInvite(false));
+  // Auto reveal and slowly scroll down on public invitation links.
+  setTimeout(()=>revealPublicInvite(true),1800);
 
   const wishList=$("publicWishList");
   const wishStatus=document.createElement("p");
