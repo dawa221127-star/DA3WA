@@ -2552,7 +2552,7 @@ document.addEventListener("keydown",e=>{
   for(const id of required){const el=document.getElementById(id);if(!el||!String(el.value||"").trim()){status.textContent="يرجى إكمال الحقل المطلوب: "+(el?.previousElementSibling?.textContent||id);el?.focus();return;}}
   if(!payment){status.textContent="اختار طريقة الدفع أولاً.";return;}
   const phone=document.getElementById("orderPhone").value.trim();
-  if(!/^(\\+?964|0)?7\\d{9}$/.test(phone.replace(/[\\s-]/g,""))){status.textContent="تأكد من رقم الهاتف العراقي.";return;}
+  if(!/^(\+?964|0)?7\d{9}$/.test(phone.replace(/[\s-]/g,""))){status.textContent="تأكد من رقم الهاتف العراقي.";return;}
   const url="https://xnabtqiukgcbukrmpyle.supabase.co";
   const key="sb_publishable_-fZR33L75gcyESGdh0OYTg_Ct1Iamlz";
   if(!window.supabase?.createClient){status.textContent="تعذر تحميل خدمة قاعدة البيانات. حدّث الصفحة وجرب مرة ثانية.";return;}
@@ -2566,7 +2566,7 @@ document.addEventListener("keydown",e=>{
    if(!amount){status.textContent="تعذر قراءة سعر الباقة من قاعدة البيانات. تواصل مع إدارة مِراس.";return;}
    const time=v=>{if(!v)return "يحدد لاحقاً";const [h,m]=v.split(":").map(Number);return (h%12||12)+":"+String(m).padStart(2,"0")+" "+(h>=12?"مساءً":"صباحاً");};
    const value=id=>document.getElementById(id)?.value?.trim()||"";
-   const details=["نوع المناسبة: "+value("eventKind"),"الأسماء: "+value("previewNames"),"عبارة الدعوة: "+value("previewGreeting"),"التاريخ: "+value("previewDate"),"وقت الوصول: "+time(value("previewArrival")),"بداية المناسبة: "+time(value("previewStart")),"المكان: "+value("previewVenue"),"رابط الموقع: "+value("previewMap"),"اسم المستضيف: "+value("previewHost"),"هاتف المستضيف: "+value("previewPhone"),"الأغنية المطلوبة: "+(value("orderSongRequest")||"لم يحدد")].join("\\n");
+   const details=["نوع المناسبة: "+value("eventKind"),"الأسماء: "+value("previewNames"),"عبارة الدعوة: "+value("previewGreeting"),"التاريخ: "+value("previewDate"),"وقت الوصول: "+time(value("previewArrival")),"بداية المناسبة: "+time(value("previewStart")),"المكان: "+value("previewVenue"),"رابط الموقع: "+value("previewMap"),"اسم المستضيف: "+value("previewHost"),"هاتف المستضيف: "+value("previewPhone"),"الأغنية المطلوبة: "+(value("orderSongRequest")||"لم يحدد")].join("\n");
    const order={customer_name:value("orderName"),phone,occasion:value("eventKind"),template_name:value("orderTemplate"),package_name:packageName,amount,payment_method:payment,invitation_date:value("previewDate")||null,invitation_time:value("previewStart")||null,invitation_location:value("previewVenue")||null,invitation_message:details,status:"new"};
    const {error}=await db.from("orders").insert([order]);
    if(error)throw error;
