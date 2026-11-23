@@ -1074,6 +1074,7 @@ $("invitationForm").addEventListener("submit", async e => {
         details.music_name=selectedSong.name;
       }else if(editingInvitationId && selectedSongPath.startsWith("http")){
         details.music_url=selectedSongPath;
+        details.music_name=$("invitationMusicSelect").selectedOptions[0]?.textContent||"أغنية الدعوة";
       }else throw new Error("الأغنية المختارة غير موجودة في المكتبة. حدّث المكتبة وجرب مرة ثانية.");
     }else{
       details.music_url="";
