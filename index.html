@@ -1246,6 +1246,8 @@ body.public-invitation #publicInvitationPage{width:100%!important;max-width:none
 .baghdad-ivory .envelope-screen{height:100svh!important;min-height:680px!important;padding:0!important;display:flex!important;align-items:center!important;justify-content:center!important;overflow:hidden!important;background:linear-gradient(180deg,#f0dfbf22,#24180c55),url("https://commons.wikimedia.org/wiki/Special:FilePath/Tigris_river_in_Baghdad.png") center/cover!important}
 .baghdad-ivory .envelope-screen:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,#f2e4c9aa 0%,#9e784544 45%,#20170e99 100%);pointer-events:none}
 .baghdad-ivory .envelope-screen>.tiny{position:absolute;z-index:4;top:8%;color:#fff3d8!important;font-family:serif;letter-spacing:2px;text-shadow:0 2px 16px #3c2918}
+.baghdad-ivory .envelope-screen>.tiny:first-child{font-size:0!important}.baghdad-ivory .envelope-screen>.tiny:first-child:after{content:"دعوة من قلب بغداد";font:24px "Amiri",serif;letter-spacing:1px}
+.baghdad-ivory .invite-kicker{font-size:0!important}.baghdad-ivory .invite-section:nth-child(2) .invite-kicker:after{content:"بداية حكايتنا";font:19px "Amiri",serif}.baghdad-ivory .invite-section:nth-child(3) .invite-kicker:after{content:"تفاصيل يوم الفرح";font:19px "Amiri",serif}.baghdad-ivory .invite-section:nth-child(4) .invite-kicker:after{content:"لحظة لقائنا";font:19px "Amiri",serif}.baghdad-ivory .invite-section:nth-child(5) .invite-kicker:after{content:"كلمات من القلب";font:19px "Amiri",serif}
 .baghdad-ivory .envelope-screen .scene-art{position:absolute!important;inset:0!important;margin:0!important;z-index:1!important;width:100%!important;height:100%!important}
 .baghdad-ivory .baghdad-ivory-scene{position:absolute;inset:0;background:linear-gradient(180deg,#e7d6b433,#261b1077),url("https://commons.wikimedia.org/wiki/Special:FilePath/Tigris_river_in_Baghdad.png") center/cover}
 .baghdad-ivory .baghdad-ivory-glow{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 36%,#fff1d188,transparent 55%)}
@@ -1611,7 +1613,7 @@ function renderTemplates(){
  $("templateGrid").innerHTML=templates.map((t,index)=>`
   <article class="template template-choice" data-template="${t.id}">
    <div class="template-art theme-${t.theme}" id="card-${t.id}">
-    ${t.id==="red-star"?'<span class="template-number-badge">11</span>':""}
+    ${t.id==="red-star"?'<span class="template-number-badge">11</span>':t.id==="baghdad-ivory"?'<span class="template-number-badge">12</span>':""}
     <div class="art-inner"><div class="art-scene">${sceneMarkup(t.theme)}</div></div>
    </div>
    <div class="template-info">
