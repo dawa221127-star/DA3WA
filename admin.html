@@ -74,6 +74,42 @@ button.success{background:#356c53;color:white}
 header{padding:16px}
 .panel{padding:16px}
 }
+
+/* DA3WA admin: motion-first, CSS/SVG artwork only */
+body{background:radial-gradient(ellipse at 50% -15%,#482235,#1a0d17 55%,#0b080c);color:#f5ead9}
+header{background:#160b14eF;border-bottom:1px solid #d7b87955;backdrop-filter:blur(12px)}
+.panel,.order,.invite-card,.stat{background:linear-gradient(145deg,#291722,#160e16);border-color:#75544277;box-shadow:0 12px 32px #0003}
+h1,.section-title,.order h3,.invite-card h3{color:#f0d9aa}
+input,select,textarea{background:#120b12;color:#f7ead8;border-color:#62444c}
+label{color:#dfc17e}
+button{background:linear-gradient(135deg,#d9bd83,#a77b43);color:#24121a}
+button.secondary,.tab{background:#392330;color:#f2dfc0;border:1px solid #8a6948}
+.tab.active{background:#d5b47a;color:#211719}
+.grid{grid-template-columns:repeat(5,minmax(0,1fr))}
+.template{background:linear-gradient(155deg,#2c1925,#150d16);border-color:#6c4b45;transition:transform .35s,box-shadow .35s}
+.template:hover{transform:translateY(-6px);box-shadow:0 15px 35px #0008,0 0 22px #d7b87922}
+.template-art{height:155px;background:radial-gradient(circle at 50% 45%,#563044,#1b101b 70%)!important;border:1px solid #b08b5a;color:#e8cc91}
+.template-art:before{content:"";position:absolute;inset:12px;border:1px solid #d7b87966;border-radius:50%;animation:adminOrbit 12s linear infinite}
+.template-art:after{content:"";position:absolute;width:70px;height:70px;border:1px solid #d7b87944;border-radius:50%;box-shadow:0 0 25px #d7b87922;animation:adminPulse 3s ease-in-out infinite}
+.template-art span{z-index:2;position:relative;background:linear-gradient(145deg,#d8ba7d,#8d653c);color:#2b1720;border:3px double #f6e2b0;width:54px;height:54px;border-radius:50%;display:grid;place-items:center;font-size:26px;box-shadow:0 0 28px #d7b87955}
+.art-orbit,.art-glow{position:absolute;display:block;border-radius:50%;pointer-events:none}
+.art-orbit{width:90px;height:90px;border:1px dashed #d7b87988;animation:adminOrbit 18s linear infinite reverse}
+.art-glow{width:12px;height:12px;background:#f6dfa4;box-shadow:0 0 18px 6px #d7b87977;animation:adminPulse 2.5s ease-in-out infinite}
+.art-2 .template-art{background:radial-gradient(circle at 50% 45%,#713044,#1a0c15 72%)!important}
+.art-3 .template-art{background:radial-gradient(circle at 50% 45%,#70503e,#1c1117 72%)!important}
+.art-4 .template-art{background:radial-gradient(circle at 50% 45%,#4b526f,#111421 72%)!important}
+.art-5 .template-art{background:radial-gradient(circle at 50% 45%,#7a603b,#21150f 72%)!important}
+.art-6 .template-art{background:radial-gradient(circle at 50% 45%,#713047,#1d0d16 72%)!important}
+.art-7 .template-art{background:radial-gradient(circle at 50% 45%,#7b6240,#21160e 72%)!important}
+.art-8 .template-art{background:radial-gradient(circle at 50% 45%,#49386d,#100e20 72%)!important}
+.art-9 .template-art{background:radial-gradient(circle at 50% 45%,#43655b,#0e1c18 72%)!important}
+.art-10 .template-art{background:radial-gradient(circle at 50% 45%,#7a4937,#1b0e12 72%)!important}
+.preview{background:radial-gradient(ellipse at 50% 20%,#633047,#1a0d19 75%)!important;color:#f3dfb7;border:1px solid #a37d50}
+.preview:before{background:radial-gradient(circle at 50% 45%,#d7b87918,transparent 55%),linear-gradient(180deg,#10091022,#10091099)}
+.preview.admin-preview-art:after{content:attr(data-symbol);font:90px Georgia;color:#d8b879;position:absolute;opacity:.13;z-index:-1;animation:adminPulse 4s ease-in-out infinite}
+@keyframes adminOrbit{to{transform:rotate(360deg)}}
+@keyframes adminPulse{50%{transform:scale(1.12);opacity:.65}}
+@media(max-width:850px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 </style>
 </head>
 <body>
@@ -126,17 +162,7 @@ header{padding:16px}
       <p class="muted">اختار قالب، أضف تفاصيل المناسبة، عاين الدعوة، وبعدها انشرها حتى تحصل على رابط خاص.</p>
 
       <h3>1. اختار القالب</h3>
-      <div class="grid" id="templateGrid">
-        <div class="template selected" data-template="royal-couple"><div class="template-art" style="background-image:url('01-royal-first-dance.jpg')"><span>زفاف ملكي</span></div><b>زفاف ملكي</b></div>
-        <div class="template" data-template="first-dance"><div class="template-art" style="background-image:url('02-rose-garden-bride.jpg')"><span>الظرف الأحمر</span></div><b>الظرف الأحمر</b></div>
-        <div class="template" data-template="blooming-roses"><div class="template-art" style="background-image:url('03-ivory-envelope.jpg')"><span>فرحة التخرج</span></div><b>فرحة التخرج</b></div>
-        <div class="template" data-template="midnight-pearl"><div class="template-art" style="background-image:url('04-graduation-celebration.jpg')"><span>عيد ميلاد وردي</span></div><b>عيد ميلاد وردي</b></div>
-        <div class="template" data-template="silk-gold"><div class="template-art" style="background-image:url('05-pink-birthday-cake.jpg')"><span>المولود الجديد</span></div><b>المولود الجديد</b></div>
-        <div class="template" data-template="royal-seal"><div class="template-art" style="background-image:url('06-crimson-seal-envelope.jpg')"><span>الورد الأحمر</span></div><b>الورد الأحمر</b></div>
-        <div class="template" data-template="graduation-purple"><div class="template-art" style="background-image:url('07-royal-couple.jpg')"><span>الظرف الذهبي</span></div><b>الظرف الذهبي</b></div>
-        <div class="template" data-template="graduation-blue"><div class="template-art" style="background-image:url('08-graduation-cap.jpg')"><span>دعوة باريس</span></div><b>دعوة باريس</b></div>
-        <div class="template" data-template="birthday-pastel"><div class="template-art" style="background-image:url('09-pastel-birthday.jpg')"><span>المنزل الفاخر</span></div><b>المنزل الفاخر</b></div>
-        <div class="template" data-template="birthday-neon"><div class="template-art" style="background-image:url('10-moonlight-wedding.jpg')"><span>الليلة الشرقية</span></div><b>الليلة الشرقية</b></div>
+      <div class="grid" id="templateGrid"></div>
 
       <div class="editor-grid" style="margin-top:25px">
         <div>
@@ -238,16 +264,16 @@ const statusNames = {
 };
 
 const templateCatalog = [
-  {id:"royal-couple",name:"زفاف ملكي",image:"01-royal-first-dance.jpg"},
-  {id:"first-dance",name:"الظرف الأحمر",image:"02-rose-garden-bride.jpg"},
-  {id:"blooming-roses",name:"فرحة التخرج",image:"03-ivory-envelope.jpg"},
-  {id:"midnight-pearl",name:"عيد ميلاد وردي",image:"04-graduation-celebration.jpg"},
-  {id:"silk-gold",name:"المولود الجديد",image:"05-pink-birthday-cake.jpg"},
-  {id:"royal-seal",name:"الورد الأحمر",image:"06-crimson-seal-envelope.jpg"},
-  {id:"graduation-purple",name:"الظرف الذهبي",image:"07-royal-couple.jpg"},
-  {id:"graduation-blue",name:"دعوة باريس",image:"08-graduation-cap.jpg"},
-  {id:"birthday-pastel",name:"المنزل الفاخر",image:"09-pastel-birthday.jpg"},
-  {id:"birthday-neon",name:"الليلة الشرقية",image:"10-moonlight-wedding.jpg"}
+  {id:"royal-couple",name:"زفاف ملكي",symbol:"❦"},
+  {id:"first-dance",name:"الظرف الأحمر",symbol:"❖"},
+  {id:"blooming-roses",name:"فرحة التخرج",symbol:"✿"},
+  {id:"midnight-pearl",name:"عيد ميلاد وردي",symbol:"✧"},
+  {id:"silk-gold",name:"المولود الجديد",symbol:"☾"},
+  {id:"royal-seal",name:"الورد الأحمر",symbol:"❀"},
+  {id:"graduation-purple",name:"الظرف الذهبي",symbol:"✦"},
+  {id:"graduation-blue",name:"دعوة باريس",symbol:"♛"},
+  {id:"birthday-pastel",name:"المنزل الفاخر",symbol:"⌂"},
+  {id:"birthday-neon",name:"الليلة الشرقية",symbol:"۞"}
 ];
 const templateNames = Object.fromEntries(templateCatalog.map(t=>[t.id,t.name]));
 Object.assign(templateNames,{
@@ -263,9 +289,9 @@ let selectedTemplate = "royal-couple";
 
 function renderAdminTemplates(){
  const grid=$("templateGrid");
- grid.innerHTML=templateCatalog.map(t=>`
-  <div class="template" data-template="${t.id}">
-   <div class="template-art" style="background-image:url('${t.image}')"><span>اختيار القالب</span></div>
+ grid.innerHTML=templateCatalog.map((t,index)=>`
+  <div class="template admin-template-art art-${index+1}" data-template="${t.id}">
+   <div class="template-art"><span>${t.symbol}</span><i class="art-orbit"></i><i class="art-glow"></i></div>
    <b>${t.name}</b>
   </div>`).join("");
  grid.querySelectorAll(".template").forEach(card=>{
@@ -503,8 +529,10 @@ function updatePreview() {
     ( $("startTime").value ? formatTime($("startTime").value) : "غير محدد" );
 
   const selected=templateCatalog.find(t=>t.id===normalizeTemplate(selectedTemplate))||templateCatalog[0];
-  $("preview").className="preview";
-  $("preview").style.backgroundImage=`url("${selected.image}")`;
+  const selectedIndex=templateCatalog.indexOf(selected)+1;
+  $("preview").className="preview admin-preview-art art-"+selectedIndex;
+  $("preview").style.backgroundImage="none";
+  $("preview").setAttribute("data-symbol",selected.symbol);
 }
 
 [
