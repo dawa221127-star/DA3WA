@@ -759,6 +759,77 @@ body{background:radial-gradient(ellipse at 50% -15%,#512538 0,#1b0d17 48%,#0c080
 .template-art.theme-birthday-neon .cin-balloon{box-shadow:0 0 18px #db83ff,inset -5px -4px 9px #0003}
 .template-art.theme-birthday-neon .cin-frame{border:2px solid #d57cff;box-shadow:0 0 25px #bd61ff,inset 0 0 25px #0005}
 
+/* DA3WA FULL-PAGE INVITATION ART DIRECTION — every section belongs to its template */
+.live-invite{position:relative;isolation:isolate;min-height:100vh;background:var(--surface);background-image:radial-gradient(ellipse at 8% 12%,color-mix(in srgb,var(--accent2) 15%,transparent),transparent 34%),radial-gradient(ellipse at 92% 78%,color-mix(in srgb,var(--accent) 9%,transparent),transparent 38%)}
+.envelope-screen{min-height:100svh;padding:clamp(35px,7vh,90px) 22px;gap:clamp(16px,3vh,30px);background-image:radial-gradient(ellipse at 50% 40%,color-mix(in srgb,var(--accent2) 42%,var(--accent)),var(--accent) 68%,#100d16);box-shadow:inset 0 0 100px #0005}
+.envelope-screen:before,.envelope-screen:after{content:"";position:absolute;pointer-events:none;inset:22px;border:1px solid color-mix(in srgb,var(--accent2) 65%,transparent);z-index:1}
+.envelope-screen:after{inset:31px;border-color:color-mix(in srgb,#fff 25%,transparent)}
+.envelope-screen .scene-art{width:min(560px,92vw);height:clamp(190px,34vh,330px);margin:2vh auto;filter:drop-shadow(0 22px 35px #0005)}
+.envelope{width:min(370px,86vw);height:clamp(180px,27vh,245px);margin:0 auto;filter:drop-shadow(0 22px 28px #0008)}
+.seal-button{box-shadow:0 0 0 7px #ffffff12,0 0 0 8px color-mix(in srgb,var(--accent2) 65%,transparent),0 12px 30px #0008}
+.invitation-content{position:relative;overflow:hidden;background:var(--surface);background-image:radial-gradient(ellipse at 50% 0%,color-mix(in srgb,var(--accent2) 12%,transparent),transparent 55%)}
+.invitation-content:before{content:"";position:absolute;inset:0;pointer-events:none;opacity:.22;background-image:repeating-linear-gradient(0deg,transparent 0 47px,color-mix(in srgb,var(--accent2) 16%,transparent) 48px,transparent 49px);z-index:0}
+.invite-section{z-index:1;min-height:360px;padding:clamp(55px,8vw,100px) clamp(20px,6vw,70px);display:flex;flex-direction:column;align-items:center;justify-content:center;background:transparent}
+.invite-section:nth-child(odd){background:linear-gradient(145deg,color-mix(in srgb,var(--surface) 92%,var(--accent2)),var(--surface) 52%,color-mix(in srgb,var(--surface) 94%,var(--accent)))}
+.invite-section:nth-child(even){background:linear-gradient(35deg,color-mix(in srgb,var(--surface) 88%,var(--accent2)),var(--surface) 45%,color-mix(in srgb,var(--surface) 94%,var(--accent)))}
+.invite-section:before{content:"";position:absolute;inset:18px 5%;border:1px solid color-mix(in srgb,var(--accent2) 30%,transparent);pointer-events:none}
+.invite-section:after{content:"✦";position:absolute;top:27px;left:50%;transform:translateX(-50%);font-size:17px;color:var(--accent2);opacity:.75}
+.invite-section .scene-art{width:min(440px,88vw);height:clamp(155px,25vw,245px);margin:20px auto 28px;filter:drop-shadow(0 18px 25px #0002)}
+.invite-section .scene-art .cin-scene{border-radius:2px}
+.couple-names{padding:8px 20px 14px;border-bottom:1px solid color-mix(in srgb,var(--accent2) 55%,transparent);text-shadow:0 3px 18px color-mix(in srgb,var(--accent2) 18%,transparent)}
+.detail-grid{width:min(680px,100%);gap:13px}
+.detail{background:color-mix(in srgb,var(--surface) 84%,white);border:1px solid color-mix(in srgb,var(--accent2) 58%,transparent);box-shadow:0 10px 28px #2a1a180d;border-radius:2px;padding:22px 12px}
+.countdown div{background:color-mix(in srgb,var(--surface) 82%,white);box-shadow:0 8px 20px #2415150b;min-width:75px;padding:17px 10px}
+.wish-form input,.wish-form textarea{background:color-mix(in srgb,var(--surface) 85%,white);border-radius:2px;padding:15px}
+.wish{background:color-mix(in srgb,var(--surface) 80%,white);margin:9px 0;border:1px solid color-mix(in srgb,var(--accent2) 28%,transparent);padding:16px}
+.watermark{position:relative;z-index:1;padding:38px 20px 55px;background:var(--accent);color:color-mix(in srgb,var(--accent2) 65%,white);letter-spacing:4px}
+/* Wedding: full-length romantic editorial layout */
+.live-invite.royal-couple{--accent:#4a202c;--accent2:#c7a36d;--surface:#f8f0e5;--text:#4c3540}
+.live-invite.royal-couple .envelope-screen{background:radial-gradient(ellipse at 50% 25%,#9b6d59,#4a202c 55%,#1d111b)}
+.live-invite.royal-couple .invite-section:nth-child(odd){background:linear-gradient(150deg,#f7eee1,#fffaf2 48%,#eadbc9)}
+.live-invite.royal-couple .invite-section:nth-child(even){background:linear-gradient(30deg,#efe0d1,#fbf5ec 50%,#e7d5c2)}
+.live-invite.first-dance{--accent:#38243f;--accent2:#cba6bd;--surface:#f4eaf0;--text:#49384b}
+.live-invite.first-dance .envelope-screen{background:radial-gradient(ellipse at 50% 25%,#9b718f,#38243f 58%,#17101e)}
+.live-invite.first-dance .invite-section:nth-child(odd){background:linear-gradient(145deg,#f4e7ef,#fff8fb,#e9d7e7)}
+.live-invite.first-dance .invite-section:nth-child(even){background:linear-gradient(35deg,#e8d8e9,#faf2f8 55%,#e3d0e2)}
+.live-invite.blooming-roses{--accent:#673641;--accent2:#c78c91;--surface:#fff2ef;--text:#5d3b43}
+.live-invite.blooming-roses .envelope-screen{background:radial-gradient(ellipse at 50% 25%,#b36f79,#673641 58%,#26131d)}
+.live-invite.blooming-roses .invite-section:nth-child(odd){background:radial-gradient(ellipse at 5% 10%,#f0d2d0,transparent 40%),linear-gradient(145deg,#fff0ed,#fffaf7)}
+.live-invite.blooming-roses .invite-section:nth-child(even){background:radial-gradient(ellipse at 95% 85%,#e9c1c2,transparent 42%),#fbedeb}
+.live-invite.midnight-pearl{--accent:#182743;--accent2:#a9bfdc;--surface:#eaf0f8;--text:#263b5a}
+.live-invite.midnight-pearl .envelope-screen{background:radial-gradient(ellipse at 50% 22%,#526e9b,#182743 60%,#080f20)}
+.live-invite.midnight-pearl .invitation-content{background:#eaf0f8;background-image:radial-gradient(ellipse at 50% 0%,#b7cbe3,transparent 55%)}
+.live-invite.midnight-pearl .invite-section:nth-child(odd){background:linear-gradient(145deg,#e5edf7,#f8fbff,#dce6f2)}
+.live-invite.midnight-pearl .invite-section:nth-child(even){background:linear-gradient(35deg,#d9e4f1,#f4f8fd 55%,#dce7f5)}
+/* Envelope: tactile paper, velvet and wax atmosphere */
+.live-invite.silk-gold{--accent:#57352c;--accent2:#c9a36d;--surface:#f5ead7;--text:#554034}
+.live-invite.silk-gold .envelope-screen{background:radial-gradient(ellipse at 50% 30%,#a57b56,#57352c 58%,#21131a)}
+.live-invite.silk-gold .invite-section:nth-child(odd){background:linear-gradient(145deg,#f3e5cf,#fff8e9,#e8d5b9)}
+.live-invite.silk-gold .invite-section:nth-child(even){background:linear-gradient(35deg,#e9d7bd,#f9f0e1 55%,#e6d1b2)}
+.live-invite.royal-seal{--accent:#342039;--accent2:#d1ad73;--surface:#f2eaf1;--text:#463449}
+.live-invite.royal-seal .envelope-screen{background:radial-gradient(ellipse at 50% 30%,#76516e,#342039 60%,#100b17)}
+.live-invite.royal-seal .invite-section:nth-child(odd){background:linear-gradient(145deg,#f1e6ef,#fff9fd,#e8d9e9)}
+.live-invite.royal-seal .invite-section:nth-child(even){background:linear-gradient(35deg,#e7d8e8,#f9f1f9 55%,#e1d1e4)}
+/* Graduation: ceremonial academic palettes */
+.live-invite.graduation-purple{--accent:#3d2a58;--accent2:#b9a0dd;--surface:#f1ecf8;--text:#40344f}
+.live-invite.graduation-purple .envelope-screen{background:radial-gradient(ellipse at 50% 25%,#8065a7,#3d2a58 60%,#181126)}
+.live-invite.graduation-purple .invite-section:nth-child(odd){background:linear-gradient(145deg,#eee6f7,#fffaff,#ded2ee)}
+.live-invite.graduation-purple .invite-section:nth-child(even){background:linear-gradient(35deg,#e0d5f0,#f8f3fc 55%,#d8cbed)}
+.live-invite.graduation-blue{--accent:#1e456a;--accent2:#9fc7e4;--surface:#eaf3fa;--text:#2c4861}
+.live-invite.graduation-blue .envelope-screen{background:radial-gradient(ellipse at 50% 25%,#638daf,#1e456a 60%,#0b192a)}
+.live-invite.graduation-blue .invite-section:nth-child(odd){background:linear-gradient(145deg,#e1edf7,#fbfdff,#d1e3f1)}
+.live-invite.graduation-blue .invite-section:nth-child(even){background:linear-gradient(35deg,#d5e5f3,#f4f9fd 55%,#cbdfee)}
+/* Birthday: celebratory gradients, bokeh and luminous details */
+.live-invite.birthday-pastel{--accent:#874c68;--accent2:#e5afc3;--surface:#fff0f6;--text:#69485b}
+.live-invite.birthday-pastel .envelope-screen{background:radial-gradient(ellipse at 50% 25%,#d79bb5,#874c68 60%,#3a203b)}
+.live-invite.birthday-pastel .invite-section:nth-child(odd){background:radial-gradient(circle at 12% 20%,#f5d0df 0 2px,transparent 3px),radial-gradient(circle at 85% 75%,#f5d0df 0 3px,transparent 4px),linear-gradient(145deg,#fff0f6,#fffafd,#f4dce8)}
+.live-invite.birthday-pastel .invite-section:nth-child(even){background:radial-gradient(circle at 82% 18%,#edc1d4 0 2px,transparent 3px),linear-gradient(35deg,#f4dce9,#fff7fb 55%,#efd5e3)}
+.live-invite.birthday-neon{--accent:#27183e;--accent2:#d88cf0;--surface:#f5eaff;--text:#3f2d52}
+.live-invite.birthday-neon .envelope-screen{background:radial-gradient(ellipse at 50% 25%,#744c99,#27183e 60%,#0d091b)}
+.live-invite.birthday-neon .invite-section:nth-child(odd){background:radial-gradient(ellipse at 15% 20%,#f0c5ff 0,transparent 38%),linear-gradient(145deg,#f4e6ff,#fffaff,#e5d3f5)}
+.live-invite.birthday-neon .invite-section:nth-child(even){background:radial-gradient(ellipse at 90% 80%,#e7c1ff 0,transparent 40%),linear-gradient(35deg,#e9d9f8,#fbf6ff 55%,#dfc9f0)}
+@media(max-width:650px){.envelope-screen{min-height:100svh;padding:35px 16px}.invite-section{min-height:320px;padding:55px 20px}.detail-grid{grid-template-columns:1fr 1fr}.detail-wide{grid-column:1/-1}.invite-section:before{inset:12px 3%}}
+
 /* DA3WA — luxury editorial template art direction: ten distinct cinematic worlds */
 .templates{grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
 .template{padding:9px;border-radius:3px;background:#fbf8f2;border:1px solid #d9c9ad;box-shadow:0 12px 32px #24131a12;transition:transform .45s ease,box-shadow .45s ease}
