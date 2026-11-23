@@ -1040,6 +1040,25 @@ body.public-invitation{height:auto!important;min-height:100vh!important;overflow
 @keyframes redStarReveal{from{opacity:0;transform:translateY(45px);filter:brightness(1.8)}to{opacity:1;transform:none;filter:none}}
 @media(prefers-reduced-motion:reduce){.red-star *,.red-star:before{animation:none!important;transition:none!important}}
 
+
+/* Ensure template 11 is visibly rendered in the public template gallery */
+#templateGrid .theme-red-star .cin-scene{
+ background:radial-gradient(ellipse at 50% 48%,#5b0a1b 0%,#21070d 48%,#070708 100%)!important;
+}
+#templateGrid .theme-red-star .cin-center{display:grid!important;z-index:7!important}
+#templateGrid .theme-red-star .red-star-stage{width:145px;max-width:58%;aspect-ratio:1;position:relative;display:grid;place-items:center;animation:redStarFloat 4.5s ease-in-out infinite}
+#templateGrid .theme-red-star .red-star-shape{
+ width:68%;aspect-ratio:1;display:grid;place-items:center;
+ clip-path:polygon(50% 0%,61% 34%,98% 35%,68% 57%,79% 94%,50% 72%,21% 94%,32% 57%,2% 35%,39% 34%);
+ background:linear-gradient(145deg,#ff5261,#d30e2b 48%,#720719);
+ color:#ffe7a5;font-size:76px;filter:drop-shadow(0 0 13px #ff1b3d) drop-shadow(0 0 34px #b30b2c);
+ animation:redStarPulse 2.8s ease-in-out infinite;
+}
+#templateGrid .theme-red-star .red-star-aura{position:absolute;inset:7%;border-radius:50%;background:radial-gradient(circle,#ff183b66,#b30b2b30 48%,transparent 72%);filter:blur(9px);animation:redStarAura 3s ease-in-out infinite}
+#templateGrid .theme-red-star .red-star-orbit{position:absolute;inset:-5%;border:1px solid #e3bd6d88;border-radius:50%;transform:rotate(-25deg) scaleY(.34);animation:redStarOrbit 12s linear infinite}
+#templateGrid .theme-red-star .card-seal{background:linear-gradient(145deg,#d5b56f,#79521e)!important;color:#170d09!important}
+#templateGrid .template-info .template-number{display:inline-block;color:#c99a42;font-size:11px;font-weight:800;letter-spacing:1px;margin-inline-end:6px}
+
 </style>
 </head>
 
@@ -1374,7 +1393,7 @@ function renderTemplates(){
     </div>
    </div>
    <div class="template-info">
-    <div><strong>${t.arabic}</strong><small>قالب تفاعلي</small></div>
+    <div><strong>${t.arabic}</strong><small>${t.id==="red-star"?'<span class="template-number">11 · </span>':""}قالب تفاعلي</small></div>
     <button class="mini-btn" onclick="chooseTemplate('${t.id}')">معاينة</button>
    </div>
   </article>
