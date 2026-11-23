@@ -1369,12 +1369,14 @@ body.public-invitation #publicInvitationPage{width:100%!important;max-width:none
 }
 .live-invite .seal-button .seal-brand{
  display:flex;
- flex-direction:column;
  align-items:center;
  justify-content:center;
- gap:2px;
- color:#f6e5bc!important;
- line-height:1.1;
+ width:100%;
+ height:100%;
+ color:#f5dfb5!important;
+ font:700 66px/1 Amiri,serif!important;
+ text-shadow:0 2px 1px #2c0c15,0 0 12px #f1d69a55;
+ padding-bottom:7px;
  pointer-events:none;
 }
 .live-invite .seal-button .seal-brand b{
@@ -1676,7 +1678,7 @@ body.public-invitation #publicInvitationPage{width:100%!important;max-width:none
      <section class="envelope-screen opening-${theme}">
       <div class="tiny">YOU ARE INVITED</div>
       <div class="scene-art" id="previewScene"></div>
-      <div class="envelope"><span class="envelope-letter" aria-hidden="true"></span><button class="seal-button" onclick="openEnvelope()" aria-label="افتح دعوة مِراس"><span class="seal-brand"><b>MIRAS</b><i>مِراس</i></span></button></div>
+      <div class="envelope"><span class="envelope-letter" aria-hidden="true"></span><button class="seal-button" onclick="openEnvelope()" aria-label="افتح دعوة مِراس"><span class="seal-brand" aria-label="مِراس">م</span></button></div>
       <div class="open-hint" id="openHint">اضغط على الختم لفتح دعوتك</div>
       <div class="tiny" style="margin-top:20px">MIRAS · A SPECIAL MOMENT</div>
      </section>
@@ -2229,7 +2231,7 @@ document.addEventListener("keydown",e=>{
      ${["red-star","golden-cinema"].includes(theme)?'<div class="royal-curtain-panel royal-curtain-left" aria-hidden="true"></div><div class="royal-curtain-panel royal-curtain-right" aria-hidden="true"></div>':""}
      <div class="envelope">
       <span class="envelope-letter" aria-hidden="true"></span>
-      <button class="seal-button" id="openPublicEnvelope" aria-label="افتح دعوة مِراس"><span class="seal-brand"><b>MIRAS</b><i>مِراس</i></span></button>
+      <button class="seal-button" id="openPublicEnvelope" aria-label="افتح دعوة مِراس"><span class="seal-brand" aria-label="مِراس">م</span></button>
      </div>
      <div class="open-hint">${escapeHTML(template.line)} · اضغط لفتح الدعوة</div>
      <div class="tiny" style="margin-top:20px">MIRAS · A SPECIAL MOMENT</div>
