@@ -398,6 +398,17 @@ button.secondary,.tab{background:#392330;color:#f2dfc0;border:1px solid #8a6948}
 @keyframes redStarReveal{from{opacity:0;transform:translateY(45px);filter:brightness(1.8)}to{opacity:1;transform:none;filter:none}}
 @media(prefers-reduced-motion:reduce){.red-star *,.red-star:before{animation:none!important;transition:none!important}}
 
+
+/* Admin gallery: render the red star artwork and identify it as template 11 */
+.template-art.theme-red-star .cin-scene{background:radial-gradient(ellipse at 50% 48%,#5b0a1b 0%,#21070d 48%,#070708 100%)!important}
+.template-art.theme-red-star .cin-center{display:grid!important;z-index:7!important}
+.template-art.theme-red-star .red-star-stage{width:120px;max-width:58%;aspect-ratio:1;position:relative;display:grid;place-items:center;animation:redStarFloat 4.5s ease-in-out infinite}
+.template-art.theme-red-star .red-star-shape{width:68%;aspect-ratio:1;display:grid;place-items:center;clip-path:polygon(50% 0%,61% 34%,98% 35%,68% 57%,79% 94%,50% 72%,21% 94%,32% 57%,2% 35%,39% 34%);background:linear-gradient(145deg,#ff5261,#d30e2b 48%,#720719);color:#ffe7a5;font-size:65px;filter:drop-shadow(0 0 13px #ff1b3d) drop-shadow(0 0 34px #b30b2c);animation:redStarPulse 2.8s ease-in-out infinite}
+.template-art.theme-red-star .red-star-aura{position:absolute;inset:7%;border-radius:50%;background:radial-gradient(circle,#ff183b66,#b30b2b30 48%,transparent 72%);filter:blur(9px);animation:redStarAura 3s ease-in-out infinite}
+.template-art.theme-red-star .red-star-orbit{position:absolute;inset:-5%;border:1px solid #e3bd6d88;border-radius:50%;transform:rotate(-25deg) scaleY(.34);animation:redStarOrbit 12s linear infinite}
+.template[data-template="red-star"]{border:1px solid #c99a42!important;box-shadow:0 0 18px #c99a4233}
+.template[data-template="red-star"] .admin-template-label:after{content:"11";position:absolute;top:7px;right:7px;background:#c99a42;color:#100b08;border-radius:20px;padding:2px 7px;font:700 11px Arial;z-index:10}
+
 </style>
 </head>
 <body>
