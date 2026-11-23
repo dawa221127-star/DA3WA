@@ -1316,31 +1316,30 @@ document.addEventListener("keydown",e=>{
    const content=invite.querySelector(".invitation-content");
    invite.classList.add("opened");
    if(auto){
-    // Wait for the reveal layout to be applied before measuring the target.
     requestAnimationFrame(()=>requestAnimationFrame(()=>{
      const scroller=document.scrollingElement||document.documentElement;
-     const start=scroller.scrollTop;
-     const target=content.getBoundingClientRect().top+start;
-     const distance=Math.max(0,target-start);
-     const duration=5200;
+     const maxScroll=Math.max(0,scroller.scrollHeight-window.innerHeight);
+     const startY=window.scrollY||scroller.scrollTop||0;
+     const targetY=Math.min(maxScroll,Math.max(startY+window.innerHeight*.9,content.getBoundingClientRect().top+startY));
+     const distance=targetY-startY;
+     const duration=6500;
      const began=performance.now();
      const ease=t=>t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2;
-     function move(now){
+     function animateScroll(now){
       const progress=Math.min(1,(now-began)/duration);
-      const next=start+distance*ease(progress);
-      scroller.scrollTop=next;
-      window.scrollTo(0,next);
-      if(progress<1)requestAnimationFrame(move);
+      const y=startY+distance*ease(progress);
+      window.scrollTo(0,y);
+      scroller.scrollTop=y;
+      if(progress<1)requestAnimationFrame(animateScroll);
      }
-     requestAnimationFrame(move);
+     requestAnimationFrame(animateScroll);
     }));
    }else{
     content.scrollIntoView({behavior:"smooth",block:"start"});
    }
   }
   $("openPublicEnvelope").addEventListener("click",()=>revealPublicInvite(false));
-  // Only published invitation links use this automatic cinematic reveal.
-  setTimeout(()=>revealPublicInvite(true),2200);
+  setTimeout(()=>revealPublicInvite(true),1800);
 
   const wishList=$("publicWishList");
   const wishStatus=document.createElement("p");
