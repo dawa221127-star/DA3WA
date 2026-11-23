@@ -543,6 +543,40 @@ body{background:radial-gradient(ellipse at 50% -15%,#512538 0,#1b0d17 48%,#0c080
 @media(max-width:460px){.templates{grid-template-columns:1fr}.template-art{height:270px}.nav a:nth-child(2),.nav a:nth-child(4){display:none}}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important}}
 
+
+/* DA3WA cinematic template upgrade */
+.toon-scene{border-radius:inherit;isolation:isolate;perspective:900px;filter:saturate(1.12)}
+.toon-scene:after{content:"";position:absolute;inset:-35%;z-index:6;pointer-events:none;background:linear-gradient(112deg,transparent 38%,#fff2 48%,#f4d9a455 50%,transparent 61%);transform:translateX(-75%) rotate(8deg);animation:da3waSheen 8s ease-in-out infinite}
+@keyframes da3waSheen{0%,18%{transform:translateX(-75%) rotate(8deg)}58%,100%{transform:translateX(75%) rotate(8deg)}}
+.toon-scene .real-couple-art{width:min(96%,390px);height:auto;overflow:visible;filter:drop-shadow(0 18px 20px #12070b66);animation:da3waPortrait 6s ease-in-out infinite;transform-origin:50% 85%}
+@keyframes da3waPortrait{0%,100%{transform:translateY(2px) scale(1)}50%{transform:translateY(-7px) scale(1.018)}}
+.toon-scene .groom-motion{transform-origin:130px 110px;animation:da3waGroom 5s ease-in-out infinite}
+.toon-scene .bride-motion{transform-origin:215px 125px;animation:da3waBride 4.5s ease-in-out infinite}
+@keyframes da3waGroom{0%,100%{transform:rotate(0)}50%{transform:rotate(-1.8deg)}}
+@keyframes da3waBride{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-3px) rotate(1.2deg)}}
+.toon-scene .sparkle-points{animation:da3waSparkle 3s ease-in-out infinite alternate;filter:drop-shadow(0 0 8px #f8dfaa)}
+@keyframes da3waSparkle{from{opacity:.35;transform:scale(.94)}to{opacity:1;transform:scale(1.08)}}
+.toon-scene.toon-royal-couple,.toon-scene.toon-royal-seal{background:radial-gradient(ellipse at 50% 42%,#7b3d4d 0,#321722 48%,#100a11 100%)}
+.toon-scene.toon-first-dance{background:radial-gradient(ellipse at 50% 45%,#ad7d82 0,#4a2634 52%,#160d17 100%)}
+.toon-scene.toon-blooming-roses{background:radial-gradient(ellipse at 50% 45%,#6c493e 0,#2c1721 58%,#100a11 100%)}
+.toon-scene.toon-midnight-pearl{background:radial-gradient(ellipse at 50% 35%,#49506d 0,#1a1b32 55%,#080a13 100%)}
+.toon-scene.toon-silk-gold{background:radial-gradient(ellipse at 50% 45%,#9b7145 0,#3a2026 55%,#140b13 100%)}
+.toon-scene.toon-graduation-purple{background:radial-gradient(ellipse at 50% 45%,#625184 0,#261b3c 58%,#0d0b17 100%)}
+.toon-scene.toon-graduation-blue{background:radial-gradient(ellipse at 50% 45%,#47708c 0,#172b43 58%,#080d17 100%)}
+.toon-scene.toon-birthday-pastel{background:radial-gradient(ellipse at 50% 45%,#bd8d91 0,#56313f 58%,#180e18 100%)}
+.toon-scene.toon-birthday-neon{background:radial-gradient(ellipse at 50% 45%,#7d4d6f 0,#251735 58%,#090914 100%)}
+.toon-envelope,.toon-grad,.toon-birthday{filter:drop-shadow(0 16px 18px #09050a88);transform-style:preserve-3d}
+.toon-envelope{animation:da3waObjectFloat 4.4s ease-in-out infinite}
+.toon-grad{animation:da3waObjectFloat 4.8s ease-in-out infinite}
+.toon-birthday{animation:da3waObjectFloat 4s ease-in-out infinite}
+@keyframes da3waObjectFloat{0%,100%{transform:translateY(3px) rotateX(0)}50%{transform:translateY(-8px) rotateX(3deg)}}
+.card-seal{box-shadow:0 0 0 5px #e8d4a31c,0 0 28px #d7b87988,inset 0 2px 5px #fff8;animation:da3waSealPulse 3.2s ease-in-out infinite}
+@keyframes da3waSealPulse{50%{box-shadow:0 0 0 10px #e8d4a30c,0 0 42px #e8c98daa,inset 0 2px 8px #fff9;transform:translate(-50%,-50%) scale(1.045)}}
+.template-art.card-opened .art-scene{filter:brightness(1.13) saturate(1.18)}
+.template-art.card-opened .card-seal{animation:da3waSealOpen .75s cubic-bezier(.2,.8,.2,1) forwards}
+@keyframes da3waSealOpen{to{transform:translate(-50%,-50%) rotate(35deg) scale(.72);opacity:.2}}
+@media(prefers-reduced-motion:reduce){.toon-scene:after,.toon-scene *, .card-seal{animation:none!important;transition:none!important}}
+
 </style>
 </head>
 
