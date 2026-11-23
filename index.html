@@ -1376,6 +1376,18 @@ body.public-invitation #publicInvitationPage{width:100%!important;max-width:none
 .live-invite.door-birds .invite-section h2,.live-invite.door-birds .invite-section h3,.live-invite.door-birds .couple-names,.live-invite.door-birds .ornament,.live-invite.door-birds .invite-kicker{color:#927044!important}
 @media(max-width:600px){.royal-door-scene{width:91vw;height:67vh;min-height:360px}.live-invite.door-birds .wish-door-caption{bottom:6%}.royal-door-crown{top:-5%}}
 
+
+/* The opened doors reveal a complete palace hall with visible architectural depth */
+.royal-door-scene .wish-door-portal{background:#21170f!important;perspective:900px}
+.royal-door-scene .palace-reveal{position:absolute;inset:0;width:100%;height:100%;display:block;filter:brightness(.8) saturate(.92);transform:scale(1.04);transition:filter 2s ease,transform 3s ease}
+.live-invite.door-birds.opened .royal-door-scene .palace-reveal{filter:brightness(1.12) saturate(1.08);transform:scale(1.13)}
+.royal-door-scene .wish-portal-light{z-index:2;mix-blend-mode:screen;pointer-events:none}
+.royal-door-scene .wish-portal-rays{z-index:3;pointer-events:none}
+.royal-door-scene .wish-door-leaf{will-change:transform}
+.live-invite.door-birds.opened .royal-door-scene .wish-door-leaf.left{transform:perspective(1300px) rotateY(-116deg)}
+.live-invite.door-birds.opened .royal-door-scene .wish-door-leaf.right{transform:perspective(1300px) rotateY(116deg)}
+@media(max-width:600px){.royal-door-scene{width:94vw;height:70vh;min-height:370px}.royal-door-scene .palace-reveal{transform:scale(1.1)}.live-invite.door-birds.opened .royal-door-scene .palace-reveal{transform:scale(1.22)}}
+
 </style>
 </head>
 
@@ -1670,7 +1682,53 @@ function sceneMarkup(theme){
   <div class="royal-door-scene">
    <div class="royal-arch-outer"></div><div class="royal-arch-inner"></div>
    <div class="royal-door-crown"><span>✦</span></div>
-   <div class="wish-door-portal"><span class="wish-portal-light"></span><span class="wish-portal-rays"></span></div>
+   <div class="wish-door-portal">
+    <svg class="palace-reveal" viewBox="0 0 600 760" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+     <defs>
+      <linearGradient id="hallWall" x2="0" y2="1"><stop stop-color="#ead6ad"/><stop offset=".48" stop-color="#a77c4c"/><stop offset="1" stop-color="#352318"/></linearGradient>
+      <linearGradient id="hallGold" x2="1"><stop stop-color="#765020"/><stop offset=".48" stop-color="#f8dfa0"/><stop offset="1" stop-color="#805a29"/></linearGradient>
+      <linearGradient id="hallFloor" x2="0" y2="1"><stop stop-color="#806144"/><stop offset="1" stop-color="#120e0b"/></linearGradient>
+      <linearGradient id="hallCarpet" x2="0" y2="1"><stop stop-color="#8e1e27"/><stop offset="1" stop-color="#26080d"/></linearGradient>
+      <radialGradient id="hallGlow"><stop stop-color="#fff5d6"/><stop offset=".3" stop-color="#f5d89a" stop-opacity=".7"/><stop offset="1" stop-color="#f5d89a" stop-opacity="0"/></radialGradient>
+     </defs>
+     <rect width="600" height="760" fill="#1b1712"/>
+     <path d="M0 0H600V420L300 300 0 420Z" fill="url(#hallWall)"/>
+     <path d="M0 0Q300 -110 600 0V120Q300 25 0 120Z" fill="#3d2818" stroke="#d5b16e" stroke-width="9"/>
+     <path d="M35 0Q300 -65 565 0" fill="none" stroke="#f0d49a" stroke-width="4"/>
+     <path d="M65 50Q300 -15 535 50V410H65Z" fill="#5b3a22" stroke="#d2ad69" stroke-width="10"/>
+     <path d="M95 65Q300 15 505 65V390H95Z" fill="#d9c19a"/>
+     <path d="M115 80Q300 35 485 80V380H115Z" fill="#27342d"/>
+     <g opacity=".95"><path d="M130 95H470V360H130Z" fill="#1b2a24"/><path d="M300 90V365M130 220H470" stroke="#c69b58" stroke-width="9"/><path d="M145 105L290 215 290 350H145Z M310 215L455 105V350H310Z" fill="#66745d" opacity=".55"/><path d="M150 105L290 215M450 105L310 215" stroke="#e8d09a" stroke-width="4"/></g>
+     <g fill="#c7a36b" stroke="#f1d9a4" stroke-width="5">
+      <path d="M18 0H86V485H18Z"/><path d="M514 0H582V485H514Z"/>
+      <path d="M5 0H100V34H5ZM500 0H595V34H500Z"/>
+      <path d="M0 450H105V478H0ZM495 450H600V478H495Z"/>
+      <path d="M112 60H160V430H112Z"/><path d="M440 60H488V430H440Z"/>
+      <path d="M100 55H172V80H100ZM428 55H500V80H428Z"/>
+      <path d="M100 410H172V438H100ZM428 410H500V438H428Z"/>
+     </g>
+     <g fill="#3b2718" stroke="#e0bf7b" stroke-width="5"><path d="M0 440Q55 380 110 440V475H0Z"/><path d="M490 440Q545 380 600 440V475H490Z"/></g>
+     <path d="M0 475L300 350 600 475V760H0Z" fill="url(#hallFloor)"/>
+     <path d="M0 520L300 390 600 520M0 610L300 430 600 610M0 700L300 470 600 700" stroke="#c9a56d" stroke-opacity=".35" stroke-width="3" fill="none"/>
+     <path d="M210 760L255 430H345L390 760Z" fill="url(#hallCarpet)" stroke="#d5ae68" stroke-width="7"/>
+     <path d="M230 760L270 445H330L370 760Z" fill="none" stroke="#e5c47f" stroke-width="3"/>
+     <g fill="#a57a43" stroke="#f4d99d" stroke-width="4">
+      <path d="M248 455L352 455 385 480 215 480Z"/><path d="M235 500L365 500 405 530 195 530Z"/><path d="M210 550L390 550 430 585 170 585Z"/><path d="M180 610L420 610 470 650 130 650Z"/>
+     </g>
+     <g stroke="#e8c77f" fill="none" stroke-width="5">
+      <path d="M300 0V90M250 90H350M265 90L245 145M335 90L355 145M245 145H355"/>
+      <path d="M260 145Q300 205 340 145M270 145L255 195M330 145L345 195"/>
+      <path d="M255 195H345M270 195L260 225M330 195L340 225"/>
+     </g>
+     <g fill="#fff0bd" filter="url(#none)">
+      <circle cx="245" cy="145" r="9"/><circle cx="355" cy="145" r="9"/><circle cx="260" cy="195" r="8"/><circle cx="340" cy="195" r="8"/><circle cx="300" cy="210" r="12"/>
+     </g>
+     <ellipse cx="300" cy="285" rx="235" ry="300" fill="url(#hallGlow)" opacity=".45"/>
+     <g fill="#e6c77f"><circle cx="60" cy="190" r="7"/><circle cx="540" cy="190" r="7"/><circle cx="60" cy="310" r="6"/><circle cx="540" cy="310" r="6"/></g>
+     <path d="M0 0H600V760H0Z" fill="none" stroke="#160d08" stroke-width="24"/>
+    </svg>
+    <span class="wish-portal-light"></span><span class="wish-portal-rays"></span>
+   </div>
    <div class="wish-door-leaf left"><svg viewBox="0 0 300 760" preserveAspectRatio="none" aria-hidden="true"><defs><linearGradient id="oakL" x2="1"><stop stop-color="#160d08"/><stop offset=".22" stop-color="#704321"/><stop offset=".48" stop-color="#3b2112"/><stop offset=".72" stop-color="#85552b"/><stop offset="1" stop-color="#1a1009"/></linearGradient><linearGradient id="goldL" x2="1"><stop stop-color="#6b451d"/><stop offset=".5" stop-color="#f1d18a"/><stop offset="1" stop-color="#795020"/></linearGradient></defs><path fill="url(#oakL)" d="M0 0H300V760H0z"/><path fill="none" stroke="url(#goldL)" stroke-width="9" d="M20 18H280V742H20z"/><path fill="none" stroke="#2b160c" stroke-width="13" d="M37 34H263V726H37z"/><path fill="none" stroke="#d4ad68" stroke-width="3" d="M45 42H255V718H45z"/><path fill="none" stroke="url(#goldL)" stroke-width="8" d="M65 60H235V300Q150 380 65 300z M65 405H235V690H65z"/><path fill="none" stroke="#c99b54" stroke-width="3" d="M82 78H218V287Q150 350 82 287z M82 422H218V672H82z"/><g fill="none" stroke="#d6b16e" stroke-width="3"><path d="M150 94l22 38-22 38-22-38z M150 160c-42 20-42 54 0 74 42-20 42-54 0-74z M150 452l26 34-26 34-26-34z M150 540c-38 18-38 48 0 66 38-18 38-48 0-66z"/><path d="M100 220q50-54 100 0M100 590q50-54 100 0"/></g><g fill="#e4c17c"><circle cx="150" cy="132" r="6"/><circle cx="150" cy="486" r="6"/><circle cx="150" cy="630" r="5"/></g></svg></div>
    <div class="wish-door-leaf right"><svg viewBox="0 0 300 760" preserveAspectRatio="none" aria-hidden="true"><defs><linearGradient id="oakR" x2="1"><stop stop-color="#1a1009"/><stop offset=".28" stop-color="#85552b"/><stop offset=".52" stop-color="#3b2112"/><stop offset=".78" stop-color="#704321"/><stop offset="1" stop-color="#160d08"/></linearGradient><linearGradient id="goldR" x2="1"><stop stop-color="#795020"/><stop offset=".5" stop-color="#f1d18a"/><stop offset="1" stop-color="#6b451d"/></linearGradient></defs><path fill="url(#oakR)" d="M0 0H300V760H0z"/><path fill="none" stroke="url(#goldR)" stroke-width="9" d="M20 18H280V742H20z"/><path fill="none" stroke="#2b160c" stroke-width="13" d="M37 34H263V726H37z"/><path fill="none" stroke="#d4ad68" stroke-width="3" d="M45 42H255V718H45z"/><path fill="none" stroke="url(#goldR)" stroke-width="8" d="M65 60H235V300Q150 380 65 300z M65 405H235V690H65z"/><path fill="none" stroke="#c99b54" stroke-width="3" d="M82 78H218V287Q150 350 82 287z M82 422H218V672H82z"/><g fill="none" stroke="#d6b16e" stroke-width="3"><path d="M150 94l22 38-22 38-22-38z M150 160c-42 20-42 54 0 74 42-20 42-54 0-74z M150 452l26 34-26 34-26-34z M150 540c-38 18-38 48 0 66 38-18 38-48 0-66z"/><path d="M100 220q50-54 100 0M100 590q50-54 100 0"/></g><g fill="#e4c17c"><circle cx="150" cy="132" r="6"/><circle cx="150" cy="486" r="6"/><circle cx="150" cy="630" r="5"/></g></svg></div>
    <div class="royal-door-handle left"></div><div class="royal-door-handle right"></div>
