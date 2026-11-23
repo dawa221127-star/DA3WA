@@ -1411,17 +1411,17 @@ document.addEventListener("keydown",e=>{
     const startY=window.scrollY||scroller.scrollTop||0;
     const targetY=Math.max(0,scroller.scrollHeight-window.innerHeight);
     const distance=targetY-startY;
-    const duration=10000;
+    const speed=75; // سرعة ثابتة: 75 بكسل بالثانية
+    const duration=Math.abs(distance)/speed*1000;
     const began=performance.now();
-    const ease=t=>t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2;
     function animateScroll(now){
-     const progress=Math.min(1,(now-began)/duration);
-     const y=startY+distance*ease(progress);
+     const progress=duration===0?1:Math.min(1,(now-began)/duration);
+     const y=startY+distance*progress;
      window.scrollTo(0,y);
      scroller.scrollTop=y;
      if(progress<1)requestAnimationFrame(animateScroll);
     }
-    requestAnimationFrame(animateScroll);
+    if(distance!==0)requestAnimationFrame(animateScroll);
    }));
   }
   function revealPublicInvite(){
