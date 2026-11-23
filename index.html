@@ -1791,7 +1791,8 @@ body.public-invitation #publicInvitationPage{width:100%!important;max-width:none
   <button class="close" onclick="closeModal('orderModal')">×</button>
   <h3>إكمال طلب الدعوة</h3>
   <p class="notice">راجع بياناتك واختر طريقة الدفع المفضلة. لن يتم خصم أي مبلغ تلقائياً.</p>
-  <form id="orderForm">
+  <form id="orderForm" novalidate>
+   <div class="result order-live-status" id="orderResult" role="status" aria-live="polite"></div>
    <div class="form-grid">
     <div class="field"><label>اسم صاحب الطلب</label><input id="orderName" required maxlength="100"></div>
     <div class="field"><label>رقم الهاتف</label><input id="orderPhone" required type="tel" maxlength="20" placeholder="07xxxxxxxxx"></div>
@@ -1832,7 +1833,6 @@ body.public-invitation #publicInvitationPage{width:100%!important;max-width:none
    <p class="notice">سيتم إرسال تفاصيل الدعوة التي أدخلتها إلى الإدارة حتى يتم تجهيزها.</p>
    <button class="btn" type="submit" style="width:100%">إرسال الطلب</button>
   </form>
-  <div class="result" id="orderResult" role="status"></div>
  </div>
 </div>
 
@@ -2151,17 +2151,25 @@ $("orderForm").addEventListener("submit",async e=>{
  const button=form.querySelector('button[type="submit"]');
  const result=$("orderResult");
  result.textContent="";
- if(!da3waDB){result.textContent="تعذر الاتصال بقاعدة البيانات.";return}
- if(!form.reportValidity())return;
- if(!selectedPayment){result.textContent="يرجى اختيار طريقة الدفع.";return}
+ if(!da3waDB){result.textContent="تعذر الاتصال بقاعدة البيانات. حدّث الصفحة وحاول مرة ثانية.";result.scrollIntoView({behavior:"smooth",block:"nearest"});return}
+ if(!form.checkValidity()){
+  const invalid=form.querySelector(":invalid");
+  const label=invalid?.closest(".field")?.querySelector("label")?.textContent||"أحد الحقول المطلوبة";
+  result.textContent="يرجى إكمال الحقل: "+label;
+  invalid?.focus({preventScroll:true});
+  invalid?.scrollIntoView({behavior:"smooth",block:"center"});
+  result.scrollIntoView({behavior:"smooth",block:"nearest"});
+  return;
+ }
+ if(!selectedPayment){result.textContent="يرجى اختيار طريقة الدفع أولاً.";result.scrollIntoView({behavior:"smooth",block:"nearest"});return}
 
  const phone=$("orderPhone").value.trim();
  if(!/^(\+?964|0)?7\d{9}$/.test(phone.replace(/[\s-]/g,""))){
-  result.textContent="تأكد من رقم الهاتف العراقي.";return;
+  result.textContent="تأكد من رقم الهاتف العراقي.";result.scrollIntoView({behavior:"smooth",block:"nearest"});return;
  }
  const packageName=$("orderPackage").value;
  const price=prices[packageName];
- if(!price){result.textContent="الباقة المختارة غير صحيحة.";return}
+ if(!price){result.textContent="الباقة المختارة غير صحيحة. أعد اختيار الباقة.";result.scrollIntoView({behavior:"smooth",block:"nearest"});return}
 
  const details=[
   "نوع المناسبة: "+$("eventKind").value,
@@ -2197,6 +2205,7 @@ $("orderForm").addEventListener("submit",async e=>{
   const {error}=await da3waDB.from("orders").insert([order]);
   if(error)throw error;
   result.textContent="تم إرسال طلبك بنجاح إلى MIRAS ❤️\nالقالب: "+order.template_name+"\nالباقة: "+packageName+"\nالمبلغ: "+price.toLocaleString("en-US")+" د.ع\nحالة الطلب: بانتظار مراجعة الإدارة.";
+  result.scrollIntoView({behavior:"smooth",block:"nearest"});
   form.reset();selectedPayment="";
   document.querySelectorAll(".payment-option").forEach(x=>x.classList.remove("selected"));
  }catch(error){
@@ -2206,6 +2215,7 @@ $("orderForm").addEventListener("submit",async e=>{
   if(error.code==="42P01")message="جدول orders غير موجود.";
   if(error.code==="42703")message="يوجد عمود مفقود في جدول orders.";
   result.textContent="لم يتم إرسال الطلب.\nسبب الخطأ: "+message;
+  result.scrollIntoView({behavior:"smooth",block:"nearest"});
  }finally{
   isSubmitting=false;button.disabled=false;button.textContent="إرسال الطلب";
  }
