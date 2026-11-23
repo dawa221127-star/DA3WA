@@ -417,6 +417,21 @@ button.secondary,.tab{background:#392330;color:#f2dfc0;border:1px solid #8a6948}
 #templateGrid [data-template="red-star"] .cin-center{display:grid!important}
 #templateGrid [data-template="red-star"] .red-star-stage{width:115px!important;max-width:70%!important}
 
+
+/* Reusable music library */
+.music-library-panel{margin:22px 0 10px;padding:18px;border:1px solid #60434c;border-radius:14px;background:#1e181b}
+.music-library-heading{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.music-library-heading h3{margin:0}
+.music-upload-row{display:grid;grid-template-columns:1fr 1.3fr auto;gap:12px;align-items:end}
+.music-upload-row input{margin-bottom:0}
+.music-upload-action{padding-bottom:0}
+.music-library-list{display:grid;gap:8px;margin-top:12px}
+.music-library-item{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 12px;border:1px solid #49343c;border-radius:10px;background:#302329}
+.music-library-item strong{display:block;overflow-wrap:anywhere}
+.music-library-item audio{width:min(280px,100%);height:34px}
+.music-library-item-actions{display:flex;gap:7px;align-items:center;flex-wrap:wrap}
+.music-library-item-actions button{padding:8px 11px}
+@media(max-width:700px){.music-upload-row{grid-template-columns:1fr}.music-library-item{align-items:flex-start;flex-direction:column}.music-library-item audio{width:100%}}
 </style>
 </head>
 <body>
@@ -473,6 +488,21 @@ button.secondary,.tab{background:#392330;color:#f2dfc0;border:1px solid #8a6948}
       <h3>1. اختار القالب</h3>
       <div class="grid" id="templateGrid"></div>
 
+      <section class="music-library-panel">
+        <div class="music-library-heading">
+          <div><h3>مكتبة الأغاني</h3><p class="muted">ارفع أغاني MP3 مرة واحدة، وراح تبقى جاهزة للاختيار بكل دعوة جديدة.</p></div>
+          <button type="button" class="secondary" id="refreshMusicLibraryBtn">تحديث المكتبة</button>
+        </div>
+        <div class="music-upload-row">
+          <div><label for="musicLibraryTitle">اسم الأغنية</label><input id="musicLibraryTitle" maxlength="120" placeholder="اسم الأغنية أو الفنان"></div>
+          <div><label for="musicLibraryFile">ملف الأغنية (MP3)</label><input id="musicLibraryFile" type="file" accept=".mp3,audio/mpeg"></div>
+          <div class="music-upload-action"><button type="button" id="uploadLibrarySongBtn">رفع إلى المكتبة</button></div>
+        </div>
+        <p class="muted">الحد الأقصى لكل أغنية 12MB. الأغاني تبقى محفوظة في التخزين وتظهر هنا للاختيار.</p>
+        <p id="musicLibraryMessage" class="muted" role="status"></p>
+        <div id="musicLibraryList" class="music-library-list"></div>
+      </section>
+
       <div class="editor-grid" style="margin-top:25px">
         <div>
           <h3>2. تفاصيل الدعوة</h3>
@@ -506,9 +536,11 @@ button.secondary,.tab{background:#392330;color:#f2dfc0;border:1px solid #8a6948}
 
             <label>رسالة إضافية للضيوف</label>
             <textarea id="extraMessage" placeholder="نتشرف بحضوركم ومشاركتكم فرحتنا..."></textarea>
-            <label>أغنية الدعوة التي طلبها الزبون (اختياري — MP3)</label>
-            <input id="invitationMusic" type="file" accept=".mp3,audio/mpeg">
-            <p class="muted">ارفع أغنية الزبون هنا. الحد الأقصى 12MB؛ ستكون مخفية وتبدأ تلقائياً عند ضغط الضيف على ختم الظرف لفتح الدعوة.</p>
+            <label>اختيار أغنية الدعوة من المكتبة</label>
+            <select id="invitationMusicSelect">
+              <option value="">بدون أغنية</option>
+            </select>
+            <p class="muted">اختار أغنية سبق ورفعتها إلى مكتبة الأغاني. تقدر تضيف أغاني جديدة من القسم أدناه.</p>
 
             <div class="actions">
               <button type="submit" id="saveInvitationBtn">نشر الدعوة وإنشاء الرابط</button>
@@ -688,6 +720,78 @@ $("savePricingBtn").addEventListener("click",async(event)=>{
  }finally{btn.disabled=false;}
 });
 let editingInvitationId = null;
+let musicLibrary = [];
+
+function safeMusicTitle(file){
+  return (file?.name||"").replace(/\.mp3$/i,"").replace(/[_-]+/g," ").trim() || "أغنية بدون اسم";
+}
+function renderMusicLibrary(){
+  const select=$("invitationMusicSelect");
+  const current=select.value;
+  select.replaceChildren(new Option("بدون أغنية",""));
+  musicLibrary.forEach(song=>select.add(new Option(song.name,song.path)));
+  if(musicLibrary.some(song=>song.path===current))select.value=current;
+  const list=$("musicLibraryList");
+  list.replaceChildren();
+  if(!musicLibrary.length){
+    const empty=document.createElement("p");empty.className="muted";empty.textContent="مكتبة الأغاني فارغة حالياً. ارفع أول أغنية حتى تظهر هنا.";list.appendChild(empty);return;
+  }
+  musicLibrary.forEach(song=>{
+    const item=document.createElement("div");item.className="music-library-item";
+    const info=document.createElement("div");
+    const name=document.createElement("strong");name.textContent=song.name;
+    const audio=document.createElement("audio");audio.controls=true;audio.preload="none";audio.src=song.url;
+    info.append(name,audio);
+    const actions=document.createElement("div");actions.className="music-library-item-actions";
+    const choose=document.createElement("button");choose.type="button";choose.textContent="اختيار للدعوة";
+    choose.addEventListener("click",()=>{$("invitationMusicSelect").value=song.path;$("musicLibraryMessage").textContent="تم اختيار: "+song.name;});
+    const remove=document.createElement("button");remove.type="button";remove.className="danger";remove.textContent="حذف";
+    remove.addEventListener("click",async()=>{
+      if(!confirm("متأكد تريد حذف أغنية "+song.name+" من المكتبة؟"))return;
+      remove.disabled=true;
+      const {error}=await db.storage.from("invitation-music").remove([song.path]);
+      if(error){$("musicLibraryMessage").textContent="تعذر حذف الأغنية: "+error.message;remove.disabled=false;return;}
+      if($("invitationMusicSelect").value===song.path)$("invitationMusicSelect").value="";
+      await loadMusicLibrary();
+      $("musicLibraryMessage").textContent="تم حذف الأغنية من المكتبة.";
+    });
+    actions.append(choose,remove);item.append(info,actions);list.appendChild(item);
+  });
+}
+async function loadMusicLibrary(){
+  const msg=$("musicLibraryMessage");
+  if(msg)msg.textContent="جاري تحميل مكتبة الأغاني...";
+  const {data,error}=await db.storage.from("invitation-music").list("library",{limit:100,sortBy:{column:"name",order:"asc"}});
+  if(error){if(msg)msg.textContent="تعذر تحميل المكتبة: "+error.message;return;}
+  musicLibrary=(data||[]).filter(x=>x.name&&x.name.toLowerCase().endsWith(".mp3")).map(file=>{
+    const path="library/"+file.name;
+    return {path,name:file.metadata?.song_title||safeMusicTitle(file),url:db.storage.from("invitation-music").getPublicUrl(path).data.publicUrl};
+  });
+  renderMusicLibrary();
+  if(msg)msg.textContent=musicLibrary.length?"عدد الأغاني المحفوظة: "+musicLibrary.length:"المكتبة فارغة حالياً.";
+}
+$("uploadLibrarySongBtn").addEventListener("click",async()=>{
+  const file=$("musicLibraryFile").files[0];
+  const msg=$("musicLibraryMessage");
+  const btn=$("uploadLibrarySongBtn");
+  if(!file){msg.textContent="اختار ملف MP3 أولاً.";return;}
+  if(!/^audio\/(mpeg|mp3)$/i.test(file.type)&&!/\.mp3$/i.test(file.name)){msg.textContent="ارفع ملف MP3 فقط.";return;}
+  if(file.size>12*1024*1024){msg.textContent="حجم الأغنية أكبر من 12MB.";return;}
+  const title=$("musicLibraryTitle").value.trim()||safeMusicTitle(file);
+  const ext=".mp3";
+  const path="library/"+crypto.randomUUID()+ext;
+  btn.disabled=true;msg.textContent="جاري رفع الأغنية إلى المكتبة...";
+  try{
+    const {error}=await db.storage.from("invitation-music").upload(path,file,{upsert:false,contentType:"audio/mpeg",metadata:{song_title:title}});
+    if(error)throw error;
+    $("musicLibraryFile").value="";$("musicLibraryTitle").value="";
+    await loadMusicLibrary();
+    msg.textContent="تمت إضافة "+title+" إلى مكتبة الأغاني.";
+  }catch(e){msg.textContent="تعذر رفع الأغنية: "+e.message;}
+  finally{btn.disabled=false;}
+});
+$("refreshMusicLibraryBtn").addEventListener("click",loadMusicLibrary);
+
 
 function showLogin() {
   loginPanel.classList.remove("hidden");
@@ -732,6 +836,7 @@ document.getElementById("loginForm").addEventListener("submit", async e => {
     showDashboard();
     await loadOrders();
     await loadInvitations();
+    await loadMusicLibrary();
   } catch (err) {
     await db.auth.signOut();
     message.textContent = err.message;
@@ -959,18 +1064,20 @@ $("invitationForm").addEventListener("submit", async e => {
   status.textContent = "جاري حفظ الدعوة...";
 
   const details = getFormDetails();
-  const musicFile = $("invitationMusic").files[0] || null;
+  const selectedSongPath = $("invitationMusicSelect").value;
 
   try {
-    if(musicFile){
-      if(!/^audio\/(mpeg|mp3)$/i.test(musicFile.type) && !/\.mp3$/i.test(musicFile.name)) throw new Error("ارفع ملف MP3 فقط.");
-      if(musicFile.size > 12 * 1024 * 1024) throw new Error("حجم الأغنية أكبر من 12MB.");
-      status.textContent = "جاري رفع الأغنية...";
-      const musicPath = "invitations/" + (editingInvitationId || crypto.randomUUID()) + "/" + Date.now() + ".mp3";
-      const {error:uploadError} = await db.storage.from("invitation-music").upload(musicPath,musicFile,{upsert:true,contentType:"audio/mpeg"});
-      if(uploadError) throw uploadError;
-      details.music_url = db.storage.from("invitation-music").getPublicUrl(musicPath).data.publicUrl;
-      details.music_name = musicFile.name.replace(/\.mp3$/i,"");
+    if(selectedSongPath){
+      const selectedSong=musicLibrary.find(song=>song.path===selectedSongPath);
+      if(selectedSong){
+        details.music_url=selectedSong.url;
+        details.music_name=selectedSong.name;
+      }else if(editingInvitationId && selectedSongPath.startsWith("http")){
+        details.music_url=selectedSongPath;
+      }else throw new Error("الأغنية المختارة غير موجودة في المكتبة. حدّث المكتبة وجرب مرة ثانية.");
+    }else{
+      details.music_url="";
+      details.music_name="";
     }
 
     const record = {
@@ -1057,6 +1164,7 @@ $("clearFormBtn").addEventListener("click", () => {
   if (!confirm("تريد تفريغ كل تفاصيل الدعوة؟")) return;
   $("invitationForm").reset();
   editingInvitationId = null;
+  $("invitationMusicSelect").value = "";
   $("saveInvitationBtn").textContent = "نشر الدعوة وإنشاء الرابط";
   selectedTemplate = "royal-couple";
   document.querySelectorAll(".template").forEach(c => {
@@ -1175,7 +1283,13 @@ function editInvitation(inv) {
   $("startTime").value = d.start_time || "";
   $("hostPhone").value = d.host_phone || "";
   $("extraMessage").value = d.extra_message || "";
-  $("invitationMusic").value = "";
+  $("invitationMusicSelect").value = "";
+  const existingSong=musicLibrary.find(song=>song.url===d.music_url);
+  if(existingSong)$("invitationMusicSelect").value=existingSong.path;
+  else if(d.music_url){
+    const legacyOption=new Option(d.music_name||"أغنية الدعوة الحالية",d.music_url);
+    $("invitationMusicSelect").add(legacyOption);$("invitationMusicSelect").value=d.music_url;
+  }
 
   document.querySelectorAll(".template").forEach(c => {
     c.classList.toggle("selected", c.dataset.template === selectedTemplate);
@@ -1200,6 +1314,7 @@ async function restoreSession() {
     showDashboard();
     await loadOrders();
     await loadInvitations();
+    await loadMusicLibrary();
   } catch (err) {
     await db.auth.signOut();
     showLogin();
