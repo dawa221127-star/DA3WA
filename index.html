@@ -447,6 +447,25 @@ body.public-invitation > *:not(#publicInvitationPage){display:none!important}
 @media(prefers-reduced-motion:reduce){
  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important}
 }
+ 
+/* DA3WA: تفاصيل القوالب لا تظهر إلا بعد لمس الختم */
+.template-closed .art-inner{position:relative;min-height:300px;overflow:hidden}
+.template-closed .art-inner>small,.template-closed .art-inner>strong,.template-closed .art-inner>p{display:none!important}
+.template-closed .art-scene{position:absolute;inset:0}
+.card-seal{position:absolute;z-index:8;left:50%;top:52%;transform:translate(-50%,-50%);width:76px;height:76px;border-radius:50%;border:3px double #f7e8c9;background:radial-gradient(circle at 35% 28%,#e9d19a,#98713b 68%,#5d3e24);color:#fff0cf;font:36px Amiri;box-shadow:0 8px 24px #0007,inset 0 0 0 4px #ffffff30;cursor:pointer;transition:transform .5s,opacity .5s,filter .5s}
+.card-seal:hover{transform:translate(-50%,-50%) rotate(-16deg) scale(1.12);filter:brightness(1.18)}
+.card-seal.seal-graduation{background:radial-gradient(circle,#344e7b,#172a48)}
+.card-seal.seal-birthday{background:radial-gradient(circle,#d88cae,#8e496b)}
+.card-reveal{position:absolute;z-index:7;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:24px;background:#180f18d9;color:#fff4e6;opacity:0;visibility:hidden;transform:translateY(14px);transition:opacity .65s,transform .65s,visibility .65s}
+.card-reveal strong{font:32px Amiri;color:#f3d8a2}
+.card-reveal p{font-size:13px;line-height:1.9;max-width:260px}
+.card-opened .card-seal{opacity:0;pointer-events:none;transform:translate(-50%,-50%) scale(1.8) rotate(35deg)}
+.card-opened .card-reveal{opacity:1;visibility:visible;transform:translateY(0)}
+#openHint{display:none!important}
+.envelope-screen>.tiny{display:none}
+.seal-button{font-size:0!important}
+.seal-button:after{content:"❖";font:32px Amiri}
+
 </style>
 </head>
 
@@ -741,24 +760,26 @@ function sceneMarkup(theme){
 function renderTemplates(){
  $("templateGrid").innerHTML=templates.map(t=>`
   <article class="template">
-   <div class="template-art theme-${t.theme}">
+   <div class="template-art theme-${t.theme} template-closed" id="card-${t.id}">
     <div class="art-inner">
-     <small>DA3WA · INVITATION</small>
      <div class="art-scene">${sceneMarkup(t.theme)}</div>
-     <strong>أحمد & زهراء</strong>
-     <p>${t.line}</p>
-     <small>${t.name.toUpperCase()}</small>
+     <button class="card-seal seal-${t.kind}" type="button" aria-label="كشف تفاصيل القالب" onclick="revealTemplateCard('${t.id}')">${t.kind==="envelope"?"❖":t.kind==="graduation"?"✦":t.kind==="birthday"?"✧":"❦"}</button>
+     <div class="card-reveal">
+      <strong>${t.arabic}</strong><p>${t.line}</p>
+      <button class="mini-btn primary" onclick="chooseTemplate('${t.id}')">اختيار هذا القالب</button>
+     </div>
     </div>
    </div>
    <div class="template-info">
-    <div><strong>${t.arabic}</strong><small>${t.name}</small></div>
-    <div style="display:flex;gap:5px;flex-wrap:wrap">
-     <button class="mini-btn" onclick="previewTemplate('${t.id}')">معاينة</button>
-     <button class="mini-btn primary" onclick="chooseTemplate('${t.id}')">اختيار</button>
-    </div>
+    <div><strong>${t.arabic}</strong><small>قالب تفاعلي</small></div>
+    <button class="mini-btn" onclick="chooseTemplate('${t.id}')">معاينة</button>
    </div>
   </article>
  `).join("");
+}
+function revealTemplateCard(id){
+ const card=$("card-"+id);
+ if(card)card.classList.add("card-opened");
 }
 renderTemplates();
 
@@ -786,9 +807,9 @@ function applyTemplate(t){
   "birthday-pastel":"أطفئ الشموع وافتح دعوة الاحتفال",
   "birthday-neon":"الأضواء اشتعلت — اضغط لبدء الحفلة"
  };
- $("openHint").textContent=hints[t.id]||"اضغط على الختم لفتح دعوتك";
+ $("openHint").textContent="";
  const button=$("liveInvite").querySelector(".seal-button");
- button.textContent=t.symbol||"د";
+ button.textContent="";
 }
 
 function previewTemplate(id){
