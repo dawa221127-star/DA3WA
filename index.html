@@ -1571,6 +1571,30 @@ body.public-invitation #publicInvitationPage{width:100%!important;max-width:none
 @media(prefers-reduced-motion:reduce){.live-invite.door-birds.opened .envelope{animation:none}}
 
 
+
+/* MIRAS — force the Arabic meem on every invitation seal */
+.seal-button{font-size:0!important}
+.seal-button:after{content:none!important;display:none!important}
+.seal-button .seal-brand{
+ display:flex!important;
+ align-items:center!important;
+ justify-content:center!important;
+ position:absolute!important;
+ inset:0!important;
+ width:100%!important;
+ height:100%!important;
+ color:#fff0ca!important;
+ font:700 54px/1 Amiri,serif!important;
+ text-shadow:0 2px 2px #32101a,0 0 12px #f6d58b99!important;
+ padding:0 0 5px!important;
+ margin:0!important;
+ pointer-events:none!important;
+ transform:none!important;
+}
+.curtain-invite .seal-button .seal-brand,
+.baghdad-ivory .seal-button .seal-brand,
+.live-invite .seal-button .seal-brand{display:flex!important}
+
 </style>
 </head>
 
