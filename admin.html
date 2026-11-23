@@ -171,7 +171,7 @@ button.secondary,.tab{background:#392330;color:#f2dfc0;border:1px solid #8a6948}
       <button class="tab" data-tab="pricingSection">إدارة الأسعار والباقات</button>
     </div>
 
-    <section id="pricingSection" class="panel hidden"><h2 class="section-title">إدارة الأسعار والباقات</h2><p class="muted">عدّل اسم كل باقة وسعرها ومميزاتها. تظهر التغييرات في الموقع ونموذج الطلب بعد الحفظ.</p><div id="pricingEditor"></div><div class="actions"><button id="savePricingBtn" class="success">حفظ تغييرات الأسعار</button><span id="pricingMessage" class="muted"></span></div></section>
+    <section id="pricingSection" class="panel hidden"><h2 class="section-title">إدارة الأسعار والباقات</h2><p class="muted">عدّل اسم كل باقة وسعرها ومميزاتها. تظهر التغييرات في الموقع ونموذج الطلب بعد الحفظ.</p><div id="pricingEditor"></div><div class="actions"><button type="button" id="savePricingBtn" class="success">حفظ تغييرات الأسعار</button><span id="pricingMessage" class="muted"></span></div></section>
     <!-- الطلبات -->
     <section id="ordersSection" class="panel">
       <div class="actions">
@@ -339,7 +339,31 @@ let pricingData=DEFAULT_PRICING.map(p=>({...p,features:[...p.features]}));
 function escPrice(v){return String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
 function renderPricingEditor(){$("pricingEditor").innerHTML=pricingData.map((p,i)=>`<div class="order"><h3>الباقة ${i+1}</h3><label>اسم الباقة</label><input data-price-name="${i}" maxlength="40" value="${escPrice(p.name)}"><label>السعر بالدينار العراقي</label><input data-price-amount="${i}" type="number" min="0" step="500" value="${Number(p.amount)||0}"><label>المميزات — كل ميزة بسطر</label><textarea data-price-features="${i}" rows="5">${escPrice(p.features.join("\n"))}</textarea></div>`).join("");}
 async function loadPricing(){const msg=$("pricingMessage");if(msg)msg.textContent="جاري تحميل الأسعار...";try{const {data,error}=await db.from("site_settings").select("value").eq("key","pricing").maybeSingle();if(error)throw error;pricingData=data?.value&&Array.isArray(data.value)&&data.value.length===3?data.value.map(p=>({name:String(p.name||""),amount:Number(p.amount)||0,features:Array.isArray(p.features)?p.features.map(String):[]})):DEFAULT_PRICING.map(p=>({...p,features:[...p.features]}));renderPricingEditor();if(msg)msg.textContent="";}catch(e){if(msg)msg.textContent="تعذر تحميل الأسعار. أنشئ جدول site_settings في Supabase أولاً.";}}
-$("savePricingBtn").addEventListener("click",async()=>{const msg=$("pricingMessage"),btn=$("savePricingBtn");const next=pricingData.map((p,i)=>({name:$("[data-price-name='"+i+"']").value.trim(),amount:Number($("[data-price-amount='"+i+"']").value),features:$("[data-price-features='"+i+"']").value.split("\n").map(x=>x.trim()).filter(Boolean)}));if(next.some(p=>!p.name||!Number.isFinite(p.amount)||p.amount<0||!p.features.length)){msg.textContent="أدخل اسم وسعر وميزة واحدة على الأقل لكل باقة.";return;}btn.disabled=true;msg.textContent="جاري الحفظ...";try{const {error}=await db.from("site_settings").upsert({key:"pricing",value:next,updated_at:new Date().toISOString()},{onConflict:"key"});if(error)throw error;pricingData=next;msg.textContent="تم حفظ الباقات بنجاح.";}catch(e){msg.textContent="تعذر الحفظ: "+(e.message||"تحقق من صلاحيات Supabase.");}finally{btn.disabled=false;}});
+$("savePricingBtn").addEventListener("click",async(event)=>{
+ event.preventDefault();
+ const msg=$("pricingMessage"),btn=$("savePricingBtn");
+ msg.textContent="تم الضغط على حفظ — جاري التحقق...";
+ try{
+  const next=[0,1,2].map(i=>{
+   const name=$("[data-price-name='"+i+"']");
+   const amount=$("[data-price-amount='"+i+"']");
+   const features=$("[data-price-features='"+i+"']");
+   if(!name||!amount||!features)throw new Error("حقول الباقات غير ظاهرة. افتح تبويب إدارة الأسعار من جديد.");
+   return {name:name.value.trim(),amount:Number(amount.value),features:features.value.split("\\n").map(x=>x.trim()).filter(Boolean)};
+  });
+  if(next.some(p=>!p.name||!Number.isFinite(p.amount)||p.amount<0||!p.features.length)){
+   msg.textContent="أدخل اسم وسعر وميزة واحدة على الأقل لكل باقة.";return;
+  }
+  btn.disabled=true;msg.textContent="جاري حفظ الأسعار في قاعدة البيانات...";
+  const {data,error}=await db.from("site_settings").upsert({key:"pricing",value:next,updated_at:new Date().toISOString()},{onConflict:"key"}).select("key,value").single();
+  if(error)throw error;
+  pricingData=next;
+  msg.textContent="تم حفظ الباقات بنجاح. افتح الصفحة الرئيسية أو حدّثها لرؤية الأسعار الجديدة.";
+ }catch(e){
+  console.error("Pricing save failed:",e);
+  msg.textContent="فشل الحفظ: "+(e?.message||String(e));
+ }finally{btn.disabled=false;}
+});
 let editingInvitationId = null;
 
 function showLogin() {
