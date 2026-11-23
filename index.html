@@ -1309,37 +1309,39 @@ document.addEventListener("keydown",e=>{
    </div>`;
 
   let publicInviteRevealed=false;
-  function revealPublicInvite(auto=false){
+  function scrollToInviteDetails(){
+   const content=$("publicInvite").querySelector(".invitation-content");
+   if(!content)return;
+   requestAnimationFrame(()=>requestAnimationFrame(()=>{
+    const scroller=document.scrollingElement||document.documentElement;
+    const startY=window.scrollY||scroller.scrollTop||0;
+    const targetY=Math.min(
+     Math.max(0,scroller.scrollHeight-window.innerHeight),
+     Math.max(startY,content.getBoundingClientRect().top+startY)
+    );
+    const distance=targetY-startY;
+    const duration=2600;
+    const began=performance.now();
+    const ease=t=>t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2;
+    function animateScroll(now){
+     const progress=Math.min(1,(now-began)/duration);
+     const y=startY+distance*ease(progress);
+     window.scrollTo(0,y);
+     scroller.scrollTop=y;
+     if(progress<1)requestAnimationFrame(animateScroll);
+    }
+    requestAnimationFrame(animateScroll);
+   }));
+  }
+  function revealPublicInvite(){
    if(publicInviteRevealed)return;
    publicInviteRevealed=true;
    const invite=$("publicInvite");
-   const content=invite.querySelector(".invitation-content");
    invite.classList.add("opened");
-   if(auto){
-    requestAnimationFrame(()=>requestAnimationFrame(()=>{
-     const scroller=document.scrollingElement||document.documentElement;
-     const maxScroll=Math.max(0,scroller.scrollHeight-window.innerHeight);
-     const startY=window.scrollY||scroller.scrollTop||0;
-     const targetY=Math.min(maxScroll,Math.max(startY+window.innerHeight*.9,content.getBoundingClientRect().top+startY));
-     const distance=targetY-startY;
-     const duration=6500;
-     const began=performance.now();
-     const ease=t=>t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2;
-     function animateScroll(now){
-      const progress=Math.min(1,(now-began)/duration);
-      const y=startY+distance*ease(progress);
-      window.scrollTo(0,y);
-      scroller.scrollTop=y;
-      if(progress<1)requestAnimationFrame(animateScroll);
-     }
-     requestAnimationFrame(animateScroll);
-    }));
-   }else{
-    content.scrollIntoView({behavior:"smooth",block:"start"});
-   }
+   // Wait for the envelope transition and invitation layout before scrolling.
+   setTimeout(scrollToInviteDetails,950);
   }
-  $("openPublicEnvelope").addEventListener("click",()=>revealPublicInvite(false));
-  setTimeout(()=>revealPublicInvite(true),1800);
+  $("openPublicEnvelope").addEventListener("click",revealPublicInvite);
 
   const wishList=$("publicWishList");
   const wishStatus=document.createElement("p");
