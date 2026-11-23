@@ -409,6 +409,14 @@ button.secondary,.tab{background:#392330;color:#f2dfc0;border:1px solid #8a6948}
 .template[data-template="red-star"]{border:1px solid #c99a42!important;box-shadow:0 0 18px #c99a4233}
 .template[data-template="red-star"] .admin-template-label:after{content:"11";position:absolute;top:7px;right:7px;background:#c99a42;color:#100b08;border-radius:20px;padding:2px 7px;font:700 11px Arial;z-index:10}
 
+
+/* Force template 11 to be clearly visible and numbered in admin */
+#templateGrid [data-template="red-star"]{display:block!important;visibility:visible!important;opacity:1!important;position:relative!important;border:2px solid #c99a42!important;box-shadow:0 0 22px #c99a4244!important}
+#templateGrid [data-template="red-star"]:after{content:"القالب رقم 11";display:block;color:#f0d18b;font-weight:800;font-size:13px;margin-top:8px}
+#templateGrid [data-template="red-star"] .template-art{background:radial-gradient(ellipse at 50% 45%,#590b1b,#09090b 75%)!important}
+#templateGrid [data-template="red-star"] .cin-center{display:grid!important}
+#templateGrid [data-template="red-star"] .red-star-stage{width:115px!important;max-width:70%!important}
+
 </style>
 </head>
 <body>
