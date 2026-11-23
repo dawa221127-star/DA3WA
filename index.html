@@ -1302,7 +1302,7 @@ document.addEventListener("keydown",e=>{
        <button class="action-link" type="submit">إرسال التهنئة</button>
       </form>
       <div class="wish-list" id="publicWishList"><div class="wish"><strong>أحبابكم</strong><p>بانتظار أجمل تهانيكم ❤️</p></div></div>
-      <p class="notice">رسائل التهاني في هذه النسخة تظهر على نفس الجهاز فقط.</p>
+      <p class="notice">تُحفظ التهاني وتظهر لجميع زوار هذه الدعوة.</p>
      </section>
      <div class="watermark">DA3WA · MADE WITH LOVE</div>
     </div>
@@ -1313,17 +1313,72 @@ document.addEventListener("keydown",e=>{
    window.scrollTo({top:0,behavior:"smooth"});
   });
 
-  $("publicWishForm").addEventListener("submit",e=>{
+  const wishList=$("publicWishList");
+  const wishStatus=document.createElement("p");
+  wishStatus.className="notice";
+  wishStatus.id="publicWishStatus";
+  wishStatus.setAttribute("role","status");
+  wishStatus.textContent="جاري تحميل التهاني...";
+  wishList.after(wishStatus);
+
+  function showPublicWishes(rows){
+   wishList.replaceChildren();
+   if(!rows||!rows.length){
+    const empty=document.createElement("div");empty.className="wish";
+    const title=document.createElement("strong");title.textContent="أحبابكم";
+    const message=document.createElement("p");message.textContent="كونوا أول من يترك تهنئة جميلة ❤️";
+    empty.append(title,message);wishList.append(empty);return;
+   }
+   rows.forEach(row=>{
+    const item=document.createElement("div");item.className="wish";
+    const title=document.createElement("strong");title.textContent=row.sender_name;
+    const message=document.createElement("p");message.textContent=row.message;
+    item.append(title,message);wishList.append(item);
+   });
+  }
+
+  async function loadPublicWishes(){
+   if(!da3waDB){wishStatus.textContent="تعذر الاتصال بقاعدة البيانات.";return}
+   const {data,error}=await da3waDB.from("wishes")
+    .select("sender_name,message,created_at")
+    .eq("invitation_slug",invitationSlug)
+    .order("created_at",{ascending:false})
+    .limit(100);
+   if(error){
+    console.error("Load wishes error:",error);
+    wishStatus.textContent="تعذر تحميل التهاني حالياً.";
+    return;
+   }
+   showPublicWishes(data||[]);
+   wishStatus.textContent="";
+  }
+
+  $("publicWishForm").addEventListener("submit",async e=>{
    e.preventDefault();
+   const form=e.currentTarget;
    const name=$("publicWishName").value.trim();
    const message=$("publicWishText").value.trim();
+   const button=form.querySelector('button[type="submit"]');
    if(!name||!message)return;
-   const item=document.createElement("div");item.className="wish";
-   const strong=document.createElement("strong");strong.textContent=name;
-   const p=document.createElement("p");p.textContent=message;
-   item.append(strong,p);$("publicWishList").prepend(item);
-   e.target.reset();
+   if(!da3waDB){wishStatus.textContent="تعذر الاتصال بقاعدة البيانات.";return}
+   button.disabled=true;button.textContent="جاري الإرسال...";
+   wishStatus.textContent="";
+   const {error}=await da3waDB.from("wishes").insert([{
+    invitation_slug:invitationSlug,
+    sender_name:name,
+    message:message
+   }]);
+   button.disabled=false;button.textContent="إرسال التهنئة";
+   if(error){
+    console.error("Save wish error:",error);
+    wishStatus.textContent="ما انحفظت التهنئة. تأكد من إعداد جدول التهاني وحاول مرة ثانية.";
+    return;
+   }
+   form.reset();
+   wishStatus.textContent="تم حفظ تهنئتك بنجاح ❤️";
+   await loadPublicWishes();
   });
+  loadPublicWishes();
 
   function countdown(){
    if(!target||Number.isNaN(target)){
