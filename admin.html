@@ -110,6 +110,23 @@ button.secondary,.tab{background:#392330;color:#f2dfc0;border:1px solid #8a6948}
 @keyframes adminOrbit{to{transform:rotate(360deg)}}
 @keyframes adminPulse{50%{transform:scale(1.12);opacity:.65}}
 @media(max-width:850px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+/* DA3WA premium animated template cards */
+.template-art{isolation:isolate;overflow:hidden}
+.template-art:before{content:"";position:absolute;inset:-40%;z-index:0;background:conic-gradient(from 0deg,transparent,#f4dba633,transparent 28%,#fff2,transparent 58%);animation:adminCardSweep 12s linear infinite}
+.template-art:after{z-index:1!important;inset:0!important;width:auto!important;height:auto!important;border:0!important;border-radius:inherit!important;background:radial-gradient(circle at 50% 50%,#f6dfaa28,transparent 58%),linear-gradient(120deg,transparent 30%,#fff2 50%,transparent 68%)!important;animation:adminCardGlow 5s ease-in-out infinite!important}
+.template-art span{z-index:3!important;position:relative;box-shadow:0 0 0 5px #f3dba51a,0 0 28px #d7b87966,inset 0 2px 8px #fff8;animation:adminSealFloat 4s ease-in-out infinite}
+.template:nth-child(2n) .template-art span{animation-delay:-1.2s}
+.template:nth-child(3n) .template-art span{animation-delay:-2.1s}
+.template:nth-child(4n) .template-art span{border-radius:14px;transform:rotate(45deg)}
+.template:nth-child(4n) .template-art span{font-size:22px}
+.template{position:relative;overflow:hidden}
+.template:after{content:"";position:absolute;inset:5px;border:1px solid #d7b87922;border-radius:10px;pointer-events:none}
+@keyframes adminCardSweep{to{transform:rotate(360deg)}}
+@keyframes adminCardGlow{0%,100%{opacity:.35}50%{opacity:.9}}
+@keyframes adminSealFloat{0%,100%{transform:translateY(2px) scale(1)}50%{transform:translateY(-5px) scale(1.06)}}
+@media(prefers-reduced-motion:reduce){.template-art:before,.template-art:after,.template-art span{animation:none!important}}
+
 </style>
 </head>
 <body>
