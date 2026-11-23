@@ -1833,6 +1833,8 @@ function chooseTemplate(id){
 }
 function openPreview(){tryTemplate(selectedTemplate.id)}
 function resetDemoInvitation(){
+ stopDemoAutoScroll();
+ const demoStage=$("previewModal").querySelector(".demo-stage");if(demoStage)demoStage.scrollTop=0;
  $("liveInvite").classList.remove("opened");
  $("liveNames").textContent="ليان & عمر";
  $("liveGreeting").textContent="بكل الحب والسرور، يسعدنا أن نشارككم أجمل لحظات حياتنا";
@@ -1847,8 +1849,41 @@ function resetDemoInvitation(){
  $("phoneLink").href="tel:";
  ["cdDays","cdHours","cdMinutes","cdSeconds"].forEach(id=>$(id).textContent="--");
 }
-function closeModal(id){$(id).classList.remove("open")}
-function openEnvelope(){$("liveInvite").classList.add("opened")}
+function closeModal(id){if(id==="previewModal")stopDemoAutoScroll();$(id).classList.remove("open")}
+let demoAutoScrollFrame=0;
+let demoAutoScrollTimer=0;
+function stopDemoAutoScroll(){
+ if(demoAutoScrollFrame)cancelAnimationFrame(demoAutoScrollFrame);
+ demoAutoScrollFrame=0;
+ if(demoAutoScrollTimer)clearTimeout(demoAutoScrollTimer);
+ demoAutoScrollTimer=0;
+}
+function startDemoAutoScroll(){
+ stopDemoAutoScroll();
+ const stage=$("previewModal").querySelector(".demo-stage");
+ if(!stage)return;
+ demoAutoScrollTimer=setTimeout(()=>{
+  const start=stage.scrollTop;
+  const distance=Math.max(0,stage.scrollHeight-stage.clientHeight-start);
+  const duration=distance/48*1000;
+  const began=performance.now();
+  let cancelled=false;
+  const stop=()=>{cancelled=true;stopDemoAutoScroll();};
+  ["wheel","touchstart","pointerdown","keydown"].forEach(type=>stage.addEventListener(type,stop,{once:true,passive:true}));
+  const step=now=>{
+   if(cancelled)return;
+   const progress=duration?Math.min(1,(now-began)/duration):1;
+   stage.scrollTop=start+distance*progress;
+   if(progress<1)demoAutoScrollFrame=requestAnimationFrame(step);
+   else demoAutoScrollFrame=0;
+  };
+  if(distance)demoAutoScrollFrame=requestAnimationFrame(step);
+ },1500);
+}
+function openEnvelope(){
+ $("liveInvite").classList.add("opened");
+ startDemoAutoScroll();
+}
 
 $("previewTemplate").addEventListener("change",e=>applyTemplate(getTemplate(e.target.value)));
 
