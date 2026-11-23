@@ -1022,8 +1022,8 @@ async function loadPublicPricing(){if(!da3waDB)return;try{const {data,error}=awa
 /* تحديث الأسعار تلقائياً بعد حفظها من لوحة الإدارة */
 setInterval(loadPublicPricing,5000);
 window.addEventListener("focus",loadPublicPricing);
-renderPublicPricing();
 const $=id=>document.getElementById(id);
+renderPublicPricing();
 let selectedTemplate=templates[0];
 let selectedPayment="";
 let isSubmitting=false;
