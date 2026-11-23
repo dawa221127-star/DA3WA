@@ -417,6 +417,8 @@ body.public-invitation > *:not(#publicInvitationPage){display:none!important}
 .public-invite .invitation-content{display:none}
 .public-invite.opened .invitation-content{display:block;animation:fadeUp .9s ease}
 .public-invite.opened .envelope-screen{animation:screenAway .9s ease forwards;pointer-events:none}
+.public-invite.opened .envelope-screen{animation:inviteScreenCollapse .9s ease forwards;pointer-events:none;overflow:hidden}
+@keyframes inviteScreenCollapse{0%{opacity:1;transform:scale(1);min-height:100vh;height:auto;padding-top:65px;padding-bottom:65px}85%{opacity:0;transform:scale(1.02)}100%{opacity:0;transform:scale(1.02);height:0;min-height:0;padding-top:0;padding-bottom:0;margin:0;border:0;visibility:hidden}}
 .public-invite .invite-section{padding:65px 22px}
 .public-invite .wish-form{max-width:500px;margin:20px auto}
 .public-invite .wish-form input,.public-invite .wish-form textarea{width:100%;padding:12px;margin:6px 0;border:1px solid var(--accent2);background:transparent;color:var(--text)}
@@ -1309,18 +1311,13 @@ document.addEventListener("keydown",e=>{
    </div>`;
 
   let publicInviteRevealed=false;
-  function scrollToInviteDetails(){
-   const content=$("publicInvite").querySelector(".invitation-content");
-   if(!content)return;
+  function scrollToInviteEnd(){
    requestAnimationFrame(()=>requestAnimationFrame(()=>{
     const scroller=document.scrollingElement||document.documentElement;
     const startY=window.scrollY||scroller.scrollTop||0;
-    const targetY=Math.min(
-     Math.max(0,scroller.scrollHeight-window.innerHeight),
-     Math.max(startY,content.getBoundingClientRect().top+startY)
-    );
+    const targetY=Math.max(0,scroller.scrollHeight-window.innerHeight);
     const distance=targetY-startY;
-    const duration=2600;
+    const duration=10000;
     const began=performance.now();
     const ease=t=>t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2;
     function animateScroll(now){
@@ -1336,10 +1333,9 @@ document.addEventListener("keydown",e=>{
   function revealPublicInvite(){
    if(publicInviteRevealed)return;
    publicInviteRevealed=true;
-   const invite=$("publicInvite");
-   invite.classList.add("opened");
-   // Wait for the envelope transition and invitation layout before scrolling.
-   setTimeout(scrollToInviteDetails,950);
+   $("publicInvite").classList.add("opened");
+   // Let the envelope disappear and the invitation content take its final layout.
+   setTimeout(scrollToInviteEnd,1000);
   }
   $("openPublicEnvelope").addEventListener("click",revealPublicInvite);
 
