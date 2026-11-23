@@ -1105,7 +1105,7 @@ function updatePreview() {
   const extra=$("extraMessage").value.trim();
   if(selected.id==="baghdad-ivory"){
     preview.className="preview admin-preview-art baghdad-admin-preview";
-    preview.innerHTML=\`
+    preview.innerHTML=`
       <div class="admin-baghdad-hero">
         <div class="admin-baghdad-arch"><span>بغداد</span><i>✦</i></div>
         <div class="admin-baghdad-seal">❦</div>
@@ -1125,7 +1125,7 @@ function updatePreview() {
         <div><span>المكان</span><strong class="admin-baghdad-venue"></strong></div>
         <p class="admin-baghdad-extra"></p>
       </section>
-      <div class="admin-baghdad-footer">بغداد تجمعنا على الفرح · DA3WA</div>\`;
+      <div class="admin-baghdad-footer">بغداد تجمعنا على الفرح · DA3WA</div>`;
     [[".admin-baghdad-opening",opening],[".admin-baghdad-names",names],[".admin-baghdad-occasion",occasion],
      [".admin-baghdad-date",date],[".admin-baghdad-arrival",arrival],[".admin-baghdad-start",start],
      [".admin-baghdad-venue",venue],[".admin-baghdad-extra",extra]].forEach(([selector,value])=>{preview.querySelector(selector).textContent=value;});
