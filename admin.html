@@ -40,7 +40,7 @@ button.success{background:#356c53;color:white}
 .grid{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
 .template{border:2px solid #59404a;border-radius:13px;padding:9px;background:#302329;cursor:pointer;text-align:center}
 .template.selected{border-color:#e8c98d;box-shadow:0 0 0 2px #e8c98d33}
-.template-art{height:125px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:25px;margin-bottom:9px;position:relative;overflow:hidden}
+.template-art{height:155px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:25px;margin-bottom:9px;position:relative;overflow:hidden;background-size:cover;background-position:center;border:1px solid #725b48}.template-art span{background:#171315a8;border:1px solid #e8c98d;padding:9px 12px;border-radius:30px;color:#f7e6bd;font-size:12px;backdrop-filter:blur(4px)}.template-art:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,#00000008,#00000035);pointer-events:none}.template-art span{position:relative;z-index:1}
 .template-art span{border:1px solid currentColor;padding:12px 8px;font-size:13px}
 .t1{background:linear-gradient(140deg,#411923,#170d12);color:#e8c98d}
 .t2{background:linear-gradient(140deg,#f4dce0,#fff8f1);color:#8b5264}
@@ -49,7 +49,7 @@ button.success{background:#356c53;color:white}
 .t5{background:linear-gradient(140deg,#092d28,#124a3c);color:#d8c18b}
 .template b{font-size:13px}
 .editor-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:18px}
-.preview{min-height:420px;border-radius:14px;padding:25px;text-align:center;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:14px;white-space:pre-wrap}
+.preview{min-height:460px;border-radius:14px;padding:25px;text-align:center;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:14px;white-space:pre-wrap;background-size:cover;background-position:center;position:relative;isolation:isolate;text-shadow:0 2px 12px #000b}.preview:before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,#160d1055,#160d1099);z-index:-1;border-radius:14px}.preview>*{position:relative}
 .preview h2{font-size:30px;margin:5px 0}
 .preview p{line-height:1.9;margin:4px 0}
 .preview .preview-names{font-size:27px}
@@ -248,15 +248,47 @@ const statusNames = {
   rejected: "مرفوض"
 };
 
-const templateNames = {
-  royal: "الظرف الملكي",
-  rose: "حديقة الورد",
-  black: "الليلة السوداء",
-  ivory: "اللؤلؤ العاجي",
-  oriental: "الليلة الشرقية"
+const templateCatalog = [
+  {id:"royal-couple",name:"زفاف ملكي",image:"images/scene-1.jpg"},
+  {id:"first-dance",name:"الظرف الأحمر",image:"images/scene-2.jpg"},
+  {id:"blooming-roses",name:"فرحة التخرج",image:"images/scene-3.jpg"},
+  {id:"midnight-pearl",name:"عيد ميلاد وردي",image:"images/scene-4.jpg"},
+  {id:"silk-gold",name:"المولود الجديد",image:"images/scene-5.jpg"},
+  {id:"royal-seal",name:"الورد الأحمر",image:"images/scene-6.jpg"},
+  {id:"graduation-purple",name:"الظرف الذهبي",image:"images/scene-7.jpg"},
+  {id:"graduation-blue",name:"دعوة باريس",image:"images/scene-8.jpg"},
+  {id:"birthday-pastel",name:"المنزل الفاخر",image:"images/scene-9.jpg"},
+  {id:"birthday-neon",name:"الليلة الشرقية",image:"images/scene-10.jpg"}
+];
+const templateNames = Object.fromEntries(templateCatalog.map(t=>[t.id,t.name]));
+Object.assign(templateNames,{
+ royal:"الظرف الملكي",rose:"حديقة الورد",black:"الليلة السوداء",
+ ivory:"اللؤلؤ العاجي",oriental:"الليلة الشرقية"
+});
+const legacyTemplateMap={
+ royal:"royal-couple",rose:"blooming-roses",black:"midnight-pearl",
+ ivory:"silk-gold",oriental:"royal-seal"
 };
+function normalizeTemplate(id){return legacyTemplateMap[id]||id}
+let selectedTemplate = "royal-couple";
 
-let selectedTemplate = "royal";
+function renderAdminTemplates(){
+ const grid=$("templateGrid");
+ grid.innerHTML=templateCatalog.map(t=>`
+  <div class="template" data-template="${t.id}">
+   <div class="template-art" style="background-image:url('${t.image}')"><span>اختيار القالب</span></div>
+   <b>${t.name}</b>
+  </div>`).join("");
+ grid.querySelectorAll(".template").forEach(card=>{
+  card.addEventListener("click",()=>{
+   grid.querySelectorAll(".template").forEach(c=>c.classList.remove("selected"));
+   card.classList.add("selected");
+   selectedTemplate=card.dataset.template;
+   updatePreview();
+  });
+ });
+ grid.querySelector('[data-template="royal-couple"]').classList.add("selected");
+}
 let editingInvitationId = null;
 
 function showLogin() {
@@ -442,15 +474,8 @@ async function loadOrders() {
 
 $("refreshBtn").addEventListener("click", loadOrders);
 
-/* اختيار القالب */
-document.querySelectorAll(".template").forEach(card => {
-  card.addEventListener("click", () => {
-    document.querySelectorAll(".template").forEach(c => c.classList.remove("selected"));
-    card.classList.add("selected");
-    selectedTemplate = card.dataset.template;
-    updatePreview();
-  });
-});
+/* اختيار القوالب العشرة بالصور الواقعية */
+renderAdminTemplates();
 
 /* المعاينة المباشرة */
 const previewFields = [
@@ -488,9 +513,9 @@ function updatePreview() {
   $("previewStart").textContent = "بدء المناسبة: " +
     ( $("startTime").value ? formatTime($("startTime").value) : "غير محدد" );
 
-  $("preview").className = "preview " + ({
-    royal:"t1", rose:"t2", black:"t3", ivory:"t4", oriental:"t5"
-  }[selectedTemplate] || "t1");
+  const selected=templateCatalog.find(t=>t.id===normalizeTemplate(selectedTemplate))||templateCatalog[0];
+  $("preview").className="preview";
+  $("preview").style.backgroundImage=`url("${selected.image}")`;
 }
 
 [
@@ -619,9 +644,9 @@ $("clearFormBtn").addEventListener("click", () => {
   $("invitationForm").reset();
   editingInvitationId = null;
   $("saveInvitationBtn").textContent = "نشر الدعوة وإنشاء الرابط";
-  selectedTemplate = "royal";
+  selectedTemplate = "royal-couple";
   document.querySelectorAll(".template").forEach(c => {
-    c.classList.toggle("selected", c.dataset.template === "royal");
+    c.classList.toggle("selected", c.dataset.template === "royal-couple");
   });
   $("inviteMessage").textContent = "";
   updatePreview();
@@ -724,7 +749,7 @@ async function loadInvitations() {
 function editInvitation(inv) {
   const d = inv.details || {};
   editingInvitationId = inv.id;
-  selectedTemplate = inv.template_id;
+  selectedTemplate = normalizeTemplate(inv.template_id);
 
   $("hostNames").value = d.names || "";
   $("occasion").value = d.occasion || "";
