@@ -466,6 +466,24 @@ button.secondary,.tab{background:#392330;color:#f2dfc0;border:1px solid #8a6948}
 .customer-order-picker{margin:22px 0;padding:18px;border:1px solid #a9824e88;border-radius:13px;background:linear-gradient(135deg,#291722,#120c12)}
 .customer-order-picker h3{margin:0 0 8px;color:#f0d9aa}.customer-order-picker select{width:100%;max-width:650px}
 .customer-order-picker .small-note{margin-bottom:0}
+/* Admin preview — template 12 Baghdad Ivory */
+#preview.baghdad-admin-preview{display:block!important;height:min(1120px,78vh)!important;overflow-y:auto!important;padding:0!important;border:1px solid #b18a52!important;border-radius:2px!important;background:#e8d9bd!important;color:#503d2c!important;text-shadow:none!important}
+.baghdad-admin-preview:before{display:none!important}
+.admin-baghdad-hero{height:500px;position:relative;display:flex;align-items:center;justify-content:center;background:linear-gradient(180deg,#d7c29a44,#2d211488),url("https://commons.wikimedia.org/wiki/Special:FilePath/Tigris_river_in_Baghdad.png") center/cover}
+.admin-baghdad-arch{width:72%;height:78%;border:1px solid #f4e5c0;border-radius:50% 50% 0 0/28% 28% 0 0;box-shadow:0 0 0 7px #d7bd8b44,inset 0 0 40px #fff3;display:flex;align-items:center;justify-content:center;color:#fff1d5;text-shadow:0 3px 18px #3d2918;position:relative}
+.admin-baghdad-arch span{font:64px Amiri,serif;letter-spacing:4px}.admin-baghdad-arch i{position:absolute;top:8%;font-style:normal;color:#f8e6bb}
+.admin-baghdad-seal{position:absolute;bottom:18%;width:58px;height:58px;border-radius:50%;display:grid;place-items:center;background:radial-gradient(circle at 30% 25%,#fff1d2,#c9a66c 50%,#8a6637);border:2px solid #f4e5c5;color:#594126;font-size:26px;box-shadow:0 5px 20px #34220e88}
+.admin-baghdad-hint{position:absolute;bottom:6%;color:#fff2d7;text-shadow:0 2px 12px #382716;font:18px Amiri,serif}
+.admin-baghdad-section{min-height:390px;padding:70px 22px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;background:linear-gradient(180deg,#f0e5d1df,#e8d9b9ed),url("https://commons.wikimedia.org/wiki/Special:FilePath/Baghdad.JPG") center/cover;border-bottom:1px solid #b18a5244}
+.admin-baghdad-section small{color:#a17a43;font:18px Amiri,serif}.admin-baghdad-flourish{color:#b18a52;font-size:34px;margin:12px}
+.admin-baghdad-section p{font:20px/2 Amiri,serif;color:#604a32}.admin-baghdad-section h2{font:42px Amiri,serif;color:#9a7442;margin:10px}
+.admin-baghdad-section .admin-baghdad-names{font-size:clamp(38px,7vw,58px)}
+.admin-baghdad-details{background:linear-gradient(180deg,#e9dcc6b8,#e8d9b9ed),url("https://commons.wikimedia.org/wiki/Special:FilePath/Between_Two_Skies_%E2%80%94_Al-Shaheed_Monument%2C_Baghdad%2C_Iraq.jpg") center/cover}
+.admin-baghdad-details>div{width:min(580px,100%);padding:14px;border-bottom:1px solid #b18a5277;display:flex;justify-content:space-between;gap:15px}
+.admin-baghdad-details>div span{color:#987344}.admin-baghdad-details>div strong{color:#4e3925;font:22px Amiri,serif}
+.admin-baghdad-footer{padding:45px 12px;text-align:center;background:#e8d9bd;color:#a17a43;font:18px Amiri,serif}
+@media(max-width:600px){#preview.baghdad-admin-preview{height:75vh!important}.admin-baghdad-hero{height:440px}.admin-baghdad-section{padding:60px 16px}.admin-baghdad-details>div{flex-direction:column;gap:4px}}
+
 </style>
 </head>
 <body>
@@ -660,7 +678,8 @@ const templateCatalog = [
   {id:"graduation-blue",name:"إنجاز أزرق",symbol:"✧",colors:["#132b48","#78a9d2","#e0f1ff"],kind:"graduation"},
   {id:"birthday-pastel",name:"عيد ميلاد باستيل",symbol:"♡",colors:["#563044","#d99cae","#ffe7eb"],kind:"birthday"},
   {id:"birthday-neon",name:"حفلة أضواء",symbol:"★",colors:["#251438","#c06bd2","#f5d6ff"],kind:"birthday"},
-  {id:"red-star",name:"الستارة الملكية",symbol:"✦",colors:["#090609","#c99a42","#ffe4a1"],kind:"envelope"}
+  {id:"red-star",name:"الستارة الملكية",symbol:"✦",colors:["#090609","#c99a42","#ffe4a1"],kind:"envelope"},
+  {id:"baghdad-ivory",name:"بغداد العاجية",symbol:"❦",colors:["#e8d9bd","#b18a52","#503d2c"],kind:"couple"}
 ];
 const templateNames = Object.fromEntries(templateCatalog.map(t=>[t.id,t.name]));
 Object.assign(templateNames,{
@@ -1064,7 +1083,33 @@ function updatePreview() {
   const arrival=$("arrivalTime").value?formatTime($("arrivalTime").value):"غير محدد";
   const start=$("startTime").value?formatTime($("startTime").value):"غير محدد";
   const extra=$("extraMessage").value.trim();
-  if(selected.id==="red-star"){
+  if(selected.id==="baghdad-ivory"){
+    preview.className="preview admin-preview-art baghdad-admin-preview";
+    preview.innerHTML=\`
+      <div class="admin-baghdad-hero">
+        <div class="admin-baghdad-arch"><span>بغداد</span><i>✦</i></div>
+        <div class="admin-baghdad-seal">❦</div>
+        <div class="admin-baghdad-hint">دعوة من قلب بغداد</div>
+      </div>
+      <section class="admin-baghdad-section">
+        <small>بِسْمِ اللهِ الرَّحْمٰنِ الرَّحِيم</small>
+        <div class="admin-baghdad-flourish">❦</div>
+        <p class="admin-baghdad-opening"></p><h2 class="admin-baghdad-names"></h2>
+        <p class="admin-baghdad-occasion"></p>
+      </section>
+      <section class="admin-baghdad-section admin-baghdad-details">
+        <small>تفاصيل يوم الفرح</small><h2>موعد لقائنا بكم</h2>
+        <div><span>التاريخ</span><strong class="admin-baghdad-date"></strong></div>
+        <div><span>استقبال الضيوف</span><strong class="admin-baghdad-arrival"></strong></div>
+        <div><span>بداية المناسبة</span><strong class="admin-baghdad-start"></strong></div>
+        <div><span>المكان</span><strong class="admin-baghdad-venue"></strong></div>
+        <p class="admin-baghdad-extra"></p>
+      </section>
+      <div class="admin-baghdad-footer">بغداد تجمعنا على الفرح · DA3WA</div>\`;
+    [[".admin-baghdad-opening",opening],[".admin-baghdad-names",names],[".admin-baghdad-occasion",occasion],
+     [".admin-baghdad-date",date],[".admin-baghdad-arrival",arrival],[".admin-baghdad-start",start],
+     [".admin-baghdad-venue",venue],[".admin-baghdad-extra",extra]].forEach(([selector,value])=>{preview.querySelector(selector).textContent=value;});
+  }else if(selected.id==="red-star"){
     preview.className="preview admin-preview-art curtain-admin-preview";
     preview.innerHTML=`
       <div class="admin-curtain-hero">
