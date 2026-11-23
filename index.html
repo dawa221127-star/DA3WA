@@ -1069,6 +1069,24 @@ body.public-invitation{height:auto!important;min-height:100vh!important;overflow
 #templateGrid .template[data-template="red-star"] .cin-scene{height:100%!important;min-height:100%!important;background:radial-gradient(ellipse at 50% 45%,#590b1b,#09090b 75%)!important}
 #templateGrid .template[data-template="red-star"] .cin-center{display:grid!important}
 
+
+/* DA3WA customer flow: two clear actions per design, one full-page demo and one complete order form */
+.template-choice .template-art{cursor:default}
+.template-choice .template-info{align-items:center;gap:12px;flex-wrap:wrap}
+.template-actions{display:flex;gap:8px;flex-wrap:wrap}
+.template-actions .mini-btn{min-width:112px}
+.template-actions .mini-btn.primary{background:var(--wine);color:#fff;border-color:var(--wine)}
+.demo-modal{width:min(1100px,96vw)!important;max-width:1100px!important;height:min(92vh,1000px);display:flex;flex-direction:column;overflow:hidden}
+.demo-heading{padding:8px 42px 10px 8px;flex:0 0 auto}
+.demo-heading h3{margin:0 0 5px}
+.demo-layout{display:block!important;min-height:0;flex:1;overflow:hidden}
+.demo-stage{height:100%!important;min-height:0!important;max-height:none!important;overflow-y:auto!important;overscroll-behavior:contain}
+.demo-stage .live-invite{min-height:100%;height:auto}
+.demo-hidden-controls{display:none!important}
+#orderModal .modal-box{width:min(760px,96vw);max-height:92vh;overflow-y:auto}
+.order-section-title{font-weight:800;color:var(--wine);font-size:17px;margin:22px 0 10px;padding-bottom:9px;border-bottom:1px solid var(--line)}
+#orderForm .field input,#orderForm .field textarea,#orderForm .field select{border-radius:9px}
+@media(max-width:650px){.template-actions{width:100%}.template-actions .mini-btn{flex:1}.demo-modal{height:94vh;width:96vw!important}.demo-stage{height:100%!important}.demo-heading{padding-right:34px}}
 </style>
 </head>
 
@@ -1167,12 +1185,11 @@ body.public-invitation{height:auto!important;min-height:100vh!important;overflow
 
 <!-- LIVE PREVIEW -->
 <div class="modal" id="previewModal">
- <div class="modal-box wide">
+ <div class="modal-box wide demo-modal">
   <button class="close" onclick="closeModal('previewModal')">×</button>
-  <h3>معاينة الدعوة التفاعلية</h3>
-  <p class="notice">اضغط على الختم لفتح الدعوة، وبعدها انزل داخلها حتى تشوف التفاصيل.</p>
-  <div class="preview-layout">
-   <div class="preview-stage">
+  <div class="demo-heading"><h3>تجربة القالب</h3><p class="notice">هذه نسخة تجريبية كاملة. اضغط على الختم وافتح الدعوة، ثم تصفح تفاصيلها بالتمرير.</p></div>
+  <div class="preview-layout demo-layout">
+   <div class="preview-stage demo-stage">
     <div class="live-invite royal-couple" id="liveInvite">
      <section class="envelope-screen">
       <div class="tiny">YOU ARE INVITED</div>
@@ -1235,31 +1252,9 @@ body.public-invitation{height:auto!important;min-height:100vh!important;overflow
     </div>
    </div>
 
-   <div class="preview-controls">
-    <h3>تفاصيل دعوتك</h3>
-    <div class="field"><label>التصميم</label><select id="previewTemplate"></select></div>
-    <div class="field"><label>نوع المناسبة</label>
-     <select id="eventKind">
-      <option>دعوتكم لحضور حفل زفافنا</option>
-      <option>دعوتكم لحفل عقد قران</option>
-      <option>دعوتكم لحفل خطوبتنا</option>
-      <option>دعوتكم لحفل عيد ميلاد</option>
-      <option>دعوتكم لحفل خاص</option>
-     </select>
-    </div>
-    <div class="field"><label>الأسماء</label><input id="previewNames" value="ليان & عمر"></div>
-    <div class="field"><label>عبارة البداية</label><textarea id="previewGreeting">بكل الحب والسرور، يسعدنا أن نشارككم أجمل لحظات حياتنا</textarea></div>
-    <div class="field"><label>التاريخ</label><input id="previewDate" type="date"></div>
-    <div class="form-grid">
-     <div class="field"><label>وقت الوصول</label><input id="previewArrival" type="time" value="19:00"></div>
-     <div class="field"><label>بداية المناسبة</label><input id="previewStart" type="time" value="20:00"></div>
-    </div>
-    <div class="field"><label>اسم القاعة / المكان</label><input id="previewVenue" placeholder="مثال: قاعة الملكية"></div>
-    <div class="field"><label>رابط الموقع على Google Maps</label><input id="previewMap" placeholder="https://maps.google.com/..."></div>
-    <div class="field"><label>اسم الشخص المستضيف</label><input id="previewHost" placeholder="اسم المستضيف"></div>
-    <div class="field"><label>رقم هاتف المستضيف</label><input id="previewPhone" type="tel" placeholder="07xxxxxxxxx"></div>
-    <button class="btn" style="width:100%" onclick="usePreviewForOrder()">اختيار هذا التصميم وطلبه</button>
-    <p class="notice">المعاينة للتجربة فقط. رسائل التهاني هنا تجريبية على نفس الجهاز.</p>
+   <div class="preview-controls demo-hidden-controls" aria-hidden="true">
+    <select id="previewTemplate"></select>
+   </div>
    </div>
   </div>
  </div>
@@ -1276,7 +1271,31 @@ body.public-invitation{height:auto!important;min-height:100vh!important;overflow
     <div class="field"><label>اسم صاحب الطلب</label><input id="orderName" required maxlength="100"></div>
     <div class="field"><label>رقم الهاتف</label><input id="orderPhone" required type="tel" maxlength="20" placeholder="07xxxxxxxxx"></div>
     <div class="field"><label>القالب</label><input id="orderTemplate" readonly required></div>
-    <div class="field"><label>الباقة</label><select id="orderPackage"><option>الأساسية</option><option>المميزة</option><option>الملكية</option></select></div>
+    <div class="field"><label>الباقة</label><select id="orderPackage"><option>الأساسية</option><option>المميزة</option><option>الملكية</option></select></div> 
+   <div class="order-section-title">تفاصيل الدعوة</div>
+   <div class="field"><label>نوع المناسبة</label>
+    <select id="eventKind" required>
+     <option value="">اختر نوع المناسبة</option>
+     <option>دعوتكم لحضور حفل زفافنا</option>
+     <option>دعوتكم لحفل عقد قران</option>
+     <option>دعوتكم لحفل خطوبتنا</option>
+     <option>دعوتكم لحفل عيد ميلاد</option>
+     <option>دعوتكم لحفل خاص</option>
+    </select>
+   </div>
+   <div class="field"><label>الأسماء التي تظهر بالدعوة</label><input id="previewNames" required maxlength="120" placeholder="مثال: ليان & عمر"></div>
+   <div class="field"><label>عبارة الدعوة / الترحيب</label><textarea id="previewGreeting" required maxlength="500" placeholder="اكتب عبارة الدعوة التي تريد ظهورها"></textarea></div>
+   <div class="field"><label>تاريخ المناسبة</label><input id="previewDate" type="date" required></div>
+   <div class="form-grid">
+    <div class="field"><label>وقت استقبال الضيوف</label><input id="previewArrival" type="time" required value="19:00"></div>
+    <div class="field"><label>وقت بدء المناسبة</label><input id="previewStart" type="time" required value="20:00"></div>
+   </div>
+   <div class="field"><label>اسم القاعة / المكان</label><input id="previewVenue" required maxlength="180" placeholder="اسم القاعة أو المكان"></div>
+   <div class="field"><label>رابط موقع المناسبة على Google Maps (اختياري)</label><input id="previewMap" type="url" placeholder="https://maps.google.com/..."></div>
+   <div class="form-grid">
+    <div class="field"><label>اسم المستضيف</label><input id="previewHost" required maxlength="100" placeholder="اسم المستضيف"></div>
+    <div class="field"><label>رقم هاتف المستضيف</label><input id="previewPhone" type="tel" required maxlength="20" placeholder="07xxxxxxxxx"></div>
+   </div>
    </div>
    <div class="field"><label>اسم الأغنية المطلوبة (اختياري)</label><input id="orderSongRequest" maxlength="160" placeholder="اسم الأغنية واسم الفنان"></div>
    <div class="field"><label>طريقة الدفع</label>
@@ -1390,22 +1409,18 @@ function sceneMarkup(theme){
 }
 
 function renderTemplates(){
- $("templateGrid").innerHTML=templates.map(t=>`
-  <article class="template" data-template="${t.id}">
-   <div class="template-art theme-${t.theme} template-closed" id="card-${t.id}">
+ $("templateGrid").innerHTML=templates.map((t,index)=>`
+  <article class="template template-choice" data-template="${t.id}">
+   <div class="template-art theme-${t.theme}" id="card-${t.id}">
     ${t.id==="red-star"?'<span class="template-number-badge">11</span>':""}
-    <div class="art-inner">
-     <div class="art-scene">${sceneMarkup(t.theme)}</div>
-     <button class="card-seal seal-${t.kind}" type="button" aria-label="كشف تفاصيل القالب" onclick="revealTemplateCard('${t.id}')">${t.kind==="envelope"?"❖":t.kind==="graduation"?"✦":t.kind==="birthday"?"✧":"❦"}</button>
-     <div class="card-reveal">
-      <strong>${t.arabic}</strong><p>${t.line}</p>
-      <button class="mini-btn primary" onclick="chooseTemplate('${t.id}')">اختيار هذا القالب</button>
-     </div>
-    </div>
+    <div class="art-inner"><div class="art-scene">${sceneMarkup(t.theme)}</div></div>
    </div>
    <div class="template-info">
-    <div><strong>${t.arabic}</strong><small>${t.id==="red-star"?'<span class="template-number">11 · </span>':""}قالب تفاعلي</small></div>
-    <button class="mini-btn" onclick="chooseTemplate('${t.id}')">معاينة</button>
+    <div><strong>${t.arabic}</strong><small>${index+1} · قالب تفاعلي</small></div>
+    <div class="template-actions">
+     <button class="mini-btn" type="button" onclick="tryTemplate('${t.id}')">جرّب القالب</button>
+     <button class="mini-btn primary" type="button" onclick="chooseTemplate('${t.id}')">اطلب هذا القالب</button>
+    </div>
    </div>
   </article>
  `).join("");
@@ -1446,16 +1461,35 @@ function applyTemplate(t){
  button.textContent="";
 }
 
-function previewTemplate(id){
- applyTemplate(getTemplate(id));
- openPreview();
-}
-function chooseTemplate(id){previewTemplate(id)}
-
-function openPreview(){
+function tryTemplate(id){
+ selectedTemplate=getTemplate(id);
  $("previewModal").classList.add("open");
  applyTemplate(selectedTemplate);
+ resetDemoInvitation();
  updatePreview();
+}
+function previewTemplate(id){tryTemplate(id)}
+function chooseTemplate(id){
+ selectedTemplate=getTemplate(id);
+ $("orderTemplate").value=selectedTemplate.arabic+" — "+selectedTemplate.name;
+ $("orderResult").textContent="";
+ $("orderModal").classList.add("open");
+}
+function openPreview(){tryTemplate(selectedTemplate.id)}
+function resetDemoInvitation(){
+ $("liveInvite").classList.remove("opened");
+ $("liveNames").textContent="ليان & عمر";
+ $("liveGreeting").textContent="بكل الحب والسرور، يسعدنا أن نشارككم أجمل لحظات حياتنا";
+ $("liveKind").textContent="دعوتكم لحضور حفل زفافنا";
+ $("liveDate").textContent="الجمعة، 20 ديسمبر 2026";
+ $("liveArrival").textContent="7:00 مساءً";
+ $("liveStart").textContent="8:00 مساءً";
+ $("liveVenue").textContent="قاعة المناسبات الملكية";
+ $("liveHost").textContent="عائلة العروسين";
+ $("livePhone").textContent="07xxxxxxxxx";
+ $("mapLink").href="#";
+ $("phoneLink").href="tel:";
+ ["cdDays","cdHours","cdMinutes","cdSeconds"].forEach(id=>$(id).textContent="--");
 }
 function closeModal(id){$(id).classList.remove("open")}
 function openEnvelope(){$("liveInvite").classList.add("opened")}
@@ -1519,15 +1553,10 @@ $("wishForm").addEventListener("submit",e=>{
  $("wishName").value="";$("wishText").value="";
 });
 
-function usePreviewForOrder(){
- $("orderTemplate").value=selectedTemplate.arabic+" — "+selectedTemplate.name;
- closeModal("previewModal");
- $("orderModal").classList.add("open");
-}
+function usePreviewForOrder(){chooseTemplate(selectedTemplate.id)}
 function startOrder(packageName){
  $("orderPackage").value=packageName;
- $("orderTemplate").value=selectedTemplate.arabic+" — "+selectedTemplate.name;
- $("orderModal").classList.add("open");
+ chooseTemplate(selectedTemplate.id);
 }
 function selectPayment(btn){
  selectedPayment=btn.dataset.pay;
