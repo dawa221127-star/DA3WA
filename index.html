@@ -759,6 +759,11 @@ body{background:radial-gradient(ellipse at 50% -15%,#512538 0,#1b0d17 48%,#0c080
 .template-art.theme-birthday-neon .cin-balloon{box-shadow:0 0 18px #db83ff,inset -5px -4px 9px #0003}
 .template-art.theme-birthday-neon .cin-frame{border:2px solid #d57cff;box-shadow:0 0 25px #bd61ff,inset 0 0 25px #0005}
 
+/* Restore normal page scrolling on public invitation links */
+html,body{height:auto!important;min-height:100%;overflow-y:auto!important;overflow-x:hidden!important}
+body.public-invitation{height:auto!important;min-height:100vh!important;overflow-y:auto!important;overflow-x:hidden!important;position:static!important;touch-action:pan-y}
+#publicInvitationPage,.public-invite,.public-invite.live-invite{height:auto!important;min-height:100vh;max-height:none!important;overflow:visible!important;overscroll-behavior-y:auto}
+.public-invite .envelope-screen,.public-invite.opened .envelope-screen{overflow:hidden!important}
 /* DA3WA FULL-PAGE INVITATION ART DIRECTION — every section belongs to its template */
 .live-invite{position:relative;isolation:isolate;min-height:100vh;background:var(--surface);background-image:radial-gradient(ellipse at 8% 12%,color-mix(in srgb,var(--accent2) 15%,transparent),transparent 34%),radial-gradient(ellipse at 92% 78%,color-mix(in srgb,var(--accent) 9%,transparent),transparent 38%)}
 .envelope-screen{min-height:100svh;padding:clamp(35px,7vh,90px) 22px;gap:clamp(16px,3vh,30px);background-image:radial-gradient(ellipse at 50% 40%,color-mix(in srgb,var(--accent2) 42%,var(--accent)),var(--accent) 68%,#100d16);box-shadow:inset 0 0 100px #0005}
@@ -1523,23 +1528,29 @@ document.addEventListener("keydown",e=>{
    </div>`;
 
   let publicInviteRevealed=false;
+  let inviteAutoScrollFrame=0;
   function scrollToInviteEnd(){
+   if(inviteAutoScrollFrame)cancelAnimationFrame(inviteAutoScrollFrame);
    requestAnimationFrame(()=>requestAnimationFrame(()=>{
     const scroller=document.scrollingElement||document.documentElement;
     const startY=window.scrollY||scroller.scrollTop||0;
     const targetY=Math.max(0,scroller.scrollHeight-window.innerHeight);
     const distance=targetY-startY;
-    const speed=75; // سرعة ثابتة: 75 بكسل بالثانية
+    const speed=75;
     const duration=Math.abs(distance)/speed*1000;
     const began=performance.now();
+    let cancelled=false;
+    const stopAutoScroll=()=>{cancelled=true;if(inviteAutoScrollFrame)cancelAnimationFrame(inviteAutoScrollFrame);};
+    ["wheel","touchstart","pointerdown","keydown"].forEach(eventName=>window.addEventListener(eventName,stopAutoScroll,{once:true,passive:true}));
     function animateScroll(now){
+     if(cancelled)return;
      const progress=duration===0?1:Math.min(1,(now-began)/duration);
      const y=startY+distance*progress;
-     window.scrollTo(0,y);
-     scroller.scrollTop=y;
-     if(progress<1)requestAnimationFrame(animateScroll);
+     window.scrollTo({top:y,left:0,behavior:"instant"});
+     if(progress<1)inviteAutoScrollFrame=requestAnimationFrame(animateScroll);
+     else inviteAutoScrollFrame=0;
     }
-    if(distance!==0)requestAnimationFrame(animateScroll);
+    if(distance!==0)inviteAutoScrollFrame=requestAnimationFrame(animateScroll);
    }));
   }
   function revealPublicInvite(){
@@ -1554,7 +1565,7 @@ document.addEventListener("keydown",e=>{
     if(playAttempt&&typeof playAttempt.catch==="function")playAttempt.catch(error=>console.warn("Invitation music autoplay was blocked:",error));
    }
    // Let the envelope disappear and the invitation content take its final layout.
-   setTimeout(scrollToInviteEnd,1000);
+   setTimeout(scrollToInviteEnd,1300);
   }
   $("openPublicEnvelope").addEventListener("click",revealPublicInvite);
 
