@@ -1129,6 +1129,15 @@ function orderField(message,label){
   const line=lines.find(x=>x.trim().startsWith(label+":"));
   return line ? line.slice(line.indexOf(":")+1).trim() : "";
 }
+function parseArabicOrderTime(value){
+  const raw=String(value||"").trim();
+  const parts=raw.split(" ");
+  const hm=(parts[0]||"").split(":");
+  if(hm.length!==2||!hm[0]||!hm[1])return "";
+  let hour=Number(hm[0])%12;
+  if(raw.includes("مساءً"))hour+=12;
+  return String(hour).padStart(2,"0")+":"+String(hm[1]).padStart(2,"0");
+}
 function refreshCustomerOrderOptions(){
   const select=$("customerOrderSelect");
   if(!select)return;
@@ -1152,7 +1161,7 @@ function fillInvitationFromCustomerOrder(order){
     eventDate:order.invitation_date||"",
     venue:order.invitation_location||orderField(message,"المكان"),
     mapLink:orderField(message,"رابط الموقع"),
-    arrivalTime:orderField(message,"وقت الوصول"),
+    arrivalTime:parseArabicOrderTime(orderField(message,"وقت الوصول")),
     startTime:order.invitation_time||"",
     hostPhone:orderField(message,"هاتف المستضيف")||order.phone||"",
     extraMessage:orderField(message,"رسالة إضافية")
