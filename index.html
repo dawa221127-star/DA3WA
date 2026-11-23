@@ -2220,6 +2220,7 @@ $("orderForm").addEventListener("submit",async e=>{
   isSubmitting=false;button.disabled=false;button.textContent="إرسال الطلب";
  }
 });
+window.__mirasOrderHandlerReady=true;
 
 document.querySelectorAll(".modal").forEach(m=>{
  m.addEventListener("click",e=>{if(e.target===m)m.classList.remove("open")});
@@ -2527,6 +2528,53 @@ document.addEventListener("keydown",e=>{
  window.addEventListener("pointerdown",startMusic,true);
  window.addEventListener("keydown",startMusic,true);
  window.addEventListener("touchstart",startMusic,{capture:true,passive:true});
+})();
+</script>
+
+<!-- Independent order-form recovery: works even if an earlier homepage script stops -->
+<script>
+(function(){
+ const form=document.getElementById("orderForm");
+ if(!form || window.__mirasOrderHandlerReady) return;
+ const status=document.getElementById("orderResult");
+ const submit=form.querySelector('button[type="submit"]');
+ let payment="";
+ document.querySelectorAll("#orderForm .payment-option").forEach(btn=>btn.addEventListener("click",function(){
+  payment=btn.dataset.pay||"";
+  document.querySelectorAll("#orderForm .payment-option").forEach(x=>x.classList.toggle("selected",x===btn));
+  if(status)status.textContent="طريقة الدفع المختارة: "+payment;
+ }));
+ form.addEventListener("submit",async function(e){
+  e.preventDefault();e.stopImmediatePropagation();
+  if(!status||!submit)return;
+  status.textContent="تم الضغط على إرسال الطلب… جاري التحقق من البيانات.";
+  const required=["orderName","orderPhone","orderTemplate","eventKind","previewNames","previewGreeting","previewDate","previewArrival","previewStart","previewVenue","previewHost","previewPhone"];
+  for(const id of required){const el=document.getElementById(id);if(!el||!String(el.value||"").trim()){status.textContent="يرجى إكمال الحقل المطلوب: "+(el?.previousElementSibling?.textContent||id);el?.focus();return;}}
+  if(!payment){status.textContent="اختار طريقة الدفع أولاً.";return;}
+  const phone=document.getElementById("orderPhone").value.trim();
+  if(!/^(\\+?964|0)?7\\d{9}$/.test(phone.replace(/[\\s-]/g,""))){status.textContent="تأكد من رقم الهاتف العراقي.";return;}
+  const url="https://xnabtqiukgcbukrmpyle.supabase.co";
+  const key="sb_publishable_-fZR33L75gcyESGdh0OYTg_Ct1Iamlz";
+  if(!window.supabase?.createClient){status.textContent="تعذر تحميل خدمة قاعدة البيانات. حدّث الصفحة وجرب مرة ثانية.";return;}
+  submit.disabled=true;submit.textContent="جاري إرسال الطلب…";
+  try{
+   const db=window.supabase.createClient(url,key);
+   let packageName=document.getElementById("orderPackage").value;
+   let amount=0;
+   const settings=await db.from("site_settings").select("value").eq("key","pricing").maybeSingle();
+   if(!settings.error&&Array.isArray(settings.data?.value)){const p=settings.data.value.find(x=>x.name===packageName);amount=Number(p?.amount)||0;}
+   if(!amount){status.textContent="تعذر قراءة سعر الباقة من قاعدة البيانات. تواصل مع إدارة مِراس.";return;}
+   const time=v=>{if(!v)return "يحدد لاحقاً";const [h,m]=v.split(":").map(Number);return (h%12||12)+":"+String(m).padStart(2,"0")+" "+(h>=12?"مساءً":"صباحاً");};
+   const value=id=>document.getElementById(id)?.value?.trim()||"";
+   const details=["نوع المناسبة: "+value("eventKind"),"الأسماء: "+value("previewNames"),"عبارة الدعوة: "+value("previewGreeting"),"التاريخ: "+value("previewDate"),"وقت الوصول: "+time(value("previewArrival")),"بداية المناسبة: "+time(value("previewStart")),"المكان: "+value("previewVenue"),"رابط الموقع: "+value("previewMap"),"اسم المستضيف: "+value("previewHost"),"هاتف المستضيف: "+value("previewPhone"),"الأغنية المطلوبة: "+(value("orderSongRequest")||"لم يحدد")].join("\\n");
+   const order={customer_name:value("orderName"),phone,occasion:value("eventKind"),template_name:value("orderTemplate"),package_name:packageName,amount,payment_method:payment,invitation_date:value("previewDate")||null,invitation_time:value("previewStart")||null,invitation_location:value("previewVenue")||null,invitation_message:details,status:"new"};
+   const {error}=await db.from("orders").insert([order]);
+   if(error)throw error;
+   status.textContent="تم إرسال طلبك بنجاح إلى مِراس ❤️";form.reset();payment="";
+   document.querySelectorAll("#orderForm .payment-option").forEach(x=>x.classList.remove("selected"));
+  }catch(err){console.error("MIRAS order recovery:",err);status.textContent="لم يتم إرسال الطلب: "+(err?.message||"خطأ غير معروف");}
+  finally{submit.disabled=false;submit.textContent="إرسال الطلب";status.scrollIntoView({behavior:"smooth",block:"center"});}
+ });
 })();
 </script>
 </body>
