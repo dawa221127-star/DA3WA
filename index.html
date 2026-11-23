@@ -429,6 +429,67 @@ body.public-invitation > *:not(#publicInvitationPage){display:none!important}
 .public-invite .seal-button{cursor:pointer}
 .public-invite .detail-grid{grid-template-columns:1fr 1fr}
 
+/* DA3WA — distinct full-page invitation backgrounds for every template */
+.public-invite .invitation-content{position:relative;isolation:isolate;background-color:var(--surface,#fffaf2)}
+.public-invite .invite-section{background-color:transparent;background-repeat:no-repeat;background-size:cover}
+.public-invite.royal-couple .invitation-content{
+ background-color:#f5ead6;
+ background-image:radial-gradient(ellipse at 12% 12%,#d5b77b55,transparent 34%),radial-gradient(ellipse at 88% 86%,#9a6a4a30,transparent 38%),repeating-linear-gradient(135deg,#fff8e9 0 2px,#f5ead6 2px 7px)
+}
+.public-invite.royal-couple .invite-section{background-image:linear-gradient(90deg,transparent 0 7%,#b48b5030 7.2%,transparent 7.5% 92.5%,#b48b5030 92.8%,transparent 93%)}
+.public-invite.first-dance .invitation-content{
+ background-color:#e9ddeb;
+ background-image:radial-gradient(ellipse at 50% 0%,#fff 0,transparent 48%),linear-gradient(145deg,#e9ddeb,#c9b6d0 52%,#f4e5e9)
+}
+.public-invite.first-dance .invite-section{background-image:radial-gradient(ellipse at 50% 50%,#fff8 0 1px,transparent 2px);background-size:27px 27px}
+.public-invite.blooming-roses .invitation-content{
+ background-color:#f7e4e2;
+ background-image:radial-gradient(circle at 8% 12%,#d88f9a38 0 9%,transparent 9.5%),radial-gradient(circle at 92% 85%,#d88f9a38 0 12%,transparent 12.5%),linear-gradient(145deg,#fff5f0,#f1d4d5)
+}
+.public-invite.blooming-roses .invite-section{background-image:radial-gradient(circle at 0 0,#c77d8830 0 2px,transparent 3px),radial-gradient(circle at 100% 100%,#c77d8830 0 2px,transparent 3px);background-size:32px 32px}
+.public-invite.midnight-pearl .invitation-content{
+ background-color:#111d36;
+ background-image:radial-gradient(ellipse at 50% 0%,#526b9a88,transparent 48%),linear-gradient(160deg,#101a31,#1d2945 55%,#0b1428)
+}
+.public-invite.midnight-pearl .invite-section{color:#e9edf7;border-color:#8299c566;background-image:radial-gradient(#dce8ff88 .8px,transparent 1px);background-size:29px 29px}
+.public-invite.midnight-pearl .invite-section h2,.public-invite.midnight-pearl .invite-section h3,.public-invite.midnight-pearl .couple-names,.public-invite.midnight-pearl .detail strong,.public-invite.midnight-pearl .wish strong{color:#e5d4a7}
+.public-invite.midnight-pearl .couple-sub,.public-invite.midnight-pearl .countdown small,.public-invite.midnight-pearl .invite-section p{color:#e2e8f4}
+.public-invite.silk-gold .invitation-content{
+ background-color:#ead8b5;
+ background-image:repeating-linear-gradient(90deg,#fff3d833 0 1px,transparent 1px 8px),linear-gradient(110deg,#c8a36d,#f5e7c9 48%,#d1b17d)
+}
+.public-invite.silk-gold .invite-section{background-image:linear-gradient(90deg,transparent 0 5%,#9e784b55 5.2%,transparent 5.5% 94.5%,#9e784b55 94.8%,transparent 95%)}
+.public-invite.royal-seal .invitation-content{
+ background-color:#291722;
+ background-image:radial-gradient(ellipse at 50% 0%,#704052aa,transparent 55%),linear-gradient(145deg,#24131f,#482737 55%,#1d1420)
+}
+.public-invite.royal-seal .invite-section{color:#f5e8d5;border-color:#c6a46b88;background-image:linear-gradient(135deg,#ffffff08 25%,transparent 25% 50%,#ffffff08 50% 75%,transparent 75%);background-size:34px 34px}
+.public-invite.royal-seal .invite-section h2,.public-invite.royal-seal .invite-section h3,.public-invite.royal-seal .couple-names,.public-invite.royal-seal .detail strong,.public-invite.royal-seal .wish strong{color:#e5c98f}
+.public-invite.royal-seal .invite-section p,.public-invite.royal-seal .couple-sub,.public-invite.royal-seal .countdown small{color:#f4e6d6}
+.public-invite.graduation-purple .invitation-content{
+ background-color:#eee8f7;
+ background-image:linear-gradient(135deg,#e6d9f4 0 22%,transparent 22% 78%,#d7c8ea 78%),radial-gradient(ellipse at 50% 45%,#fff,transparent 70%)
+}
+.public-invite.graduation-purple .invite-section{background-image:linear-gradient(120deg,transparent 0 48%,#9c83c322 48.2% 51%,transparent 51.2%)}
+.public-invite.graduation-blue .invitation-content{
+ background-color:#e4eff8;
+ background-image:linear-gradient(145deg,#d9eaf6,#f8fcff 48%,#c5dcef),repeating-linear-gradient(0deg,#6d9bc211 0 1px,transparent 1px 24px)
+}
+.public-invite.graduation-blue .invite-section{background-image:linear-gradient(90deg,transparent 0 10%,#6c9dc322 10.2%,transparent 10.5% 89.5%,#6c9dc322 89.8%,transparent 90%)}
+.public-invite.birthday-pastel .invitation-content{
+ background-color:#fff0e9;
+ background-image:radial-gradient(circle at 12% 18%,#e6a6b855 0 7%,transparent 7.5%),radial-gradient(circle at 88% 28%,#d7b0df66 0 8%,transparent 8.5%),radial-gradient(circle at 18% 88%,#f4cb8b66 0 10%,transparent 10.5%),linear-gradient(145deg,#fff5ed,#f7dce4)
+}
+.public-invite.birthday-pastel .invite-section{background-image:radial-gradient(circle,#fff9 0 2px,transparent 3px);background-size:36px 36px}
+.public-invite.birthday-neon .invitation-content{
+ background-color:#171329;
+ background-image:radial-gradient(ellipse at 15% 15%,#a43fbd66,transparent 35%),radial-gradient(ellipse at 85% 82%,#246bb766,transparent 38%),linear-gradient(145deg,#171329,#211b3d 55%,#11182e)
+}
+.public-invite.birthday-neon .invite-section{color:#f7eaff;border-color:#d18cf088;background-image:linear-gradient(135deg,#ffffff09 25%,transparent 25% 50%,#ffffff09 50% 75%,transparent 75%);background-size:30px 30px}
+.public-invite.birthday-neon .invite-section h2,.public-invite.birthday-neon .invite-section h3,.public-invite.birthday-neon .couple-names,.public-invite.birthday-neon .detail strong,.public-invite.birthday-neon .wish strong{color:#f1b5ff}
+.public-invite.birthday-neon .invite-section p,.public-invite.birthday-neon .couple-sub,.public-invite.birthday-neon .countdown small{color:#f2e8ff}
+
+
 @media(max-width:800px){
  .nav{display:none}
  .hero{grid-template-columns:1fr;text-align:center;padding:45px 0}
