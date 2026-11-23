@@ -1167,6 +1167,62 @@ body.public-invitation{height:auto!important;min-height:100vh!important;overflow
 .live-invite.royal-couple .envelope-screen .cin-scene:after,
 .live-invite.first-dance .envelope-screen .cin-scene:after{content:"";position:absolute;inset:0;z-index:3;background:linear-gradient(180deg,#05050633,transparent 40%,#05050699)}
 
+
+/* DA3WA — ROYAL VELVET CINEMATIC INVITATION (full-bleed mobile-first) */
+html:has(body.public-invitation),body.public-invitation{margin:0!important;padding:0!important;background:#080507!important}
+body.public-invitation #publicInvitationPage{width:100%!important;max-width:none!important;margin:0!important;padding:0!important}
+.curtain-invite{--accent:#390813;--accent2:#d6b36d;--surface:#090609;--text:#f7e8c8;background:#080609!important;color:#f7e8c8!important;width:100vw!important;max-width:none!important;margin:0!important;overflow:hidden!important}
+.curtain-invite .envelope-screen{position:relative!important;isolation:isolate;min-height:100svh!important;min-height:100vh!important;width:100%!important;margin:0!important;padding:clamp(24px,5vh,60px) 0!important;display:flex!important;flex-direction:column!important;justify-content:center!important;align-items:center!important;gap:clamp(14px,3vh,28px)!important;overflow:hidden!important;background:#13070b!important}
+.curtain-invite .envelope-screen .scene-art{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;max-width:none!important;margin:0!important;opacity:1!important;filter:none!important;z-index:0!important}
+.curtain-invite .envelope-screen .cin-scene{width:100%!important;height:100%!important;min-height:100%!important;border:0!important;border-radius:0!important;background-image:linear-gradient(180deg,#10070a22,#08060955),url('https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=2200&q=90')!important;background-position:center!important;background-size:cover!important;animation:royalHallDrift 24s ease-in-out infinite alternate}
+.curtain-invite .envelope-screen .cin-scene:after{background:linear-gradient(180deg,#09040870,#09040822 42%,#090408b8)!important}
+.curtain-invite .envelope-screen:before,.curtain-invite .envelope-screen:after{content:"";position:absolute;top:-3%;bottom:-3%;width:53%;z-index:9;pointer-events:none;border:0!important;inset-block:-3%!important;box-shadow:inset 0 0 55px #170208,inset 0 0 12px #f6a0a022,0 15px 45px #000b;transition:transform 2.25s cubic-bezier(.72,0,.18,1),filter 1.7s ease}
+.curtain-invite .envelope-screen:before{left:0;right:auto;background:repeating-linear-gradient(90deg,#24040d00 0 3%,#6b1025aa 4%,#310611 10%,#8b1930 15%,#3b0714 21%,#19030a 27%),linear-gradient(90deg,#160208,#741329 32%,#3a0714 76%,#180208)!important;border-right:3px solid #a54a51!important;transform:translateX(0);clip-path:polygon(0 0,100% 0,92% 12%,100% 26%,92% 43%,100% 61%,91% 78%,100% 100%,0 100%)}
+.curtain-invite .envelope-screen:after{right:0;left:auto;background:repeating-linear-gradient(90deg,#19030a 0%,#3b0714 9%,#8b1930 16%,#310611 23%,#6b1025aa 30%,#24040d00 34%),linear-gradient(270deg,#160208,#741329 32%,#3a0714 76%,#180208)!important;border-left:3px solid #a54a51!important;transform:translateX(0);clip-path:polygon(0 0,100% 0,100% 100%,0 100%,8% 78%,0 61%,8% 43%,0 26%,8% 12%)}
+.curtain-invite .envelope-screen>.tiny,.curtain-invite .envelope-screen>.envelope,.curtain-invite .envelope-screen>.open-hint{position:relative;z-index:12}
+.curtain-invite .envelope-screen>.tiny{color:#f0d39a!important;letter-spacing:5px!important;text-shadow:0 2px 15px #000}
+.curtain-invite .envelope{width:100%!important;height:1px!important;position:absolute!important;inset:50% 0 auto!important;margin:0!important;background:none!important;border:0!important;box-shadow:none!important;z-index:13!important;pointer-events:none}
+.curtain-invite .envelope:before,.curtain-invite .envelope:after,.curtain-invite .envelope-letter{display:none!important}
+.curtain-invite .seal-button{pointer-events:auto!important;position:absolute!important;left:50%!important;top:0!important;transform:translate(-50%,-50%)!important;width:86px!important;height:86px!important;border-radius:50%!important;border:1px solid #f2d99c!important;outline:5px solid #d7b66a25!important;background:radial-gradient(circle at 30% 25%,#f8e3ad,#b58b43 48%,#56350f 100%)!important;color:#4b0b18!important;font:34px Amiri!important;box-shadow:0 7px 24px #000b,inset 0 2px 6px #fff9!important;animation:velvetSealPulse 2.8s ease-in-out infinite}
+.curtain-invite .open-hint{color:#f6e5c0!important;text-align:center!important;text-shadow:0 2px 15px #000;max-width:85%;margin-top:clamp(115px,20vh,190px)!important;letter-spacing:.5px}
+.curtain-invite.opened .envelope-screen:before{transform:translateX(-108%) rotate(-1deg);filter:brightness(.75)}
+.curtain-invite.opened .envelope-screen:after{transform:translateX(108%) rotate(1deg);filter:brightness(.75)}
+.curtain-invite.opened .seal-button{animation:sealExit .7s ease forwards}
+.curtain-invite .invitation-content{position:relative!important;width:100%!important;max-width:none!important;margin:0!important;padding:0!important;overflow:hidden!important;color:#f8e9cc!important;background:#080609!important;background-image:linear-gradient(180deg,#0c080b88,#080609ee),url('https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=2200&q=90')!important;background-position:center top!important;background-size:100% auto!important;background-repeat:repeat-y!important;background-attachment:scroll!important}
+.curtain-invite .invitation-content:before{content:"";position:absolute;inset:0;pointer-events:none;opacity:.28;background:radial-gradient(circle at 12% 13%,#e6c47c 0 1px,transparent 2px),radial-gradient(circle at 83% 39%,#e6c47c 0 1px,transparent 2px),radial-gradient(circle at 45% 76%,#e6c47c 0 1px,transparent 2px);background-size:130px 160px}
+.curtain-invite .invite-section{position:relative!important;z-index:1;width:100%!important;max-width:none!important;min-height:82svh!important;margin:0!important;padding:clamp(85px,13vh,150px) clamp(22px,7vw,90px)!important;display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;text-align:center!important;border:0!important;border-radius:0!important;box-shadow:none!important;background:linear-gradient(180deg,#09060940,#0906099c 20%,#090609a8 80%,#09060955)!important;color:#f7e8ca!important}
+.curtain-invite .invite-section:nth-of-type(odd){background:linear-gradient(180deg,#09060955,#090609a8)!important}
+.curtain-invite .invite-section:nth-of-type(even){background:linear-gradient(180deg,#160b10a8,#080609a8)!important}
+.curtain-invite .invite-section:before,.curtain-invite .invite-section:after{display:none!important}
+.curtain-invite .invite-section h3,.curtain-invite .couple-names,.curtain-invite .ornament,.curtain-invite .invite-kicker{color:#e7c783!important;text-shadow:0 3px 20px #000}
+.curtain-invite .couple-names{font:clamp(42px,9vw,82px)/1.35 Amiri,serif!important;margin:20px 0!important}
+.curtain-invite .couple-sub,.curtain-invite .invite-section p{color:#f6e9d4!important;font:clamp(17px,3.4vw,23px)/2 Amiri,serif!important;text-shadow:0 2px 14px #000}
+.curtain-invite .scene-art{width:min(720px,100%)!important;height:clamp(220px,42vh,470px)!important;margin:0 auto 28px!important;filter:drop-shadow(0 20px 45px #000b)}
+.curtain-invite .scene-art .cin-scene{min-height:100%!important;border-radius:0!important;background-size:cover!important;background-position:center!important}
+.curtain-invite .detail-grid{width:min(760px,100%)!important;display:flex!important;flex-wrap:wrap!important;justify-content:center!important;gap:24px 36px!important;margin:36px auto!important}
+.curtain-invite .detail{flex:1 1 220px!important;max-width:340px!important;padding:12px 8px!important;background:transparent!important;border:0!important;border-bottom:1px solid #d6b36d88!important;border-radius:0!important;box-shadow:none!important;color:#fff1d1!important}
+.curtain-invite .detail span{color:#d9bd80!important}
+.curtain-invite .detail strong{color:#fff5df!important;font:23px Amiri,serif!important}
+.curtain-invite .action-link{background:transparent!important;color:#f2d38f!important;border:1px solid #d6b36d!important;border-radius:2px!important;box-shadow:0 8px 22px #0006!important}
+.curtain-invite .countdown{display:flex!important;flex-wrap:wrap!important;justify-content:center!important;gap:12px!important}
+.curtain-invite .countdown>div{min-width:70px!important;background:transparent!important;border:0!important;border-bottom:1px solid #d6b36d!important;border-radius:0!important;color:#fff!important;box-shadow:none!important}
+.curtain-invite .countdown strong{color:#f2d38f!important}
+.curtain-invite .wish-form{width:min(520px,100%)!important}
+.curtain-invite .wish-form input,.curtain-invite .wish-form textarea,.curtain-invite .wish{background:#120c0fdd!important;color:#fff1d1!important;border:1px solid #b58b4b77!important;border-radius:0!important;box-shadow:none!important}
+.curtain-invite .wish-list{width:min(680px,100%)!important}
+.curtain-invite .watermark{background:#080609!important;color:#c9a969!important;text-align:center!important}
+@keyframes royalHallDrift{from{background-position:50% 42%;transform:scale(1)}to{background-position:50% 56%;transform:scale(1.06)}}
+@keyframes velvetSealPulse{50%{box-shadow:0 7px 28px #000d,inset 0 2px 8px #fff,0 0 32px #d6b36d88!important;transform:translate(-50%,-50%) scale(1.07)}}
+@keyframes sealExit{to{opacity:0;transform:translate(-50%,-50%) scale(.5)}}
+@media(max-width:650px){
+ .curtain-invite .envelope-screen{padding:24px 0!important}
+ .curtain-invite .invite-section{min-height:75svh!important;padding:80px 20px!important}
+ .curtain-invite .scene-art{height:32vh!important;min-height:210px!important}
+ .curtain-invite .detail-grid{gap:16px 12px!important}
+ .curtain-invite .detail{flex-basis:135px!important}
+}
+@media(prefers-reduced-motion:reduce){.curtain-invite *{animation:none!important;transition:none!important}}
+
 </style>
 </head>
 
@@ -1413,7 +1469,7 @@ const templates=[
  {id:"graduation-blue",name:"Blue Achievement",arabic:"إنجاز أزرق",theme:"graduation-blue",kind:"graduation",symbol:"✧",line:"شهادة تتفتح من لفافة زرقاء أنيقة"},
  {id:"birthday-pastel",name:"Pastel Birthday",arabic:"عيد ميلاد باستيل",theme:"birthday-pastel",kind:"birthday",symbol:"♡",line:"كيكة ثلاثية الأبعاد وشموع وبلونات طائرة"},
  {id:"birthday-neon",name:"Neon Party",arabic:"حفلة أضواء",theme:"birthday-neon",kind:"birthday",symbol:"★",line:"بالونات لامعة وكيكة وأضواء حفلة متحركة"},
- {id:"red-star",name:"Red Star Reveal",arabic:"النجمة الحمراء",theme:"red-star",kind:"envelope",symbol:"★",line:"اضغط على النجمة الحمراء لتنكشف دعوة سوداء وذهبية فاخرة"}
+ {id:"red-star",name:"Royal Velvet Curtain",arabic:"الستارة الملكية",theme:"red-star",kind:"envelope",symbol:"✦",line:"ستارة مخملية حمراء تنفتح على قاعة زفاف ملكية"}
 ];
 
 /* IDs القديمة تبقى قابلة للعرض في الدعوات المنشورة سابقاً */
@@ -1760,7 +1816,7 @@ document.addEventListener("keydown",e=>{
   const target=d.event_date?new Date(d.event_date+"T"+(d.start_time||"20:00")+":00").getTime():0;
 
   root.innerHTML=`
-   <div class="public-invite live-invite ${theme}" id="publicInvite">
+   <div class="public-invite live-invite ${theme} ${theme==="red-star"?"curtain-invite":""}" id="publicInvite">
     <section class="envelope-screen">
      <div class="tiny">YOU ARE INVITED</div>
      <div class="scene-art">${sceneMarkup(theme)}</div>
