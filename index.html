@@ -833,23 +833,7 @@ body{background:radial-gradient(ellipse at 50% -15%,#512538 0,#1b0d17 48%,#0c080
    <h2>اختار الباقة المناسبة</h2>
    <p>تقدر تختار الباقة قبل إرسال الطلب.</p>
   </div>
-  <div class="prices">
-   <article class="price">
-    <h3>الأساسية</h3><div class="amount">20,000 <small>د.ع</small></div>
-    <ul><li>دعوة تفاعلية</li><li>الأسماء والتفاصيل</li><li>رابط خاص للمشاركة</li><li>موقع المناسبة</li></ul>
-    <button class="btn" onclick="startOrder('الأساسية')">اختيار الباقة</button>
-   </article>
-   <article class="price featured">
-    <h3>المميزة</h3><div class="amount">40,000 <small>د.ع</small></div>
-    <ul><li>كل مميزات الأساسية</li><li>حركات وانتقالات مميزة</li><li>موسيقى اختيارية</li><li>عداد تنازلي</li></ul>
-    <button class="btn" onclick="startOrder('المميزة')">اختيار الباقة</button>
-   </article>
-   <article class="price">
-    <h3>الملكية</h3><div class="amount">70,000 <small>د.ع</small></div>
-    <ul><li>كل مميزات المميزة</li><li>دفتر تهاني إلكتروني</li><li>تصميم وتنسيق حصري</li><li>مراجعة خاصة للدعوة</li></ul>
-    <button class="btn" onclick="startOrder('الملكية')">اختيار الباقة</button>
-   </article>
-  </div>
+  <div class="prices" id="pricingGrid"></div>
  </div>
 </section>
 
@@ -1004,6 +988,7 @@ try{
   da3waDB=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
  }
 }catch(e){console.error(e)}
+loadPublicPricing();
 
 const templates=[
  {id:"royal-couple",name:"Royal Wedding",arabic:"زفاف ملكي",theme:"royal-couple",kind:"couple",symbol:"♕",line:"العروسان في رقصة ملكية وسط بريق الذهب"},
@@ -1028,7 +1013,12 @@ const oldTemplateMap={
  "royal-ballroom":"midnight-pearl","pearl-garden":"blooming-roses","emerald-gold":"royal-seal"
 };
 
-const prices={"الأساسية":20000,"المميزة":40000,"الملكية":70000};
+let pricingData=[{name:"الأساسية",amount:20000,features:["دعوة تفاعلية","الأسماء والتفاصيل","رابط خاص للمشاركة","موقع المناسبة"]},{name:"المميزة",amount:40000,features:["كل مميزات الأساسية","حركات وانتقالات مميزة","موسيقى اختيارية","عداد تنازلي"]},{name:"الملكية",amount:70000,features:["كل مميزات المميزة","دفتر تهاني إلكتروني","تصميم وتنسيق حصري","مراجعة خاصة للدعوة"]}];
+let prices=Object.fromEntries(pricingData.map(p=>[p.name,p.amount]));
+function escPublic(v){return String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
+function renderPublicPricing(){const grid=$("pricingGrid");if(!grid)return;grid.innerHTML=pricingData.map((p,i)=>`<article class="price ${i===1?"featured":""}"><h3>${escPublic(p.name)}</h3><div class="amount">${Number(p.amount).toLocaleString("en-US")} <small>د.ع</small></div><ul>${p.features.map(f=>"<li>"+escPublic(f)+"</li>").join("")}</ul><button class="btn" onclick="startOrder('${escPublic(p.name).replace(/'/g,"&#39;")}')">اختيار الباقة</button></article>`).join("");const sel=$("orderPackage"),old=sel.value;sel.innerHTML=pricingData.map(p=>`<option value="${escPublic(p.name)}">${escPublic(p.name)}</option>`).join("");if(pricingData.some(p=>p.name===old))sel.value=old;prices=Object.fromEntries(pricingData.map(p=>[p.name,p.amount]));}
+async function loadPublicPricing(){if(!da3waDB)return;try{const {data,error}=await da3waDB.from("site_settings").select("value").eq("key","pricing").maybeSingle();if(error)throw error;if(data?.value&&Array.isArray(data.value)&&data.value.length===3){pricingData=data.value.map(p=>({name:String(p.name||""),amount:Number(p.amount)||0,features:Array.isArray(p.features)?p.features.map(String):[]}));renderPublicPricing();}}catch(e){console.warn("Using default package prices",e);}}
+renderPublicPricing();
 const $=id=>document.getElementById(id);
 let selectedTemplate=templates[0];
 let selectedPayment="";
