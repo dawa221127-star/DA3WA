@@ -498,7 +498,7 @@ button.secondary,.tab{background:#392330;color:#f2dfc0;border:1px solid #8a6948}
           <div><label for="musicLibraryFile">ملف الأغنية (MP3)</label><input id="musicLibraryFile" type="file" accept=".mp3,audio/mpeg"></div>
           <div class="music-upload-action"><button type="button" id="uploadLibrarySongBtn">رفع إلى المكتبة</button></div>
         </div>
-        <p class="muted">الحد الأقصى لكل أغنية 12MB. الأغاني تبقى محفوظة في التخزين وتظهر هنا للاختيار.</p>
+        <p class="muted">الحد الأقصى لكل أغنية 100MB، بشرط أن تسمح إعدادات Supabase Storage بهذا الحجم. الأغاني تبقى محفوظة في التخزين وتظهر هنا للاختيار.</p>
         <p id="musicLibraryMessage" class="muted" role="status"></p>
         <div id="musicLibraryList" class="music-library-list"></div>
       </section>
@@ -776,7 +776,7 @@ $("uploadLibrarySongBtn").addEventListener("click",async()=>{
   const btn=$("uploadLibrarySongBtn");
   if(!file){msg.textContent="اختار ملف MP3 أولاً.";return;}
   if(!/^audio\/(mpeg|mp3)$/i.test(file.type)&&!/\.mp3$/i.test(file.name)){msg.textContent="ارفع ملف MP3 فقط.";return;}
-  if(file.size>12*1024*1024){msg.textContent="حجم الأغنية أكبر من 12MB.";return;}
+  if(file.size>100*1024*1024){msg.textContent="حجم الأغنية أكبر من 100MB. قلّل حجم الملف وحاول مرة ثانية.";return;}
   const title=$("musicLibraryTitle").value.trim()||safeMusicTitle(file);
   const ext=".mp3";
   const path="library/"+crypto.randomUUID()+ext;
