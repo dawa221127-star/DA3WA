@@ -1294,33 +1294,52 @@ body.public-invitation #publicInvitationPage{width:100%!important;max-width:none
 @keyframes gcLight{from{transform:rotate(-8deg);opacity:.45}to{transform:rotate(8deg);opacity:.9}}@keyframes gcSpark{0%,100%{transform:translateY(0);opacity:.65}50%{transform:translateY(7px);opacity:1}}@keyframes gcDust{to{background-position:0 -260px}}@media(max-width:600px){.live-invite.parchment .parchment-scroll{inset:10% 7%}}
 
 
-/* Wish Door — interactive grand entrance */
-.wish-door-art{position:relative;width:100%;height:100%;min-height:250px;overflow:hidden;display:grid;place-items:center;background:radial-gradient(ellipse at 50% 42%,#526b5d,#182b2a 58%,#091414);isolation:isolate}
-.wish-door-glow{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 42%,#fff0c766,transparent 48%);animation:wishGlow 4s ease-in-out infinite alternate}
-.wish-door-frame{position:relative;width:min(54%,330px);height:78%;min-height:200px;border:9px solid #8d6739;border-bottom:0;border-radius:48% 48% 0 0;background:linear-gradient(90deg,#34251a,#d4b277 10%,#634628 18%,#1b2925 50%,#634628 82%,#d4b277 90%,#34251a);box-shadow:0 0 0 5px #e4c88d66,0 0 40px #f2d39b66,inset 0 0 35px #000}
-.wish-door-frame:before{content:"";position:absolute;inset:12px 12px 0;border:2px solid #d6b77b;border-bottom:0;border-radius:48% 48% 0 0;pointer-events:none}
-.wish-door-leaf{position:absolute;top:8%;bottom:0;width:50%;background:repeating-linear-gradient(90deg,#172d2a 0 9%,#365047 10%,#172923 20%);border:3px solid #b58b4e;box-shadow:inset 0 0 22px #050c0a,0 0 12px #0008;transition:transform 2.25s cubic-bezier(.72,0,.2,1);transform-origin:center}
-.wish-door-leaf.left{left:0;border-radius:100% 0 0 0;border-right:1px solid #e3c889}.wish-door-leaf.right{right:0;border-radius:0 100% 0 0;border-left:1px solid #e3c889}
-.wish-door-leaf:before{content:"";position:absolute;inset:12% 13% 9%;border:2px solid #c4a16a;border-radius:48% 48% 4px 4px;box-shadow:inset 0 0 14px #d9b87933}
-.wish-door-leaf:after{content:"";position:absolute;left:50%;top:48%;width:30%;height:25%;transform:translateX(-50%);border:2px solid #c4a16a;border-radius:45% 45% 4px 4px}
-.wish-door-knob{position:absolute;z-index:3;top:55%;width:9px;height:9px;border-radius:50%;background:radial-gradient(circle at 30% 25%,#fff1c4,#b7863d 65%,#51371c);box-shadow:0 0 8px #e5c47c}.wish-door-knob.left{left:44%}.wish-door-knob.right{right:44%}
-.wish-door-emblem{position:absolute;z-index:4;top:24%;left:50%;transform:translateX(-50%);color:#f3d99e;text-shadow:0 0 12px #e8c17a;font-size:25px}
-.wish-door-caption{position:absolute;bottom:4%;color:#f5e5c4;font:clamp(18px,3vw,28px) Amiri,serif;letter-spacing:2px;text-shadow:0 2px 12px #000}
-.live-invite.door-birds .envelope-screen{background:radial-gradient(ellipse at 50% 40%,#526b5d,#182b2a 58%,#091414)!important;overflow:hidden}
+/* Wish Door — cinematic, realistic double-door entrance */
+.wish-door-art{position:relative;width:100%;height:100%;min-height:100svh;overflow:hidden;display:grid;place-items:center;background:radial-gradient(ellipse at 50% 44%,#455d4d 0,#20372f 39%,#101d1b 76%,#070d0d 100%);isolation:isolate;perspective:1500px}
+.wish-door-atmosphere{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 48%,#d8b97820,transparent 38%),linear-gradient(180deg,#07100e55,transparent 45%,#05090999);z-index:0}
+.wish-door-glow{position:absolute;z-index:1;inset:0;background:radial-gradient(ellipse at 50% 45%,#fff0c733,transparent 50%);animation:wishGlow 4s ease-in-out infinite alternate}
+.wish-door-floor{position:absolute;z-index:1;left:-20%;right:-20%;bottom:-8%;height:32%;background:repeating-linear-gradient(90deg,#19251f 0 2px,#314237 3px 5px,#1a2922 7px 90px);transform:perspective(300px) rotateX(57deg);transform-origin:bottom;box-shadow:0 -20px 50px #0009}
+.wish-door-frame{position:relative;z-index:3;width:min(68vw,510px);height:min(75vh,700px);min-height:390px;border:14px solid #70502e;border-bottom:0;border-radius:48% 48% 0 0;background:linear-gradient(90deg,#261c13,#b58b4d 4%,#49321f 9%,#172820 15%,#1a2a23 50%,#172820 85%,#49321f 91%,#b58b4d 96%,#261c13);box-shadow:0 0 0 5px #d9bb7c66,0 0 55px #f2d39b44,inset 0 0 40px #000;transform:translateY(3%)}
+.wish-door-frame:before{content:"";position:absolute;z-index:7;inset:10px 10px 0;border:3px double #d5b779;border-bottom:0;border-radius:48% 48% 0 0;box-shadow:inset 0 0 22px #e7c98622,0 0 12px #d8b36c55;pointer-events:none}
+.wish-door-frame:after{content:"";position:absolute;z-index:8;inset:-17px -17px 0;border:2px solid #9b7946;border-bottom:0;border-radius:49% 49% 0 0;pointer-events:none}
+.wish-door-portal{position:absolute;inset:5% 5% 0;background:#080e0b;overflow:hidden;box-shadow:inset 0 0 45px #000;z-index:0}
+.wish-portal-light{position:absolute;inset:-15%;background:radial-gradient(ellipse at 50% 45%,#fff8d9 0,#f5d995 9%,#d8a94e88 22%,#f3d18c22 42%,transparent 65%);opacity:.42;transition:opacity 1.4s ease,transform 2s ease;transform:scale(.8)}
+.wish-portal-rays{position:absolute;inset:-20%;background:repeating-conic-gradient(from 0deg at 50% 48%,#ffe9ad22 0deg 2deg,transparent 2deg 16deg);opacity:0;filter:blur(8px);transition:opacity 1.2s ease}
+.wish-door-leaf{position:absolute;z-index:4;top:7%;bottom:0;width:50%;overflow:hidden;background:linear-gradient(90deg,#120f0b 0%,#4a2c18 7%,#8c5a2e 13%,#56351e 20%,#a16e3d 34%,#56351e 50%,#8a5c34 68%,#3b281a 88%,#17120d 100%);border:5px solid #b38a4c;box-shadow:inset 0 0 0 4px #3b2818,inset 0 0 0 7px #d2aa65,inset 0 0 30px #080604,0 0 18px #000b;transition:transform 2.5s cubic-bezier(.68,-.04,.18,1);transform-style:preserve-3d;backface-visibility:visible}
+.wish-door-leaf:before{content:"";position:absolute;inset:3% 7%;border:2px solid #d3ae6d;box-shadow:inset 0 0 0 3px #432a18,inset 0 0 18px #130b05,0 0 5px #f0cf8b55;background:repeating-linear-gradient(90deg,#ffffff08 0 2px,transparent 2px 11px),linear-gradient(90deg,#24160e55,#d8a76b22 22%,#170e0822 50%,#d8a76b22 78%,#24160e55);pointer-events:none}
+.wish-door-leaf:after{content:"";position:absolute;inset:8% 13%;border:1px solid #e2c17e;border-radius:46% 46% 3px 3px;box-shadow:inset 0 0 0 5px #56351e,inset 0 0 0 7px #c89a58,inset 0 0 24px #0c0805;pointer-events:none}
+.wish-door-leaf.left{left:0;border-radius:100% 0 0 0;border-right:2px solid #e4c98b;transform-origin:left center}
+.wish-door-leaf.right{right:0;border-radius:0 100% 0 0;border-left:2px solid #e4c98b;transform-origin:right center}
+.door-panel{position:absolute;z-index:2;left:17%;width:66%;border:3px solid #c49a5d;border-radius:44% 44% 5px 5px;box-shadow:inset 0 0 0 3px #442a18,inset 0 0 18px #120a05,0 2px 9px #100904;background:linear-gradient(110deg,#3a2113,#9a6638 24%,#4b2b17 55%,#a47745 78%,#2a190f)}
+.panel-top{top:13%;height:25%}.panel-mid{top:43%;height:22%;border-radius:12px}.panel-bottom{top:70%;height:21%;border-radius:10px}
+.door-carving{position:absolute;z-index:3;top:34%;left:50%;transform:translateX(-50%);font-style:normal;color:#e7c27d;font-size:clamp(24px,4vw,42px);text-shadow:0 1px 4px #1a0e06,0 0 10px #f5d18a66}
+.wish-door-knob{position:absolute;z-index:9;top:53%;width:17px;height:17px;border-radius:50%;background:radial-gradient(circle at 28% 22%,#fff6d6 0,#e5c276 18%,#94652c 58%,#3d2813 80%);border:1px solid #f2d79c;box-shadow:0 0 0 3px #4b321b,0 0 12px #e6c17b88}
+.wish-door-knob.left{left:46%}.wish-door-knob.right{right:46%}
+.wish-door-hinge{position:absolute;z-index:8;top:24%;height:8%;width:9px;border-radius:3px;background:linear-gradient(90deg,#533719,#e4c27c,#78532a);box-shadow:0 0 4px #000}
+.hinge-left{left:-5px}.hinge-right{right:-5px;top:24%}
+.wish-door-emblem{position:absolute;z-index:10;top:21%;left:50%;transform:translateX(-50%);color:#f5dda2;text-shadow:0 0 12px #e8c17a;font-size:clamp(24px,4vw,34px)}
+.wish-door-caption{position:absolute;z-index:12;bottom:8%;color:#f5e5c4;font:clamp(20px,3vw,30px) Amiri,serif;letter-spacing:1px;text-shadow:0 2px 15px #000}
+.live-invite.door-birds .envelope-screen{background:#0b1713!important;overflow:hidden}
 .live-invite.door-birds .envelope-screen>.scene-art{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;z-index:1}
-.live-invite.door-birds .wish-door-art{height:100%;min-height:100%;padding-bottom:40px}
-.live-invite.door-birds .wish-door-frame{width:min(62vw,410px);height:72%;min-height:280px}
-.live-invite.door-birds .opened .wish-door-art .wish-door-leaf{}
-.live-invite.door-birds.opened .wish-door-leaf.left{transform:perspective(900px) rotateY(-108deg);transform-origin:left center}
-.live-invite.door-birds.opened .wish-door-leaf.right{transform:perspective(900px) rotateY(108deg);transform-origin:right center}
-.live-invite.door-birds .wish-door-birds{position:absolute;inset:0;z-index:8;pointer-events:none;overflow:hidden}
-.wish-flying-bird{position:absolute;left:50%;top:47%;font-size:clamp(20px,4vw,34px);opacity:0;filter:drop-shadow(0 2px 5px #10201c);animation:wishBirdFly 2.8s cubic-bezier(.18,.7,.25,1) forwards;animation-delay:var(--delay)}
-.live-invite.door-birds .seal-button{position:relative;z-index:10;background:radial-gradient(circle at 30% 25%,#fff0c9,#c19a5b 55%,#76502b)!important;color:#294039!important;border:3px double #f8e7c2!important;box-shadow:0 0 25px #f0d59a88!important}
-.live-invite.door-birds .open-hint{position:relative;z-index:10;color:#f8ebcf!important}
+.live-invite.door-birds .wish-door-art{height:100%;min-height:100svh;padding-bottom:0}
+.live-invite.door-birds .wish-door-frame{width:min(76vw,540px);height:min(76vh,720px);min-height:390px}
+.live-invite.door-birds.opened .wish-door-leaf.left{transform:perspective(1300px) rotateY(-112deg)}
+.live-invite.door-birds.opened .wish-door-leaf.right{transform:perspective(1300px) rotateY(112deg)}
+.live-invite.door-birds.opened .wish-portal-light{opacity:1;transform:scale(1.65)}
+.live-invite.door-birds.opened .wish-portal-rays{opacity:.9;animation:wishRayPulse 2.8s ease-out both}
+.live-invite.door-birds .wish-door-birds{position:absolute;inset:0;z-index:11;pointer-events:none;overflow:hidden}
+.wish-flying-bird{position:absolute;left:50%;top:49%;font-size:clamp(24px,4.5vw,43px);opacity:0;color:#fff;filter:drop-shadow(0 2px 8px #fff9);animation:wishBirdFly 3.4s cubic-bezier(.18,.7,.25,1) forwards;animation-delay:var(--delay)}
+.wish-spark{position:absolute;left:50%;top:53%;width:var(--size);height:var(--size);border-radius:50%;background:#fff1bf;box-shadow:0 0 8px 3px #ffe4a477,0 0 22px #fff8;opacity:0;animation:wishSparkFly 2.8s ease-out forwards;animation-delay:var(--delay)}
+.live-invite.door-birds .seal-button{position:relative;z-index:14;background:radial-gradient(circle at 30% 25%,#fff0c9,#c19a5b 55%,#76502b)!important;color:#294039!important;border:3px double #f8e7c2!important;box-shadow:0 0 25px #f0d59a88!important}
+.live-invite.door-birds .open-hint{position:relative;z-index:14;color:#f8ebcf!important}
 .live-invite.door-birds .invite-section{background:linear-gradient(180deg,#f2e8d4,#d9c6a2)!important;color:#34423a!important}.live-invite.door-birds .invite-section h2,.live-invite.door-birds .invite-section h3,.live-invite.door-birds .couple-names,.live-invite.door-birds .ornament,.live-invite.door-birds .invite-kicker{color:#927044!important}
-@keyframes wishBirdFly{0%{opacity:0;transform:translate(-50%,0) scale(.5) rotate(-8deg)}12%{opacity:1}100%{opacity:0;transform:translate(calc(-50% + var(--x)),var(--y)) scale(1.25) rotate(16deg)}}
-@keyframes wishGlow{from{opacity:.55;transform:scale(.96)}to{opacity:1;transform:scale(1.05)}}
-@media(max-width:600px){.live-invite.door-birds .wish-door-frame{width:76vw;height:68%;min-height:250px}.live-invite.door-birds .seal-button{width:62px;height:62px}}
+@keyframes wishBirdFly{0%{opacity:0;transform:translate(-50%,0) scale(.35) rotate(-12deg)}12%{opacity:1}100%{opacity:0;transform:translate(calc(-50% + var(--x)),var(--y)) scale(1.45) rotate(22deg)}}
+@keyframes wishSparkFly{0%{opacity:0;transform:translate(-50%,0) scale(.2)}15%{opacity:1}100%{opacity:0;transform:translate(calc(-50% + var(--x)),var(--y)) scale(0)}}
+@keyframes wishGlow{from{opacity:.4;transform:scale(.94)}to{opacity:1;transform:scale(1.08)}}
+@keyframes wishRayPulse{0%{opacity:0;transform:scale(.6) rotate(0)}35%{opacity:1}100%{opacity:.35;transform:scale(1.5) rotate(18deg)}}
+@media(max-width:600px){.live-invite.door-birds .wish-door-frame{width:88vw;height:66vh;min-height:340px}.wish-door-knob{width:13px;height:13px}.wish-door-caption{bottom:7%}}
+@media(prefers-reduced-motion:reduce){.wish-door-leaf,.wish-portal-light,.wish-portal-rays{transition-duration:.01ms!important}.wish-flying-bird,.wish-spark{animation-duration:.01ms!important}}
+
 
 </style>
 </head>
@@ -1611,7 +1630,7 @@ function getTemplate(id){
 /* مشاهد فوتوغرافية للقوالب — ملفات الصور داخل assets/ */
 function sceneMarkup(theme){
  const t=templates.find(x=>x.theme===theme)||templates[0];
- if(theme==="door-birds")return `<div class="wish-door-art"><div class="wish-door-glow"></div><div class="wish-door-frame"><div class="wish-door-leaf left"></div><div class="wish-door-leaf right"></div><div class="wish-door-knob left"></div><div class="wish-door-knob right"></div><div class="wish-door-emblem">✦</div></div><div class="wish-door-caption">باب الأمنيات</div></div>`;
+ if(theme==="door-birds")return `<div class="wish-door-art"><div class="wish-door-atmosphere"></div><div class="wish-door-glow"></div><div class="wish-door-floor"></div><div class="wish-door-frame"><div class="wish-door-portal"><span class="wish-portal-light"></span><span class="wish-portal-rays"></span></div><div class="wish-door-leaf left"><i class="door-panel panel-top"></i><i class="door-panel panel-mid"></i><i class="door-panel panel-bottom"></i><i class="door-carving">❦</i></div><div class="wish-door-leaf right"><i class="door-panel panel-top"></i><i class="door-panel panel-mid"></i><i class="door-panel panel-bottom"></i><i class="door-carving">❦</i></div><div class="wish-door-knob left"></div><div class="wish-door-knob right"></div><div class="wish-door-hinge hinge-left"></div><div class="wish-door-hinge hinge-right"></div><div class="wish-door-emblem">✦</div></div><div class="wish-door-caption">اضغط لفتح الدعوة</div><div class="wish-door-birds"></div></div>`;
  if(theme==="golden-cinema")return `<div class="golden-cinema-art"><div class="gc-light"></div><div class="gc-arch"></div><div class="gc-chandelier">✧</div><div class="gc-title">ليلة من العمر</div><div class="gc-dust"></div></div>`;
  if(theme==="parchment")return `<div class="parchment-art"><div class="parchment-scroll"><div class="parchment-roll"></div><div class="parchment-copy"><small>بِسْمِ اللهِ الرَّحْمٰنِ الرَّحِيم</small><b>دعوة لحضور</b><i>❦</i><span>أجمل المناسبات</span></div><div class="parchment-roll"></div></div></div>`;
  if(theme==="baghdad-ivory")return `<div class="baghdad-book-art" aria-hidden="true"><div class="baghdad-book-sun"></div><div class="baghdad-book-stars">✦　✧　✦</div><svg class="baghdad-illustration" viewBox="0 0 900 650" preserveAspectRatio="xMidYMid slice"><defs><linearGradient id="biSky" x2="0" y2="1"><stop stop-color="#e7d7b9"/><stop offset="1" stop-color="#f5ead6"/></linearGradient><linearGradient id="biGold" x2="0" y2="1"><stop stop-color="#d2b47d"/><stop offset="1" stop-color="#987344"/></linearGradient></defs><path fill="url(#biSky)" d="M0 0H900V650H0z"/><circle cx="700" cy="130" r="78" fill="#fff8e8" opacity=".5"/><path d="M0 480Q180 450 350 485T900 470V650H0Z" fill="#c9b28e" opacity=".35"/><g stroke="#9b784b" stroke-width="4" stroke-linejoin="round" fill="#d7c29e"><path d="M55 470V340h108v130z"/><path d="M75 340q38-82 76 0z" fill="url(#biGold)"/><path d="M205 470V295h68v175z"/><path d="M205 295q34-72 68 0z"/><path d="M320 470V360h260v110z"/><path d="M345 360q105-190 210 0z" fill="url(#biGold)"/><path d="M385 470V390h130v80z"/><path d="M620 470V330h148v140z"/><path d="M638 330q46-100 92 0z" fill="url(#biGold)"/><path d="M770 470V365h130v105z"/><path d="M786 365q34-75 68 0z"/></g><path d="M0 485H900" stroke="#9b784b" stroke-width="4"/><g fill="none" stroke="#b18a52" stroke-width="2" opacity=".8"><path d="M20 40h860v570H20z"/><path d="M34 54h832v542H34z"/></g></svg><div class="baghdad-book-title">بغداد<span>مدينة الحب والفرح</span></div><div class="baghdad-book-dust"></div></div>`;
@@ -2029,7 +2048,7 @@ document.addEventListener("keydown",e=>{
    inviteRoot.classList.add("opened");
    if(inviteRoot.classList.contains("door-birds")){
     const flock=inviteRoot.querySelector(".wish-door-birds");
-    if(flock)flock.innerHTML=Array.from({length:22},(_,i)=>`<span class="wish-flying-bird" style="--i:${i};--x:${(i%11-5)*58}px;--y:${-100-(i%6)*48}px;--delay:${(i%8)*85}ms">🕊</span>`).join("");
+    if(flock){const birds=Array.from({length:28},(_,i)=>`<span class="wish-flying-bird" style="--x:${(i%14-7)*76}px;--y:${-130-(i%7)*62}px;--delay:${(i%10)*95}ms">🕊</span>`);const sparks=Array.from({length:42},(_,i)=>`<i class="wish-spark" style="--size:${2+(i%4)*2}px;--x:${(i%14-7)*68}px;--y:${-80-(i%9)*55}px;--delay:${(i%12)*75}ms"></i>`);flock.innerHTML=birds.concat(sparks).join("");}
    }
    const invitationMusic=$("invitationBackgroundMusic");
    if(invitationMusic){invitationMusic.volume=0.85;const playAttempt=invitationMusic.play();if(playAttempt&&typeof playAttempt.catch==="function")playAttempt.catch(error=>console.warn("Invitation music autoplay was blocked:",error));}
