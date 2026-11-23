@@ -176,6 +176,36 @@ a{color:inherit;text-decoration:none}
 .hidden{display:none!important}
 button:disabled{opacity:.6;cursor:not-allowed}
 
+/* القوالب الفوتوغرافية الأربعة */
+.scene-art,.art-scene{position:relative;isolation:isolate;overflow:hidden}
+.scene-photo{position:absolute;inset:0;background-size:cover;background-position:center;transform:scale(1.02);transition:transform 1.2s ease,filter 1s ease}
+.scene-photo:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,#1c15101c 0%,#1c151044 100%)}
+.template:hover .scene-photo{transform:scale(1.09)}
+.photo-royal-couple{background-image:url("https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1100&q=85")}
+.photo-silk-gold{background-image:url("https://images.unsplash.com/photo-1607344645866-009c320b63e0?auto=format&fit=crop&w=1100&q=85")}
+.photo-emerald-gold{background-image:url("https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=1100&q=85")}
+.photo-midnight-pearl{background-image:url("https://images.unsplash.com/photo-1519167758481-83f550bb49b3?auto=format&fit=crop&w=1100&q=85")}
+.theme-emerald-gold{background:linear-gradient(145deg,#092e27,#17624d);color:#e6d2a0}
+.theme-midnight-pearl{background:linear-gradient(145deg,#101b32,#52617b);color:#e5d9c6}
+.live-invite.emerald-gold{--accent:#185342;--accent2:#c5a76a;--surface:#f6f4eb;--text:#263b34}
+.live-invite.midnight-pearl{--accent:#263652;--accent2:#c8cbd4;--surface:#f7f7f8;--text:#283044}
+.live-invite.emerald-gold .envelope-screen{background:linear-gradient(135deg,#092e27,#17624d,#0b352d)}
+.live-invite.midnight-pearl .envelope-screen{background:linear-gradient(135deg,#101b32,#3d4d6a,#111a2b)}
+.live-invite.emerald-gold .envelope{background:linear-gradient(135deg,#0b392f,#1c604d);border:2px solid #c5a76a}
+.live-invite.midnight-pearl .envelope{background:linear-gradient(135deg,#17243d,#3b4962);border:2px solid #c8cbd4}
+.live-invite.emerald-gold .seal-button{background:#c5a76a;color:#123a30}
+.live-invite.midnight-pearl .seal-button{background:#d8dbe2;color:#263652}
+.live-invite.silk-gold .envelope:before{background:linear-gradient(135deg,#e9d5b4,#b58a56);opacity:1}
+.live-invite.silk-gold .envelope{box-shadow:0 24px 55px #4d321d55}
+.envelope{perspective:900px}
+.envelope:before{transform-origin:top center;backface-visibility:hidden;transition:transform .75s cubic-bezier(.2,.75,.25,1);z-index:6}
+.live-invite.opened .envelope:before{transform:rotateX(180deg)}
+.envelope-letter{position:absolute;z-index:0;left:9%;right:9%;bottom:8px;height:76%;background:linear-gradient(160deg,#fffdf7,#f0e5d2);box-shadow:0 2px 9px #24150d30;transform:translateY(35px);opacity:0}
+.live-invite.opened .envelope-letter{animation:letterRise .9s .18s ease forwards}
+@keyframes letterRise{0%{transform:translateY(35px);opacity:0}55%{opacity:1}100%{transform:translateY(-28px);opacity:1}}
+.live-invite.opened .seal-button{animation:sealBreak .5s ease forwards}
+@keyframes sealBreak{0%{transform:scale(1) rotate(0)}35%{transform:scale(1.16) rotate(12deg)}100%{transform:scale(.1) rotate(-35deg);opacity:0}}
+
 /* الرسوم المتحركة المشتركة */
 .scene-art{width:min(360px,88%);height:225px;position:relative;display:grid;place-items:center;margin:12px auto 18px;z-index:3}
 .scene-art svg{width:100%;height:100%;overflow:visible}
@@ -441,7 +471,7 @@ body.public-invitation > *:not(#publicInvitationPage){display:none!important}
      <section class="envelope-screen">
       <div class="tiny">YOU ARE INVITED</div>
       <div class="scene-art" id="previewScene"></div>
-      <div class="envelope"><button class="seal-button" onclick="openEnvelope()">د</button></div>
+      <div class="envelope"><span class="envelope-letter" aria-hidden="true"></span><button class="seal-button" onclick="openEnvelope()">د</button></div>
       <div class="open-hint" id="openHint">اضغط على الختم لفتح دعوتك</div>
       <div class="tiny" style="margin-top:20px">DA3WA · A SPECIAL MOMENT</div>
      </section>
@@ -567,34 +597,36 @@ try{
 }catch(e){console.error(e)}
 
 const templates=[
- {id:"royal-couple",name:"The Couple",arabic:"العروسان",theme:"royal-couple",symbol:"♕",line:"العروس والعريس بإطلالة ملكية"},
- {id:"first-dance",name:"First Dance",arabic:"الرقصة الأولى",theme:"first-dance",symbol:"♡",line:"مشهد رومانسي لرقصة العروسين"},
- {id:"forever-together",name:"Forever Together",arabic:"معاً للأبد",theme:"forever-together",symbol:"◇",line:"لحظة تبادل الخواتم"},
- {id:"silk-gold",name:"Silk & Gold",arabic:"الحرير والذهب",theme:"silk-gold",symbol:"❧",line:"أقمشة حريرية ولمسات ذهبية"},
- {id:"blooming-roses",name:"Blooming Roses",arabic:"الورود المتفتحة",theme:"blooming-roses",symbol:"❀",line:"ورود تتفتح وبتلات تتساقط"},
- {id:"champagne-glow",name:"Champagne Glow",arabic:"وهج الشامبين",theme:"champagne-glow",symbol:"✧",line:"ذرات ذهبية مضيئة"},
- {id:"swan-elegance",name:"Swan Elegance",arabic:"أناقة البجع",theme:"swan-elegance",symbol:"♧",line:"بجعتان فوق الماء"},
- {id:"golden-rings",name:"Golden Rings",arabic:"الخواتم الذهبية",theme:"golden-rings",symbol:"◇",line:"خاتمان ذهبيان يلتقيان"},
- {id:"royal-ballroom",name:"Royal Ballroom",arabic:"القاعة الملكية",theme:"royal-ballroom",symbol:"✦",line:"ثريا كريستالية وستائر ملكية"},
- {id:"pearl-garden",name:"Pearl Garden",arabic:"حديقة اللؤلؤ",theme:"pearl-garden",symbol:"❖",line:"لآلئ وزهور وإطار عاجي"}
+ {id:"royal-couple",name:"Ivory & Champagne",arabic:"العاجي والشمبانيا",theme:"royal-couple",symbol:"♕",line:"أناقة العاجي ولمسات الشمبانيا الذهبية"},
+ {id:"silk-gold",name:"Silk Envelope",arabic:"الظرف الحريري",theme:"silk-gold",symbol:"❧",line:"ظرف حريري وختم شمعي يُفتح باللمس"},
+ {id:"emerald-gold",name:"Emerald & Gold",arabic:"الزمردي والذهبي",theme:"emerald-gold",symbol:"❖",line:"أخضر زمردي وتفاصيل ذهبية راقية"},
+ {id:"midnight-pearl",name:"Midnight Pearl",arabic:"لؤلؤة منتصف الليل",theme:"midnight-pearl",symbol:"✦",line:"كحلي عميق ولمسات فضية لؤلؤية"}
 ];
 
 /* IDs القديمة تبقى قابلة للعرض في الدعوات المنشورة سابقاً */
 const oldTemplateMap={
  royal:"royal-couple",
- floral:"blooming-roses",
- minimal:"pearl-garden",
- midnight:"champagne-glow",
- champagne:"silk-gold",
+ floral:"silk-gold",
+ minimal:"midnight-pearl",
+ midnight:"midnight-pearl",
+ champagne:"royal-couple",
  parchment:"silk-gold",
- "royal-seal":"golden-rings",
- "garden-romance":"blooming-roses",
- "midnight-love":"champagne-glow",
- "pearl-elegance":"pearl-garden",
- andalusian:"pearl-garden",
- "golden-cinema":"royal-ballroom",
- "watercolor-dreams":"blooming-roses",
- "heritage-gold":"silk-gold"
+ "royal-seal":"emerald-gold",
+ "garden-romance":"silk-gold",
+ "midnight-love":"midnight-pearl",
+ "pearl-elegance":"midnight-pearl",
+ andalusian:"royal-couple",
+ "golden-cinema":"midnight-pearl",
+ "watercolor-dreams":"silk-gold",
+ "heritage-gold":"royal-couple",
+ "first-dance":"royal-couple",
+ "forever-together":"royal-couple",
+ "blooming-roses":"silk-gold",
+ "champagne-glow":"royal-couple",
+ "swan-elegance":"midnight-pearl",
+ "golden-rings":"emerald-gold",
+ "royal-ballroom":"midnight-pearl",
+ "pearl-garden":"midnight-pearl"
 };
 
 const prices={"الأساسية":20000,"المميزة":40000,"الملكية":70000};
@@ -611,149 +643,9 @@ function getTemplate(id){
  templates[0];
 }
 
-/* رسومات SVG متجهية: خفيفة وتتحرك داخل المتصفح */
+/* مشاهد فوتوغرافية للقوالب الأربعة */
 function sceneMarkup(theme){
- const scenes={
- "royal-couple":`
- <svg viewBox="0 0 340 220" role="img" aria-label="رسم العروس والعريس">
-  <defs><linearGradient id="dressA" x2="0" y2="1"><stop stop-color="#fffdf7"/><stop offset="1" stop-color="#d9c7a5"/></linearGradient><linearGradient id="suitA"><stop stop-color="#47352d"/><stop offset="1" stop-color="#171719"/></linearGradient></defs>
-  <ellipse cx="170" cy="199" rx="115" ry="9" fill="#987c52" opacity=".22"/>
-  <g class="sway">
-   <path d="M100 91 Q68 115 56 198 Q100 211 145 198 Q133 130 120 91Z" fill="url(#dressA)" stroke="#b99b6c" stroke-width="1.5"/>
-   <path d="M104 89 Q75 105 45 168 Q72 174 92 150Z" fill="#fffaf0" opacity=".8"/>
-   <path d="M100 93 Q70 120 80 190" fill="none" stroke="#c7ad84" stroke-width="2"/>
-   <circle cx="110" cy="60" r="20" fill="#e9c5a9"/>
-   <path d="M91 58 Q91 28 116 35 Q137 42 128 68 Q119 47 96 48Z" fill="#604638"/>
-   <path d="M91 57 Q78 91 98 112 Q108 92 103 76" fill="#fffaf0" opacity=".7"/>
-   <path d="M96 43 Q110 20 129 39" fill="none" stroke="#d9c39b" stroke-width="3"/>
-   <path d="M91 81 Q75 98 87 119" fill="none" stroke="#e9c5a9" stroke-width="7" stroke-linecap="round"/>
-   <path d="M125 81 Q143 99 151 111" fill="none" stroke="#e9c5a9" stroke-width="7" stroke-linecap="round"/>
-  </g>
-  <g class="float-delay">
-   <path d="M190 91 L230 91 L250 197 L174 197Z" fill="url(#suitA)"/>
-   <path d="M190 91 L210 112 L230 91 L222 137 L198 137Z" fill="#fff8e9"/>
-   <path d="M190 91 L210 112 L198 137 L181 103Z" fill="#6b4c3c"/>
-   <path d="M230 91 L210 112 L222 137 L240 103Z" fill="#6b4c3c"/>
-   <circle cx="210" cy="59" r="19" fill="#dcb99b"/>
-   <path d="M191 56 Q191 31 213 35 Q231 37 231 57 Q214 43 194 49Z" fill="#332b28"/>
-   <path d="M205 112 L210 124 L215 112" fill="none" stroke="#c7a36d" stroke-width="2"/>
-   <path d="M191 79 L180 105 M229 79 L241 105" stroke="#dcb99b" stroke-width="7" stroke-linecap="round"/>
-  </g>
-  <g class="glow" fill="none" stroke="#c9a76c" stroke-width="1.4"><path d="M55 42 Q170 -8 285 42"/><path d="M68 33 Q170 -2 272 33"/></g>
-  <g class="twinkle" fill="#c9a76c"><path d="M45 70l4 8 8 4-8 4-4 8-4-8-8-4 8-4z"/><path d="M286 83l3 6 6 3-6 3-3 6-3-6-6-3 6-3z"/></g>
- </svg>`,
- "first-dance":`
- <svg viewBox="0 0 340 220" role="img" aria-label="العروسان يرقصان">
-  <ellipse cx="170" cy="195" rx="120" ry="12" fill="#e5d0a8" opacity=".3"/>
-  <path d="M60 190 Q170 170 280 190" fill="none" stroke="#e5cf9e" stroke-width="2"/>
-  <g class="sway">
-   <path d="M115 91 Q82 112 65 190 Q120 207 163 190 Q145 129 135 91Z" fill="#fff7e8" stroke="#d5bd92" stroke-width="2"/>
-   <circle cx="125" cy="61" r="18" fill="#e9c5a9"/>
-   <path d="M107 61 Q104 34 130 39 Q146 43 141 66 Q128 49 110 52Z" fill="#604638"/>
-   <path d="M108 82 Q91 98 104 121 M140 82 Q159 88 180 70" fill="none" stroke="#e9c5a9" stroke-width="7" stroke-linecap="round"/>
-  </g>
-  <g class="float-delay">
-   <path d="M205 91 L244 91 L260 190 L190 190Z" fill="#423331"/>
-   <path d="M205 91 L224 111 L244 91 L236 137 L213 137Z" fill="#f4e9d6"/>
-   <circle cx="224" cy="61" r="18" fill="#dcb99b"/>
-   <path d="M206 58 Q206 35 230 39 Q246 43 242 60 Q226 48 208 51Z" fill="#332b28"/>
-   <path d="M205 82 Q189 77 180 70 M244 82 Q260 101 250 119" fill="none" stroke="#dcb99b" stroke-width="7" stroke-linecap="round"/>
-  </g>
-  <path class="glow" d="M95 45 Q170 5 250 45" fill="none" stroke="#f4d99d" stroke-width="2"/>
-  <g class="twinkle" fill="#f5dfb4"><circle cx="76" cy="65" r="3"/><circle cx="270" cy="58" r="4"/><circle cx="170" cy="28" r="3"/></g>
- </svg>`,
- "forever-together":`
- <svg viewBox="0 0 340 220" role="img" aria-label="خاتما زفاف">
-  <ellipse cx="170" cy="190" rx="100" ry="10" fill="#987c52" opacity=".2"/>
-  <g class="spin" style="transform-origin:145px 108px"><ellipse cx="145" cy="108" rx="65" ry="42" fill="none" stroke="#c69d50" stroke-width="12"/><ellipse cx="145" cy="108" rx="65" ry="42" fill="none" stroke="#f7e6bd" stroke-width="3"/></g>
-  <g class="float-delay" style="transform-origin:207px 108px"><ellipse cx="207" cy="108" rx="65" ry="42" fill="none" stroke="#987044" stroke-width="12"/><ellipse cx="207" cy="108" rx="65" ry="42" fill="none" stroke="#f5e4bc" stroke-width="3"/></g>
-  <path class="glow" d="M170 42 l8 15 16 3-12 11 3 16-15-8-15 8 3-16-12-11 16-3z" fill="#fff0c5"/>
-  <g class="twinkle" fill="#d8b66f"><circle cx="75" cy="54" r="4"/><circle cx="274" cy="68" r="4"/><circle cx="270" cy="155" r="3"/></g>
- </svg>`,
- "silk-gold":`
- <svg viewBox="0 0 340 220" role="img" aria-label="قماش حريري ذهبي">
-  <path class="sway" d="M12 40 Q100 -5 168 43 T330 38 L330 190 Q245 230 170 184 T12 190Z" fill="#fff0d1" opacity=".75"/>
-  <path d="M12 60 Q100 15 168 63 T330 58" fill="none" stroke="#b48b50" stroke-width="2"/>
-  <path d="M12 100 Q100 55 168 103 T330 98" fill="none" stroke="#c6a36d" stroke-width="2" opacity=".7"/>
-  <path class="float" d="M30 130 Q110 75 180 130 T320 120 L320 210 L30 210Z" fill="#d5b985" opacity=".55"/>
-  <path d="M160 60 Q170 45 180 60 Q195 75 180 95 Q170 105 160 95 Q145 75 160 60Z" fill="#fff8e8" stroke="#b9955d"/>
-  <g class="glow" fill="#fff5d9"><circle cx="90" cy="48" r="4"/><circle cx="255" cy="58" r="4"/><circle cx="220" cy="160" r="3"/></g>
- </svg>`,
- "blooming-roses":`
- <svg viewBox="0 0 340 220" role="img" aria-label="ورود متفتحة">
-  <g class="sway" transform="translate(45 10)">
-   <path d="M75 180 Q65 120 88 70" stroke="#55745c" stroke-width="4" fill="none"/>
-   <path d="M83 130 Q45 100 35 125 Q55 145 83 130 M82 145 Q120 110 130 133 Q112 154 82 145" fill="#789779"/>
-   <g class="float"><circle cx="88" cy="66" r="24" fill="#d99aa4"/><circle cx="68" cy="66" r="16" fill="#edc1c3"/><circle cx="106" cy="66" r="16" fill="#edc1c3"/><circle cx="88" cy="47" r="16" fill="#e8b1b7"/><circle cx="88" cy="84" r="16" fill="#e8b1b7"/><circle cx="88" cy="66" r="9" fill="#b66f7b"/></g>
-  </g>
-  <g class="sway" transform="translate(150 20) scale(.85)">
-   <path d="M75 180 Q65 120 88 70" stroke="#55745c" stroke-width="4" fill="none"/>
-   <path d="M83 130 Q45 100 35 125 Q55 145 83 130 M82 145 Q120 110 130 133 Q112 154 82 145" fill="#789779"/>
-   <g class="float-delay"><circle cx="88" cy="66" r="24" fill="#d99aa4"/><circle cx="68" cy="66" r="16" fill="#edc1c3"/><circle cx="106" cy="66" r="16" fill="#edc1c3"/><circle cx="88" cy="47" r="16" fill="#e8b1b7"/><circle cx="88" cy="84" r="16" fill="#e8b1b7"/><circle cx="88" cy="66" r="9" fill="#b66f7b"/></g>
-  </g>
-  <g class="twinkle" fill="#fff5e9"><circle cx="45" cy="45" r="4"/><circle cx="280" cy="65" r="4"/><circle cx="260" cy="170" r="3"/></g>
- </svg>`,
- "champagne-glow":`
- <svg viewBox="0 0 340 220" role="img" aria-label="وهج ذهبي">
-  <circle cx="170" cy="108" r="68" fill="none" stroke="#d8bd83" stroke-width="1" opacity=".5"/>
-  <circle cx="170" cy="108" r="48" fill="none" stroke="#f5dfae" stroke-width="1" opacity=".7"/>
-  <g class="spin" fill="none" stroke="#e5c98f" stroke-width="2"><ellipse cx="170" cy="108" rx="88" ry="30" transform="rotate(35 170 108)"/><ellipse cx="170" cy="108" rx="88" ry="30" transform="rotate(-35 170 108)"/></g>
-  <g class="glow" fill="#fff1c9"><path d="M170 57 l8 28 28 8-28 8-8 28-8-28-28-8 28-8z"/><circle cx="80" cy="70" r="5"/><circle cx="260" cy="145" r="5"/></g>
-  <g class="twinkle" fill="#f5dfb4"><circle cx="95" cy="150" r="3"/><circle cx="245" cy="55" r="4"/><circle cx="275" cy="95" r="3"/></g>
- </svg>`,
- "swan-elegance":`
- <svg viewBox="0 0 340 220" role="img" aria-label="بجعتان على الماء">
-  <path d="M20 170 Q90 155 160 170 T320 170" fill="none" stroke="#71958c" stroke-width="3" opacity=".6"/>
-  <path d="M20 190 Q90 175 160 190 T320 190" fill="none" stroke="#9ebbb1" stroke-width="2"/>
-  <g class="sway">
-   <path d="M55 140 Q90 75 135 120 Q150 145 100 150 Q70 150 55 140Z" fill="#fffdf5" stroke="#b6c7bd" stroke-width="2"/>
-   <path d="M110 120 Q125 75 105 55 Q95 43 105 34 Q125 38 126 62 Q135 85 145 105" fill="none" stroke="#fffdf5" stroke-width="13" stroke-linecap="round"/>
-   <circle cx="108" cy="40" r="5" fill="#fffdf5"/><path d="M112 40 l15 4-14 4" fill="#c69c65"/>
-  </g>
-  <g class="float-delay">
-   <path d="M190 140 Q225 75 270 120 Q285 145 235 150 Q205 150 190 140Z" fill="#fffdf5" stroke="#b6c7bd" stroke-width="2"/>
-   <path d="M245 120 Q260 75 240 55 Q230 43 240 34 Q260 38 261 62 Q270 85 280 105" fill="none" stroke="#fffdf5" stroke-width="13" stroke-linecap="round"/>
-   <circle cx="243" cy="40" r="5" fill="#fffdf5"/><path d="M247 40 l15 4-14 4" fill="#c69c65"/>
-  </g>
-  <g class="glow" fill="#fff"><circle cx="55" cy="65" r="3"/><circle cx="280" cy="70" r="3"/></g>
- </svg>`,
- "golden-rings":`
- <svg viewBox="0 0 340 220" role="img" aria-label="خاتمان ذهبيان">
-  <g class="float">
-   <ellipse cx="135" cy="112" rx="65" ry="48" fill="none" stroke="#a77932" stroke-width="13"/>
-   <ellipse cx="135" cy="112" rx="65" ry="48" fill="none" stroke="#f5dfae" stroke-width="3"/>
-  </g>
-  <g class="float-delay">
-   <ellipse cx="205" cy="112" rx="65" ry="48" fill="none" stroke="#c69d50" stroke-width="13"/>
-   <ellipse cx="205" cy="112" rx="65" ry="48" fill="none" stroke="#fff0c5" stroke-width="3"/>
-  </g>
-  <path class="glow" d="M170 36 l8 17 18 3-13 13 3 18-16-9-16 9 3-18-13-13 18-3z" fill="#fff1c5"/>
-  <g class="twinkle" fill="#fff0c5"><circle cx="75" cy="62" r="4"/><circle cx="275" cy="60" r="4"/><circle cx="280" cy="160" r="3"/></g>
- </svg>`,
- "royal-ballroom":`
- <svg viewBox="0 0 340 220" role="img" aria-label="ثريا ملكية">
-  <path d="M170 15 V55" stroke="#d5ad70" stroke-width="3"/>
-  <path d="M115 75 Q170 30 225 75" fill="none" stroke="#d5ad70" stroke-width="4"/>
-  <g class="glow" stroke="#f5d99b" fill="none" stroke-width="3">
-   <path d="M170 50 V115 M135 65 L115 115 M205 65 L225 115 M150 70 L140 130 M190 70 L200 130"/>
-  </g>
-  <g fill="#f4dfb2" class="twinkle">
-   <circle cx="115" cy="118" r="8"/><circle cx="140" cy="132" r="8"/><circle cx="170" cy="118" r="9"/><circle cx="200" cy="132" r="8"/><circle cx="225" cy="118" r="8"/>
-  </g>
-  <path d="M80 190 Q170 155 260 190" fill="none" stroke="#d5ad70" stroke-width="2"/>
-  <g class="sway" fill="#713c3b" opacity=".8"><path d="M25 25 Q75 40 70 200 L15 200Z"/><path d="M315 25 Q265 40 270 200 L325 200Z"/></g>
- </svg>`,
- "pearl-garden":`
- <svg viewBox="0 0 340 220" role="img" aria-label="لآلئ وزهور">
-  <path d="M70 180 Q55 90 170 30 Q285 90 270 180" fill="none" stroke="#c6ae8c" stroke-width="3"/>
-  <path d="M85 180 Q75 100 170 48 Q265 100 255 180" fill="none" stroke="#e3d5bd" stroke-width="2"/>
-  <g class="float"><circle cx="170" cy="66" r="20" fill="url(#pearl)" stroke="#c6b99e"/><circle cx="115" cy="112" r="13" fill="#fffdf7" stroke="#c6b99e"/><circle cx="225" cy="112" r="13" fill="#fffdf7" stroke="#c6b99e"/></g>
-  <defs><radialGradient id="pearl"><stop stop-color="#fff"/><stop offset=".7" stop-color="#eee6d9"/><stop offset="1" stop-color="#c6b99e"/></radialGradient></defs>
-  <g class="sway" fill="#d9b2b2"><circle cx="75" cy="150" r="10"/><circle cx="90" cy="140" r="10"/><circle cx="82" cy="130" r="10"/><circle cx="265" cy="150" r="10"/><circle cx="250" cy="140" r="10"/><circle cx="258" cy="130" r="10"/></g>
-  <g class="twinkle" fill="#fff"><circle cx="50" cy="65" r="4"/><circle cx="290" cy="70" r="4"/></g>
- </svg>`
- };
- return `<div class="scene-particles"><i></i><i></i><i></i><i></i><i></i></div>${scenes[theme]||scenes["royal-couple"]}`;
+ return `<div class="scene-particles"><i></i><i></i><i></i><i></i><i></i></div><div class="scene-photo photo-${theme}" aria-hidden="true"></div>`;
 }
 
 function renderTemplates(){
@@ -793,20 +685,14 @@ function applyTemplate(t){
  $("insideScene").innerHTML=sceneMarkup(t.theme);
 
  const hints={
-  "royal-couple":"اضغط لفتح دعوة العروسين",
-  "first-dance":"اضغط لتبدأ رقصة العروسين",
-  "forever-together":"اضغط لتبدأ حكاية الخاتمين",
-  "silk-gold":"اضغط لتكشف تفاصيل الدعوة",
-  "blooming-roses":"اضغط لتتفتح الورود",
-  "champagne-glow":"اضغط لتضيء الدعوة",
-  "swan-elegance":"اضغط لتبدأ حكاية البجعتين",
-  "golden-rings":"اضغط لفتح دعوة الخواتم الذهبية",
-  "royal-ballroom":"اضغط لتفتح الستائر الملكية",
-  "pearl-garden":"اضغط لفتح حديقة اللؤلؤ"
+  "royal-couple":"اضغط لفتح دعوتكم بأناقة العاجي والشمبانيا",
+  "silk-gold":"اضغط على ختم الشمع لفتح الظرف الحريري",
+  "emerald-gold":"اضغط لفتح الدعوة الزمردية",
+  "midnight-pearl":"اضغط لفتح الدعوة اللؤلؤية"
  };
  $("openHint").textContent=hints[t.id]||"اضغط على الختم لفتح دعوتك";
  const button=$("liveInvite").querySelector(".seal-button");
- button.textContent=t.id==="golden-rings"||t.id==="forever-together"?"◇":t.id==="blooming-roses"?"❀":t.id==="swan-elegance"?"♡":"د";
+ button.textContent=t.symbol||"د";
 }
 
 function previewTemplate(id){
@@ -1018,6 +904,7 @@ document.addEventListener("keydown",e=>{
      <div class="tiny">YOU ARE INVITED</div>
      <div class="scene-art">${sceneMarkup(theme)}</div>
      <div class="envelope">
+      <span class="envelope-letter" aria-hidden="true"></span>
       <button class="seal-button" id="openPublicEnvelope" aria-label="افتح الدعوة">${escapeHTML(template.symbol)}</button>
      </div>
      <div class="open-hint">${escapeHTML(template.line)} · اضغط لفتح الدعوة</div>
