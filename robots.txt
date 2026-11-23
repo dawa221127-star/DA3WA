@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /admin.html
 
-Sitemap: https://dawa221127-star.github.io/DA3WA/sitemap.xml
+Sitemap: https://dawa221127-star.github.io/MIRAS/sitemap.xml
