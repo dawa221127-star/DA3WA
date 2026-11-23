@@ -127,6 +127,13 @@ button.secondary,.tab{background:#392330;color:#f2dfc0;border:1px solid #8a6948}
 @keyframes adminSealFloat{0%,100%{transform:translateY(2px) scale(1)}50%{transform:translateY(-5px) scale(1.06)}}
 @media(prefers-reduced-motion:reduce){.template-art:before,.template-art:after,.template-art span{animation:none!important}}
 
+
+/* Admin templates now use the same order, names and color identity as public invitations. */
+.admin-template-art .template-art{min-height:155px}
+.admin-template-art .template-art .admin-scene-halo{position:absolute;width:115px;height:115px;border:1px solid currentColor;border-radius:50%;opacity:.22;box-shadow:0 0 38px currentColor;animation:adminOrbit 24s linear infinite}
+.admin-template-art .template-art .admin-scene-frame{position:absolute;inset:18px 28px;border:1px solid currentColor;opacity:.3;border-radius:48% 48% 8px 8px}
+.admin-template-art .template-art span{background:#160e18aa!important}
+
 </style>
 </head>
 <body>
@@ -281,16 +288,16 @@ const statusNames = {
 };
 
 const templateCatalog = [
-  {id:"royal-couple",name:"زفاف ملكي",symbol:"❦"},
-  {id:"first-dance",name:"الظرف الأحمر",symbol:"❖"},
-  {id:"blooming-roses",name:"فرحة التخرج",symbol:"✿"},
-  {id:"midnight-pearl",name:"عيد ميلاد وردي",symbol:"✧"},
-  {id:"silk-gold",name:"المولود الجديد",symbol:"☾"},
-  {id:"royal-seal",name:"الورد الأحمر",symbol:"❀"},
-  {id:"graduation-purple",name:"الظرف الذهبي",symbol:"✦"},
-  {id:"graduation-blue",name:"دعوة باريس",symbol:"♛"},
-  {id:"birthday-pastel",name:"المنزل الفاخر",symbol:"⌂"},
-  {id:"birthday-neon",name:"الليلة الشرقية",symbol:"۞"}
+  {id:"royal-couple",name:"زفاف ملكي",symbol:"♕",colors:["#3b1725","#b58a50","#f5dfb8"]},
+  {id:"first-dance",name:"الرقصة الأولى",symbol:"♡",colors:["#281b35","#c69ab1","#f8e9ee"]},
+  {id:"blooming-roses",name:"حديقة الورد",symbol:"❀",colors:["#3d202d","#c77d88","#f7d9d7"]},
+  {id:"midnight-pearl",name:"فالس منتصف الليل",symbol:"✦",colors:["#101b36","#7897bd","#e4eafa"]},
+  {id:"silk-gold",name:"الظرف الحريري",symbol:"❧",colors:["#482a2b","#c29a63","#f5e5c6"]},
+  {id:"royal-seal",name:"الختم الملكي",symbol:"♛",colors:["#241323","#b58a50","#f4dcae"]},
+  {id:"graduation-purple",name:"فرحة التخرج",symbol:"✦",colors:["#291d43","#a58bd0","#eadcff"]},
+  {id:"graduation-blue",name:"إنجاز أزرق",symbol:"✧",colors:["#132b48","#78a9d2","#e0f1ff"]},
+  {id:"birthday-pastel",name:"عيد ميلاد باستيل",symbol:"♡",colors:["#563044","#d99cae","#ffe7eb"]},
+  {id:"birthday-neon",name:"حفلة أضواء",symbol:"★",colors:["#251438","#c06bd2","#f5d6ff"]}
 ];
 const templateNames = Object.fromEntries(templateCatalog.map(t=>[t.id,t.name]));
 Object.assign(templateNames,{
@@ -308,7 +315,11 @@ function renderAdminTemplates(){
  const grid=$("templateGrid");
  grid.innerHTML=templateCatalog.map((t,index)=>`
   <div class="template admin-template-art art-${index+1}" data-template="${t.id}">
-   <div class="template-art"><span>${t.symbol}</span><i class="art-orbit"></i><i class="art-glow"></i></div>
+   <div class="template-art" style="background:radial-gradient(ellipse at 50% 42%,${t.colors[1]},${t.colors[0]} 76%);color:${t.colors[2]}">
+    <i class="admin-scene-halo"></i><i class="admin-scene-frame"></i>
+    <span style="color:${t.colors[2]};border-color:${t.colors[2]}">${t.symbol}</span>
+    <i class="art-orbit"></i><i class="art-glow"></i>
+   </div>
    <b>${t.name}</b>
   </div>`).join("");
  grid.querySelectorAll(".template").forEach(card=>{
@@ -548,7 +559,8 @@ function updatePreview() {
   const selected=templateCatalog.find(t=>t.id===normalizeTemplate(selectedTemplate))||templateCatalog[0];
   const selectedIndex=templateCatalog.indexOf(selected)+1;
   $("preview").className="preview admin-preview-art art-"+selectedIndex;
-  $("preview").style.backgroundImage="none";
+  $("preview").style.background="radial-gradient(ellipse at 50% 20%, "+selected.colors[1]+", "+selected.colors[0]+" 78%)";
+  $("preview").style.color=selected.colors[2];
   $("preview").setAttribute("data-symbol",selected.symbol);
 }
 
