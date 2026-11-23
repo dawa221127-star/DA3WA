@@ -767,8 +767,8 @@ function renderAdminTemplates(){
   </div>`).join("");
  grid.querySelectorAll(".template").forEach(card=>{
   card.addEventListener("click",()=>{
-   grid.querySelectorAll(".template").forEach(c=>c.classList.remove("selected"));
-   card.classList.add("selected");
+   grid.querySelectorAll(".template").forEach(c=>c?.classList.remove("selected"));
+   card?.classList.add("selected");
    selectedTemplate=card.dataset.template;
    updatePreview();
   });
@@ -881,15 +881,15 @@ $("refreshMusicLibraryBtn").addEventListener("click",loadMusicLibrary);
 
 
 function showLogin() {
-  loginPanel.classList.remove("hidden");
-  dashboard.classList.add("hidden");
-  logoutBtn.classList.add("hidden");
+  loginPanel?.classList.remove("hidden");
+  dashboard?.classList.add("hidden");
+  logoutBtn?.classList.add("hidden");
 }
 
 function showDashboard() {
-  loginPanel.classList.add("hidden");
-  dashboard.classList.remove("hidden");
-  logoutBtn.classList.remove("hidden");
+  loginPanel?.classList.add("hidden");
+  dashboard?.classList.remove("hidden");
+  logoutBtn?.classList.remove("hidden");
 }
 
 async function verifyAdmin(user) {
@@ -940,11 +940,11 @@ logoutBtn.addEventListener("click", async () => {
 
 document.querySelectorAll(".tab").forEach(button => {
   button.addEventListener("click", () => {
-    document.querySelectorAll(".tab").forEach(b => b.classList.remove("active"));
-    button.classList.add("active");
+    document.querySelectorAll(".tab").forEach(b => b?.classList.remove("active"));
+    button?.classList.add("active");
 
     ["ordersSection","createSection","invitationsSection","pricingSection"].forEach(id => {
-      $(id).classList.toggle("hidden", id !== button.dataset.tab);
+      $(id)?.classList.toggle("hidden", id !== button.dataset.tab);
     });
 
     if (button.dataset.tab === "invitationsSection") loadInvitations();
@@ -1171,19 +1171,19 @@ function updatePreview() {
     preview.querySelector(".admin-preview-venue").textContent=venue;
     preview.querySelector(".admin-preview-extra").textContent=extra;
     const hero=preview.querySelector(".admin-curtain-hero");
-    preview.querySelector(".admin-curtain-seal").addEventListener("click",()=>hero.classList.toggle("opened"));
+    preview.querySelector(".admin-curtain-seal").addEventListener("click",()=>hero?.classList.toggle("opened"));
   }else if(selected.id==="golden-cinema"){
     preview.className="preview admin-preview-art golden-cinema-admin-preview";
     preview.innerHTML=`<div class="admin-gc-hero"><div class="admin-gc-stage"><div class="admin-gc-arch"></div><div class="admin-gc-curtain left"></div><div class="admin-gc-curtain right"></div><h2 class="admin-gc-names"></h2><p class="admin-gc-hint">اضغط لفتح الستارة</p><button type="button" class="admin-gc-seal">✦</button></div></div><section class="admin-gc-section"><small>بِسْمِ اللهِ الرَّحْمٰنِ الرَّحِيم</small><h2 class="admin-gc-names-copy"></h2><p class="admin-gc-opening"></p><h3 class="admin-gc-occasion"></h3><div class="admin-gc-details"><div>التاريخ<strong class="admin-gc-date"></strong></div><div>الاستقبال<strong class="admin-gc-arrival"></strong></div><div>البداية<strong class="admin-gc-start"></strong></div><div>المكان<strong class="admin-gc-venue"></strong></div></div><p class="admin-gc-extra"></p></section>`;
-    [[".admin-gc-names-copy",names],[".admin-gc-opening",opening],[".admin-gc-occasion",occasion],[".admin-gc-date",date],[".admin-gc-arrival",arrival],[".admin-gc-start",start],[".admin-gc-venue",venue],[".admin-gc-extra",extra]].forEach(([q,v])=>preview.querySelector(q).textContent=v);preview.querySelector(".admin-gc-names").textContent=names;const stage=preview.querySelector(".admin-gc-stage");preview.querySelector(".admin-gc-seal").addEventListener("click",()=>stage.classList.toggle("opened"));
+    [[".admin-gc-names-copy",names],[".admin-gc-opening",opening],[".admin-gc-occasion",occasion],[".admin-gc-date",date],[".admin-gc-arrival",arrival],[".admin-gc-start",start],[".admin-gc-venue",venue],[".admin-gc-extra",extra]].forEach(([q,v])=>preview.querySelector(q).textContent=v);preview.querySelector(".admin-gc-names").textContent=names;const stage=preview.querySelector(".admin-gc-stage");preview.querySelector(".admin-gc-seal").addEventListener("click",()=>stage?.classList.toggle("opened"));
   }else if(selected.id==="parchment"){
     preview.className="preview admin-preview-art parchment-admin-preview";preview.innerHTML=`<div class="admin-parchment-hero"><div class="admin-parchment-scroll"><div class="admin-parchment-roll"></div><div class="admin-parchment-copy"><small>بِسْمِ اللهِ الرَّحْمٰنِ الرَّحِيم</small><i>❦</i><p class="admin-parchment-opening"></p><h2 class="admin-parchment-names"></h2><p class="admin-parchment-occasion"></p><button type="button" class="admin-parchment-seal">افتح المخطوطة</button></div><div class="admin-parchment-roll"></div></div></div><section class="admin-parchment-details"><h2>تفاصيل المناسبة</h2><div class="admin-parchment-grid"><div>التاريخ<strong class="admin-parchment-date"></strong></div><div>الاستقبال<strong class="admin-parchment-arrival"></strong></div><div>البداية<strong class="admin-parchment-start"></strong></div><div>المكان<strong class="admin-parchment-venue"></strong></div></div><p class="admin-parchment-extra"></p></section>`;
-    [[".admin-parchment-opening",opening],[".admin-parchment-names",names],[".admin-parchment-occasion",occasion],[".admin-parchment-date",date],[".admin-parchment-arrival",arrival],[".admin-parchment-start",start],[".admin-parchment-venue",venue],[".admin-parchment-extra",extra]].forEach(([q,v])=>preview.querySelector(q).textContent=v);const scroll=preview.querySelector(".admin-parchment-scroll");preview.querySelector(".admin-parchment-seal").addEventListener("click",()=>scroll.classList.toggle("opened"));
+    [[".admin-parchment-opening",opening],[".admin-parchment-names",names],[".admin-parchment-occasion",occasion],[".admin-parchment-date",date],[".admin-parchment-arrival",arrival],[".admin-parchment-start",start],[".admin-parchment-venue",venue],[".admin-parchment-extra",extra]].forEach(([q,v])=>preview.querySelector(q).textContent=v);const scroll=preview.querySelector(".admin-parchment-scroll");preview.querySelector(".admin-parchment-seal").addEventListener("click",()=>scroll?.classList.toggle("opened"));
   }else if(selected.id==="door-birds"){
     preview.className="preview admin-preview-art door-birds-admin-preview";
     preview.innerHTML=`<div class="admin-door-hero"><div class="admin-door-stage"><div class="admin-door-frame"><div class="admin-door-leaf left"></div><div class="admin-door-leaf right"></div><div class="admin-door-knob left"></div><div class="admin-door-knob right"></div><div class="admin-door-emblem">✦</div></div><div class="admin-door-birds"></div><h2 class="admin-door-title">باب الأمنيات</h2><button type="button" class="admin-door-open">افتح الباب</button></div></div><section class="admin-door-details"><small>بِسْمِ اللهِ الرَّحْمٰنِ الرَّحِيم</small><h2 class="admin-door-names"></h2><p class="admin-door-opening"></p><h3 class="admin-door-occasion"></h3><div class="admin-door-grid"><div>التاريخ<strong class="admin-door-date"></strong></div><div>الاستقبال<strong class="admin-door-arrival"></strong></div><div>البداية<strong class="admin-door-start"></strong></div><div>المكان<strong class="admin-door-venue"></strong></div></div><p class="admin-door-extra"></p></section>`;
     [[".admin-door-names",names],[".admin-door-opening",opening],[".admin-door-occasion",occasion],[".admin-door-date",date],[".admin-door-arrival",arrival],[".admin-door-start",start],[".admin-door-venue",venue],[".admin-door-extra",extra]].forEach(([q,v])=>preview.querySelector(q).textContent=v);
-    preview.querySelector(".admin-door-open").addEventListener("click",()=>{const stage=preview.querySelector(".admin-door-stage");stage.classList.add("opened");preview.querySelector(".admin-door-birds").innerHTML=Array.from({length:14},(_,i)=>`<span style="--i:${i};--x:${(i%7-3)*75}px;--y:${-80-(i%4)*45}px">🕊</span>`).join("");});
+    preview.querySelector(".admin-door-open").addEventListener("click",()=>{const stage=preview.querySelector(".admin-door-stage");stage?.classList.add("opened");preview.querySelector(".admin-door-birds").innerHTML=Array.from({length:14},(_,i)=>`<span style="--i:${i};--x:${(i%7-3)*75}px;--y:${-80-(i%4)*45}px">🕊</span>`).join("");});
   }else{
     preview.className="preview admin-preview-art art-"+selectedIndex;
     preview.innerHTML=`
@@ -1405,7 +1405,7 @@ $("clearFormBtn").addEventListener("click", () => {
   $("saveInvitationBtn").textContent = "نشر الدعوة وإنشاء الرابط";
   selectedTemplate = templateCatalog[0]?.id || "red-star";
   document.querySelectorAll(".template").forEach(c => {
-    c.classList.toggle("selected", c.dataset.template === selectedTemplate);
+    c?.classList.toggle("selected", c.dataset.template === selectedTemplate);
   });
   $("inviteMessage").textContent = "";
   updatePreview();
@@ -1529,7 +1529,7 @@ function editInvitation(inv) {
   }
 
   document.querySelectorAll(".template").forEach(c => {
-    c.classList.toggle("selected", c.dataset.template === selectedTemplate);
+    c?.classList.toggle("selected", c.dataset.template === selectedTemplate);
   });
 
   $("saveInvitationBtn").textContent = "حفظ تعديلات الدعوة";
