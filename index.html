@@ -1223,6 +1223,23 @@ body.public-invitation #publicInvitationPage{width:100%!important;max-width:none
 }
 @media(prefers-reduced-motion:reduce){.curtain-invite *{animation:none!important;transition:none!important}}
 
+
+/* Corrected real two-panel theatre curtain: independent left and right fabric panels */
+.curtain-invite .envelope-screen{min-height:100svh!important;height:100svh!important;padding:0!important;display:block!important;background:#090609!important;overflow:hidden!important}
+.curtain-invite .envelope-screen>.scene-art{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;margin:0!important;z-index:0!important}
+.curtain-invite .envelope-screen>.scene-art .cin-scene{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;min-height:100%!important;border-radius:0!important}
+.curtain-invite .royal-curtain-panel{position:absolute!important;top:-2%!important;bottom:-2%!important;width:51.5%!important;height:104%!important;z-index:10!important;pointer-events:none!important;will-change:transform;transition:transform 2.6s cubic-bezier(.77,0,.18,1),filter 2.2s ease!important;box-shadow:inset 0 0 70px #160107,inset 0 0 22px #f4b0a022,0 8px 35px #000c!important}
+.curtain-invite .royal-curtain-left{left:0!important;right:auto!important;transform:translateX(0);transform-origin:left center;background:repeating-linear-gradient(90deg,#21030b 0%,#4b0818 5%,#8c1932 10%,#4b0818 16%,#26040e 22%,#741329 29%,#32050f 36%,#8e2037 43%,#31050f 51%),linear-gradient(90deg,#160208,#8d1c35 28%,#390713 80%,#160208)!important;border-right:3px solid #c17a72!important;clip-path:polygon(0 0,100% 0,96% 8%,100% 18%,96% 30%,100% 42%,96% 55%,100% 68%,96% 82%,100% 93%,96% 100%,0 100%)!important}
+.curtain-invite .royal-curtain-right{right:0!important;left:auto!important;transform:translateX(0);transform-origin:right center;background:repeating-linear-gradient(90deg,#31050f 0%,#8e2037 8%,#32050f 16%,#741329 23%,#26040e 31%,#4b0818 39%,#8c1932 46%,#4b0818 53%,#21030b 60%),linear-gradient(270deg,#160208,#8d1c35 28%,#390713 80%,#160208)!important;border-left:3px solid #c17a72!important;clip-path:polygon(0 0,100% 0,100% 100%,0 100%,4% 93%,0 82%,4% 68%,0 55%,4% 42%,0 30%,4% 18%,0 8%)!important}
+.curtain-invite .envelope-screen>.tiny{position:absolute!important;z-index:12!important;top:7%!important;left:0!important;right:0!important;text-align:center!important;color:#f4dba5!important;text-shadow:0 3px 18px #000!important;pointer-events:none}
+.curtain-invite .envelope-screen>.envelope{position:absolute!important;z-index:13!important;left:50%!important;top:50%!important;transform:translate(-50%,-50%)!important;width:1px!important;height:1px!important;margin:0!important;background:transparent!important;border:0!important;box-shadow:none!important;pointer-events:none!important}
+.curtain-invite .envelope-screen .seal-button{position:absolute!important;left:50%!important;top:50%!important;transform:translate(-50%,-50%)!important;pointer-events:auto!important;z-index:14!important}
+.curtain-invite .envelope-screen .open-hint{position:absolute!important;z-index:12!important;left:5%!important;right:5%!important;bottom:9%!important;margin:0!important;text-align:center!important;color:#f8e8ca!important;text-shadow:0 3px 16px #000!important;pointer-events:none}
+.curtain-invite.opened .royal-curtain-left{transform:translateX(-105%)!important;filter:brightness(.78)!important}
+.curtain-invite.opened .royal-curtain-right{transform:translateX(105%)!important;filter:brightness(.78)!important}
+.curtain-invite.opened .envelope-screen:before,.curtain-invite.opened .envelope-screen:after{opacity:0!important;transition:opacity .5s!important}
+@media(max-width:650px){.curtain-invite .royal-curtain-panel{width:52%!important}.curtain-invite .envelope-screen>.tiny{top:8%!important}.curtain-invite .envelope-screen .open-hint{bottom:8%!important}}
+
 </style>
 </head>
 
@@ -1820,6 +1837,7 @@ document.addEventListener("keydown",e=>{
     <section class="envelope-screen">
      <div class="tiny">YOU ARE INVITED</div>
      <div class="scene-art">${sceneMarkup(theme)}</div>
+     ${theme==="red-star"?'<div class="royal-curtain-panel royal-curtain-left" aria-hidden="true"></div><div class="royal-curtain-panel royal-curtain-right" aria-hidden="true"></div>':""}
      <div class="envelope">
       <span class="envelope-letter" aria-hidden="true"></span>
       <button class="seal-button" id="openPublicEnvelope" aria-label="افتح الدعوة">${escapeHTML(template.symbol)}</button>
