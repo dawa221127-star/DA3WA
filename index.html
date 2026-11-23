@@ -1151,6 +1151,22 @@ body.public-invitation{height:auto!important;min-height:100vh!important;overflow
 @media(max-width:650px){.template-art{height:330px!important;min-height:330px!important}.live-invite .invite-section{padding:55px 18px;min-height:50vh}.live-invite .detail-grid{grid-template-columns:1fr 1fr}.live-invite .envelope-screen .open-hint{bottom:7vh}}
 @media(prefers-reduced-motion:reduce){.live-invite.red-star .envelope-screen:before,.live-invite.red-star .envelope-screen:after{transition:none}}
 
+
+/* Photographic wedding atmosphere instead of illustrated characters */
+.live-invite.royal-couple .envelope-screen .cin-scene,
+.live-invite.first-dance .envelope-screen .cin-scene{
+ background-image:linear-gradient(180deg,#100a0a33,#08080999),url("https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=2200&q=90")!important;
+ background-size:cover!important;background-position:center 42%!important;
+ animation:weddingPhotoDrift 18s ease-in-out infinite alternate;
+}
+.live-invite.royal-couple .envelope-screen .toon-groom,
+.live-invite.royal-couple .envelope-screen .toon-bride,
+.live-invite.first-dance .envelope-screen .toon-groom,
+.live-invite.first-dance .envelope-screen .toon-bride{display:none!important}
+@keyframes weddingPhotoDrift{from{background-position:48% 44%}to{background-position:53% 50%}}
+.live-invite.royal-couple .envelope-screen .cin-scene:after,
+.live-invite.first-dance .envelope-screen .cin-scene:after{content:"";position:absolute;inset:0;z-index:3;background:linear-gradient(180deg,#05050633,transparent 40%,#05050699)}
+
 </style>
 </head>
 
