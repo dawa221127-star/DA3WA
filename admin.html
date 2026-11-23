@@ -2,9 +2,11 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
+<meta name="theme-color" content="#512630">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>DA3WA | لوحة الإدارة</title>
+<title>مِراس | MIRAS — لوحة الإدارة</title>
 <script>
 window.addEventListener("error",function(e){
  const detail=e.message||"خطأ JavaScript غير معروف";
@@ -93,7 +95,7 @@ header{padding:16px}
 .panel{padding:16px}
 }
 
-/* DA3WA admin: motion-first, CSS/SVG artwork only */
+/* MIRAS admin: motion-first, CSS/SVG artwork only */
 body{background:radial-gradient(ellipse at 50% -15%,#482235,#1a0d17 55%,#0b080c);color:#f5ead9}
 header{background:#160b14eF;border-bottom:1px solid #d7b87955;backdrop-filter:blur(12px)}
 .panel,.order,.invite-card,.stat{background:linear-gradient(145deg,#291722,#160e16);border-color:#75544277;box-shadow:0 12px 32px #0003}
@@ -129,7 +131,7 @@ button.secondary,.tab{background:#392330;color:#f2dfc0;border:1px solid #8a6948}
 @keyframes adminPulse{50%{transform:scale(1.12);opacity:.65}}
 @media(max-width:850px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 
-/* DA3WA premium animated template cards */
+/* MIRAS premium animated template cards */
 .template-art{isolation:isolate;overflow:hidden}
 .template-art:before{content:"";position:absolute;inset:-40%;z-index:0;background:conic-gradient(from 0deg,transparent,#f4dba633,transparent 28%,#fff2,transparent 58%);animation:adminCardSweep 12s linear infinite}
 .template-art:after{z-index:1!important;inset:0!important;width:auto!important;height:auto!important;border:0!important;border-radius:inherit!important;background:radial-gradient(circle at 50% 50%,#f6dfaa28,transparent 58%),linear-gradient(120deg,transparent 30%,#fff2 50%,transparent 68%)!important;animation:adminCardGlow 5s ease-in-out infinite!important}
@@ -154,7 +156,7 @@ button.secondary,.tab{background:#392330;color:#f2dfc0;border:1px solid #8a6948}
 
 
 /* Admin template chooser uses the same animated artwork as the public site */
-/* DA3WA cinematic motion templates — CSS-only scenes, no cartoon artwork */
+/* MIRAS cinematic motion templates — CSS-only scenes, no cartoon artwork */
 .cin-scene{position:relative;isolation:isolate;overflow:hidden;min-height:150px;background:radial-gradient(ellipse at 50% 43%,color-mix(in srgb,var(--cin-gold) 24%,var(--cin-deep)),var(--cin-deep) 72%);perspective:900px}
 .cin-scene:before{content:"";position:absolute;inset:0;background:linear-gradient(115deg,transparent 20%,#fff1 48%,transparent 61%);transform:translateX(-120%);animation:cinSweep 7s ease-in-out infinite;z-index:8;pointer-events:none}
 .cin-backlight{position:absolute;width:75%;height:85%;left:12.5%;top:5%;border-radius:50%;background:radial-gradient(ellipse,var(--cin-gold) 0%,transparent 68%);opacity:.24;filter:blur(17px);animation:cinBreathe 5s ease-in-out infinite}
@@ -260,7 +262,7 @@ button.secondary,.tab{background:#392330;color:#f2dfc0;border:1px solid #8a6948}
 @media(max-width:480px){.grid{grid-template-columns:1fr 1fr;gap:9px}.admin-template-art{padding:7px!important}.admin-template-art .template-art{height:190px;min-height:190px}}
 
 
-/* DA3WA — new cinematic photographic collection */
+/* MIRAS — new cinematic photographic collection */
 .cin-scene{
  min-height:220px!important;
  background-color:#21171b!important;
@@ -517,14 +519,14 @@ button.secondary,.tab{background:#392330;color:#f2dfc0;border:1px solid #8a6948}
 <body>
 
 <header>
-  <h1>DA3WA | الإدارة</h1>
+  <h1>مِراس | MIRAS — الإدارة</h1>
   <button id="logoutBtn" class="secondary hidden">تسجيل الخروج</button>
 </header>
 
 <main>
   <section id="loginPanel" class="panel">
     <h2>تسجيل دخول الإدارة</h2>
-    <p class="muted">هذه الصفحة مخصصة لإدارة DA3WA</p>
+    <p class="muted">هذه الصفحة مخصصة لإدارة مِراس MIRAS</p>
     <form id="loginForm">
       <label>البريد الإلكتروني</label>
       <input id="email" type="email" required placeholder="admin@email.com">
@@ -1131,7 +1133,7 @@ function updatePreview() {
         <div><span>المكان</span><strong class="admin-baghdad-venue"></strong></div>
         <p class="admin-baghdad-extra"></p>
       </section>
-      <div class="admin-baghdad-footer">بغداد تجمعنا على الفرح · DA3WA</div>`;
+      <div class="admin-baghdad-footer">بغداد تجمعنا على الفرح · MIRAS</div>`;
     [[".admin-baghdad-opening",opening],[".admin-baghdad-names",names],[".admin-baghdad-occasion",occasion],
      [".admin-baghdad-date",date],[".admin-baghdad-arrival",arrival],[".admin-baghdad-start",start],
      [".admin-baghdad-venue",venue],[".admin-baghdad-extra",extra]].forEach(([selector,value])=>{preview.querySelector(selector).textContent=value;});
@@ -1161,7 +1163,7 @@ function updatePreview() {
         </div>
         <p class="admin-preview-extra"></p>
       </section>
-      <div class="admin-curtain-end">DA3WA <span>✦</span> ننتظركم بكل حب</div>`;
+      <div class="admin-curtain-end">MIRAS <span>✦</span> ننتظركم بكل حب</div>`;
     preview.querySelector(".admin-opening").textContent=opening;
     preview.querySelector(".admin-preview-names").textContent=names;
     preview.querySelector(".admin-preview-occasion").textContent=occasion;
