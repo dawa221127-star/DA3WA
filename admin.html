@@ -712,7 +712,7 @@ const legacyTemplateMap={
  ivory:"silk-gold",oriental:"royal-seal"
 };
 function normalizeTemplate(id){return legacyTemplateMap[id]||id}
-let selectedTemplate = "royal-couple";
+let selectedTemplate = templateCatalog[0]?.id || "red-star";
 
 function sceneMarkup(theme){
  const t=templateCatalog.find(x=>x.id===theme)||templateCatalog[0];
@@ -773,7 +773,8 @@ function renderAdminTemplates(){
    updatePreview();
   });
  });
- grid.querySelector('[data-template="royal-couple"]').classList.add("selected");
+ const initialCard = grid.querySelector('[data-template="' + selectedTemplate + '"]') || grid.querySelector(".template");
+ if(initialCard){initialCard.classList.add("selected");selectedTemplate=initialCard.dataset.template;}
 }
 const DEFAULT_PRICING=[{name:"الأساسية",amount:20000,features:["دعوة تفاعلية","الأسماء والتفاصيل","رابط خاص للمشاركة","موقع المناسبة"]},{name:"المميزة",amount:40000,features:["كل مميزات الأساسية","حركات وانتقالات مميزة","موسيقى اختيارية","عداد تنازلي"]},{name:"الملكية",amount:70000,features:["كل مميزات المميزة","دفتر تهاني إلكتروني","تصميم وتنسيق حصري","مراجعة خاصة للدعوة"]}];
 let pricingData=DEFAULT_PRICING.map(p=>({...p,features:[...p.features]}));
@@ -1402,9 +1403,9 @@ $("clearFormBtn").addEventListener("click", () => {
   $("customerOrderSelect").value = "";
   $("customerOrderHint").textContent = "يتم عرض الطلبات المحفوظة في قسم طلبات الزبائن.";
   $("saveInvitationBtn").textContent = "نشر الدعوة وإنشاء الرابط";
-  selectedTemplate = "royal-couple";
+  selectedTemplate = templateCatalog[0]?.id || "red-star";
   document.querySelectorAll(".template").forEach(c => {
-    c.classList.toggle("selected", c.dataset.template === "royal-couple");
+    c.classList.toggle("selected", c.dataset.template === selectedTemplate);
   });
   $("inviteMessage").textContent = "";
   updatePreview();
