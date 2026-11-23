@@ -872,6 +872,11 @@ body{background:radial-gradient(ellipse at 50% -15%,#512538 0,#1b0d17 48%,#0c080
 @media(max-width:850px){.templates{grid-template-columns:repeat(2,minmax(0,1fr))}.template-art{height:300px}.art-scene{height:165px;flex-basis:165px}}
 @media(max-width:560px){.templates{grid-template-columns:1fr;gap:17px}.template-art{height:340px}.art-scene{height:205px;flex-basis:205px}.cin-scene{min-height:205px}}
 @media(prefers-reduced-motion:reduce){.cin-scene,.cin-scene *{animation:none!important}}
+
+/* Slightly taller invitation template cards on the main site */
+#templateGrid .template-art{height:340px;min-height:340px}
+#templateGrid .template-art .art-scene{height:165px}
+@media(max-width:650px){#templateGrid .template-art{height:355px;min-height:355px}#templateGrid .template-art .art-scene{height:180px}}
 </style>
 </head>
 
