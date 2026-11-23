@@ -278,6 +278,126 @@ button.secondary,.tab{background:#392330;color:#f2dfc0;border:1px solid #8a6948}
 .template-art .cin-scene{min-height:100%!important}
 @media(max-width:700px){.cin-scene{min-height:200px!important}}
 
+
+/* RED STAR — premium black & gold reveal invitation */
+.live-invite.red-star{
+ --accent:#b80f27;--accent2:#d8b56c;--surface:#080809;--text:#f4e8ca;
+ background:#080809!important;color:#f4e8ca!important;
+}
+.red-star .envelope-screen{
+ min-height:100svh!important;min-height:100vh!important;
+ background:radial-gradient(ellipse at 50% 44%,#4b0713 0%,#18070c 38%,#050506 78%)!important;
+ color:#f6dfad!important;overflow:hidden!important;
+}
+.red-star .envelope-screen:before{
+ content:"";position:absolute;inset:-30%;pointer-events:none;
+ background:repeating-conic-gradient(from 0deg at 50% 50%,#d5ae5420 0deg 1deg,transparent 1deg 15deg);
+ opacity:.32;animation:redStarRays 90s linear infinite;
+}
+.red-star .envelope-screen .scene-art{
+ position:absolute!important;inset:0!important;width:100%!important;height:100%!important;
+ opacity:.9;pointer-events:none;
+}
+.red-star .envelope-screen .cin-scene{
+ height:100%!important;min-height:100%!important;
+ background:radial-gradient(ellipse at 50% 46%,#610b1a 0%,#24070d 37%,#070708 78%)!important;
+}
+.red-star .envelope-screen .cin-frame{
+ inset:9% 8%!important;border-color:#d5ad5b88!important;
+ border-radius:3px!important;box-shadow:0 0 60px #c99a4230,inset 0 0 70px #000!important;
+}
+.red-star .envelope-screen .cin-frame:before{border-color:#f2d99b55!important}
+.red-star .envelope-screen .cin-frame:after{border-color:#d5ad5b33!important}
+.red-star .envelope-screen .cin-center{display:grid!important}
+.red-star .envelope-screen .red-star-stage{
+ position:relative;width:min(54vw,230px);aspect-ratio:1;display:grid;place-items:center;
+ animation:redStarFloat 4.5s ease-in-out infinite;
+}
+.red-star-shape{
+ width:68%;aspect-ratio:1;display:grid;place-items:center;
+ clip-path:polygon(50% 0%,61% 34%,98% 35%,68% 57%,79% 94%,50% 72%,21% 94%,32% 57%,2% 35%,39% 34%);
+ background:linear-gradient(145deg,#ff5261 0%,#d30e2b 42%,#720719 100%);
+ color:#ffe7a5;font-size:clamp(62px,13vw,112px);line-height:1;
+ filter:drop-shadow(0 0 16px #ff1b3d) drop-shadow(0 0 42px #b30b2c);
+ text-shadow:0 3px 14px #4b000d;animation:redStarPulse 2.8s ease-in-out infinite;
+}
+.red-star-aura{
+ position:absolute;inset:9%;border-radius:50%;
+ background:radial-gradient(circle,#ff183b66 0%,#b30b2b30 38%,transparent 72%);
+ filter:blur(12px);animation:redStarAura 3s ease-in-out infinite;
+}
+.red-star-orbit{
+ position:absolute;inset:-7%;border:1px solid #e3bd6d66;border-radius:50%;
+ transform:rotate(-25deg) scaleY(.34);animation:redStarOrbit 12s linear infinite;
+}
+.red-star .envelope{
+ width:min(330px,85%)!important;height:0!important;margin:0!important;
+ background:transparent!important;border:0!important;box-shadow:none!important;
+ position:absolute!important;left:50%;top:50%;transform:translate(-50%,-50%);
+ z-index:12!important;display:block!important;pointer-events:none;
+}
+.red-star .envelope:before,.red-star .envelope:after,.red-star .envelope-letter{display:none!important}
+.red-star .seal-button{
+ pointer-events:auto;width:clamp(100px,24vw,145px)!important;height:clamp(100px,24vw,145px)!important;
+ border:0!important;border-radius:0!important;clip-path:polygon(50% 0%,61% 34%,98% 35%,68% 57%,79% 94%,50% 72%,21% 94%,32% 57%,2% 35%,39% 34%)!important;
+ background:linear-gradient(145deg,#ff4c5d,#c20c2b 52%,#700719)!important;
+ color:#ffe7ad!important;font:clamp(35px,8vw,58px) Amiri!important;
+ box-shadow:none!important;filter:drop-shadow(0 0 13px #e10b36) drop-shadow(0 0 35px #c20c2b)!important;
+ animation:redStarPulse 2.5s ease-in-out infinite!important;
+}
+.red-star .seal-button:hover{transform:scale(1.1) rotate(8deg)!important}
+.red-star .open-hint{color:#f0d69d!important;letter-spacing:1px;animation:redStarHint 1.8s ease-in-out infinite}
+.red-star .envelope-screen .tiny{color:#e7c77f!important;letter-spacing:4px!important}
+.red-star .invitation-content{
+ background:radial-gradient(ellipse at 50% 0%,#30200d 0%,#0a0908 34%,#050506 78%)!important;
+ color:#f5e8ca!important;position:relative;overflow:hidden;
+}
+.red-star .invitation-content:before{
+ content:"";position:absolute;inset:0;pointer-events:none;opacity:.2;
+ background:radial-gradient(circle at 12% 18%,#e6bf6a 0 1px,transparent 2px),
+ radial-gradient(circle at 83% 34%,#e6bf6a 0 1px,transparent 2px),
+ radial-gradient(circle at 45% 73%,#e6bf6a 0 1px,transparent 2px);
+ background-size:115px 125px;animation:redStarDust 16s linear infinite;
+}
+.red-star .invite-section{
+ position:relative;z-index:1;background:linear-gradient(180deg,#15110b,#080809 85%)!important;
+ color:#f4e8ca!important;border:1px solid #b88d452c!important;
+ box-shadow:inset 0 1px #e4c77b22,0 18px 60px #0008!important;
+ margin:22px auto!important;width:min(92%,850px)!important;
+}
+.red-star .invite-section h3,.red-star .couple-names,.red-star .ornament,
+.red-star .invite-kicker{color:#e4c276!important}
+.red-star .detail{
+ background:linear-gradient(145deg,#21190d,#100e0a)!important;
+ border:1px solid #c59d513f!important;color:#f7e9c9!important;
+ box-shadow:0 8px 24px #0006,inset 0 1px #fff1!important;
+}
+.red-star .detail span{color:#c9a968!important}
+.red-star .detail strong{color:#fff1d1!important}
+.red-star .action-link,.red-star .wish,.red-star .wish-form input,.red-star .wish-form textarea{
+ background:#171209!important;color:#f4e5c4!important;border:1px solid #b9914a66!important;
+}
+.red-star .wish-form button{background:linear-gradient(135deg,#d7b56d,#8d672d)!important;color:#160f07!important}
+.red-star .countdown>div{
+ background:linear-gradient(145deg,#21190d,#0c0a08)!important;
+ border:1px solid #d0a95366!important;color:#f6dfaa!important;
+ box-shadow:0 0 25px #c99a421c!important;
+}
+.red-star .countdown strong{color:#f3d28a!important}
+.red-star .scene-art .cin-scene{border:1px solid #c6a45a44}
+.red-star.opened .envelope-screen{animation:redStarCurtain 1.35s cubic-bezier(.7,0,.2,1) forwards!important}
+.red-star.opened .invitation-content{animation:redStarReveal 1.5s ease both!important}
+@keyframes redStarPulse{0%,100%{transform:scale(1);filter:drop-shadow(0 0 12px #ed183e) drop-shadow(0 0 28px #b20a2b)}50%{transform:scale(1.09);filter:drop-shadow(0 0 23px #ff3654) drop-shadow(0 0 52px #d00c32)}}
+@keyframes redStarAura{0%,100%{transform:scale(.88);opacity:.65}50%{transform:scale(1.18);opacity:1}}
+@keyframes redStarFloat{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-13px) rotate(2deg)}}
+@keyframes redStarOrbit{to{transform:rotate(335deg) scaleY(.34)}}
+@keyframes redStarRays{to{transform:rotate(360deg)}}
+@keyframes redStarHint{50%{opacity:.45;transform:translateY(-3px)}}
+@keyframes redStarDust{to{background-position:115px 250px}}
+@keyframes redStarCurtain{0%{opacity:1;transform:scale(1);filter:brightness(1)}55%{opacity:1;filter:brightness(2.2)}100%{opacity:0;transform:scale(1.1);visibility:hidden}}
+@keyframes redStarReveal{from{opacity:0;transform:translateY(45px);filter:brightness(1.8)}to{opacity:1;transform:none;filter:none}}
+@media(prefers-reduced-motion:reduce){.red-star *,.red-star:before{animation:none!important;transition:none!important}}
+
 </style>
 </head>
 <body>
@@ -446,7 +566,8 @@ const templateCatalog = [
   {id:"graduation-purple",name:"فرحة التخرج",symbol:"✦",colors:["#291d43","#a58bd0","#eadcff"],kind:"graduation"},
   {id:"graduation-blue",name:"إنجاز أزرق",symbol:"✧",colors:["#132b48","#78a9d2","#e0f1ff"],kind:"graduation"},
   {id:"birthday-pastel",name:"عيد ميلاد باستيل",symbol:"♡",colors:["#563044","#d99cae","#ffe7eb"],kind:"birthday"},
-  {id:"birthday-neon",name:"حفلة أضواء",symbol:"★",colors:["#251438","#c06bd2","#f5d6ff"],kind:"birthday"}
+  {id:"birthday-neon",name:"حفلة أضواء",symbol:"★",colors:["#251438","#c06bd2","#f5d6ff"],kind:"birthday"},
+  {id:"red-star",name:"النجمة الحمراء",symbol:"★",colors:["#09090b","#c99a42","#ffe4a1"],kind:"envelope"}
 ];
 const templateNames = Object.fromEntries(templateCatalog.map(t=>[t.id,t.name]));
 Object.assign(templateNames,{
@@ -474,12 +595,15 @@ function sceneMarkup(theme){
   "birthday-pastel":["#563044","#d99cae","#ffe7eb"],
   "birthday-neon":["#251438","#c06bd2","#f5d6ff"]
  };
+ palette["red-star"]=["#09090b","#c99a42","#ffe4a1"];
  const p=palette[theme]||palette["royal-couple"];
  const petals=t.kind==="couple"||theme==="blooming-roses";
  const envelope=t.kind==="envelope";
  const graduate=t.kind==="graduation";
  const birthday=t.kind==="birthday";
- const centerpiece=envelope
+ const centerpiece=theme==="red-star"
+  ? `<div class="red-star-stage"><div class="red-star-aura"></div><div class="red-star-shape">★</div><span class="red-star-orbit"></span></div>`
+  : envelope
   ? `<div class="cin-envelope"><div class="cin-letter"><i></i><i></i><i></i><b>✦</b></div><div class="cin-flap"></div><button class="cin-wax">${t.symbol}</button></div>`
   : graduate
    ? `<div class="cin-diploma"><div class="cin-scroll"></div><div class="cin-cap"><i></i></div><div class="cin-ribbon"></div></div><div class="cin-orbit"></div>`
