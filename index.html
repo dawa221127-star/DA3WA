@@ -1792,7 +1792,7 @@ body.public-invitation #publicInvitationPage{width:100%!important;max-width:none
   <h3>إكمال طلب الدعوة</h3>
   <p class="notice">راجع بياناتك واختر طريقة الدفع المفضلة. لن يتم خصم أي مبلغ تلقائياً.</p>
   <form id="orderForm" novalidate>
-   <div class="result order-live-status" id="orderResult" role="status" aria-live="polite"></div>
+   
    <div class="form-grid">
     <div class="field"><label>اسم صاحب الطلب</label><input id="orderName" required maxlength="100"></div>
     <div class="field"><label>رقم الهاتف</label><input id="orderPhone" required type="tel" maxlength="20" placeholder="07xxxxxxxxx"></div>
@@ -1831,6 +1831,7 @@ body.public-invitation #publicInvitationPage{width:100%!important;max-width:none
     </div>
    </div>
    <p class="notice">سيتم إرسال تفاصيل الدعوة التي أدخلتها إلى الإدارة حتى يتم تجهيزها.</p>
+   <div class="result order-live-status" id="orderResult" role="status" aria-live="polite"></div>
    <button class="btn" type="submit" style="width:100%">إرسال الطلب</button>
   </form>
  </div>
