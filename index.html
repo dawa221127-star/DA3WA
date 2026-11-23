@@ -1134,7 +1134,7 @@ body.public-invitation{height:auto!important;min-height:100vh!important;overflow
 <section class="section light" id="templates">
  <div class="container">
   <div class="section-head">
-   <span class="eyebrow">عشرة تصاميم حصرية</span>
+   <span class="eyebrow">11 تصميماً حصرياً</span>
    <h2>اختر تجربة دعوتك</h2>
    <p>رسوم متحركة راقية، مشاهد رومانسية، وتفاصيل مصممة حتى تليق بمناسبتكم.</p>
   </div>
@@ -1300,7 +1300,7 @@ body.public-invitation{height:auto!important;min-height:100vh!important;overflow
    <div class="field"><label>طريقة الدفع</label>
     <div class="payment-options">
      <button type="button" class="payment-option" data-pay="Mastercard" onclick="selectPayment(this)">💳<br>Mastercard</button>
-     <button type="button" class="payment-option" data-pay="ZainCash" onclick="selectPayment(this)">📱<br>ZainCash</button>
+     <button type="button" class="payment-option" data-pay="ZainCash" onclick="selectPayment(this)">📱<br>زين كاش (Zain Cash)</button>
     </div>
    </div>
    <p class="notice">سيتم إرسال تفاصيل الدعوة التي أدخلتها إلى الإدارة حتى يتم تجهيزها.</p>
@@ -1471,6 +1471,8 @@ function chooseTemplate(id){
  selectedTemplate=getTemplate(id);
  $("orderTemplate").value=selectedTemplate.arabic+" — "+selectedTemplate.name;
  $("orderResult").textContent="";
+ selectedPayment="";
+ document.querySelectorAll(".payment-option").forEach(x=>x.classList.remove("selected"));
  $("orderModal").classList.add("open");
 }
 function openPreview(){tryTemplate(selectedTemplate.id)}
