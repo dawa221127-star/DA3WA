@@ -577,6 +577,26 @@ body{background:radial-gradient(ellipse at 50% -15%,#512538 0,#1b0d17 48%,#0c080
 @keyframes da3waSealOpen{to{transform:translate(-50%,-50%) rotate(35deg) scale(.72);opacity:.2}}
 @media(prefers-reduced-motion:reduce){.toon-scene:after,.toon-scene *, .card-seal{animation:none!important;transition:none!important}}
 
+
+/* Replaced template artwork: bespoke premium SVG scenes */
+.da3wa-premium-scene{background:radial-gradient(ellipse at 50% 45%,#5b3540,#1b111b 75%);overflow:hidden}
+.da3wa-premium-art{width:min(100%,420px);height:auto;overflow:visible;position:relative;z-index:2;filter:drop-shadow(0 14px 18px #09050a88);animation:da3waSceneFloat 5s ease-in-out infinite}
+.da3wa-envelope{transform-origin:170px 140px;animation:da3waEnvelopeTilt 5s ease-in-out infinite}
+.da3wa-letter{animation:da3waLetterRise 4.5s ease-in-out infinite}
+.da3wa-graduate{transform-origin:170px 190px;animation:da3waPersonSway 4.4s ease-in-out infinite}
+.da3wa-birthday-person{transform-origin:170px 205px;animation:da3waPersonSway 4.2s ease-in-out infinite}
+.da3wa-cake{transform-origin:264px 208px;animation:da3waCakeBounce 3.6s ease-in-out infinite}
+.da3wa-balloons{animation:da3waBalloons 5s ease-in-out infinite}
+.da3wa-particles{animation:da3waParticleGlow 2.8s ease-in-out infinite alternate}
+@keyframes da3waSceneFloat{0%,100%{transform:translateY(3px) scale(1)}50%{transform:translateY(-6px) scale(1.018)}}
+@keyframes da3waEnvelopeTilt{0%,100%{transform:rotate(0)}50%{transform:rotate(-1.5deg)}}
+@keyframes da3waLetterRise{0%,100%{transform:translateY(7px)}50%{transform:translateY(-5px)}}
+@keyframes da3waPersonSway{0%,100%{transform:rotate(0)}50%{transform:rotate(1.2deg)}}
+@keyframes da3waCakeBounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+@keyframes da3waBalloons{0%,100%{transform:translateY(5px)}50%{transform:translateY(-8px)}}
+@keyframes da3waParticleGlow{from{opacity:.35}to{opacity:1}}
+@media(prefers-reduced-motion:reduce){.da3wa-premium-art,.da3wa-premium-art *{animation:none!important}}
+
 </style>
 </head>
 
@@ -865,7 +885,38 @@ function getTemplate(id){
 
 /* مشاهد فوتوغرافية للقوالب — ملفات الصور داخل assets/ */
 function sceneMarkup(theme){
- return legacySceneMarkup(theme);
+ const t=templates.find(x=>x.theme===theme)||templates[0];
+ if(t.kind==="couple")return legacySceneMarkup(theme);
+ const palette={
+  "silk-gold":["#f5dfb0","#9d6d40","#49242b"],
+  "royal-seal":["#f2d59a","#b17b43","#351723"],
+  "graduation-purple":["#e5c9ff","#8c6bc2","#25183d"],
+  "graduation-blue":["#d5ecff","#6798c1","#142b46"],
+  "birthday-pastel":["#ffe3e8","#d68d9d","#532c42"],
+  "birthday-neon":["#f5c9ff","#bd68d7","#24132f"]
+ };
+ const p=palette[theme]||palette["silk-gold"];
+ const defs=`<defs>
+  <linearGradient id="fabric-${theme}" x1="0" y1="0" x2="1" y2="1"><stop stop-color="${p[0]}"/><stop offset=".48" stop-color="${p[1]}"/><stop offset="1" stop-color="${p[2]}"/></linearGradient>
+  <linearGradient id="shine-${theme}" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#fff" stop-opacity=".85"/><stop offset=".45" stop-color="#fff" stop-opacity=".08"/><stop offset="1" stop-color="#fff" stop-opacity=".55"/></linearGradient>
+  <radialGradient id="glow-${theme}"><stop stop-color="${p[0]}" stop-opacity=".65"/><stop offset="1" stop-color="${p[1]}" stop-opacity="0"/></radialGradient>
+  <filter id="shadow-${theme}" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="5"/></filter>
+ </defs>`;
+ let art="";
+ if(t.kind==="envelope"){
+  art=`<ellipse cx="170" cy="208" rx="105" ry="12" fill="#09060b" opacity=".38" filter="url(#shadow-${theme})"/>
+  <g class="da3wa-letter"><rect x="117" y="40" width="106" height="143" rx="5" fill="#fff7e7" stroke="${p[0]}" stroke-width="2"/><path d="M137 76h66M137 89h58M137 102h65" stroke="${p[1]}" stroke-opacity=".45" stroke-width="2"/><path d="M170 124c-19-19-35 8 0 29 35-21 19-48 0-29Z" fill="${p[1]}"/><path d="M145 151h50" stroke="${p[1]}" stroke-width="1.5"/></g>
+  <g class="da3wa-envelope"><path d="M65 111 170 48l105 63v88H65Z" fill="url(#fabric-${theme})" stroke="${p[0]}" stroke-width="2"/><path d="m65 111 105 72 105-72M65 199l75-67M275 199l-75-67" fill="none" stroke="${p[0]}" stroke-width="2" opacity=".8"/><path d="m65 111 105 72 105-72-105-64Z" fill="url(#shine-${theme})" opacity=".55"/><circle cx="170" cy="139" r="24" fill="${p[2]}" stroke="${p[0]}" stroke-width="3"/><circle cx="170" cy="139" r="18" fill="none" stroke="${p[0]}" stroke-dasharray="2 3"/><text x="170" y="147" text-anchor="middle" font-size="23" fill="${p[0]}">${t.symbol}</text></g>`;
+ }else if(t.kind==="graduation"){
+  art=`<ellipse cx="170" cy="211" rx="76" ry="10" fill="#09060b" opacity=".35" filter="url(#shadow-${theme})"/>
+  <g class="da3wa-graduate"><path d="M113 207q4-69 57-69t57 69Z" fill="url(#fabric-${theme})" stroke="${p[0]}" stroke-width="2"/><path d="M132 151q38 24 76 0l-8 55h-60Z" fill="${p[2]}" opacity=".8"/><path d="M141 100q0-39 29-39t29 39l-5 35q-24 25-48 0Z" fill="#d99d7d" stroke="#f3d3b5"/><path d="M137 103q-4-47 33-49 36 4 34 43l-12-13q-18-12-42 2Z" fill="#211820"/><path d="M153 107q5-4 10 0m12 0q5-4 10 0" stroke="#563b35" stroke-width="2" fill="none" stroke-linecap="round"/><path d="M162 122q8 5 16 0" stroke="#9e5e5b" stroke-width="2" fill="none" stroke-linecap="round"/><path d="M114 72 170 45l56 27-56 27Z" fill="${p[2]}" stroke="${p[0]}" stroke-width="2"/><path d="M226 72v39" stroke="${p[0]}" stroke-width="3"/><circle cx="226" cy="114" r="4" fill="${p[0]}"/><path d="M170 45 226 72 170 99 114 72Z" fill="url(#shine-${theme})" opacity=".45"/></g><path d="M89 132q-12 12 0 24m184-30q12 12 0 24" fill="none" stroke="${p[0]}" stroke-width="3" stroke-linecap="round"/>`;
+ }else{
+  art=`<ellipse cx="170" cy="215" rx="95" ry="10" fill="#09060b" opacity=".35" filter="url(#shadow-${theme})"/>
+  <g class="da3wa-birthday-person"><path d="M104 210q8-62 66-62t66 62Z" fill="url(#fabric-${theme})" stroke="${p[0]}" stroke-width="2"/><path d="M139 151q31 18 62 0l19 59h-100Z" fill="url(#shine-${theme})" opacity=".55"/><path d="M142 91q0-37 28-37t28 37l-5 39q-23 23-46 0Z" fill="#e6b99b" stroke="#f8d8bb"/><path d="M136 97q-7-50 34-54 38 3 36 48l-12-15q-25-17-48 4Z" fill="#321d24"/><path d="M149 98q5-4 10 0m13 0q5-4 10 0" stroke="#69433b" stroke-width="2" fill="none" stroke-linecap="round"/><path d="M159 115q11 8 22 0" stroke="#ad6466" stroke-width="2" fill="none" stroke-linecap="round"/></g>
+  <g class="da3wa-cake"><path d="M235 169h58v39h-58Z" rx="5" fill="#fff0e5" stroke="${p[0]}" stroke-width="2"/><path d="M235 181q14 12 29 0t29 0" fill="none" stroke="${p[1]}" stroke-width="4"/><path d="M264 169v-19" stroke="${p[0]}" stroke-width="4" stroke-linecap="round"/><path d="M264 145q-9-10 0-17 9 8 0 17" fill="#ffd77c"/><path d="M246 208h36" stroke="${p[1]}" stroke-width="3"/></g>
+  <g class="da3wa-balloons"><path d="M73 61q-28 0-23 31 5 25 23 25t23-25q5-31-23-31Z" fill="${p[1]}" stroke="${p[0]}" stroke-width="2"/><path d="M73 117q12 31 8 47" stroke="${p[0]}" fill="none"/><path d="M294 48q-25 0-21 28 4 22 21 22t21-22q4-28-21-28Z" fill="${p[2]}" stroke="${p[0]}" stroke-width="2"/><path d="M294 98q-10 26-6 40" stroke="${p[0]}" fill="none"/></g>`;
+ }
+ return `<div class="toon-scene toon-${t.kind} toon-${theme} da3wa-premium-scene" aria-hidden="true"><div class="toon-halo"></div><svg class="da3wa-premium-art" viewBox="0 0 340 250" role="img" aria-label="${t.arabic}">${defs}<ellipse cx="170" cy="125" rx="142" ry="112" fill="url(#glow-${theme})"/><ellipse cx="170" cy="125" rx="130" ry="102" fill="none" stroke="${p[0]}" stroke-opacity=".35" stroke-dasharray="2 7"/>${art}<g class="da3wa-particles" fill="${p[0]}"><path d="M53 43l3 8 8 3-8 3-3 8-3-8-8-3 8-3Z"/><path d="M280 53l2 6 6 2-6 2-2 6-2-6-6-2 6-2Z"/><circle cx="95" cy="177" r="2.5"/><circle cx="258" cy="142" r="2"/></g></svg><div class="toon-floor"></div></div>`;
 }
 function legacySceneMarkup(theme){
  const t=templates.find(x=>x.theme===theme)||templates[0];
