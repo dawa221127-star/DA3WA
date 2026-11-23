@@ -463,6 +463,9 @@ button.secondary,.tab{background:#392330;color:#f2dfc0;border:1px solid #8a6948}
 @keyframes adminRoyalDrift{from{background-position:50% 42%;transform:scale(1)}to{background-position:50% 56%;transform:scale(1.07)}}
 @media(max-width:600px){#preview.curtain-admin-preview{height:75vh!important}.curtain-admin-preview .admin-curtain-hero{height:460px}.curtain-admin-preview .admin-curtain-scene{min-height:360px;padding:65px 16px}.admin-scene-details{gap:12px}.admin-scene-details strong{font-size:18px}}
 
+.customer-order-picker{margin:22px 0;padding:18px;border:1px solid #a9824e88;border-radius:13px;background:linear-gradient(135deg,#291722,#120c12)}
+.customer-order-picker h3{margin:0 0 8px;color:#f0d9aa}.customer-order-picker select{width:100%;max-width:650px}
+.customer-order-picker .small-note{margin-bottom:0}
 </style>
 </head>
 <body>
@@ -532,6 +535,14 @@ button.secondary,.tab{background:#392330;color:#f2dfc0;border:1px solid #8a6948}
         <p class="muted">الحد الأقصى لكل أغنية 100MB، بشرط أن تسمح إعدادات Supabase Storage بهذا الحجم. الأغاني تبقى محفوظة في التخزين وتظهر هنا للاختيار.</p>
         <p id="musicLibraryMessage" class="muted" role="status"></p>
         <div id="musicLibraryList" class="music-library-list"></div>
+      </section>
+
+      <section class="customer-order-picker">
+        <h3>معلومات الزبون</h3>
+        <p class="muted">اختار طلب الزبون حتى تنتقل بياناته تلقائياً إلى حقول الدعوة.</p>
+        <label for="customerOrderSelect">الزبون صاحب الطلب</label>
+        <select id="customerOrderSelect"><option value="">— إنشاء دعوة بدون ربط طلب —</option></select>
+        <p id="customerOrderHint" class="small-note">يتم عرض الطلبات المحفوظة في قسم طلبات الزبائن.</p>
       </section>
 
       <div class="editor-grid" style="margin-top:25px">
@@ -913,6 +924,8 @@ function addDetail(container, label, value) {
 }
 
 /* إدارة الطلبات القديمة */
+let cachedCustomerOrders = [];
+
 async function loadOrders() {
   ordersMessage.textContent = "جاري تحميل الطلبات...";
   ordersList.replaceChildren();
@@ -928,6 +941,8 @@ async function loadOrders() {
   }
 
   const orders = data || [];
+  cachedCustomerOrders = orders;
+  refreshCustomerOrderOptions();
   $("total").textContent = orders.length;
   $("newCount").textContent = orders.filter(o => o.status === "new").length;
 
@@ -1109,8 +1124,56 @@ function updatePreview() {
   "arrivalTime","startTime","extraMessage"
 ].forEach(id => $(id).addEventListener("input", updatePreview));
 
+function orderField(message,label){
+  const lines=String(message||"").split(/\\r?\\n/);
+  const line=lines.find(x=>x.trim().startsWith(label+":"));
+  return line ? line.slice(line.indexOf(":")+1).trim() : "";
+}
+function refreshCustomerOrderOptions(){
+  const select=$("customerOrderSelect");
+  if(!select)return;
+  const current=select.value;
+  select.innerHTML='<option value="">— إنشاء دعوة بدون ربط طلب —</option>';
+  cachedCustomerOrders.forEach(order=>{
+    const option=document.createElement("option");
+    option.value=String(order.id);
+    const date=order.created_at?new Date(order.created_at).toLocaleDateString("ar-IQ"):"";
+    option.textContent=(order.customer_name||"زبون بدون اسم")+" · "+(order.phone||"بدون هاتف")+" · "+(order.occasion||"مناسبة غير محددة")+" · "+date;
+    select.appendChild(option);
+  });
+  if(current && cachedCustomerOrders.some(o=>String(o.id)===current))select.value=current;
+}
+function fillInvitationFromCustomerOrder(order){
+  const message=order.invitation_message||"";
+  const values={
+    hostNames:orderField(message,"الأسماء")||order.customer_name||"",
+    occasion:order.occasion||orderField(message,"نوع المناسبة"),
+    opening:orderField(message,"عبارة الدعوة"),
+    eventDate:order.invitation_date||"",
+    venue:order.invitation_location||orderField(message,"المكان"),
+    mapLink:orderField(message,"رابط الموقع"),
+    arrivalTime:orderField(message,"وقت الوصول"),
+    startTime:order.invitation_time||"",
+    hostPhone:orderField(message,"هاتف المستضيف")||order.phone||"",
+    extraMessage:orderField(message,"رسالة إضافية")
+  };
+  Object.entries(values).forEach(([id,value])=>{if($(id))$(id).value=value;});
+  updatePreview();
+  $("customerOrderHint").textContent="تم تحميل بيانات "+(order.customer_name||"الزبون")+" تلقائياً. راجع التفاصيل وعدّلها إذا تحتاج قبل النشر.";
+  $("customerOrderHint").style.color="#e8c98d";
+}
+$("customerOrderSelect").addEventListener("change",()=>{
+  const order=cachedCustomerOrders.find(o=>String(o.id)===$("customerOrderSelect").value);
+  if(order)fillInvitationFromCustomerOrder(order);
+  else $("customerOrderHint").textContent="تم إلغاء ربط الطلب. تقدر تدخل التفاصيل يدوياً.";
+});
+
 function getFormDetails() {
+  const linkedOrder=cachedCustomerOrders.find(o=>String(o.id)===$("customerOrderSelect").value);
   return {
+    customer_name: linkedOrder?.customer_name||"",
+    customer_phone: linkedOrder?.phone||"",
+    source_order_id: linkedOrder?.id||null,
     names: $("hostNames").value.trim(),
     occasion: $("occasion").value.trim(),
     opening: $("opening").value.trim(),
@@ -1245,6 +1308,8 @@ $("clearFormBtn").addEventListener("click", () => {
   $("invitationForm").reset();
   editingInvitationId = null;
   $("invitationMusicSelect").value = "";
+  $("customerOrderSelect").value = "";
+  $("customerOrderHint").textContent = "يتم عرض الطلبات المحفوظة في قسم طلبات الزبائن.";
   $("saveInvitationBtn").textContent = "نشر الدعوة وإنشاء الرابط";
   selectedTemplate = "royal-couple";
   document.querySelectorAll(".template").forEach(c => {
