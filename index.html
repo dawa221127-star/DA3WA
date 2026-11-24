@@ -1675,6 +1675,25 @@ body.public-invitation #publicInvitationPage{width:100%!important;max-width:none
   100%{opacity:0;transform:translate3d(0,112vh,0) rotate(-5deg)}
 }
 
+
+/* MIRAS — delicate white petals for template 13 */
+.ivory-petal-field{opacity:.72}
+.ivory-petal{
+  width:var(--w)!important;
+  height:calc(var(--w)*1.28)!important;
+  border-radius:78% 18% 76% 24%!important;
+  background:linear-gradient(145deg,#ffffff 0%,#fffdfb 58%,#eee7e4 100%)!important;
+  box-shadow:inset -1px -2px 3px #b7aaa633,0 1px 4px #3b273012!important;
+}
+.ivory-petal.p1{--w:8px!important}
+.ivory-petal.p2{--w:7px!important}
+.ivory-petal.p3{--w:8px!important}
+.ivory-petal.p4{--w:7px!important}
+.ivory-petal.p5{--w:8px!important}
+.ivory-petal.p6{--w:7px!important}
+.ivory-petal.p7{--w:7px!important}
+.ivory-petal.p8{--w:8px!important}
+
 </style>
 </head>
 
@@ -1966,7 +1985,7 @@ function getTemplate(id){
 function sceneMarkup(theme){
  const t=templates.find(x=>x.theme===theme)||templates[0];
  if(theme==="ivory-staircase")return `<div class="ivory-palace-scene" aria-hidden="true">
-  <img class="ivory-palace-photo" src="assets/ivory-palace.jpg" alt="" loading="lazy" decoding="async">
+  <img class="ivory-palace-photo" src="assets/ivory-palace-v2.png" alt="" loading="lazy" decoding="async">
   <div class="ivory-palace-glow"></div>
   <div class="ivory-petal-field" aria-hidden="true"><i class="ivory-petal p1"></i><i class="ivory-petal p2"></i><i class="ivory-petal p3"></i><i class="ivory-petal p4"></i><i class="ivory-petal p5"></i><i class="ivory-petal p6"></i><i class="ivory-petal p7"></i><i class="ivory-petal p8"></i><i class="ivory-petal p9"></i><i class="ivory-petal p10"></i><i class="ivory-petal p11"></i><i class="ivory-petal p12"></i><i class="ivory-petal p13"></i><i class="ivory-petal p14"></i><i class="ivory-petal p15"></i><i class="ivory-petal p16"></i><i class="ivory-petal p17"></i><i class="ivory-petal p18"></i></div>
   <div class="ivory-palace-lights"><i></i><i></i><i></i><i></i><i></i><i></i></div>
