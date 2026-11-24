@@ -1643,6 +1643,38 @@ body.public-invitation #publicInvitationPage{width:100%!important;max-width:none
 .ivory-petal.p18{--x:72%;--w:12px;--r:48deg;--duration:10s;--delay:-2s}
 @keyframes ivoryPetalFall{0%{opacity:0;transform:translate3d(0,-8vh,0) rotate(var(--r))}10%{opacity:.88}48%{transform:translate3d(5vw,52vh,0) rotate(calc(var(--r) + 150deg))}88%{opacity:.78}100%{opacity:0;transform:translate3d(-4vw,112vh,0) rotate(calc(var(--r) + 320deg))}}
 @media(prefers-reduced-motion:reduce){.ivory-petal{animation:none!important;display:none!important}.ivory-staircase .ivory-palace-photo,.ivory-staircase .ivory-palace-monogram{animation:none!important}}
+
+/* MIRAS — softer, natural rose-petal motion for template 13 */
+.ivory-petal-field{opacity:.82}
+.ivory-petal{
+  width:var(--w);
+  height:calc(var(--w)*1.3);
+  border-radius:78% 18% 76% 24%;
+  background:linear-gradient(145deg,#fff5f1 0%,#d97883 48%,#a83b50 100%);
+  box-shadow:inset -1px -2px 3px #5d102b22,0 1px 4px #2a102512;
+  opacity:0;
+  animation:ivoryPetalDrift var(--duration) ease-in-out var(--delay) infinite;
+}
+.ivory-petal.p1{--x:8%;--w:12px;--r:0deg;--duration:22s;--delay:-8s}
+.ivory-petal.p2{--x:23%;--w:10px;--r:0deg;--duration:25s;--delay:-15s}
+.ivory-petal.p3{--x:39%;--w:13px;--r:0deg;--duration:23s;--delay:-4s}
+.ivory-petal.p4{--x:57%;--w:11px;--r:0deg;--duration:27s;--delay:-19s}
+.ivory-petal.p5{--x:73%;--w:13px;--r:0deg;--duration:24s;--delay:-11s}
+.ivory-petal.p6{--x:90%;--w:10px;--r:0deg;--duration:26s;--delay:-21s}
+.ivory-petal.p7{--x:15%;--w:11px;--r:0deg;--duration:28s;--delay:-13s}
+.ivory-petal.p8{--x:82%;--w:12px;--r:0deg;--duration:23s;--delay:-6s}
+.ivory-petal.p9,.ivory-petal.p10,.ivory-petal.p11,.ivory-petal.p12,
+.ivory-petal.p13,.ivory-petal.p14,.ivory-petal.p15,.ivory-petal.p16,
+.ivory-petal.p17,.ivory-petal.p18{display:none}
+@keyframes ivoryPetalDrift{
+  0%{opacity:0;transform:translate3d(0,-8vh,0) rotate(-12deg)}
+  12%{opacity:.58}
+  30%{transform:translate3d(2vw,25vh,0) rotate(9deg)}
+  55%{transform:translate3d(-1vw,52vh,0) rotate(-8deg)}
+  78%{opacity:.48;transform:translate3d(2vw,79vh,0) rotate(11deg)}
+  100%{opacity:0;transform:translate3d(0,112vh,0) rotate(-5deg)}
+}
+
 </style>
 </head>
 
