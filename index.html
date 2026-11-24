@@ -1694,6 +1694,28 @@ body.public-invitation #publicInvitationPage{width:100%!important;max-width:none
 .ivory-petal.p7{--w:7px!important}
 .ivory-petal.p8{--w:8px!important}
 
+
+/* MIRAS — template 13 portrait full-screen auto pages */
+.ivory-staircase .invitation-content{min-height:100svh!important;padding:0!important;background:#211b17!important;overflow:hidden!important}
+.ivory-staircase .invitation-content>.invite-section{display:none!important;position:relative!important;box-sizing:border-box!important;width:100%!important;max-width:none!important;height:100svh!important;min-height:100svh!important;margin:0!important;padding:clamp(34px,7vh,76px) clamp(20px,7vw,58px)!important;overflow:hidden!important;isolation:isolate!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;text-align:center!important;border:0!important;border-radius:0!important;box-shadow:none!important;background:linear-gradient(180deg,rgba(28,20,16,.48),rgba(28,20,16,.62)),url('assets/ivory-palace-v2.png') center 45%/cover no-repeat!important;color:#fffaf1!important}
+.ivory-staircase .invitation-content>.invite-section.is-active{display:flex!important;animation:ivorySlideIn .9s cubic-bezier(.2,.75,.25,1) both}
+.ivory-staircase .invitation-content>.invite-section:before{content:"";position:absolute;inset:18px 14px;border:1px solid rgba(255,248,231,.55);pointer-events:none;z-index:-1}
+.ivory-staircase .invitation-content>.invite-section:after{content:"";position:absolute;inset:auto 0 0;height:24%;background:linear-gradient(0deg,rgba(20,14,11,.3),transparent);pointer-events:none;z-index:-1}
+.ivory-staircase .invitation-content>.invite-section .scene-art{display:none!important}
+.ivory-staircase .invitation-content>.invite-section .invite-kicker,.ivory-staircase .invitation-content>.invite-section h3,.ivory-staircase .invitation-content>.invite-section p,.ivory-staircase .invitation-content>.invite-section .couple-names,.ivory-staircase .invitation-content>.invite-section .couple-sub,.ivory-staircase .invitation-content>.invite-section .ornament{position:relative;z-index:1;color:#fffaf1!important;text-shadow:0 2px 15px rgba(0,0,0,.75)!important}
+.ivory-staircase .invitation-content>.invite-section .couple-names{font-size:clamp(38px,9vw,66px)!important}
+.ivory-staircase .invitation-content>.invite-section h3{font-size:clamp(30px,7vw,46px)!important}
+.ivory-staircase .invitation-content>.invite-section p{font-size:clamp(17px,4.2vw,23px)!important;line-height:2!important;max-width:560px!important}
+.ivory-staircase .invitation-content>.invite-section .detail{background:rgba(255,250,241,.9)!important;color:#5f4934!important;border:1px solid #e7d5b7!important;box-shadow:0 5px 22px #0003!important}
+.ivory-staircase .invitation-content>.invite-section .detail strong,.ivory-staircase .invitation-content>.invite-section .detail span{color:#5f4934!important;text-shadow:none!important}
+.ivory-staircase .invitation-content>.invite-section .action-link{position:relative;z-index:2;background:#a17a49!important;color:#fff!important}
+.ivory-staircase .invitation-content>.invite-section .wish-form input,.ivory-staircase .invitation-content>.invite-section .wish-form textarea{background:rgba(255,250,241,.94)!important;color:#493827!important;border-color:#e5cfaa!important}
+.ivory-staircase .invitation-content>.miras-return-nav,.ivory-staircase .invitation-content>.watermark{display:none!important}
+.ivory-staircase .ivory-slide-indicator{position:fixed;z-index:30;top:14px;left:50%;transform:translateX(-50%);display:flex;gap:6px;padding:7px 10px;border-radius:30px;background:#21170c66;backdrop-filter:blur(8px)}
+.ivory-staircase .ivory-slide-indicator i{display:block;width:22px;height:3px;border-radius:4px;background:#fff7;overflow:hidden}
+.ivory-staircase .ivory-slide-indicator i.active{background:#fff}
+@keyframes ivorySlideIn{from{opacity:0;transform:translateY(18px) scale(1.015)}to{opacity:1;transform:translateY(0) scale(1)}}
+@media(prefers-reduced-motion:reduce){.ivory-staircase .invitation-content>.invite-section.is-active{animation:none!important}}
 </style>
 </head>
 
@@ -2480,6 +2502,25 @@ document.addEventListener("keydown",e=>{
    publicInviteRevealed=true;
    const inviteRoot=$("publicInvite");
    inviteRoot.classList.add("opened");
+   if(inviteRoot.classList.contains("ivory-staircase")){
+    const slides=Array.from(inviteRoot.querySelectorAll(".invitation-content>.invite-section"));
+    if(slides.length){
+     let activeSlide=0;
+     const indicator=document.createElement("div");
+     indicator.className="ivory-slide-indicator";
+     indicator.setAttribute("aria-label","تقدم صفحات الدعوة");
+     indicator.innerHTML=slides.map((_,i)=>'<i'+(i===0?' class="active"':'')+'></i>').join("");
+     inviteRoot.appendChild(indicator);
+     const bars=Array.from(indicator.children);
+     const showSlide=(index)=>{
+      slides.forEach((slide,i)=>slide.classList.toggle("is-active",i===index));
+      bars.forEach((bar,i)=>bar.classList.toggle("active",i===index));
+      activeSlide=index;
+     };
+     showSlide(0);
+     window.setInterval(()=>showSlide((activeSlide+1)%slides.length),10000);
+    }
+   }
    if(inviteRoot.classList.contains("door-birds")){
     const flock=inviteRoot.querySelector(".wish-door-birds");
     if(flock){const birds=Array.from({length:28},(_,i)=>`<span class="wish-flying-bird" style="--x:${(i%14-7)*76}px;--y:${-130-(i%7)*62}px;--delay:${(i%10)*95}ms">🕊</span>`);const sparks=Array.from({length:42},(_,i)=>`<i class="wish-spark" style="--size:${2+(i%4)*2}px;--x:${(i%14-7)*68}px;--y:${-80-(i%9)*55}px;--delay:${(i%12)*75}ms"></i>`);flock.innerHTML=birds.concat(sparks).join("");}
@@ -2487,7 +2528,7 @@ document.addEventListener("keydown",e=>{
    const invitationMusic=$("invitationBackgroundMusic");
    if(invitationMusic){invitationMusic.volume=0.85;const playAttempt=invitationMusic.play();if(playAttempt&&typeof playAttempt.catch==="function")playAttempt.catch(error=>console.warn("Invitation music autoplay was blocked:",error));}
    const revealDelay=inviteRoot.classList.contains("golden-cinema")?2200:inviteRoot.classList.contains("parchment")?1800:inviteRoot.classList.contains("door-birds")?2400:1600;
-   setTimeout(scrollToInviteEnd,revealDelay);
+   if(!inviteRoot.classList.contains("ivory-staircase"))setTimeout(scrollToInviteEnd,revealDelay);
   }
   $("openPublicEnvelope").addEventListener("click",revealPublicInvite);
 
