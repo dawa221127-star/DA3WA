@@ -1614,6 +1614,35 @@ body.public-invitation #publicInvitationPage{width:100%!important;max-width:none
 .ivory-staircase .ivory-palace-lights{z-index:3}
 .ivory-staircase .ivory-palace-monogram{z-index:5}
 @media(max-width:600px){.ivory-staircase .ivory-palace-photo{object-position:center center}}
+
+/* MIRAS — continuous rose-petal entrance for template 13 */
+.ivory-staircase .ivory-palace-photo{animation:ivoryPhotoReveal 2.2s cubic-bezier(.2,.7,.2,1) both;transform-origin:50% 55%}
+@keyframes ivoryPhotoReveal{from{opacity:.25;transform:scale(1.09);filter:blur(5px) saturate(.75)}to{opacity:1;transform:scale(1);filter:blur(0) saturate(1)}}
+.ivory-staircase .ivory-palace-glow{animation:ivoryGlowBreath 6s ease-in-out infinite alternate}
+@keyframes ivoryGlowBreath{from{opacity:.55}to{opacity:1}}
+.ivory-staircase .ivory-palace-monogram{animation:ivoryMonogramIn 1.7s .55s cubic-bezier(.18,.8,.25,1) both}
+.ivory-petal-field{position:absolute;inset:0;z-index:4;overflow:hidden;pointer-events:none}
+.ivory-petal{position:absolute;top:-12%;left:var(--x);width:var(--w);height:calc(var(--w)*1.42);border-radius:85% 12% 78% 18%;background:linear-gradient(145deg,#fff1ef 0%,#d94a61 42%,#7f142b 100%);box-shadow:inset -2px -3px 5px #5d102b55,0 2px 8px #2a102522;opacity:0;transform:rotate(var(--r));animation:ivoryPetalFall var(--duration) linear var(--delay) infinite}
+.ivory-petal.p1{--x:4%;--w:15px;--r:32deg;--duration:10s;--delay:-7s}
+.ivory-petal.p2{--x:13%;--w:11px;--r:70deg;--duration:13s;--delay:-2s}
+.ivory-petal.p3{--x:22%;--w:18px;--r:12deg;--duration:11s;--delay:-9s}
+.ivory-petal.p4{--x:31%;--w:12px;--r:85deg;--duration:14s;--delay:-4s}
+.ivory-petal.p5{--x:40%;--w:16px;--r:45deg;--duration:12s;--delay:-10s}
+.ivory-petal.p6{--x:49%;--w:10px;--r:20deg;--duration:9s;--delay:-3s}
+.ivory-petal.p7{--x:58%;--w:17px;--r:65deg;--duration:13s;--delay:-8s}
+.ivory-petal.p8{--x:67%;--w:12px;--r:30deg;--duration:10s;--delay:-5s}
+.ivory-petal.p9{--x:76%;--w:15px;--r:90deg;--duration:15s;--delay:-11s}
+.ivory-petal.p10{--x:85%;--w:11px;--r:15deg;--duration:12s;--delay:-6s}
+.ivory-petal.p11{--x:94%;--w:17px;--r:55deg;--duration:11s;--delay:-1s}
+.ivory-petal.p12{--x:8%;--w:10px;--r:10deg;--duration:16s;--delay:-12s}
+.ivory-petal.p13{--x:27%;--w:14px;--r:75deg;--duration:12s;--delay:-6s}
+.ivory-petal.p14{--x:46%;--w:13px;--r:35deg;--duration:14s;--delay:-9s}
+.ivory-petal.p15{--x:64%;--w:10px;--r:5deg;--duration:9s;--delay:-4s}
+.ivory-petal.p16{--x:81%;--w:18px;--r:62deg;--duration:13s;--delay:-10s}
+.ivory-petal.p17{--x:17%;--w:16px;--r:25deg;--duration:15s;--delay:-13s}
+.ivory-petal.p18{--x:72%;--w:12px;--r:48deg;--duration:10s;--delay:-2s}
+@keyframes ivoryPetalFall{0%{opacity:0;transform:translate3d(0,-8vh,0) rotate(var(--r))}10%{opacity:.88}48%{transform:translate3d(5vw,52vh,0) rotate(calc(var(--r) + 150deg))}88%{opacity:.78}100%{opacity:0;transform:translate3d(-4vw,112vh,0) rotate(calc(var(--r) + 320deg))}}
+@media(prefers-reduced-motion:reduce){.ivory-petal{animation:none!important;display:none!important}.ivory-staircase .ivory-palace-photo,.ivory-staircase .ivory-palace-monogram{animation:none!important}}
 </style>
 </head>
 
@@ -1907,6 +1936,7 @@ function sceneMarkup(theme){
  if(theme==="ivory-staircase")return `<div class="ivory-palace-scene" aria-hidden="true">
   <img class="ivory-palace-photo" src="assets/ivory-palace.jpg" alt="" loading="lazy" decoding="async">
   <div class="ivory-palace-glow"></div>
+  <div class="ivory-petal-field" aria-hidden="true"><i class="ivory-petal p1"></i><i class="ivory-petal p2"></i><i class="ivory-petal p3"></i><i class="ivory-petal p4"></i><i class="ivory-petal p5"></i><i class="ivory-petal p6"></i><i class="ivory-petal p7"></i><i class="ivory-petal p8"></i><i class="ivory-petal p9"></i><i class="ivory-petal p10"></i><i class="ivory-petal p11"></i><i class="ivory-petal p12"></i><i class="ivory-petal p13"></i><i class="ivory-petal p14"></i><i class="ivory-petal p15"></i><i class="ivory-petal p16"></i><i class="ivory-petal p17"></i><i class="ivory-petal p18"></i></div>
   <div class="ivory-palace-lights"><i></i><i></i><i></i><i></i><i></i><i></i></div>
   <div class="ivory-palace-monogram">A <span>&</span> N</div>
  </div>`;
