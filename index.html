@@ -1987,7 +1987,7 @@ function renderTemplates(){
  $("templateGrid").innerHTML=templates.map((t,index)=>`
   <article class="template template-choice" data-template="${t.id}">
    <div class="template-art theme-${t.theme}" id="card-${t.id}">
-    ${t.id==="red-star"?'<span class="template-number-badge">11</span>':t.id==="baghdad-ivory"?'<span class="template-number-badge">12</span>':""}
+    ${t.id==="red-star"?'<span class="template-number-badge">11</span>':t.id==="baghdad-ivory"?'<span class="template-number-badge">12</span>':t.id==="ivory-staircase"?'<span class="template-number-badge">13</span>':""}
     <div class="art-inner"><div class="art-scene">${sceneMarkup(t.theme)}</div></div>
    </div>
    <div class="template-info">
